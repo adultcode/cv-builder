@@ -26,17 +26,39 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
       marginRight: 2.0*PdfPageFormat.inch,
       marginTop: 0.0 );
   doc.addPage(
-
+    // pw.Text('حسام رسولیانث',
+    //     //  textScaleFactor: 1,
+    //     style: pw.TextStyle(fontSize: 15),
+    //     textDirection: pw.TextDirection.rtl
+    // )
     pw.MultiPage(
      pageTheme: pageTheme,
      // pageFormat: format,
       build: (pw.Context context) => [
         pw.Container(
           alignment: pw.Alignment.topRight,
-          child: pw.Text('حسام رسولیانث',
-            //  textScaleFactor: 1,
-              style: pw.TextStyle(fontSize: 15),
-              textDirection: pw.TextDirection.rtl
+          child: pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Expanded(
+                flex: 10,
+                child:  pw.Container(
+               //   width: 10*PdfPageFormat.cm,
+                  height: 100,
+
+                  color: PdfColor.fromInt(0xff9ce5d0)
+              ),
+              ),
+              pw.Expanded(
+                  flex: 18,
+
+                  child: pw.Container(
+                  // width: 3.0*PdfPageFormat.cm,
+                    height: 100,
+                    color: PdfColor.fromInt(0xff9005d0)
+                )
+              )
+            ]
           ),
         ),
       ],
