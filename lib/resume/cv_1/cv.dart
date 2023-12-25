@@ -4,6 +4,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:cv_builder/resume/cv_1/widget.dart';
 import 'package:cv_builder/util/color.dart';
 import 'package:cv_builder/util/font_size.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+
+import '../../util/text_style.dart';
 
 Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext) async {
   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
@@ -81,18 +84,8 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                          )
 
                      ),
-                     pw.Container(
-                         alignment: pw.Alignment.topRight,
-                       //  margin: pw.EdgeInsets.only(top: top_margin_body_1),
-                         child: pw.Text(dump_body,
-                             textDirection: pw.TextDirection.rtl,
-                             textAlign: pw.TextAlign.justify,
-                             style: pw.TextStyle(
-                                 font: font_light,
-                                 color: black_text1,fontSize: text_body_1)
-                         )
+                     RightBody(dump_body,margin_top: 0),
 
-                     ),
 
                      /*
                      contact section
@@ -106,18 +99,10 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                          )
 
                      ),
-                     pw.Container(
-                         alignment: pw.Alignment.topRight,
-                         margin: pw.EdgeInsets.only(top: 15),
-                         child: pw.Text(dump_body,
-                             textDirection: pw.TextDirection.rtl,
+                     RightBody('call@hesam.cc'),
+                     RightBody('+989019655342'),
 
-                             style: pw.TextStyle(
-                              //   font: font,
-                                 color: black_text1,fontWeight: pw.FontWeight.normal,fontSize: text_body_1)
-                         )
 
-                     ),
                    ]
                )
              )
@@ -174,9 +159,9 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
             pw.Positioned(
               right: 0,
               child: pw.Container(
-                  width: 1,
+                  width: 2.0,
                   height: PdfPageFormat.a4.height,
-                  color:  black_text1,
+                  color:  vertical_div_1,
                   margin: pw.EdgeInsets.only(right: 200)
               )
             ),
