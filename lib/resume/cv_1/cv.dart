@@ -75,30 +75,15 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                      /*
                      profile section
                       */
-                     pw.Container(
-                         alignment: pw.Alignment.topRight,
-                         margin: pw.EdgeInsets.only(top: 20),
-                         child: pw.Text('پروفایل',
-                             textDirection: pw.TextDirection.rtl,
-                             style: pw.TextStyle(color: black_title1,fontWeight: pw.FontWeight.bold,fontSize: text_title_1)
-                         )
+                     TitleText('پروفایل',margin_top: 20),
 
-                     ),
                      RightBody(dump_body,margin_top: 0),
 
 
                      /*
                      contact section
                       */
-                     pw.Container(
-                         alignment: pw.Alignment.topRight,
-                         margin: pw.EdgeInsets.only(top: top_margin_title_1),
-                         child: pw.Text('اطلاعات تماس',
-                             textDirection: pw.TextDirection.rtl,
-                             style: pw.TextStyle(color: black_title1,fontWeight: pw.FontWeight.bold,fontSize: text_title_1)
-                         )
-
-                     ),
+                     TitleText('اطلاعات تماس'),
                      RightBody('call@hesam.cc'),
                      RightBody('+989019655342'),
 
