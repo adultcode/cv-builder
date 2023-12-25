@@ -4,6 +4,8 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:cv_builder/model/skill_model.dart';
+import 'package:cv_builder/resume/cv_1/skill.dart';
 import 'package:cv_builder/resume/cv_1/widget.dart';
 import 'package:cv_builder/util/color.dart';
 import 'package:cv_builder/util/font_size.dart';
@@ -86,6 +88,22 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                      TitleText('اطلاعات تماس'),
                      RightBody('call@hesam.cc'),
                      RightBody('+989019655342'),
+                     /*
+                     skills section
+                      */
+                     TitleText('مهارت ها'),
+                     pw.Container(
+                       margin: pw.EdgeInsets.only(top: 15),
+                       child: Skill(skillModel: SkillModel(title: 'Flutter',percent: 0.4))
+                     ),
+                     pw.Container(
+                         margin: pw.EdgeInsets.only(top: top_margin_title_1),
+                         child: Skill(skillModel: SkillModel(title: 'Java',percent: 0.8))
+                     ),
+                     pw.Container(
+                         margin: pw.EdgeInsets.only(top: top_margin_title_1),
+                         child: Skill(skillModel: SkillModel(title: 'Git',percent: 0.7))
+                     ),
 
 
                    ]
