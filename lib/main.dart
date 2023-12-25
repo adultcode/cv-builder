@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
-import 'cv.dart';
+import 'resume/cv_1/cv.dart';
 
 void main() {
   runApp(const MyApp());

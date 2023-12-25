@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:cv_builder/util/color.dart';
+import 'package:cv_builder/util/font_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
@@ -13,20 +14,15 @@ import 'package:printing/printing.dart';
 
 Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext) async {
   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
+  final fontData = await rootBundle.load('font/iran_light.ttf');
+  final font_light = pw.Font.ttf(fontData);
 
-  // final fontData = await rootBundle.load('iran.ttf');
-  // final font = pw.Font.ttf(fontData);
 
   // final profileImage = pw.MemoryImage(
   //   (await rootBundle.load('assets/profile.jpg')).buffer.asUint8List(),
   // );
 
   final pageTheme = await _myPageTheme(format);
-  // format = format.copyWith(
-  //     marginBottom: 0.0,
-  //     marginLeft: 1.0*PdfPageFormat.inch ,
-  //     marginRight: 2.0*PdfPageFormat.inch,
-  //     marginTop: 0.0 );
   doc.addPage(
     // pw.Text('حسام رسولیانث',
     //     //  textScaleFactor: 1,
@@ -41,6 +37,10 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
        pw.Partitions(
          mainAxisSize: pw.MainAxisSize.max,
          children: [
+
+           /*
+           left side
+            */
            pw.Partition(
              flex: 18,
 
@@ -51,49 +51,75 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                    //width: 4.0*PdfPageFormat.cm,
                    height: 200,
                    margin: pw.EdgeInsets.only(top: 10,right: 4),
-                   color: PdfColor.fromInt(0xff9005d0),
+                //   color: PdfColor.fromInt(0xff9005d0),
                  ),
-                 pw.Container(
-                   //width: 3.0*PdfPageFormat.cm,
-                   height: 200,
-                   margin: pw.EdgeInsets.only(top: 10,right: 4),
-                   color: PdfColor.fromInt(0xff9005d0),
-                 ),
-                 pw.Container(
-                   width: 3.0*PdfPageFormat.cm,
-                   height: 200,
-                   margin: pw.EdgeInsets.only(top: 10,right: 4),
-                   color: PdfColor.fromInt(0xff9005d0),
-                 ),
-                 pw.Container(
-                   width: 3.0*PdfPageFormat.cm,
-                   height: 200,
-                   margin: pw.EdgeInsets.only(top: 10,right: 4),
-                   color: PdfColor.fromInt(0xff9005d0),
-                 ),
-                 pw.Container(
-                   width: 3.0*PdfPageFormat.cm,
-                   height: 200,
-                   margin: pw.EdgeInsets.only(top: 10,right: 4),
-                   color: PdfColor.fromInt(0xff9005d0),
-                 ),
+
+
                ]
              )
            ),
 
 
+           /*
+           right side
+            */
            pw.Partition(
              flex: 9,
-             //width: 120,
-             child:  pw.Column(
-               children: [
-                 pw.Container(
-                 //  width: 1.0*PdfPageFormat.cm,
-                   height: 200,
-                   margin: pw.EdgeInsets.only(top: 10),
-                   color: black_title1,
-                 ),
-               ]
+             child:  pw.Padding(
+               padding: pw.EdgeInsets.only(right: PdfPageFormat.cm*0.4,left: PdfPageFormat.cm*0.2),
+               child: pw.Column(
+                   children: [
+                     /*
+                     profile section
+                      */
+                     pw.Container(
+                         alignment: pw.Alignment.topRight,
+                         margin: pw.EdgeInsets.only(top: 20),
+                         child: pw.Text('پروفایل',
+                             textDirection: pw.TextDirection.rtl,
+                             style: pw.TextStyle(color: black_title1,fontWeight: pw.FontWeight.bold,fontSize: text_title_1)
+                         )
+
+                     ),
+                     pw.Container(
+                         alignment: pw.Alignment.topRight,
+                       //  margin: pw.EdgeInsets.only(top: top_margin_body_1),
+                         child: pw.Text(dump_body,
+                             textDirection: pw.TextDirection.rtl,
+                             textAlign: pw.TextAlign.justify,
+                             style: pw.TextStyle(
+                                 font: font_light,
+                                 color: black_text1,fontSize: text_body_1)
+                         )
+
+                     ),
+
+                     /*
+                     contact section
+                      */
+                     pw.Container(
+                         alignment: pw.Alignment.topRight,
+                         margin: pw.EdgeInsets.only(top: top_margin_title_1),
+                         child: pw.Text('اطلاعات تماس',
+                             textDirection: pw.TextDirection.rtl,
+                             style: pw.TextStyle(color: black_title1,fontWeight: pw.FontWeight.bold,fontSize: text_title_1)
+                         )
+
+                     ),
+                     pw.Container(
+                         alignment: pw.Alignment.topRight,
+                         margin: pw.EdgeInsets.only(top: 15),
+                         child: pw.Text(dump_body,
+                             textDirection: pw.TextDirection.rtl,
+
+                             style: pw.TextStyle(
+                              //   font: font,
+                                 color: black_text1,fontWeight: pw.FontWeight.normal,fontSize: text_body_1)
+                         )
+
+                     ),
+                   ]
+               )
              )
 
            )
@@ -110,7 +136,9 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
 Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
   final bgShape = await rootBundle.loadString('assets/resume.svg');
   final fontData = await rootBundle.load('font/iran.ttf');
+  final fontData_bold = await rootBundle.load('font/iran_bold.ttf');
   final font = pw.Font.ttf(fontData);
+  final font_bold = pw.Font.ttf(fontData_bold);
 
   format = format.copyWith(
       marginBottom: 0.0,
@@ -125,7 +153,7 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
     theme: pw.ThemeData.withFont(
 
       base: font,
-      bold: await PdfGoogleFonts.openSansBold(),
+      bold: font_bold,
       icons: await PdfGoogleFonts.materialIcons(),
     ),
 
@@ -148,7 +176,7 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
               child: pw.Container(
                   width: 1,
                   height: PdfPageFormat.a4.height,
-                  color:  PdfColor.fromHex('#ec1c24'),
+                  color:  black_text1,
                   margin: pw.EdgeInsets.only(right: 200)
               )
             ),
