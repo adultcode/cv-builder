@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
+          margin: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
           // child: Center(
           //   child: ElevatedButton(
           //     onPressed: (){
@@ -52,7 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // ),
           child: PdfPreview(
             initialPageFormat: PdfPageFormat.a4,
-            useActions: false,
+           useActions: true,
+           maxPageWidth: 700,
+
             build: (format) => generateResume(format,context),
           ),
         ),

@@ -13,6 +13,7 @@ import 'package:printing/printing.dart';
 
 Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext) async {
   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
+
   // final fontData = await rootBundle.load('iran.ttf');
   // final font = pw.Font.ttf(fontData);
 
@@ -37,56 +38,68 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
      pageTheme: pageTheme,
      // pageFormat: format,,
       build: (pw.Context context) => [
-        pw.Partition(
-          child: pw.Container(
-            // color: black_title1,
-            // height: MediaQuery.of(buildContext).size.height,
-            alignment: pw.Alignment.topRight,
-            child: pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.end,
-                children: [
-                  /*
-              left side
-               */
-                  pw.Expanded(
-                    flex: 10,
-                    child:  pw.Container(
-                      //   width: 10*PdfPageFormat.cm,
-                        height: 100,
+       pw.Partitions(
+         mainAxisSize: pw.MainAxisSize.max,
+         children: [
+           pw.Partition(
+             flex: 18,
 
-                        color: PdfColor.fromInt(0xff9ce5d0)
-                    ),
-                  ),
+             child: pw.Column(
+               crossAxisAlignment: pw.CrossAxisAlignment.start,
+               children: [
+                 pw.Container(
+                   //width: 4.0*PdfPageFormat.cm,
+                   height: 200,
+                   margin: pw.EdgeInsets.only(top: 10,right: 4),
+                   color: PdfColor.fromInt(0xff9005d0),
+                 ),
+                 pw.Container(
+                   //width: 3.0*PdfPageFormat.cm,
+                   height: 200,
+                   margin: pw.EdgeInsets.only(top: 10,right: 4),
+                   color: PdfColor.fromInt(0xff9005d0),
+                 ),
+                 pw.Container(
+                   width: 3.0*PdfPageFormat.cm,
+                   height: 200,
+                   margin: pw.EdgeInsets.only(top: 10,right: 4),
+                   color: PdfColor.fromInt(0xff9005d0),
+                 ),
+                 pw.Container(
+                   width: 3.0*PdfPageFormat.cm,
+                   height: 200,
+                   margin: pw.EdgeInsets.only(top: 10,right: 4),
+                   color: PdfColor.fromInt(0xff9005d0),
+                 ),
+                 pw.Container(
+                   width: 3.0*PdfPageFormat.cm,
+                   height: 200,
+                   margin: pw.EdgeInsets.only(top: 10,right: 4),
+                   color: PdfColor.fromInt(0xff9005d0),
+                 ),
+               ]
+             )
+           ),
 
-                  /*
-              right side
-               */
-                  pw.Expanded(
-                      flex: 18,
 
-                      child: pw.Container(
-                        // width: 3.0*PdfPageFormat.cm,
-                          height: 100,
-                          color: PdfColor.fromInt(0xff9005d0),
-                          child: pw.Column(
-                              children:[
-                                pw.Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: pw.BoxDecoration(
-                                      color: black_title1,
-                                      shape: pw.BoxShape.circle
-                                  ),
-                                  // color:  PdfColor.fromInt(0xff9ce5d0)
-                                )
-                              ]
-                          )
-                      )
-                  )
-                ]
-            ),
-          ),
-        )
+           pw.Partition(
+             flex: 9,
+             //width: 120,
+             child:  pw.Column(
+               children: [
+                 pw.Container(
+                 //  width: 1.0*PdfPageFormat.cm,
+                   height: 200,
+                   margin: pw.EdgeInsets.only(top: 10),
+                   color: black_title1,
+                 ),
+               ]
+             )
+
+           )
+         ]
+       )
+
       ],
     ),
   );
@@ -120,10 +133,26 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
       return pw.FullPage(
 
         ignoreMargins: true,
-        child: pw.Expanded(
-          child: pw.Container(
-            color: bg_color1
-          )
+        child: pw.Stack(
+          children: [
+
+            pw.Expanded(
+                child: pw.Container(
+                    color: bg_color1,
+
+
+                )
+            ),
+            pw.Positioned(
+              right: 0,
+              child: pw.Container(
+                  width: 1,
+                  height: PdfPageFormat.a4.height,
+                  color:  PdfColor.fromHex('#ec1c24'),
+                  margin: pw.EdgeInsets.only(right: 200)
+              )
+            ),
+          ]
         )
         // child: pw.Stack(
         //   children: [
