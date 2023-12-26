@@ -1,5 +1,6 @@
 double text_title_1 = 13.0;
 double text_body_1 = 11.0;
+double social_body_1 = 10.0;
 
 double top_margin_body_1 = 4.0;
 double top_margin_title_1 = 20.0;

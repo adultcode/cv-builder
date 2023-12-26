@@ -44,8 +44,8 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
   final fontData = await rootBundle.load('font/iran_light.ttf');
   final font_light = pw.Font.ttf(fontData);
-  SocialModel socialModel = SocialModel(address: 'sd',socialType: SocialType.linkedin);
-  socialModel.address = await Geticon(socialModel);
+  SocialModel socialModel = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin);
+  socialModel.icon_path = await Geticon(socialModel);
 
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../util/constant/color.dart';
 import '../../util/constant/font_size.dart';
+import '../../util/constant/text_style.dart';
 import '../../util/social_icon.dart';
 
 class Social extends pw.StatelessWidget {
@@ -24,23 +25,32 @@ class Social extends pw.StatelessWidget {
   pw.Widget build(pw.Context context) {
     return  pw.Container(
         width: double.infinity,
-        // color: PdfColor.fromHex('#a61010'),
+         //color: PdfColor.fromHex('#a61010'),
+        margin: pw.EdgeInsets.only(top: 7),
         child: pw.Row(
-            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
 
 
+              pw.Expanded(child: pw.Container(
+                alignment: pw.Alignment.topRight,
+                padding: pw.EdgeInsets.only(right: 4),
+                child: pw.Text(socialModel!.address!,
+                    style: social_style_1)
+              )),
+
               pw.Container(
-                  margin: pw.EdgeInsets.only(top: 10),
-                  width: 22,
-                  height: 22,
+                  width: 20,
+                  height: 20,
+
                   alignment: pw.Alignment.center,
                   padding: pw.EdgeInsets.all(4),
                   decoration: pw.BoxDecoration(
                       shape: pw.BoxShape.circle,
                       color: black_text1
                   ),
-                  child: pw.SvgImage(svg: socialModel!.address!,height: 18,width: 18,colorFilter:bg_color1 )
+                  child: pw.SvgImage(svg: socialModel!.icon_path!,height: 18,width: 18,colorFilter:bg_color1 )
               ),
 
             ]

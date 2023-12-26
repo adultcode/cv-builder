@@ -1,9 +1,10 @@
 class SocialModel{
 
   String? address;
+  String? icon_path;
   SocialType? socialType;
 
-  SocialModel(  {this.address, this.socialType});
+  SocialModel(  {this.address, this.socialType,this.icon_path});
 }
 
 
