@@ -1,9 +1,9 @@
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
-import '../../util/color.dart';
-import '../../util/font_size.dart';
-import '../../util/text_style.dart';
+import '../../util/constant/color.dart';
+import '../../util/constant/font_size.dart';
+import '../../util/constant/text_style.dart';
 
 Widget RightBody(var text, {double? margin_top}){
   return pw.Container(

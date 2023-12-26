@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-import '../../util/color.dart';
-import '../../util/font_size.dart';
-import '../../util/text_style.dart';
+import '../../util/constant/color.dart';
+import '../../util/constant/font_size.dart';
+import '../../util/constant/text_style.dart';
 
 class Skill extends pw.StatelessWidget {
 

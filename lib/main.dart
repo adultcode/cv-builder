@@ -1,11 +1,18 @@
+import 'package:cv_builder/provider/icon_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
 
 import 'resume/cv_1/cv.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(providers: [
+      Provider(create: (context) => IconProvider(),)
+    ],
+     child: MyApp(),)
+  );
 }
 
 class MyApp extends StatelessWidget {
