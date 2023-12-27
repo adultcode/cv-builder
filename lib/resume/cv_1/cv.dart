@@ -24,7 +24,7 @@ Future<String> Geticon(SocialModel socialModel)async{
       return await rootBundle.loadString('assets/linkedin_fill.svg');
       break;
     case SocialType.github:
-      return await rootBundle.loadString('assets/linkedin_fill.svg');
+      return await rootBundle.loadString('assets/github_fill.svg');
       break;
     case SocialType.telegram:
       return await rootBundle.loadString('assets/linkedin_fill.svg');
@@ -45,7 +45,9 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
   final fontData = await rootBundle.load('font/iran_light.ttf');
   final font_light = pw.Font.ttf(fontData);
   SocialModel socialModel = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin);
+  SocialModel socialModel2 = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.github);
   socialModel.icon_path = await Geticon(socialModel);
+  socialModel2.icon_path = await Geticon(socialModel2);
 
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
@@ -141,19 +143,9 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                      social section
                       */
                      TitleText('اجتماعی'),
-                     pw.Container(
-                         margin: pw.EdgeInsets.only(top: 10),
-                         width: 22,
-                         height: 22,
-                         alignment: pw.Alignment.center,
-                         padding: pw.EdgeInsets.all(4),
-                         decoration: pw.BoxDecoration(
-                           shape: pw.BoxShape.circle,
-                           color: black_text1
-                         ),
-                       child: pw.SvgImage(svg: bgShape,height: 18,width: 18,colorFilter:bg_color1 )
-                     ),
-                     Social(socialModel: socialModel)
+
+                     Social(socialModel: socialModel),
+                     Social(socialModel: socialModel2),
                    ]
                )
              )

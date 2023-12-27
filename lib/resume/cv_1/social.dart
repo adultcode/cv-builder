@@ -26,7 +26,7 @@ class Social extends pw.StatelessWidget {
     return  pw.Container(
         width: double.infinity,
          //color: PdfColor.fromHex('#a61010'),
-        margin: pw.EdgeInsets.only(top: 7),
+        margin: pw.EdgeInsets.only(top: 10),
         child: pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             crossAxisAlignment: pw.CrossAxisAlignment.center,
