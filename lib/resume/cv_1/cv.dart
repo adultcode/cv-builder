@@ -4,8 +4,10 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:cv_builder/model/experience_model.dart';
 import 'package:cv_builder/model/skill_model.dart';
 import 'package:cv_builder/model/social_model.dart';
+import 'package:cv_builder/resume/cv_1/experience.dart';
 import 'package:cv_builder/resume/cv_1/skill.dart';
 import 'package:cv_builder/resume/cv_1/social.dart';
 import 'package:cv_builder/resume/cv_1/widget.dart';
@@ -49,6 +51,9 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
   socialModel.icon_path = await Geticon(socialModel);
   socialModel2.icon_path = await Geticon(socialModel2);
 
+
+  var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body);
+
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
   // final profileImage = pw.MemoryImage(
@@ -67,30 +72,11 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
          mainAxisSize: pw.MainAxisSize.max,
          children: [
 
+
+
+
            /*
            left side
-            */
-           pw.Partition(
-             flex: 18,
-
-             child: pw.Column(
-               crossAxisAlignment: pw.CrossAxisAlignment.start,
-               children: [
-                 pw.Container(
-                   //width: 4.0*PdfPageFormat.cm,
-                   height: 200,
-                   margin: pw.EdgeInsets.only(top: 10,right: 4),
-                //   color: PdfColor.fromInt(0xff9005d0),
-                 ),
-
-
-               ]
-             )
-           ),
-
-
-           /*
-           right side
             */
            pw.Partition(
              flex: 9,
@@ -146,11 +132,39 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
 
                      Social(socialModel: socialModel),
                      Social(socialModel: socialModel2),
+                     /*
+                     other section
+                      */
+                     TitleText('سایر توضیحات'),
+                     RightBody(dump_body),
                    ]
                )
              )
 
-           )
+           ),
+          /*
+           left side
+            */
+
+           pw.Partition(
+               flex: 18,
+
+               child: pw.Padding(
+                   padding: pw.EdgeInsets.only(right: PdfPageFormat.cm*0.7,left: PdfPageFormat.cm*0.4),
+
+                   child: pw.Column(
+                       crossAxisAlignment: pw.CrossAxisAlignment.start,
+                       children: [
+                         TitleText('تجربه کاری',margin_top: 20),
+                        // TitleText(dump_body,margin_top: 20),
+                         pw.SizedBox(height: 10),
+                         Experience(experienceModel: ex1)
+
+
+                       ]
+                   )
+               )
+           ),
          ]
        )
 
@@ -200,12 +214,12 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
                 )
             ),
             pw.Positioned(
-              right: 0,
+              left: 0,
               child: pw.Container(
                   width: 1.0,
                   height: PdfPageFormat.a4.height,
                   color:  vertical_div_1,
-                  margin: pw.EdgeInsets.only(right: 200)
+                  margin: pw.EdgeInsets.only(left: 200)
               )
             ),
           ]

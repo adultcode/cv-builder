@@ -9,5 +9,8 @@ var body_style_1 = pw.TextStyle(
 
 var title_style_1 = pw.TextStyle(color: black_title1,fontWeight: pw.FontWeight.bold,fontSize: text_title_1);
 
+var title_experience_1 = pw.TextStyle(color: black_title1,fontWeight: pw.FontWeight.bold,fontSize: text_body_1);
+var date_experience_1 = pw.TextStyle(color: black_text1,fontWeight: pw.FontWeight.normal,fontSize: social_body_1);
+
 var social_style_1 = pw.TextStyle(
     color: black_text1,fontWeight: pw.FontWeight.normal,fontSize: social_body_1);

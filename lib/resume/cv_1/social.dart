@@ -15,10 +15,7 @@ class Social extends pw.StatelessWidget {
   SocialModel? socialModel;
   var icon_path = '';
 
-  Social({this.socialModel}){
-
-
-  }
+  Social({this.socialModel});
 
 
   @override
