@@ -8,6 +8,7 @@ import 'package:cv_builder/model/experience_model.dart';
 import 'package:cv_builder/model/skill_model.dart';
 import 'package:cv_builder/model/social_model.dart';
 import 'package:cv_builder/resume/cv_1/experience.dart';
+import 'package:cv_builder/resume/cv_1/profile_1.dart';
 import 'package:cv_builder/resume/cv_1/skill.dart';
 import 'package:cv_builder/resume/cv_1/social.dart';
 import 'package:cv_builder/resume/cv_1/widget.dart';
@@ -156,6 +157,10 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                    child: pw.Column(
                        crossAxisAlignment: pw.CrossAxisAlignment.start,
                        children: [
+                         /*
+                         image and name
+                          */
+                         Profile1(),
                          TitleText('تجربه کاری',margin_top: 20),
                       //   TitleText(dump_body,margin_top: 20),
                          pw.SizedBox(height: 10),
