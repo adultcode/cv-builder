@@ -52,7 +52,8 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
   socialModel2.icon_path = await Geticon(socialModel2);
 
 
-  var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body);
+  var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
+  company: 'گوگل');
 
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
@@ -143,7 +144,7 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
 
            ),
           /*
-           left side
+           right side
             */
 
            pw.Partition(
@@ -156,9 +157,10 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                        crossAxisAlignment: pw.CrossAxisAlignment.start,
                        children: [
                          TitleText('تجربه کاری',margin_top: 20),
-                        // TitleText(dump_body,margin_top: 20),
+                      //   TitleText(dump_body,margin_top: 20),
                          pw.SizedBox(height: 10),
-                         Experience(experienceModel: ex1)
+                         Experience(experienceModel: ex1,),
+                         Experience(experienceModel: ex1,top_margin: top_margin_experience_1),
 
 
                        ]

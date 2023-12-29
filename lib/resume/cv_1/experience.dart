@@ -16,9 +16,11 @@ import '../../util/social_icon.dart';
 class Experience extends pw.StatelessWidget {
 
   ExperienceModel? experienceModel;
+  double? top_margin;
   var icon_path = '';
 
-  Experience({this.experienceModel});
+
+  Experience({this.experienceModel,this.top_margin});
 
 
   @override
@@ -26,17 +28,24 @@ class Experience extends pw.StatelessWidget {
     return pw.Flexible(
       child:  pw.Container(
           width: double.infinity,
-          //color: PdfColor.fromHex('#a61010'),
+         // color: PdfColor.fromHex('#a61010'),
           //height: 100,
-          margin: pw.EdgeInsets.only(top: 10),
+          decoration: pw.BoxDecoration(
+            border: pw.Border(
+              right: pw.BorderSide(
+                color: vertical_div_1,
+                width: 1
+
+              )
+            )
+          ),
+          padding: pw.EdgeInsets.only(top: top_margin??0,right: 7),
           child: pw.Row(
               mainAxisAlignment: pw.MainAxisAlignment.end,
               crossAxisAlignment: pw.CrossAxisAlignment.center,
               children: [
 
-                pw.Container(
-                    width: 50
-                ),
+
 
                 pw.Expanded(child: pw.Container(
 
@@ -47,8 +56,8 @@ class Experience extends pw.StatelessWidget {
                            */
                            pw.Container(
                               alignment: pw.Alignment.topRight,
-                              padding: pw.EdgeInsets.only(right: 4),
-                              child: pw.Text(experienceModel!.title!,
+                              padding: pw.EdgeInsets.only(right: 0),
+                              child: pw.Text("${experienceModel!.title!} - ${experienceModel!.company!}",
                                   textDirection: pw.TextDirection.rtl,
 
                                   style: title_experience_1)
@@ -58,27 +67,35 @@ class Experience extends pw.StatelessWidget {
                            */
                           pw.Container(
                               alignment: pw.Alignment.topRight,
-                              margin: pw.EdgeInsets.only(right: 4,top: PdfPageFormat.cm*0.3),
+                              margin: pw.EdgeInsets.only(top: top_margin_body_1),
                               child: pw.Text("${experienceModel!.start_date} - ${experienceModel!.end_date}",
                                   textDirection: pw.TextDirection.rtl,
 
-                                  style: date_experience_1)
+                                  style: body_style_1)
                           ),
+
                           /*
                           description
                            */
                           pw.Container(
                               alignment: pw.Alignment.topRight,
-                              margin: pw.EdgeInsets.only(right: 4,top: PdfPageFormat.cm*0.3),
+                              margin: pw.EdgeInsets.only(top: top_margin_body_1),
                               child: pw.Text("${experienceModel!.description}",
                                   textDirection: pw.TextDirection.rtl,
-
+                                  textAlign: pw.TextAlign.justify,
                                   style: body_style_1)
                           )
 
                         ]
                     )
-                ))
+                )),
+
+                // pw.Container(
+                //     width: 2,
+                //   height: double.infinity,
+                //  // height: 50,
+                //   color: black_title1
+                // ),
 
 
 
