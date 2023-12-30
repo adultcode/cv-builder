@@ -1,3 +1,4 @@
+import 'package:cv_builder/pages/dashboard_page.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
 import 'package:cv_builder/test.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  MyHomePage(),
+      home:  Dashboard(),
      // home: const PickImageTest(),
     );
   }

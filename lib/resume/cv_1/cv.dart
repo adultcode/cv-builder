@@ -101,7 +101,7 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
            pw.Partition(
              flex: 9,
              child:  pw.Padding(
-               padding: pw.EdgeInsets.only(right: PdfPageFormat.cm*0.4,left: PdfPageFormat.cm*0.2),
+               padding: pw.EdgeInsets.only(right: PdfPageFormat.cm*0.4,left: PdfPageFormat.cm*0.4),
                child: pw.Column(
                  crossAxisAlignment: pw.CrossAxisAlignment.end,
                    children: [
@@ -153,8 +153,8 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                     // if(MyHomePage.userModel.socials!=null)
                      ...socials,
                       //...MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList(),
-                     Social(socialModel: socialModel),
-                     Social(socialModel: socialModel2),
+                     //Social(socialModel: socialModel),
+                 //    Social(socialModel: socialModel2),
                      /*
                      other section
                       */

@@ -27,7 +27,7 @@ class Profile1 extends pw.StatelessWidget {
             margin: pw.EdgeInsets.only(top: PdfPageFormat.cm*1.4),
             child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.end,
-                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
 
                   /*
@@ -76,12 +76,11 @@ class Profile1 extends pw.StatelessWidget {
 
 
                   pw.Container(
-                      width: PdfPageFormat.cm*1.7,
-                    height: PdfPageFormat.cm*1.7,
-                  //  child: pw.Image(profile_img!),
+                      width: PdfPageFormat.cm*1.9,
+                    height: PdfPageFormat.cm*1.9,
+
                     decoration: pw.BoxDecoration(
                       image: pw.DecorationImage(
-                      //  image: pw.MemoryImage('profile_image_path')!
                         image: profile_img!
                       ),
                       border: pw.Border.all(
@@ -91,6 +90,7 @@ class Profile1 extends pw.StatelessWidget {
                       shape: pw.BoxShape.circle,
                     )
                   ),
+
                 ]
             )
         )
