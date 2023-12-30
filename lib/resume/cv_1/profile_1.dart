@@ -92,8 +92,8 @@ class Profile1 extends pw.StatelessWidget {
                   //  child: pw.Image(profile_img!),
                     decoration: pw.BoxDecoration(
                       image: pw.DecorationImage(
-                        image: pw.MemoryImage('profile_image_path')!
-                      //  image: profile_img!
+                      //  image: pw.MemoryImage('profile_image_path')!
+                        image: profile_img!
                       ),
                       border: pw.Border.all(
                         width: 1,

@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     useActions: true,
                     maxPageWidth: 700,
 
-                    build: (format) => generateResume(format,profile_image: value.icon_path),
+                    build: (format) => generateResume(format,profile_image_path: value.img_byte),
                   );
                 },
               )

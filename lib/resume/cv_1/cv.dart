@@ -45,7 +45,7 @@ Future<String> Geticon(SocialModel socialModel)async{
 }
 
 
-Future<Uint8List> generateResume(PdfPageFormat format, {Image? profile_image_path}) async {
+Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path}) async {
   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
   final fontData = await rootBundle.load('font/iran_light.ttf');
   final font_light = pw.Font.ttf(fontData);
@@ -66,14 +66,14 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Image? profile_image_pat
     (await rootBundle.load('assets/me.png')).buffer.asUint8List(),
   );
 
-  var provider = await flutterImageProvider(NetworkImage(
-      "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg"));
-  // MemoryImage images = provider.buildImage(context);
-  var response = await http.get(Uri.parse('https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg'));
-  var data = response.bodyBytes;
+  // var provider = await flutterImageProvider(NetworkImage(
+  //     "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg"));
+  // // MemoryImage images = provider.buildImage(context);
+  // var response = await http.get(Uri.parse('https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg'));
+  // var data = response.bodyBytes;
 
-  var img_test = NetworkImage(
-      "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg");
+  // var img_test = NetworkImage(
+  //     "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg");
   final pageTheme = await _myPageTheme(format);
   doc.addPage(
 
@@ -173,7 +173,7 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Image? profile_image_pat
                          image and name
                           */
 
-                         Profile1(profile_img: data==null?pw.MemoryImage(data):profileImage),
+                         Profile1(profile_img: profile_image_path!=null?pw.MemoryImage(profile_image_path!):profileImage),
 
                          /*
                          experience
