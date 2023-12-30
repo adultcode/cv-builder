@@ -24,17 +24,6 @@ class Profile1 extends pw.StatelessWidget {
     return pw.Flexible(
         child:  pw.Container(
             width: double.infinity,
-            // color: PdfColor.fromHex('#a61010'),
-            //height: 100,
-            // decoration: pw.BoxDecoration(
-            //     border: pw.Border(
-            //         right: pw.BorderSide(
-            //             color: vertical_div_1,
-            //             width: 1
-            //
-            //         )
-            //     )
-            // ),
             margin: pw.EdgeInsets.only(top: PdfPageFormat.cm*1.4),
             child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.end,

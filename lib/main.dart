@@ -57,11 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
           child: Column(
             children: [
-              ElevatedButton(onPressed: () async{
-               // context.read<IconProvider>()
-                Provider.of<IconProvider>(context,listen: false).getImage();
-                 }, child: Text("Pick Image")
-              ),
+              // ElevatedButton(onPressed: () async{
+              //  // context.read<IconProvider>()
+              //   Provider.of<IconProvider>(context,listen: false).SetIcon();
+              //    }, child: Text("Pick Image")
+              // ),
               Expanded(
                   child: Consumer<IconProvider>(
                 builder: (context, value, child) {

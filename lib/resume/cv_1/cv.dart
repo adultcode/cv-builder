@@ -3,6 +3,7 @@
 
 import 'dart:math';
 import 'dart:typed_data';
+import 'package:cv_builder/model/education_model.dart';
 import 'package:cv_builder/model/experience_model.dart';
 import 'package:cv_builder/model/skill_model.dart';
 import 'package:cv_builder/model/social_model.dart';
@@ -21,6 +22,7 @@ import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/constant/text_style.dart';
+import 'education.dart';
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
     case SocialType.linkedin:
@@ -46,7 +48,8 @@ Future<String> Geticon(SocialModel socialModel)async{
 
 
 Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path}) async {
-  final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
+
+  final doc = pw.Document(title: 'رزومه', author: 'حسام رسولیان');
   final fontData = await rootBundle.load('font/iran_light.ttf');
   final font_light = pw.Font.ttf(fontData);
 
@@ -58,7 +61,8 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
 
   var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
   company: 'گوگل');
-
+  var ed1 = EducationModel(title: 'کارشناسی مهندسی کامپیوتر',end_date: '1402/09',start_date: '1401/01',description: dump_body,
+      university: 'دانشگاه استنفورد');
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
 
@@ -66,14 +70,6 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
     (await rootBundle.load('assets/me.png')).buffer.asUint8List(),
   );
 
-  // var provider = await flutterImageProvider(NetworkImage(
-  //     "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg"));
-  // // MemoryImage images = provider.buildImage(context);
-  // var response = await http.get(Uri.parse('https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg'));
-  // var data = response.bodyBytes;
-
-  // var img_test = NetworkImage(
-  //     "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg");
   final pageTheme = await _myPageTheme(format);
   doc.addPage(
 
@@ -178,11 +174,18 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                          /*
                          experience
                           */
-                         TitleText('تجربه کاری',margin_top: 20),
+                         TitleText('تجربه کاری',margin_top: top_margin_title_1),
                       //   TitleText(dump_body,margin_top: 20),
                          pw.SizedBox(height: 10),
                          Experience(experienceModel: ex1,),
                          Experience(experienceModel: ex1,top_margin: top_margin_experience_1),
+
+                         /*
+                         Education
+                          */
+                         TitleText('تحصیلات',margin_top: top_margin_title_1),
+                         pw.SizedBox(height: 10),
+                         Education1(education:ed1)
 
 
                        ]

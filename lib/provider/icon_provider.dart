@@ -4,37 +4,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../util/profile_image.dart';
+
 class IconProvider extends ChangeNotifier{
 
-  Image? icon_path;
-  String? img_path;
   Uint8List? img_byte;
 
-  void SetIcon(String? icon){
-    getImage();
-    //notifyListeners();
+  void SetIcon()async{
+   var image_byte = await getImage();
+   if(image_byte!=null){
+     img_byte = image_byte;
+   }
+    notifyListeners();
   }
 
 
-  Future<void> getImage() async {
-    final ImagePicker picker = ImagePicker();
 
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-      if (image != null) {
-        print(image.path);
-        img_path = image.path;
-        img_byte =await image.readAsBytes();
-        if (kIsWeb) { // Check if this is a browser session
-          icon_path = Image.network(image.path);
-
-        } else {
-          icon_path = Image.file(File(image.path));
-
-        }
-      } else {
-        print("No image selected");
-      }
-   notifyListeners();
-  }
 }
