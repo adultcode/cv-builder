@@ -64,6 +64,17 @@ class _PickImageTestState extends State<PickImageTest> {
   //   });
   //   input.click();
   // }
+
+  List<Widget> mylist = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    mylist.add(Text("assss"));
+    mylist.add(Text("assss"));
+    mylist.add(Text("assss"));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,15 +84,7 @@ class _PickImageTestState extends State<PickImageTest> {
             child: Column(
               children: [
                 SizedBox(height: 50,),
-                ElevatedButton(onPressed: () async{
-                  _getImage();
-                }, child: Text("Pick Image")),
-                SizedBox(height: 50,),
-                Container(
-                  width: 100,
-                  height: 100,
-                  child: _image??Text('empty'),
-                )
+               ...mylist
               ],
             ),
           ),

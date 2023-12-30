@@ -21,6 +21,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 
+import '../../main.dart';
 import '../../util/constant/text_style.dart';
 import 'education.dart';
 Future<String> Geticon(SocialModel socialModel)async{
@@ -58,7 +59,16 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
   socialModel.icon_path = await Geticon(socialModel);
   socialModel2.icon_path = await Geticon(socialModel2);
 
+  List<Social> socials =  [];
+ // socials.add(pw.Text('sdsd'));
+ // socials.add(pw.Text('sdsd'));
 
+  MyHomePage.userModel.socials![0].icon_path = await Geticon(MyHomePage.userModel.socials![0]);
+  MyHomePage.userModel.socials![1].icon_path = await Geticon(MyHomePage.userModel.socials![1]);
+  socials = MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList();
+
+
+ print("social1: ${socials[0].socialModel!.address}");
   var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
   company: 'گوگل');
   var ed1 = EducationModel(title: 'کارشناسی مهندسی کامپیوتر',end_date: '1402/09',start_date: '1401/01',description: dump_body,
@@ -140,6 +150,9 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                       */
                      TitleText('اجتماعی'),
 
+                    // if(MyHomePage.userModel.socials!=null)
+                     ...socials,
+                      //...MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList(),
                      Social(socialModel: socialModel),
                      Social(socialModel: socialModel2),
                      /*

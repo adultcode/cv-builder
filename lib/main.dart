@@ -5,6 +5,8 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 
+import 'model/social_model.dart';
+import 'model/user_model.dart';
 import 'resume/cv_1/cv.dart';
 
 void main() {
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home:  MyHomePage(),
      // home: const PickImageTest(),
     );
   }
@@ -37,13 +39,32 @@ class MyApp extends StatelessWidget {
 
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  static late UserModel userModel;
+
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SocialModel socialModel = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin,icon_path: 's');
+    SocialModel socialModel2 = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.github,icon_path: 's');
+    List<SocialModel> social_list = [
+      SocialModel(address: '/user/hesam',socialType: SocialType.github),
+      SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin)
+
+    ];
+    MyHomePage.userModel = UserModel();
+
+
+    MyHomePage.userModel.socials = social_list;
+
+ }
   @override
   Widget build(BuildContext context) {
     //print("double: ${double.infinity.ceilToDouble()}");
