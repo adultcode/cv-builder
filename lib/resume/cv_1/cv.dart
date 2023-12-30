@@ -3,7 +3,6 @@
 
 import 'dart:math';
 import 'dart:typed_data';
-
 import 'package:cv_builder/model/experience_model.dart';
 import 'package:cv_builder/model/skill_model.dart';
 import 'package:cv_builder/model/social_model.dart';
@@ -19,6 +18,7 @@ import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:http/http.dart' as http;
 
 import '../../util/constant/text_style.dart';
 Future<String> Geticon(SocialModel socialModel)async{
@@ -43,10 +43,13 @@ Future<String> Geticon(SocialModel socialModel)async{
       break;
   }
 }
-Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext) async {
+
+
+Future<Uint8List> generateResume(PdfPageFormat format, {Image? profile_image_path}) async {
   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
   final fontData = await rootBundle.load('font/iran_light.ttf');
   final font_light = pw.Font.ttf(fontData);
+
   SocialModel socialModel = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin);
   SocialModel socialModel2 = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.github);
   socialModel.icon_path = await Geticon(socialModel);
@@ -58,10 +61,19 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
 
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
-  // final profileImage = pw.MemoryImage(
-  //   (await rootBundle.load('assets/profile.jpg')).buffer.asUint8List(),
-  // );
 
+  final profileImage = pw.MemoryImage(
+    (await rootBundle.load('assets/me.png')).buffer.asUint8List(),
+  );
+
+  var provider = await flutterImageProvider(NetworkImage(
+      "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg"));
+  // MemoryImage images = provider.buildImage(context);
+  var response = await http.get(Uri.parse('https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg'));
+  var data = response.bodyBytes;
+
+  var img_test = NetworkImage(
+      "https://s6.uupload.ir/files/407401421_744260147747117_9035329921598433128_n_mmpb.jpg");
   final pageTheme = await _myPageTheme(format);
   doc.addPage(
 
@@ -160,7 +172,12 @@ Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext)
                          /*
                          image and name
                           */
-                         Profile1(),
+
+                         Profile1(profile_img: data==null?pw.MemoryImage(data):profileImage),
+
+                         /*
+                         experience
+                          */
                          TitleText('تجربه کاری',margin_top: 20),
                       //   TitleText(dump_body,margin_top: 20),
                          pw.SizedBox(height: 10),

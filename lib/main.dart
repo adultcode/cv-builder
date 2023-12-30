@@ -1,4 +1,5 @@
 import 'package:cv_builder/provider/icon_provider.dart';
+import 'package:cv_builder/test.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
@@ -9,7 +10,7 @@ import 'resume/cv_1/cv.dart';
 void main() {
   runApp(
     MultiProvider(providers: [
-      Provider(create: (context) => IconProvider(),)
+      ChangeNotifierProvider(create: (context) => IconProvider())
     ],
      child: MyApp(),)
   );
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(),
+     // home: const PickImageTest(),
     );
   }
 }
@@ -52,20 +54,28 @@ class _MyHomePageState extends State<MyHomePage> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           margin: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
-          // child: Center(
-          //   child: ElevatedButton(
-          //     onPressed: (){
-          //
-          //     },
-          //     child: Text("Create pdf"),
-          //   ),
-          // ),
-          child: PdfPreview(
-            initialPageFormat: PdfPageFormat.a4,
-           useActions: true,
-           maxPageWidth: 700,
 
-            build: (format) => generateResume(format,context),
+          child: Column(
+            children: [
+              ElevatedButton(onPressed: () async{
+               // context.read<IconProvider>()
+                Provider.of<IconProvider>(context,listen: false).getImage();
+                 }, child: Text("Pick Image")
+              ),
+              Expanded(
+                  child: Consumer<IconProvider>(
+                builder: (context, value, child) {
+                  return PdfPreview(
+                    initialPageFormat: PdfPageFormat.a4,
+                    useActions: true,
+                    maxPageWidth: 700,
+
+                    build: (format) => generateResume(format,profile_image: value.icon_path),
+                  );
+                },
+              )
+              )
+            ],
           ),
         ),
       ),

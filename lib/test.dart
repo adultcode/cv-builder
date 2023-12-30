@@ -1,112 +1,92 @@
-//
-//
-//
-// import 'dart:math';
-// import 'dart:typed_data';
-//
-// import 'package:cv_builder/util/constant/color.dart';
-// import 'package:cv_builder/util/constant/font_size.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:pdf/pdf.dart';
-// import 'package:pdf/widgets.dart' as pw;
-// import 'package:printing/printing.dart';
-//
-// import '../../util/constant/text_style.dart';
-//
-// Future<Uint8List> generateResume(PdfPageFormat format,BuildContext buildContext) async {
-//   final doc = pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
-//   final fontData = await rootBundle.load('font/iran_light.ttf');
-//   final font_light = pw.Font.ttf(fontData);
-//
-//   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
-//
-//   final pageTheme = await _myPageTheme(format);
-//   doc.addPage(
-//
-//     pw.MultiPage(
-//
-//       pageTheme: pageTheme,
-//       // pageFormat: format,,
-//       build: (pw.Context context) => [
-//
-//         Container(
-//           child: Text("ssdsdsdsdsd"),
-//         )
-//
-//       ],
-//     ),
-//   );
-//   return doc.save();
-// }
-//
-//
-// Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
-//   final bgShape = await rootBundle.loadString('assets/resume.svg');
-//   final fontData = await rootBundle.load('font/iran.ttf');
-//   final fontData_bold = await rootBundle.load('font/iran_bold.ttf');
-//   final font = pw.Font.ttf(fontData);
-//   final font_bold = pw.Font.ttf(fontData_bold);
-//
-//   format = format.copyWith(
-//       marginBottom: 0.0,
-//       marginLeft: 0.0*PdfPageFormat.cm ,
-//       marginRight: 0.0*PdfPageFormat.cm,
-//       marginTop: 0.0 );
-//
-//
-//   return pw.PageTheme(
-//     pageFormat: format,
-//
-//     theme: pw.ThemeData.withFont(
-//
-//       base: font,
-//       bold: font_bold,
-//       icons: await PdfGoogleFonts.materialIcons(),
-//     ),
-//
-//     buildBackground: (pw.Context context) {
-//       return pw.FullPage(
-//
-//           ignoreMargins: true,
-//           child: pw.Stack(
-//               children: [
-//
-//                 pw.Expanded(
-//                     child: pw.Container(
-//                       color: bg_color1,
-//
-//
-//                     )
-//                 ),
-//                 pw.Positioned(
-//                     right: 0,
-//                     child: pw.Container(
-//                         width: 1.0,
-//                         height: PdfPageFormat.a4.height,
-//                         color:  vertical_div_1,
-//                         margin: pw.EdgeInsets.only(right: 200)
-//                     )
-//                 ),
-//               ]
-//           )
-//         // child: pw.Stack(
-//         //   children: [
-//         //
-//         //     // pw.Positioned(
-//         //     //   child: pw.SvgImage(svg: bgShape),
-//         //     //   left: 0,
-//         //     //   top: 0,
-//         //     // ),
-//         //     // pw.Positioned(
-//         //     //   child: pw.Transform.rotate(
-//         //     //       angle: pi, child: pw.SvgImage(svg: bgShape)),
-//         //     //   right: 0,
-//         //     //   bottom: 0,
-//         //     // ),
-//         //   ],
-//         // ),
-//       );
-//     },
-//   );
-// }
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:image_picker/image_picker.dart';
+
+
+class PickImageTest extends StatefulWidget {
+  const PickImageTest({Key? key}) : super(key: key);
+
+  @override
+  State<PickImageTest> createState() => _PickImageTestState();
+}
+
+class _PickImageTestState extends State<PickImageTest> {
+
+  String name = '';
+  String? error;
+ // Uint8Lisxt data;
+  var _image;
+  Future<void> _getImage() async {
+    final ImagePicker picker = ImagePicker();
+
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (image != null) {
+        print(image.path);
+        if (kIsWeb) { // Check if this is a browser session
+          _image = Image.network(image.path);
+        } else {
+          _image = Image.file(File(image.path));
+        }
+      } else {
+        print("No image selected");
+      }
+    });
+  }
+  // pickImage() {
+  //   final html.InputElement input = html.document.createElement('input');
+  //   input
+  //     ..type = 'file'
+  //     ..accept = 'image/*';
+  //   input.onChange.listen((e) {
+  //     if (input.files.isEmpty) return;
+  //     final reader = html.FileReader();
+  //     reader.readAsDataUrl(input.files[0]);
+  //     reader.onError.listen((err) => setState(() {
+  //       error = err.toString();
+  //     }));
+  //     reader.onLoad.first.then((res) {
+  //       final encoded = reader.result as String;
+  //       // remove data:image/*;base64 preambule
+  //       final stripped =
+  //       encoded.replaceFirst(RegExp(r'data:image/[^;]+;base64,'), '');
+  //       setState(() {
+  //         name = input.files[0].name;
+  //         data = base64.decode(stripped);
+  //         error = null;
+  //       });
+  //     });
+  //   });
+  //   input.click();
+  // }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            child: Column(
+              children: [
+                SizedBox(height: 50,),
+                ElevatedButton(onPressed: () async{
+                  _getImage();
+                }, child: Text("Pick Image")),
+                SizedBox(height: 50,),
+                Container(
+                  width: 100,
+                  height: 100,
+                  child: _image??Text('empty'),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

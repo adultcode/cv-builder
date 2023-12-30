@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cv_builder/model/experience_model.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -14,9 +15,9 @@ class Profile1 extends pw.StatelessWidget {
   // double? top_margin;
   // var icon_path = '';
 
+  pw.MemoryImage? profile_img;
 
-  Profile1();
-
+  Profile1({this.profile_img});
 
   @override
   pw.Widget build(pw.Context context) {
@@ -84,14 +85,21 @@ class Profile1 extends pw.StatelessWidget {
                   profile avataer
                    */
 
+
                   pw.Container(
                       width: PdfPageFormat.cm*1.7,
                     height: PdfPageFormat.cm*1.7,
+                  //  child: pw.Image(profile_img!),
                     decoration: pw.BoxDecoration(
+                      image: pw.DecorationImage(
+                        image: pw.MemoryImage('profile_image_path')!
+                      //  image: profile_img!
+                      ),
+                      border: pw.Border.all(
+                        width: 1,
+                        color: vertical_div_1
+                      ),
                       shape: pw.BoxShape.circle,
-                      color: black_title1,
-
-
                     )
                   ),
                 ]
