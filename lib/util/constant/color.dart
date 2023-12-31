@@ -1,5 +1,6 @@
  import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 
 /*
@@ -17,3 +18,7 @@ panel colors
  */
 
  var backgroud_color = Color(0xfff3f3f5);
+ var panel_grey = Color(0xffb5bdd1);
+
+ var panel_orange = Color(0xfff29200);
+ var panel_orange_accent = Color(0xfffdf4e5);

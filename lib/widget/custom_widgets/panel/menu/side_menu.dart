@@ -1,5 +1,9 @@
+import 'package:cv_builder/model/menu_model.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../util/constant/radius_size.dart';
+import 'active_menu.dart';
 
 
 class SideMenu extends StatelessWidget {
@@ -14,7 +18,7 @@ class SideMenu extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
 
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(outer_radius)),
           border: Border.all(
           color: Color(0xffeff0f3),
                 //width: 3
@@ -31,7 +35,9 @@ class SideMenu extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.person,size: 30,color: Color(0xffb5bdd1),)
+          //Icon(Icons.person,size: 30,color: Color(0xffb5bdd1),)
+          ActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.person )),
+          ActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.event_note_outlined )),
         ],
       ),
     );
