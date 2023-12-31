@@ -7,11 +7,9 @@ import 'package:cv_builder/model/education_model.dart';
 import 'package:cv_builder/model/experience_model.dart';
 import 'package:cv_builder/model/skill_model.dart';
 import 'package:cv_builder/model/social_model.dart';
-import 'package:cv_builder/resume/cv_1/experience.dart';
-import 'package:cv_builder/resume/cv_1/profile_1.dart';
-import 'package:cv_builder/resume/cv_1/skill.dart';
-import 'package:cv_builder/resume/cv_1/social.dart';
-import 'package:cv_builder/resume/cv_1/widget.dart';
+import '../../../util/constant/color.dart';
+import '../../../util/constant/font_size.dart';
+import '../../../util/constant/text_style.dart';
 import 'package:cv_builder/util/constant/color.dart';
 import 'package:cv_builder/util/constant/font_size.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +19,14 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 
-import '../../main.dart';
-import '../../util/constant/text_style.dart';
-import 'education.dart';
+import '../../../main.dart';
+import '../../../util/constant/text_style.dart';
+import '../../custom_widgets/cv_1/education.dart';
+import '../../custom_widgets/cv_1/experience.dart';
+import '../../custom_widgets/cv_1/profile_1.dart';
+import '../../custom_widgets/cv_1/skill.dart';
+import '../../custom_widgets/cv_1/social.dart';
+import '../../custom_widgets/cv_1/widget.dart';
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
     case SocialType.linkedin:

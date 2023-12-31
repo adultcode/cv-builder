@@ -1,6 +1,6 @@
-import 'package:cv_builder/pages/dashboard_page.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
 import 'package:cv_builder/test.dart';
+import 'package:cv_builder/widget/pages/panel/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import 'model/social_model.dart';
 import 'model/user_model.dart';
-import 'resume/cv_1/cv.dart';
+import 'widget/pages/cv/cv.dart';
 
 void main() {
   runApp(

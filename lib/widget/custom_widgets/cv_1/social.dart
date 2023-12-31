@@ -5,10 +5,9 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:provider/provider.dart';
 
-import '../../util/constant/color.dart';
-import '../../util/constant/font_size.dart';
-import '../../util/constant/text_style.dart';
-import '../../util/social_icon.dart';
+import '../../../util/constant/color.dart';
+import '../../../util/constant/font_size.dart';
+import '../../../util/constant/text_style.dart';
 
 class Social extends pw.StatelessWidget {
 

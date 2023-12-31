@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-import '../../util/constant/color.dart';
-import '../../util/constant/font_size.dart';
-import '../../util/constant/text_style.dart';
+import '../../../util/constant/color.dart';
+import '../../../util/constant/font_size.dart';
+import '../../../util/constant/text_style.dart';
 
 class Profile1 extends pw.StatelessWidget {
 
