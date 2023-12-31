@@ -8,13 +8,46 @@ import 'active_menu.dart';
 
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({Key? key}) : super(key: key);
 
+  List<MenuModel> menu_list = [];
+  List<Widget> menu_list_widget = [];
+  SideMenu(){
+
+    menu_list.add(MenuModel(title: 'داشبورد',active: true,iconData:Icons.person ));
+    menu_list.add(MenuModel(title: 'اطلاعات',active: false,iconData:Icons.event_note_outlined ));
+    menu_list.add(MenuModel(title: 'سوابق کاری',active: false,iconData:Icons.work ));
+    menu_list.add(MenuModel(title: 'سوابق تحصیلی',active: false,iconData:Icons.school ));
+    menu_list.add(MenuModel(title: 'مهارت ها',active: false,iconData:Icons.settings ));
+    menu_list.add(MenuModel(title: 'زبان',active: false,iconData:Icons.language ));
+    menu_list.add(MenuModel(title: 'شبکه های اجتماعی',active: false,iconData:Icons.alternate_email ));
+
+
+    menu_list_widget =   menu_list.map((menu) {
+      if(menu.active==true){
+        return InkWell(
+            child: ActiveMenuItem(menu),
+          onTap: () {
+
+          },
+        );
+      }else return InkWell(
+        highlightColor: Colors.redAccent,
+        focusColor: Colors.green,
+        splashColor: Colors.lightBlue,
+        child: UnActiveMenuItem(menu),
+        onTap: () {
+
+        },
+      );
+    },).toList();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 80,
       height: ScreenSize.height,
+      alignment: Alignment.center,
+
       padding: EdgeInsets.symmetric(vertical: ScreenSize.height*0.02),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -33,14 +66,13 @@ class SideMenu extends StatelessWidget {
           )
         ]
       ),
+      child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //Icon(Icons.person,size: 30,color: Color(0xffb5bdd1),)
-          ActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.person )),
-          ActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.event_note_outlined )),
-          UnActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.event_note_outlined )),
+          ...menu_list_widget
         ],
+      ),
       ),
     );
   }
