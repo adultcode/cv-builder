@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../custom_widgets/panel/side_menu.dart';
 
 
 class DashboardBig extends StatefulWidget {
@@ -20,7 +21,8 @@ class _DashboardBigState extends State<DashboardBig> {
          width: ScreenSize.width,
          height: ScreenSize.height,
         color: backgroud_color,
-        child: Text('ssss'),
+        alignment: Alignment.centerLeft,
+        child: SideMenu(),
 
     );
   }

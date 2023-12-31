@@ -16,4 +16,4 @@ var vertical_red = PdfColor.fromHex('#ec1c24');
 panel colors
  */
 
- var backgroud_color = Color(0xfff2f3f5);
+ var backgroud_color = Color(0xfff3f3f5);
