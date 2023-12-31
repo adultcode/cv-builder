@@ -1,5 +1,6 @@
 import 'package:cv_builder/model/menu_model.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
+import 'package:cv_builder/widget/custom_widgets/panel/menu/unactive_menu.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../util/constant/radius_size.dart';
@@ -38,6 +39,7 @@ class SideMenu extends StatelessWidget {
           //Icon(Icons.person,size: 30,color: Color(0xffb5bdd1),)
           ActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.person )),
           ActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.event_note_outlined )),
+          UnActiveMenuItem(MenuModel(title: 'Profile',active: true,iconData:Icons.event_note_outlined )),
         ],
       ),
     );

@@ -5,24 +5,20 @@ import 'package:flutter/material.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/radius_size.dart';
 
-class ActiveMenuItem extends StatelessWidget {
+class UnActiveMenuItem extends StatelessWidget {
 
   MenuModel menuModel;
 
-  ActiveMenuItem(this.menuModel);
+  UnActiveMenuItem(this.menuModel);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: ScreenSize.height*0.03),
       padding: EdgeInsets.all(7),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(inner_radius)
-        ),
-            color: panel_orange_accent
-      ),
-      child: Icon(menuModel.iconData,size: 24,color: panel_orange,),
-      
+
+      child: Icon(menuModel.iconData,size: 26,color: panel_grey,),
+
     );
   }
 }
