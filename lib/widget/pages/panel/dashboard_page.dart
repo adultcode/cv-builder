@@ -10,21 +10,56 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+ late Widget _current_page;
+ ScreenSizeStream? screenSizeStream;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    screenSizeStream = ScreenSizeStream();
+    // if(ScreenSize.width<ScreenSize.smallwidth){
+    //
+    //   _current_page= Center(child: Text("Small ${ScreenSize.width}"),);
+    // }else{
+    //   _current_page= Center(child: Text("Bigggggg ${ScreenSize.width}"),);
+    //   //_current_page= DashboardBig();
+    //
+    // }
+  }
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: LayoutBuilder(builder: (context, constraints) {
-        ScreenSize.width =constraints.maxWidth;
-        ScreenSize.height =constraints.maxHeight;
-        if(constraints.maxWidth<ScreenSize.smallwidth){
+      body:
+      StreamBuilder(
+        stream: ScreenSizeStream.controller.stream,
+        builder: (context, snapshot) {
+          if(snapshot.hasData){
+            if(snapshot.data!.width2<ScreenSize.smallwidth){
 
-          return Center(child: Text("Small ${constraints.maxWidth}"),);
-        }else{
-          return DashboardBig();
+              return Center(child: Text("Small ${snapshot.data!.width2}"),);
+            }else{
+              return Center(child: Text("Bigggggg ${snapshot.data!.width2}"),);
+              //_current_page= DashboardBig();
 
-        }
-      },),
+            }
+
+          }else{
+             return Center(child: InkWell(
+               onTap: (){
+                 ScreenSize  screenSize2 = ScreenSize();
+              //   screenSize2.width2 =11;
+                 screenSize2.height2 =12;
+
+                 ScreenSizeStream.controller.add(screenSize2);
+               },
+               child: Text("Empty"),
+             ),);
+          }
+
+        },
+      ),
     );
   }
 }

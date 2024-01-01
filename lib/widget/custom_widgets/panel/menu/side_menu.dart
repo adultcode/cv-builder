@@ -1,7 +1,9 @@
 import 'package:cv_builder/model/menu_model.dart';
+import 'package:cv_builder/mvvm/viewmodel/menu_viewmodel.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/unactive_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../util/constant/radius_size.dart';
 import 'active_menu.dart';
@@ -9,40 +11,42 @@ import 'active_menu.dart';
 
 class SideMenu extends StatelessWidget {
 
-  List<MenuModel> menu_list = [];
-  List<Widget> menu_list_widget = [];
+ // List<MenuModel> menu_list = [];
+  //List<Widget> menu_list_widget = [];
   SideMenu(){
 
-    menu_list.add(MenuModel(title: 'داشبورد',active: true,iconData:Icons.person ));
-    menu_list.add(MenuModel(title: 'اطلاعات',active: false,iconData:Icons.event_note_outlined ));
-    menu_list.add(MenuModel(title: 'سوابق کاری',active: false,iconData:Icons.work ));
-    menu_list.add(MenuModel(title: 'سوابق تحصیلی',active: false,iconData:Icons.school ));
-    menu_list.add(MenuModel(title: 'مهارت ها',active: false,iconData:Icons.settings ));
-    menu_list.add(MenuModel(title: 'زبان',active: false,iconData:Icons.language ));
-    menu_list.add(MenuModel(title: 'شبکه های اجتماعی',active: false,iconData:Icons.alternate_email ));
+
+    // menu_list.add(MenuModel(title: 'داشبورد',active: true,iconData:Icons.person ));
+    // menu_list.add(MenuModel(title: 'اطلاعات',active: false,iconData:Icons.event_note_outlined ));
+    // menu_list.add(MenuModel(title: 'سوابق کاری',active: false,iconData:Icons.work ));
+    // menu_list.add(MenuModel(title: 'سوابق تحصیلی',active: false,iconData:Icons.school ));
+    // menu_list.add(MenuModel(title: 'مهارت ها',active: false,iconData:Icons.settings ));
+    // menu_list.add(MenuModel(title: 'زبان',active: false,iconData:Icons.language ));
+    // menu_list.add(MenuModel(title: 'شبکه های اجتماعی',active: false,iconData:Icons.alternate_email ));
 
 
-    menu_list_widget =   menu_list.map((menu) {
-      if(menu.active==true){
-        return InkWell(
-            child: ActiveMenuItem(menu),
-          onTap: () {
-
-          },
-        );
-      }else return InkWell(
-        highlightColor: Colors.redAccent,
-        focusColor: Colors.green,
-        splashColor: Colors.lightBlue,
-        child: UnActiveMenuItem(menu),
-        onTap: () {
-
-        },
-      );
-    },).toList();
+    // menu_list_widget =   menu_list.map((menu) {
+    //   if(menu.active==true){
+    //     return InkWell(
+    //         child: ActiveMenuItem(menu),
+    //       onTap: () {
+    //
+    //       },
+    //     );
+    //   }else return InkWell(
+    //     highlightColor: Colors.redAccent,
+    //     focusColor: Colors.green,
+    //       splashColor: Colors.lightBlue,
+    //       child: UnActiveMenuItem(menu),
+    //       onTap: () {
+    //
+    //     },
+    //   );
+    // },).toList();
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<MenuVM>(context,listen: false).GetMenuList();
     return Container(
       width: 80,
       height: ScreenSize.height,
@@ -67,12 +71,17 @@ class SideMenu extends StatelessWidget {
         ]
       ),
       child: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ...menu_list_widget
-        ],
-      ),
+      child: Consumer<MenuVM>(builder:(context, value, child) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+                ...value.menu_list_widget
+          ],
+        );
+      },)
+
+
+
       ),
     );
   }
