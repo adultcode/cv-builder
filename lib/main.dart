@@ -9,12 +9,16 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 
+import 'config/locator.dart';
 import 'model/social_model.dart';
 import 'model/user_model.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'widget/pages/cv/cv.dart';
 
-void main() {
+void main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+  setUpSL();
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => IconProvider()),
@@ -46,20 +50,21 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     screenSize = ScreenSize();
-    screenSizeStream = ScreenSizeStream();
+    screenSizeStream = sl<ScreenSizeStream>();
    // _controller = screenSizeStream!.controller;
 
     ScreenSize  screenSize2 = ScreenSize();
     screenSize2.width2 =1;
     screenSize2.height2 =2;
-    ScreenSizeStream.controller.add(screenSize2);
+  //  screenSizeStream!.controller.add(screenSize2);
 
 
     ScreenSize  screenSize3 = ScreenSize();
     //   screenSize2.width2 =11;
     screenSize2.height2 =12;
 
-    ScreenSizeStream.controller.add(screenSize3);
+    // ScreenSizeStream.controller.add(screenSize3);
+   // screenSizeStream!.controller.add(screenSize3);
 
   }
   @override
@@ -79,7 +84,9 @@ class _MyAppState extends State<MyApp> {
           ScreenSize  screenSize2 = ScreenSize();
           screenSize2.width2 =constraints.maxWidth;
           screenSize2.height2 =constraints.maxHeight;
-          ScreenSizeStream.controller.add(screenSize2);
+          // ScreenSizeStream.controller.add(screenSize2);
+          screenSizeStream!.controller.add(screenSize2);
+
 
           //ScreenSize  screenSize3 = ScreenSize();
           //   screenSize2.width2 =11;

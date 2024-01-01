@@ -2,7 +2,7 @@ import 'dart:async';
 
 class ScreenSizeStream{
 
- static StreamController<ScreenSize> controller = StreamController<ScreenSize>.broadcast();
+  StreamController<ScreenSize> controller = StreamController<ScreenSize>.broadcast();
 }
 class ScreenSize {
  static double smallwidth = 600.0;

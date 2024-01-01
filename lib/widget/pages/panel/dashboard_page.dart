@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/locator.dart';
 import '../../../util/constant/screen_size.dart';
 import 'dashboard/dashboard_big.dart';
 class Dashboard extends StatefulWidget {
@@ -17,7 +18,9 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    screenSizeStream = ScreenSizeStream();
+    // screenSizeStream = ScreenSizeStream();
+    screenSizeStream = sl<ScreenSizeStream>();
+
     // if(ScreenSize.width<ScreenSize.smallwidth){
     //
     //   _current_page= Center(child: Text("Small ${ScreenSize.width}"),);
@@ -33,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       body:
       StreamBuilder(
-        stream: ScreenSizeStream.controller.stream,
+        stream: screenSizeStream!.controller.stream,
         builder: (context, snapshot) {
           if(snapshot.hasData){
             if(snapshot.data!.width2<ScreenSize.smallwidth){
@@ -52,7 +55,7 @@ class _DashboardState extends State<Dashboard> {
               //   screenSize2.width2 =11;
                  screenSize2.height2 =12;
 
-                 ScreenSizeStream.controller.add(screenSize2);
+                 screenSizeStream!.controller.add(screenSize2);
                },
                child: Text("Empty"),
              ),);
