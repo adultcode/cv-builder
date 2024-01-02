@@ -5,6 +5,7 @@ import 'package:cv_builder/widget/custom_widgets/panel/menu/unactive_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../config/locator.dart';
 import '../../../../util/constant/radius_size.dart';
 import 'active_menu.dart';
 
@@ -49,10 +50,10 @@ class SideMenu extends StatelessWidget {
     Provider.of<MenuVM>(context,listen: false).GetMenuList();
     return Container(
       width: 80,
-      height: ScreenSize.height,
+      height: sl<ScreenSize>().height,
       alignment: Alignment.center,
 
-      padding: EdgeInsets.symmetric(vertical: ScreenSize.height*0.02),
+      padding: EdgeInsets.symmetric(vertical: sl<ScreenSize>().height*0.02),
       decoration: BoxDecoration(
           color: Colors.white,
 

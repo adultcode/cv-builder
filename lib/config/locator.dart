@@ -7,6 +7,7 @@ final GetIt sl = GetIt.instance;
 
 void setUpSL(){
   sl.registerLazySingleton<ScreenSizeStream>(() =>ScreenSizeStream());
+  sl.registerLazySingleton<ScreenSize>(() =>ScreenSize());
 
   // sl.registerLazySingleton<FetchPersonRepository>(() =>FetchPersonRepositoryImpl());
   // sl.registerLazySingleton<FetchPersonUseCase>(() =>FetchPersonUseCase());

@@ -41,30 +41,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
- // late StreamController<ScreenSize> _controller;
-  ScreenSizeStream? screenSizeStream;
-  late ScreenSize screenSize;
+ // ScreenSizeStream? screenSizeStream;
+//  late ScreenSize screenSize;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    screenSize = ScreenSize();
-    screenSizeStream = sl<ScreenSizeStream>();
-   // _controller = screenSizeStream!.controller;
-
-    ScreenSize  screenSize2 = ScreenSize();
-    screenSize2.width2 =1;
-    screenSize2.height2 =2;
-  //  screenSizeStream!.controller.add(screenSize2);
-
-
-    ScreenSize  screenSize3 = ScreenSize();
-    //   screenSize2.width2 =11;
-    screenSize2.height2 =12;
-
-    // ScreenSizeStream.controller.add(screenSize3);
-   // screenSizeStream!.controller.add(screenSize3);
+    // screenSizeStream = sl<ScreenSizeStream>();
+    // screenSizeStream!.controller.stream.listen((event) {
+    //   print("Event: $event");
+    // });
+    // screenSize = sl<ScreenSize>();
+    //
+    // screenSizeStream!.controller.add(screenSize);
 
   }
   @override
@@ -79,24 +69,22 @@ class _MyAppState extends State<MyApp> {
       ),
       home: LayoutBuilder(
 
-        builder: (context, constraints) {
-          // print("Layout:${constraints.maxWidth}");
-          ScreenSize  screenSize2 = ScreenSize();
-          screenSize2.width2 =constraints.maxWidth;
-          screenSize2.height2 =constraints.maxHeight;
-          // ScreenSizeStream.controller.add(screenSize2);
-          screenSizeStream!.controller.add(screenSize2);
+            builder: (context, constraints) {
+              sl<ScreenSize>().width =constraints.maxWidth;
+              sl<ScreenSize>().height =constraints.maxHeight;
+              print("---------${ sl<ScreenSize>().width}");
+
+              sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
+              return Dashboard();
+        },)
 
 
-          //ScreenSize  screenSize3 = ScreenSize();
-          //   screenSize2.width2 =11;
-          //screenSize3.width2 =12;
 
-        //  ScreenSizeStream.controller.add(screenSize3);
 
-          return Dashboard();
-        },
-      ),
+
+
+      //   },
+      // ),
      // home: const PickImageTest(),
     );
   }
