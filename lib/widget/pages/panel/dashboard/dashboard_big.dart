@@ -1,9 +1,12 @@
+import 'package:cv_builder/mvvm/viewmodel/menu_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../custom_widgets/panel/menu/side_menu.dart';
+import '../profile_edit/profile_edit_big.dart';
 
 
 class DashboardBig extends StatefulWidget {
@@ -32,7 +35,23 @@ class _DashboardBigState extends State<DashboardBig> {
          height: screenSize.height,
         color: backgroud_color,
         alignment: Alignment.centerLeft,
-        child: SideMenu(),
+        child: Row(
+          children: [
+            SideMenu(),
+            Expanded(child: Container(
+              margin: EdgeInsets.only(left: screenSize.width*0.03),
+              child: Consumer<MenuVM>(
+                builder: (context, value, child) {
+                  if(value.active_item==0){
+                    return ProfileEditBig();
+                  }else{
+                    return Text("test");
+                  }
+                },
+              ),
+            ))
+          ],
+        ),
 
     );
   }

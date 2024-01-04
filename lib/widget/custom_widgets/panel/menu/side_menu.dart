@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/radius_size.dart';
+import '../../../../util/constant/widget_decoration.dart';
 import 'active_menu.dart';
 
 
@@ -25,23 +26,7 @@ class SideMenu extends StatelessWidget {
       alignment: Alignment.center,
 
       padding: EdgeInsets.symmetric(vertical: sl<ScreenSize>().height*0.02),
-      decoration: BoxDecoration(
-          color: Colors.white,
-
-          borderRadius: BorderRadius.all(Radius.circular(outer_radius)),
-          border: Border.all(
-          color: Color(0xffeff0f3),
-                //width: 3
-              ),
-        boxShadow: [
-          BoxShadow(
-          color:  Colors.black12.withOpacity(0.1),
-            offset: Offset(2,2),
-            spreadRadius: 1,
-            blurRadius: 10
-          )
-        ]
-      ),
+      decoration: panel_container_decoration,
       child: SingleChildScrollView(
       child: Consumer<MenuVM>(
 
