@@ -66,6 +66,12 @@ class _MyAppState extends State<MyApp> {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        fontFamily: 'sdn',
+        textTheme: TextTheme(
+          titleLarge: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,),
+          bodyMedium: TextStyle(fontSize: 15,fontWeight: FontWeight.w400,),
+          bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,),
+        )
       ),
       home: LayoutBuilder(
 

@@ -97,6 +97,32 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+  fonts:
+    - family: iran
+      fonts:
+        - asset: assets/font/iran.ttf
+          weight: 400
+        - asset: assets/font/iran_bold.ttf
+          weight: 600
+        - asset: assets/font/iran_light.ttf
+          weight: 200
+    - family: yekan
+      fonts:
+        - asset: assets/font/yekan.ttf
+          weight: 400
+        - asset: assets/font/yekan_bold2.ttf
+          weight: 600
+        - asset: assets/font/yekan_light.ttf
+          weight: 200
+    - family: sdn
+      fonts:
+        - asset: assets/font/sdn.ttf
+          weight: 400
+        - asset: assets/font/sdn_bold.ttf
+          weight: 600
+        - asset: assets/font/sdn_light.ttf
+          weight: 200
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
