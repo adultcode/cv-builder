@@ -29,7 +29,9 @@ class InputLabel extends StatelessWidget {
               controller: textEditingController,
               textDirection: TextDirection.rtl,
               style: Theme.of(context).textTheme.bodyMedium,
-              decoration: input_text_decoration(hint: hint!,
+              decoration: input_text_decoration(
+                  controller: textEditingController!,
+                  hint: hint!,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
             ),
           )

@@ -27,12 +27,15 @@ var input_decoration = BoxDecoration(
 );
 
 
-InputDecoration input_text_decoration({required String hint,required TextStyle style}){
+InputDecoration input_text_decoration({required String hint,required TextStyle style,required TextEditingController controller}){
   return InputDecoration(
-    contentPadding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+      contentPadding: EdgeInsets.symmetric(horizontal: 5,vertical: 12),
     hintStyle:  style,
   //  hintStyle:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey),
     hintText: hint,
+    prefixIcon: IconButton(icon: Icon(Icons.clear,size: 18,color: panel_grey,),onPressed: (){
+      controller.clear();
+    }),
     hintTextDirection: TextDirection.rtl,
     focusedBorder: InputBorder.none,
     enabledBorder: InputBorder.none,

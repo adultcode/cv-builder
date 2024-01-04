@@ -27,18 +27,22 @@ class ProfileEditBig extends StatelessWidget {
           children: [
             Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,),
             SizedBox(height: 10,),
-            Text('ویرایش اطلاعات و مشخصات پایه ',style: Theme.of(context).textTheme.bodyMedium,),
+            Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
             SizedBox(height: 30,),
 
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                SizedBox(width: sl<ScreenSize>().width*0.05),
                 Expanded(
-                    child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',)
+                    child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: email_controller,)
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: sl<ScreenSize>().width*0.05),
                 Expanded(
-                    child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',)
-                )
+                    child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: name_controller,)
+                ),
+
+
               ],
             )
 
