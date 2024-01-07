@@ -20,22 +20,36 @@ var panel_container_decoration = BoxDecoration(
           blurRadius: 10)
     ]);
 
-
 var input_decoration = BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
-    color: backgroud_color
-);
+    color: backgroud_color);
 
-
-InputDecoration input_text_decoration({required String hint,required TextStyle style,required TextEditingController controller}){
+InputDecoration input_text_decoration(
+    {required String hint,
+    required TextStyle style,
+    required TextEditingController controller}) {
   return InputDecoration(
-      contentPadding: EdgeInsets.symmetric(horizontal: 5,vertical: 12),
-    hintStyle:  style,
-  //  hintStyle:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey),
+
+    contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 12),
+    hintStyle: style,
+    //  hintStyle:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey),
     hintText: hint,
-    prefixIcon: IconButton(icon: Icon(Icons.clear,size: 18,color: panel_grey,),onPressed: (){
-      controller.clear();
-    }),
+
+    prefixIcon: Column(
+      children: [
+        IconButton(
+            alignment: Alignment.topCenter,
+
+            icon: Icon(
+              Icons.clear,
+              size: 18,
+              color: panel_grey,
+            ),
+            onPressed: () {
+              controller.clear();
+            })
+      ],
+    ),
     hintTextDirection: TextDirection.rtl,
     focusedBorder: InputBorder.none,
     enabledBorder: InputBorder.none,

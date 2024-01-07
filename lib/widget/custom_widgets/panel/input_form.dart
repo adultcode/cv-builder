@@ -1,15 +1,17 @@
+import 'package:cv_builder/util/constant/screen_size.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/locator.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/widget_decoration.dart';
 
 
-class InputLabel extends StatelessWidget {
+class InputForm extends StatelessWidget {
 
   String hint;
   String name;
   TextEditingController? textEditingController;
-  InputLabel({required  this.name,required  this.hint,this.textEditingController});
+  InputForm({required  this.name,required  this.hint,this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +25,21 @@ class InputLabel extends StatelessWidget {
           Text(name!,style: Theme.of(context).textTheme.bodyLarge,),
           SizedBox(height: 10,),
           Container(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.topRight,
             decoration: input_decoration,
+            height: sl<ScreenSize>().height*0.2,
             child: TextField(
-
+              maxLines: 10,
+           //   maxLength: 500,
               controller: textEditingController,
+
               textDirection: TextDirection.rtl,
               style: Theme.of(context).textTheme.bodyMedium,
               decoration: input_text_decoration(
                   controller: textEditingController!,
                   hint: hint!,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)
+              ),
             ),
           )
         ],
