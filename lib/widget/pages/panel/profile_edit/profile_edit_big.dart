@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/locator.dart';
@@ -5,6 +6,7 @@ import '../../../../util/constant/color.dart';
 import '../../../../util/constant/radius_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
+import '../../../custom_widgets/panel/change_avatar.dart';
 import '../../../custom_widgets/panel/input_form.dart';
 import '../../../custom_widgets/panel/input_label.dart';
 
@@ -92,10 +94,10 @@ class ProfileEditBig extends StatelessWidget {
               children: [
                 SizedBox(width: sl<ScreenSize>().width*0.05),
                 /*
-                email field
+                Change avatar section
                  */
                 Expanded(
-                    child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,)
+                    child: ChangeAvatar()
                 ),
                 SizedBox(width: sl<ScreenSize>().width*0.05),
                 /*
