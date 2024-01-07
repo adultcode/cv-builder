@@ -28,7 +28,31 @@ class ProfileEditBig extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,),
+            SizedBox(height: sl<ScreenSize>().height*0.02,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                InkWell(
+                  onTap: () {
+
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: panel_green_accent,
+                    ),
+                    child: Icon(Icons.done,size: 20,color: panel_accent,),
+                  ),
+                ),
+                Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,)
+
+              ],
+            ),
             SizedBox(height: 10,),
             Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
             SizedBox(height: 30,),

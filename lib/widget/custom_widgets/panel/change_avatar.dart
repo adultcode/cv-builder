@@ -11,7 +11,7 @@ class ChangeAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:  sl<ScreenSize>().height*0.2,
+      height:  sl<ScreenSize>().height*0.25,
       margin: EdgeInsets.only(top: sl<ScreenSize>().height*0.035),
       child: DottedBorder(
         color: panel_orange,
