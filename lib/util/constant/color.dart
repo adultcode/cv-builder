@@ -23,4 +23,4 @@ panel colors
  var panel_orange = Color(0xfff29200);
  var panel_orange_accent = Color(0xfffdf4e5);
  var panel_green_accent = Color(0xffe9f8f1);
- var panel_accent = Color(0xff44cc89);
+ var panel_green = Color(0xff44cc89);

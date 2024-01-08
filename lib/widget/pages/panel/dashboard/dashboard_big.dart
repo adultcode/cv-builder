@@ -37,19 +37,22 @@ class _DashboardBigState extends State<DashboardBig> {
         alignment: Alignment.centerLeft,
         child: Row(
           children: [
+            // menu of page
             SideMenu(),
-            Expanded(child: Container(
-              margin: EdgeInsets.only(left: screenSize.width*0.03),
-              child: Consumer<MenuVM>(
-                builder: (context, value, child) {
-                  if(value.active_item==0){
-                    return ProfileEditBig();
-                  }else{
-                    return Text("test");
-                  }
-                },
-              ),
-            ))
+
+            // Expanded(child: Container(
+            //   margin: EdgeInsets.only(left: screenSize.width*0.03),
+            //   child: Consumer<MenuVM>(
+            //     builder: (context, value, child) {
+            //       if(value.active_item==0){
+            //         return ProfileEditBig();
+            //       }else{
+            //         return Text("test");
+            //       }
+            //     },
+            //   ),
+            // )
+            // )
           ],
         ),
 

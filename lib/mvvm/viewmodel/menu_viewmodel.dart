@@ -5,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-class MenuVM extends ChangeNotifier implements MenuActionInterface{
+class MenuVM extends ChangeNotifier {
 
   List<Widget> menu_list_widget=[];
+  List<MenuModel> menu_list=[];
   int active_item = 0; // by default first item is active
 
  late MenuRepo menuRepo;
@@ -27,29 +28,20 @@ Change active menu
 get menu items from repository
  */
   void GetMenuList(){
-    menu_list_widget = menuRepo.FetchMenu(this,menu_list: menuDataSource.menu_list,clicked: 0);
+    menu_list = menuDataSource.menu_list;
+    //menu_list_widget = menuRepo.FetchMenu(this,menu_list: menu_list,clicked: 0);
     notifyListeners();
   }
 
-  @override
-  void onMenuItemTap(int index
-      ) {
-    // TODO: implement onMenuItemTap
-    print("menu clicked: $index");
-
-    /*
-    check if user not clicked on active menu item
-     */
-    if(index!=active_item){
-      /*
-      update menu item list with [ChangeActiveMenu]
-      and update the [active_item] to the clicked item
-       */
-      menu_list_widget = menuRepo.FetchMenu(this,menu_list: menuDataSource.ChangeActiveMenu(clicked: index,current: active_item));
+  void setActiveItem(int index) {
+    if (index != active_item) {
+      // Update only the active and previously active items.
+      menu_list[active_item].active = false;
+      menu_list[index].active = true;
       active_item = index;
 
       notifyListeners();
-
     }
   }
+
 }

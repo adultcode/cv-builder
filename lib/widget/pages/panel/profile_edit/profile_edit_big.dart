@@ -46,7 +46,7 @@ class ProfileEditBig extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: panel_green_accent,
                     ),
-                    child: Icon(Icons.done,size: 20,color: panel_accent,),
+                    child: Icon(Icons.done,size: 20,color: panel_green,),
                   ),
                 ),
                 Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,)

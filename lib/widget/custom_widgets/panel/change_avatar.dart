@@ -52,7 +52,7 @@ class ChangeAvatar extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0),
-                    child: Icon(Icons.add_circle,size: 20,color: Colors.blueGrey,),
+                    child: Icon(Icons.add_circle,size: 20,color: panel_green,),
                   )
                 ],
               ),
