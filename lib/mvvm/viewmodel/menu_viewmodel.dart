@@ -10,6 +10,7 @@ class MenuVM extends ChangeNotifier {
   List<Widget> menu_list_widget=[];
   List<MenuModel> menu_list=[];
   int active_item = 0; // by default first item is active
+  int pre_item = 0; // store previous active item
 
  late MenuRepo menuRepo;
 
@@ -38,6 +39,7 @@ get menu items from repository
       // Update only the active and previously active items.
       menu_list[active_item].active = false;
       menu_list[index].active = true;
+      pre_item = active_item;
       active_item = index;
 
       notifyListeners();

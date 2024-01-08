@@ -22,47 +22,86 @@ class ActiveMenuItem extends StatefulWidget {
   State<ActiveMenuItem> createState() => _ActiveMenuItemState();
 }
 
-class _ActiveMenuItemState extends State<ActiveMenuItem> {
+class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStateMixin {
   final Duration animationDuration = const Duration(seconds: 6);
+
+
+  final DecorationTween decorationTween = DecorationTween(
+    begin: BoxDecoration(
+      color: Colors.white,
+    ),
+    end: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
+      color: panel_orange_accent,
+    )
+  );
+
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+
+    reverseDuration: const Duration(milliseconds: 500),
+    duration: const Duration(milliseconds: 500),
+  );
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  //  _controller.forward();
+    if(widget.menuModel.id==0){
+      _controller.forward();
+    }
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<MenuVM>(context).addListener(() {
-      print("hee ${widget.menuModel.id}");
+      context.read<MenuVM>().addListener(() {
+        print("listener ${widget.menuModel.id}");
+        var current_item =  context.read<MenuVM>().active_item;
+        var pre_item =  context.read<MenuVM>().pre_item;
+        if(current_item==widget.menuModel.id){
+          _controller.forward();
+          setState(() {
+
+          });
+        }
+        if(pre_item==widget.menuModel.id){
+         // _controller.reset();
+          _controller.reverse();
+          setState(() {
+
+          });
+        }
       });
     });
 
   }
   @override
   Widget build(BuildContext context) {
-
+  print("Item ${widget.menuModel.id}");
     return InkWell(
       onTap: () {
         print("---------CLicked--------");
 
-        Provider.of<MenuVM>(context,listen: false).setActiveItem(widget.menuModel.id);
-// setState(() {
-//
-// });
+        context.read<MenuVM>().setActiveItem(widget.menuModel.id);
+
       },
-      child: AnimatedContainer(
-        duration: animationDuration,
-        curve: Curves.easeInOut,
+      child: Container(
+        alignment: Alignment.center,
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+
         padding: EdgeInsets.all(7),
-        decoration: widget.menuModel.active==true
-            ? BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
-          color: panel_orange_accent,
-        )
-            : null,
-        child: Icon(
-          widget.menuModel.iconData,
-          size: widget.menuModel.active ==true? 24 : 26,
-          color: widget.menuModel.active ==true? panel_orange : panel_grey,
+        child: DecoratedBoxTransition(
+          decoration: decorationTween.animate(_controller),
+
+          child: Container(
+            alignment: Alignment.center,
+
+            padding: EdgeInsets.symmetric(vertical: 10),
+
+            child: Icon(
+              widget.menuModel.iconData,
+              size: widget.menuModel.active ==true? 24 : 26,
+              color: widget.menuModel.active ==true? panel_orange : panel_grey,
+            ),
+          ),
         ),
       ),
     );
