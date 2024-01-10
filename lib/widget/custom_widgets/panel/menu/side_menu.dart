@@ -12,10 +12,13 @@ import 'active_menu.dart';
 
 class SideMenu extends StatelessWidget {
 
+  SideMenu(){
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    final menuVM = Provider.of<MenuVM>(context,listen: false);
+   // final menuVM = Provider.of<MenuVM>(context,listen: false);
  //   Users users = Provider.of<Users>(context, listen: false);
 
    // final menuVM =context.read<MenuVM>();
@@ -27,12 +30,16 @@ class SideMenu extends StatelessWidget {
 
       padding: EdgeInsets.symmetric(vertical: sl<ScreenSize>().height*0.02),
       decoration: panel_container_decoration,
-      child: ListView.builder(
-          itemCount: menuVM.menu_list.length,
-          itemBuilder: (context, index) {
-            return ActiveMenuItem(menuVM.menu_list[index]);
-          },
-        )
+      child: Consumer<MenuVM>(
+        builder: (context, value, child) {
+          return ListView.builder(
+            itemCount: value.menu_list.length,
+            itemBuilder: (context, index) {
+              return ActiveMenuItem(value.menu_list[index]);
+            },
+          );
+        },
+      )
 
     );
   }

@@ -85,7 +85,7 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
       },
       child: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
 
         padding: EdgeInsets.all(7),
         child: DecoratedBoxTransition(

@@ -6,7 +6,10 @@ import '../../../util/constant/color.dart';
 import '../../../util/constant/screen_size.dart';
 
 class ChangeAvatar extends StatelessWidget {
-  const ChangeAvatar({Key? key}) : super(key: key);
+
+  NetworkImage? profile_img;
+
+  ChangeAvatar({this.profile_img});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,8 @@ class ChangeAvatar extends StatelessWidget {
                         shape: BoxShape.circle,
                       //  color: Colors.green,
                       image: DecorationImage(
-                        image: AssetImage('assets/me.png')
+                      //  image: NetworkImage('df')
+                          image: profile_img != null ? profile_img as ImageProvider<Object> : AssetImage('assets/me.png')
                       )
                     ),
 

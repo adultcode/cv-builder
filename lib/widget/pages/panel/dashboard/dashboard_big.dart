@@ -40,6 +40,9 @@ class _DashboardBigState extends State<DashboardBig> {
             // menu of page
             SideMenu(),
 
+            /*
+            show widget based on active item of menu
+             */
             Expanded(child: Container(
               margin: EdgeInsets.only(left: screenSize.width*0.03),
               child: Consumer<MenuVM>(

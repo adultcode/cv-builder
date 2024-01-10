@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
@@ -10,13 +14,42 @@ import '../../../custom_widgets/panel/change_avatar.dart';
 import '../../../custom_widgets/panel/input_form.dart';
 import '../../../custom_widgets/panel/input_label.dart';
 
-class ProfileEditBig extends StatelessWidget {
+class ProfileEditBig extends StatefulWidget {
 
+  @override
+  State<ProfileEditBig> createState() => _ProfileEditBigState();
+}
+
+class _ProfileEditBigState extends State<ProfileEditBig> {
   var name_controller = TextEditingController();
+
   var email_controller = TextEditingController();
+
   var phone_controller = TextEditingController();
+
   var bio_controller = TextEditingController();
+
   var jobtitle_controller = TextEditingController();
+
+  var _image;
+
+  Future<void> _getImage() async {
+    final ImagePicker picker = ImagePicker();
+
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (image != null) {
+        print(image.path);
+        if (kIsWeb) { // Check if this is a browser session
+          _image = Image.network(image.path);
+        } else {
+          _image = Image.file(File(image.path));
+        }
+      } else {
+        print("No image selected");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
