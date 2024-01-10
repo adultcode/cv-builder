@@ -11,12 +11,7 @@ Future<Uint8List?> getImage() async {
   if (image != null) {
     print(image.path);
     return await image.readAsBytes();
-    // if (kIsWeb) { // Check if this is a browser session
-    //
-    // } else {
-    //   icon_path = Image.file(File(image.path));
-    //
-    // }
+
   } else {
     print("No image selected");
     return null;

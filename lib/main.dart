@@ -13,6 +13,7 @@ import 'config/locator.dart';
 import 'model/social_model.dart';
 import 'model/user_model.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
+import 'mvvm/viewmodel/profile_provider.dart';
 import 'widget/pages/cv/cv.dart';
 
 void main() async{
@@ -23,6 +24,7 @@ void main() async{
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => IconProvider()),
       ChangeNotifierProvider(create: (context) => MenuVM()),
+      ChangeNotifierProvider(create: (context) => ProfileProvider()),
     ],
      child: MyApp(),)
   );
@@ -81,6 +83,7 @@ class _MyAppState extends State<MyApp> {
               print("---------${ sl<ScreenSize>().width}");
 
               sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
+             // return MyHomePage();
               return Dashboard();
         },)
 
@@ -137,11 +140,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
           child: Column(
             children: [
-              // ElevatedButton(onPressed: () async{
-              //  // context.read<IconProvider>()
-              //   Provider.of<IconProvider>(context,listen: false).SetIcon();
-              //    }, child: Text("Pick Image")
-              // ),
+              ElevatedButton(onPressed: () async{
+               // context.read<IconProvider>()
+                Provider.of<IconProvider>(context,listen: false).SetIcon();
+                 }, child: Text("Pick Image")
+              ),
               Expanded(
                   child: Consumer<IconProvider>(
                 builder: (context, value, child) {

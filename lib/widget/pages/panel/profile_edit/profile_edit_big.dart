@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:cv_builder/mvvm/viewmodel/profile_provider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
@@ -154,7 +156,12 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                 Change avatar section
                  */
                 Expanded(
-                    child: ChangeAvatar()
+                    child: Consumer<ProfileProvider>(
+                      builder: (context, value, child) {
+                        print("Consumer ${value.img_byte?.isEmpty}");
+                        return ChangeAvatar(profile_img: value.img_byte!=null?value.img_byte:null);
+                      },
+                    )
                 ),
                 SizedBox(width: sl<ScreenSize>().width*0.05),
                 /*
@@ -173,4 +180,5 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
       ),
     );
   }
+
 }

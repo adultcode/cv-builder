@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+
+import 'package:cv_builder/mvvm/viewmodel/profile_provider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../config/locator.dart';
 import '../../../util/constant/color.dart';
@@ -7,7 +11,7 @@ import '../../../util/constant/screen_size.dart';
 
 class ChangeAvatar extends StatelessWidget {
 
-  NetworkImage? profile_img;
+  Uint8List? profile_img;
 
   ChangeAvatar({this.profile_img});
 
@@ -40,19 +44,25 @@ class ChangeAvatar extends StatelessWidget {
                 children: [
 
 
-                  Container(
-                    width: 70,
-                    height: 70,
-                    alignment: Alignment.centerRight,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      //  color: Colors.green,
-                      image: DecorationImage(
-                      //  image: NetworkImage('df')
-                          image: profile_img != null ? profile_img as ImageProvider<Object> : AssetImage('assets/me.png')
-                      )
-                    ),
+                  InkWell(
+                    onTap: (){
+                      context.read<ProfileProvider>().ChangeImage();
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 70,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        //  color: Colors.green,
+                        image: DecorationImage(
+                        //  image: NetworkImage('df')
+                            image: profile_img != null ? MemoryImage(profile_img!) as ImageProvider<Object> : AssetImage('assets/me.png')
+                            //image: profile_img != null ? NetworkImage(profile_img!) as ImageProvider<Object> : AssetImage('assets/me.png')
+                        )
+                      ),
 
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0),
@@ -60,8 +70,14 @@ class ChangeAvatar extends StatelessWidget {
                   )
                 ],
               ),
-              Text("تصویر پروفایل خود \n را انتخاب کنید",textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: panel_orange),),
+              InkWell(
+                onTap: () {
+                  context.read<ProfileProvider>().ReadIMG();
+
+                },
+                child: Text("تصویر پروفایل خود \n را انتخاب کنید",textAlign: TextAlign.right,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: panel_orange),),
+              ),
             ],
           ),
         ),

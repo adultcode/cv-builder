@@ -15,7 +15,7 @@ class ActiveMenuItem extends StatefulWidget {
   MenuModel menuModel;
 
   ActiveMenuItem(this.menuModel){
-    print("Active: ${menuModel.id}----------");
+  //  print("Active: ${menuModel.id}----------");
   }
 
   @override
@@ -53,7 +53,7 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
     }
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<MenuVM>().addListener(() {
-        print("listener ${widget.menuModel.id}");
+      //  print("listener ${widget.menuModel.id}");
         var current_item =  context.read<MenuVM>().active_item;
         var pre_item =  context.read<MenuVM>().pre_item;
         if(current_item==widget.menuModel.id){
@@ -75,10 +75,10 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
   }
   @override
   Widget build(BuildContext context) {
-  print("Item ${widget.menuModel.id}");
+ // print("Item ${widget.menuModel.id}");
     return InkWell(
       onTap: () {
-        print("---------CLicked--------");
+       // print("---------CLicked--------");
 
         context.read<MenuVM>().setActiveItem(widget.menuModel.id);
 
