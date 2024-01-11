@@ -24,12 +24,18 @@ var input_decoration = BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
     color: backgroud_color);
 
+/*
+decoration for textformfield
+ */
 InputDecoration input_text_decoration(
     {required String hint,
     required TextStyle style,
     required TextEditingController controller}) {
   return InputDecoration(
-
+    errorStyle: TextStyle(
+     color: Colors.black,
+      fontSize: 0,
+    ),
     contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 12),
     hintStyle: style,
     //  hintStyle:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey),
@@ -51,7 +57,13 @@ InputDecoration input_text_decoration(
       ],
     ),
     hintTextDirection: TextDirection.rtl,
-    focusedBorder: InputBorder.none,
-    enabledBorder: InputBorder.none,
+  hoverColor: Colors.green,
+   focusedBorder: InputBorder.none,
+   enabledBorder: InputBorder.none,
+    disabledBorder: InputBorder.none,
+    focusedErrorBorder: InputBorder.none,
+    errorBorder: InputBorder.none,
+
+
   );
 }

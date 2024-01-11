@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
 
 
 class MyHomePage extends StatefulWidget {
-  static late UserModel userModel;
+ // static late UserModel userModel;
 
 
   @override
@@ -121,10 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
       SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin)
 
     ];
-    MyHomePage.userModel = UserModel();
+   // MyHomePage.userModel = UserModel();
 
 
-    MyHomePage.userModel.socials = social_list;
+    //MyHomePage.userModel.socials = social_list;
 
  }
   @override

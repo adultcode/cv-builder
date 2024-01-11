@@ -21,10 +21,15 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserModel {
   String get name => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  set email(String value) => throw _privateConstructorUsedError;
   String get mobile => throw _privateConstructorUsedError;
+  set mobile(String value) => throw _privateConstructorUsedError;
   String get job => throw _privateConstructorUsedError;
+  set job(String value) => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
+  set bio(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -140,7 +145,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
-  const _$UserModelImpl(
+  _$UserModelImpl(
       {required this.name,
       required this.email,
       required this.mobile,
@@ -151,15 +156,15 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
       _$$UserModelImplFromJson(json);
 
   @override
-  final String name;
+  String name;
   @override
-  final String email;
+  String email;
   @override
-  final String mobile;
+  String mobile;
   @override
-  final String job;
+  String job;
   @override
-  final String bio;
+  String bio;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -178,22 +183,6 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
       ..add(DiagnosticsProperty('bio', bio));
   }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UserModelImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.mobile, mobile) || other.mobile == mobile) &&
-            (identical(other.job, job) || other.job == job) &&
-            (identical(other.bio, bio) || other.bio == bio));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, name, email, mobile, job, bio);
-
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -209,26 +198,31 @@ class _$UserModelImpl with DiagnosticableTreeMixin implements _UserModel {
 }
 
 abstract class _UserModel implements UserModel {
-  const factory _UserModel(
-      {required final String name,
-      required final String email,
-      required final String mobile,
-      required final String job,
-      required final String bio}) = _$UserModelImpl;
+  factory _UserModel(
+      {required String name,
+      required String email,
+      required String mobile,
+      required String job,
+      required String bio}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
 
   @override
   String get name;
+  set name(String value);
   @override
   String get email;
+  set email(String value);
   @override
   String get mobile;
+  set mobile(String value);
   @override
   String get job;
+  set job(String value);
   @override
   String get bio;
+  set bio(String value);
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

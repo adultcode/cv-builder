@@ -28,9 +28,15 @@ class InputForm extends StatelessWidget {
             alignment: Alignment.topRight,
             decoration: input_decoration,
             height: sl<ScreenSize>().height*0.25,
-            child: TextField(
+            child: TextFormField(
               maxLines: 10,
            //   maxLength: 500,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
               controller: textEditingController,
 
               textDirection: TextDirection.rtl,

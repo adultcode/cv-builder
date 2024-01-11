@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 part 'user_model.freezed.dart';
-// part 'user_model.g.dart';
+part 'user_model.g.dart';
 
-@freezed
+@unfreezed
 class UserModel with _$UserModel{
 
   // String? name;
@@ -12,7 +12,7 @@ class UserModel with _$UserModel{
   // String? job;
   // String? bio;
 
-const factory UserModel({
+ factory UserModel({
   required String name,
 
   required String email,

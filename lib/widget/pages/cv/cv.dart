@@ -66,9 +66,9 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
  // socials.add(pw.Text('sdsd'));
  // socials.add(pw.Text('sdsd'));
 
-  MyHomePage.userModel.socials![0].icon_path = await Geticon(MyHomePage.userModel.socials![0]);
-  MyHomePage.userModel.socials![1].icon_path = await Geticon(MyHomePage.userModel.socials![1]);
-  socials = MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList();
+ // MyHomePage.userModel.socials![0].icon_path = await Geticon(MyHomePage.userModel.socials![0]);
+ // MyHomePage.userModel.socials![1].icon_path = await Geticon(MyHomePage.userModel.socials![1]);
+  //socials = MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList();
 
 
  print("social1: ${socials[0].socialModel!.address}");

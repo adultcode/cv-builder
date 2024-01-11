@@ -9,6 +9,8 @@ class InputLabel extends StatelessWidget {
   String hint;
   String name;
   TextEditingController? textEditingController;
+  final FocusNode _nameFocusNode = FocusNode();
+
   InputLabel({required  this.name,required  this.hint,this.textEditingController});
 
   @override
@@ -25,8 +27,16 @@ class InputLabel extends StatelessWidget {
           Container(
             alignment: Alignment.centerRight,
             decoration: input_decoration,
-            child: TextField(
-
+            child: TextFormField(
+              textAlignVertical : TextAlignVertical.center,
+              cursorColor: Colors.black,
+              enabled: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
               controller: textEditingController,
               textDirection: TextDirection.rtl,
               style: Theme.of(context).textTheme.bodyMedium,
