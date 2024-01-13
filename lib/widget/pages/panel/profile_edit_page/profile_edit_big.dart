@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:cv_builder/model/user_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/profile_provider.dart';
@@ -35,9 +36,26 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
 
   final _formKey = GlobalKey<FormState>();
 
-  
-  void ValidationForm(){
-    
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    /// call to get Data
+
+    WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
+     // context.watch<InfoVM>().GetInfoModelData();
+      Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+    });
+
+
+  }
+  void PopulateForm(InfoModel _infoModel){
+    name_controller.text = _infoModel.name!;
+    jobtitle_controller.text = _infoModel.job!;
+    bio_controller.text = _infoModel.bio!;
+    phone_controller.text = _infoModel.mobile!;
+    email_controller.text = _infoModel.email!;
   }
 
   @override
@@ -50,155 +68,167 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
         /*
         form widget
          */
-        child: Form(
-          key: _formKey,
+        child:Consumer<InfoVM>(
+          builder: (context, value, child) {
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(height: sl<ScreenSize>().height*0.02,),
-          
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            /*
+            check if data get from shared prefences
+            populate the form inputs
+             */
+             if(value.infoModel!=null){
+                 PopulateForm(value.infoModel!);
+             }
+            return  Form(
+              key: _formKey,
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-          
-                  InkWell(
-                    onTap: () async{
-                      Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+                  SizedBox(height: sl<ScreenSize>().height*0.02,),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+
+                      InkWell(
+                        onTap: () async{
+                          //   Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
 
 
-                      /*
+                          /*
                       save user's data
                        */
-                      // if (_formKey.currentState!.validate()) {
-                      //
-                      //   /*
-                      //    If the form is valid, display a snackbar,
-                      //    save data in shared prefences
-                      //
-                      //    */
-                      //   SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                      //
-                      //   InfoModel userm = InfoModel(email: email_controller.text,
-                      //   name: name_controller.text,
-                      //       bio: bio_controller.text,
-                      //       job: jobtitle_controller.text,
-                      //       mobile: phone_controller.text);
-                      //   Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);
-                      //  // print(userm.toJson());
-                      //
-                      // }
-                      // else{
-                      //   print("-------Invalid Form");
-                      //   ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
-                      //
-                      // }
-                    },
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: panel_green_accent,
+                          if (_formKey.currentState!.validate()) {
+
+                            /*
+                             If the form is valid, display a snackbar,
+                             save data in shared prefences
+
+                             */
+                            SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
+
+                            InfoModel userm = InfoModel(email: email_controller.text,
+                            name: name_controller.text,
+                                bio: bio_controller.text,
+                                job: jobtitle_controller.text,
+                                mobile: phone_controller.text);
+                            Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);
+                           // print(userm.toJson());
+
+                          }
+                          else{
+                            print("-------Invalid Form");
+                            ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+
+                          }
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: panel_green_accent,
+                          ),
+                          child: Icon(Icons.done,size: 20,color: panel_green,),
+                        ),
                       ),
-                      child: Icon(Icons.done,size: 20,color: panel_green,),
-                    ),
+                      Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,)
+
+                    ],
                   ),
-                  Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,)
-          
-                ],
-              ),
-              SizedBox(height: 10,),
-              Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
-              SizedBox(height: 30,),
-          
-              /*
+                  SizedBox(height: 10,),
+                  Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
+                  SizedBox(height: 30,),
+
+                  /*
               first row
               email and name field
                */
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(width: sl<ScreenSize>().width*0.05),
-                  /*
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
                   email field
                    */
-                  Expanded(
-                      child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: email_controller,)
-                  ),
-                  SizedBox(width: sl<ScreenSize>().width*0.05),
-                  /*
+                      Expanded(
+                          child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: email_controller,)
+                      ),
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
                   name field
                    */
-                  Expanded(
-                      child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: name_controller,)
+                      Expanded(
+                          child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: name_controller,)
+                      ),
+
+
+                    ],
                   ),
-          
-          
-                ],
-              ),
-              /*
+                  /*
               second row
               job and mobile field
                */
-              SizedBox(height: sl<ScreenSize>().height*0.04),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(width: sl<ScreenSize>().width*0.05),
-                  /*
+                  SizedBox(height: sl<ScreenSize>().height*0.04),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
                   email field
                    */
-                  Expanded(
-                      child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,)
-                  ),
-                  SizedBox(width: sl<ScreenSize>().width*0.05),
-                  /*
+                      Expanded(
+                          child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,)
+                      ),
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
                   name field
                    */
-                  Expanded(
-                      child: InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: jobtitle_controller,)
+                      Expanded(
+                          child: InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: jobtitle_controller,)
+                      ),
+
+
+                    ],
                   ),
-          
-          
-                ],
-              ),
-              /*
+                  /*
               third row
               email and name field
                */
-              SizedBox(height: sl<ScreenSize>().height*0.04),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(width: sl<ScreenSize>().width*0.05),
-                  /*
+                  SizedBox(height: sl<ScreenSize>().height*0.04),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
                   Change avatar section
                    */
-                  Expanded(
-                      child: Consumer<ProfileProvider>(
-                        builder: (context, value, child) {
-                          print("Consumer ${value.img_byte?.isEmpty}");
-                          return ChangeAvatar(profile_img: value.img_byte!=null?value.img_byte:null);
-                        },
-                      )
-                  ),
-                  SizedBox(width: sl<ScreenSize>().width*0.05),
-                  /*
+                      Expanded(
+                          child: Consumer<ProfileProvider>(
+                            builder: (context, value, child) {
+                              print("Consumer ${value.img_byte?.isEmpty}");
+                              return ChangeAvatar(profile_img: value.img_byte!=null?value.img_byte:null);
+                            },
+                          )
+                      ),
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
                   name field
                    */
-                  Expanded(
-                      child: InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: bio_controller,)
-                  ),
-          
-          
+                      Expanded(
+                          child: InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: bio_controller,)
+                      ),
+
+
+                    ],
+                  )
+
                 ],
-              )
-          
-            ],
-          ),
-        ),
+              ),
+            );
+          },
+        )
       ),
     );
   }

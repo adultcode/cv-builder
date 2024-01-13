@@ -29,6 +29,8 @@ class InfoVM extends ChangeNotifier{
   void GetInfoModelData()async{
     try{
       var result = await infoService?.GetInfoData();
+      infoModel = result;
+      notifyListeners();
       print("Get Data: $result");
 
     }catch(e){
