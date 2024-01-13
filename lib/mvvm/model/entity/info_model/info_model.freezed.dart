@@ -30,6 +30,10 @@ mixin _$InfoModel {
   set job(String? value) => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
   set bio(String? value) => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  set city(String? value) => throw _privateConstructorUsedError;
+  String? get birth => throw _privateConstructorUsedError;
+  set birth(String? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +47,13 @@ abstract class $InfoModelCopyWith<$Res> {
       _$InfoModelCopyWithImpl<$Res, InfoModel>;
   @useResult
   $Res call(
-      {String? name, String? email, String? mobile, String? job, String? bio});
+      {String? name,
+      String? email,
+      String? mobile,
+      String? job,
+      String? bio,
+      String? city,
+      String? birth});
 }
 
 /// @nodoc
@@ -64,6 +74,8 @@ class _$InfoModelCopyWithImpl<$Res, $Val extends InfoModel>
     Object? mobile = freezed,
     Object? job = freezed,
     Object? bio = freezed,
+    Object? city = freezed,
+    Object? birth = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -86,6 +98,14 @@ class _$InfoModelCopyWithImpl<$Res, $Val extends InfoModel>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birth: freezed == birth
+          ? _value.birth
+          : birth // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -99,7 +119,13 @@ abstract class _$$InfoModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name, String? email, String? mobile, String? job, String? bio});
+      {String? name,
+      String? email,
+      String? mobile,
+      String? job,
+      String? bio,
+      String? city,
+      String? birth});
 }
 
 /// @nodoc
@@ -118,6 +144,8 @@ class __$$InfoModelImplCopyWithImpl<$Res>
     Object? mobile = freezed,
     Object? job = freezed,
     Object? bio = freezed,
+    Object? city = freezed,
+    Object? birth = freezed,
   }) {
     return _then(_$InfoModelImpl(
       name: freezed == name
@@ -140,6 +168,14 @@ class __$$InfoModelImplCopyWithImpl<$Res>
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birth: freezed == birth
+          ? _value.birth
+          : birth // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -147,7 +183,14 @@ class __$$InfoModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$InfoModelImpl with DiagnosticableTreeMixin implements _InfoModel {
-  _$InfoModelImpl({this.name, this.email, this.mobile, this.job, this.bio});
+  _$InfoModelImpl(
+      {this.name,
+      this.email,
+      this.mobile,
+      this.job,
+      this.bio,
+      this.city,
+      this.birth});
 
   factory _$InfoModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$InfoModelImplFromJson(json);
@@ -162,10 +205,14 @@ class _$InfoModelImpl with DiagnosticableTreeMixin implements _InfoModel {
   String? job;
   @override
   String? bio;
+  @override
+  String? city;
+  @override
+  String? birth;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InfoModel(name: $name, email: $email, mobile: $mobile, job: $job, bio: $bio)';
+    return 'InfoModel(name: $name, email: $email, mobile: $mobile, job: $job, bio: $bio, city: $city, birth: $birth)';
   }
 
   @override
@@ -177,7 +224,9 @@ class _$InfoModelImpl with DiagnosticableTreeMixin implements _InfoModel {
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('mobile', mobile))
       ..add(DiagnosticsProperty('job', job))
-      ..add(DiagnosticsProperty('bio', bio));
+      ..add(DiagnosticsProperty('bio', bio))
+      ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('birth', birth));
   }
 
   @JsonKey(ignore: true)
@@ -200,7 +249,9 @@ abstract class _InfoModel implements InfoModel {
       String? email,
       String? mobile,
       String? job,
-      String? bio}) = _$InfoModelImpl;
+      String? bio,
+      String? city,
+      String? birth}) = _$InfoModelImpl;
 
   factory _InfoModel.fromJson(Map<String, dynamic> json) =
       _$InfoModelImpl.fromJson;
@@ -220,6 +271,12 @@ abstract class _InfoModel implements InfoModel {
   @override
   String? get bio;
   set bio(String? value);
+  @override
+  String? get city;
+  set city(String? value);
+  @override
+  String? get birth;
+  set birth(String? value);
   @override
   @JsonKey(ignore: true)
   _$$InfoModelImplCopyWith<_$InfoModelImpl> get copyWith =>

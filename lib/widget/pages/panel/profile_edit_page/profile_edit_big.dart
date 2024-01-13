@@ -33,6 +33,8 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
   var phone_controller = TextEditingController();
   var bio_controller = TextEditingController();
   var jobtitle_controller = TextEditingController();
+  var city_controller = TextEditingController();
+  var birth_controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -56,6 +58,8 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
     bio_controller.text = _infoModel.bio!;
     phone_controller.text = _infoModel.mobile!;
     email_controller.text = _infoModel.email!;
+    city_controller.text = _infoModel.city!;
+    birth_controller.text = _infoModel.birth!;
   }
 
   @override
@@ -111,7 +115,9 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                             name: name_controller.text,
                                 bio: bio_controller.text,
                                 job: jobtitle_controller.text,
-                                mobile: phone_controller.text);
+                                mobile: phone_controller.text,
+                                city: city_controller.text,
+                                birth: birth_controller.text,);
                             Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);
                            // print(userm.toJson());
 
@@ -194,7 +200,33 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   ),
                   /*
               third row
-              email and name field
+              birth and city field
+               */
+                  SizedBox(height: sl<ScreenSize>().height*0.04),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
+                  birth field
+                   */
+                      Expanded(
+                          child: InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: birth_controller,)
+                      ),
+                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                      /*
+                  name field
+                   */
+                      Expanded(
+                          child: InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: city_controller,)
+                      ),
+
+
+                    ],
+                  ),
+                  /*
+              fourth row
+              profile and bio
                */
                   SizedBox(height: sl<ScreenSize>().height*0.04),
                   Row(

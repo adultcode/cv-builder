@@ -14,6 +14,8 @@ class InfoModel with _$InfoModel{
      String? mobile,
      String? job,
      String? bio,
+     String? city,
+     String? birth,
   }) = _InfoModel;
 
 

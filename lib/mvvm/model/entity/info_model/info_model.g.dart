@@ -13,6 +13,8 @@ _$InfoModelImpl _$$InfoModelImplFromJson(Map<String, dynamic> json) =>
       mobile: json['mobile'] as String?,
       job: json['job'] as String?,
       bio: json['bio'] as String?,
+      city: json['city'] as String?,
+      birth: json['birth'] as String?,
     );
 
 Map<String, dynamic> _$$InfoModelImplToJson(_$InfoModelImpl instance) =>
@@ -22,4 +24,6 @@ Map<String, dynamic> _$$InfoModelImplToJson(_$InfoModelImpl instance) =>
       'mobile': instance.mobile,
       'job': instance.job,
       'bio': instance.bio,
+      'city': instance.city,
+      'birth': instance.birth,
     };
