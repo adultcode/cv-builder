@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/menu_model.dart';
+import '../model/entity/menu_model.dart';
 import '../../widget/custom_widgets/panel/menu/active_menu.dart';
 import '../viewmodel/menu_viewmodel.dart';
 

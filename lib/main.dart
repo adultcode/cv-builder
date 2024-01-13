@@ -10,8 +10,9 @@ import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 
 import 'config/locator.dart';
-import 'model/social_model.dart';
 import 'model/user_model.dart';
+import 'mvvm/model/entity/social_model.dart';
+import 'mvvm/viewmodel/info_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
 import 'widget/pages/cv/cv.dart';
@@ -25,6 +26,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => IconProvider()),
       ChangeNotifierProvider(create: (context) => MenuVM()),
       ChangeNotifierProvider(create: (context) => ProfileProvider()),
+      ChangeNotifierProvider(create: (context) => InfoVM()),
     ],
      child: MyApp(),)
   );

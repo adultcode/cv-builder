@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
-import '../model/social_model.dart';
+import '../mvvm/model/entity/social_model.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){

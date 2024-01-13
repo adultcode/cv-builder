@@ -56,9 +56,9 @@ class ChangeAvatar extends StatelessWidget {
                           shape: BoxShape.circle,
                         //  color: Colors.green,
                         image: DecorationImage(
+                          fit: BoxFit.fitHeight,
                         //  image: NetworkImage('df')
                             image: profile_img != null ? MemoryImage(profile_img!) as ImageProvider<Object> : AssetImage('assets/me.png')
-                            //image: profile_img != null ? NetworkImage(profile_img!) as ImageProvider<Object> : AssetImage('assets/me.png')
                         )
                       ),
 

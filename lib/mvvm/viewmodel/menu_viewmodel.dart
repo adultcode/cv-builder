@@ -1,4 +1,4 @@
-import 'package:cv_builder/model/menu_model.dart';
+import 'package:cv_builder/mvvm/model/entity/menu_model.dart';
 import 'package:cv_builder/mvvm/data_source/menu_data_source.dart';
 import 'package:cv_builder/mvvm/repository/menu_repo.dart';
 import 'package:flutter/cupertino.dart';

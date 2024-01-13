@@ -3,10 +3,10 @@
 
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:cv_builder/model/education_model.dart';
-import 'package:cv_builder/model/experience_model.dart';
-import 'package:cv_builder/model/skill_model.dart';
-import 'package:cv_builder/model/social_model.dart';
+import 'package:cv_builder/mvvm/model/entity/skill_model.dart';
+import '../../../mvvm/model/entity/education_model.dart';
+import '../../../mvvm/model/entity/experience_model.dart';
+import '../../../mvvm/model/entity/social_model.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/font_size.dart';
 import '../../../util/constant/text_style.dart';

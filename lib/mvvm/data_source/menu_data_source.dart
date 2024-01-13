@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/menu_model.dart';
+import '../model/entity/menu_model.dart';
 
 class MenuDataSource{
 

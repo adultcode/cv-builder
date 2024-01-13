@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_model.dart';
+part of 'info_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
-    _$UserModelImpl(
-      name: json['name'] as String,
-      email: json['email'] as String,
-      mobile: json['mobile'] as String,
-      job: json['job'] as String,
-      bio: json['bio'] as String,
+_$InfoModelImpl _$$InfoModelImplFromJson(Map<String, dynamic> json) =>
+    _$InfoModelImpl(
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      mobile: json['mobile'] as String?,
+      job: json['job'] as String?,
+      bio: json['bio'] as String?,
     );
 
-Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
+Map<String, dynamic> _$$InfoModelImplToJson(_$InfoModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,

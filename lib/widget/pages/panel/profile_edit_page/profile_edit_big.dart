@@ -9,7 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../config/locator.dart';
-import '../../../../mvvm/model/user_model.dart';
+import '../../../../mvvm/model/entity/info_model/info_model.dart';
+import '../../../../mvvm/viewmodel/info_viewmodel.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/radius_size.dart';
 import '../../../../util/constant/screen_size.dart';
@@ -27,19 +28,14 @@ class ProfileEditBig extends StatefulWidget {
 
 class _ProfileEditBigState extends State<ProfileEditBig> {
   var name_controller = TextEditingController();
-
   var email_controller = TextEditingController();
-
   var phone_controller = TextEditingController();
-
   var bio_controller = TextEditingController();
-
   var jobtitle_controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  final FocusNode _nameFocusNode = FocusNode();
-  final FocusNode _nameFocusNode2 = FocusNode();
 
+  
   void ValidationForm(){
     
   }
@@ -67,25 +63,36 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                 children: [
           
                   InkWell(
-                    onTap: () {
-          
-                      // UserModel userm = UserModel(email: 'hharddy',
-                      // name: 'Hesam',bio: 'my bio',job: 'developer',mobile: '2323');
-                      // userm.name = "Hesam2";
-                      // print(userm.toJson());
+                    onTap: () async{
+                      Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+
+
                       /*
                       save user's data
                        */
-                      if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                      }
-                      else{
-                        print("-------Invalid Form");
-                        ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
-
-                      }
+                      // if (_formKey.currentState!.validate()) {
+                      //
+                      //   /*
+                      //    If the form is valid, display a snackbar,
+                      //    save data in shared prefences
+                      //
+                      //    */
+                      //   SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
+                      //
+                      //   InfoModel userm = InfoModel(email: email_controller.text,
+                      //   name: name_controller.text,
+                      //       bio: bio_controller.text,
+                      //       job: jobtitle_controller.text,
+                      //       mobile: phone_controller.text);
+                      //   Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);
+                      //  // print(userm.toJson());
+                      //
+                      // }
+                      // else{
+                      //   print("-------Invalid Form");
+                      //   ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+                      //
+                      // }
                     },
                     child: Container(
                       width: 40,
@@ -144,7 +151,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   email field
                    */
                   Expanded(
-                      child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,)
+                      child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,)
                   ),
                   SizedBox(width: sl<ScreenSize>().width*0.05),
                   /*

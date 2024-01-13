@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:cv_builder/model/menu_model.dart';
+import 'package:cv_builder/mvvm/model/entity/menu_model.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

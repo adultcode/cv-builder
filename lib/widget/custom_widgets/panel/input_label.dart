@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../util/constant/color.dart';
 import '../../../util/constant/widget_decoration.dart';
@@ -9,9 +10,9 @@ class InputLabel extends StatelessWidget {
   String hint;
   String name;
   TextEditingController? textEditingController;
-  final FocusNode _nameFocusNode = FocusNode();
+  bool? isNumber;
 
-  InputLabel({required  this.name,required  this.hint,this.textEditingController});
+  InputLabel({required  this.name,required  this.hint,this.textEditingController,this.isNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,10 @@ class InputLabel extends StatelessWidget {
               textAlignVertical : TextAlignVertical.center,
               cursorColor: Colors.black,
               enabled: true,
+              keyboardType: isNumber!=null?TextInputType.number:TextInputType.text,
+              inputFormatters: isNumber!=null?[
+                FilteringTextInputFormatter.digitsOnly
+              ]:null,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
