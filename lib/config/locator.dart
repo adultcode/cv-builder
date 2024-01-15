@@ -1,3 +1,4 @@
+import 'package:cv_builder/model/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,6 +16,7 @@ void setUpSL(){
 
 
   sl.registerLazySingleton<ScreenSize>(() =>ScreenSize());
+  sl.registerLazySingleton<UserModel>(() =>UserModel());
 
   // sl.registerLazySingleton<FetchPersonRepository>(() =>FetchPersonRepositoryImpl());
   // sl.registerLazySingleton<FetchPersonUseCase>(() =>FetchPersonUseCase());

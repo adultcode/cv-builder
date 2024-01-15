@@ -56,7 +56,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
     name_controller.text = _infoModel.name!;
     jobtitle_controller.text = _infoModel.job!;
     bio_controller.text = _infoModel.bio!;
-    phone_controller.text = _infoModel.mobile!;
+    phone_controller.text = _infoModel.mobile!.toString();
     email_controller.text = _infoModel.email!;
     city_controller.text = _infoModel.city!;
     birth_controller.text = _infoModel.birth!;
@@ -115,7 +115,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                             name: name_controller.text,
                                 bio: bio_controller.text,
                                 job: jobtitle_controller.text,
-                                mobile: phone_controller.text,
+                                mobile: int.parse(phone_controller.text),
                                 city: city_controller.text,
                                 birth: birth_controller.text,);
                             Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);

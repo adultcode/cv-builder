@@ -10,7 +10,7 @@ _$InfoModelImpl _$$InfoModelImplFromJson(Map<String, dynamic> json) =>
     _$InfoModelImpl(
       name: json['name'] as String?,
       email: json['email'] as String?,
-      mobile: json['mobile'] as String?,
+      mobile: json['mobile'] as int?,
       job: json['job'] as String?,
       bio: json['bio'] as String?,
       city: json['city'] as String?,

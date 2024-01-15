@@ -11,7 +11,7 @@ class InfoModel with _$InfoModel{
      String? name,
 
      String? email,
-     String? mobile,
+     int? mobile,
      String? job,
      String? bio,
      String? city,

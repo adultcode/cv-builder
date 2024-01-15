@@ -4,6 +4,7 @@ import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
 import 'package:cv_builder/test.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
+import 'package:cv_builder/widget/pages/loading_page.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -16,6 +17,7 @@ import 'mvvm/model/entity/social_model.dart';
 import 'mvvm/viewmodel/info_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
+import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'widget/pages/cv/cv.dart';
 
 void main() async{
@@ -28,6 +30,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => MenuVM()),
       ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ChangeNotifierProvider(create: (context) => InfoVM()),
+      ChangeNotifierProvider(create: (context) => UserViewModel()),
     ],
      child: MyApp(),)
   );
@@ -86,8 +89,8 @@ class _MyAppState extends State<MyApp> {
               print("---------${ sl<ScreenSize>().width}");
 
               sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-              return MyHomePage();
-            //  return Dashboard();
+              return LoadingPage();
+             // return Dashboard();
         },)
 
 
@@ -104,7 +107,7 @@ class _MyAppState extends State<MyApp> {
 
 
 class MyHomePage extends StatefulWidget {
-  static late UserModel userModel;
+ // static late UserModel userModel;
 
 
 
@@ -114,25 +117,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+ //late UserModel userModel;
  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   // SocialModel socialModel = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin,icon_path: 's');
-  //  SocialModel socialModel2 = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.github,icon_path: 's');
     List<SocialModel> social_list = [
       SocialModel(address: '/user/hesam',socialType: SocialType.github),
       SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin)
 
     ];
-    MyHomePage.userModel = UserModel();
-    MyHomePage.userModel.socials = social_list;
+  //  userModel = UserModel();
+    sl<UserModel>().socials = social_list;
 
 
-    WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
-      Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
-
-    });
+    // WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
+    //   Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+    //
+    // });
  }
   @override
   Widget build(BuildContext context) {
@@ -154,26 +156,14 @@ class _MyHomePageState extends State<MyHomePage> {
                  }, child: Text("Pick Image")
               ),
               Expanded(
-                  child: Consumer<InfoVM>(
-                      builder: (context, value, child) {
-                        if(value.infoModel!=null){
-                          MyHomePage.userModel.infoModel = value.infoModel;
-                          print("------ data received--");}
-                          return PdfPreview(
-                            initialPageFormat: PdfPageFormat.a4,
-                            useActions: true,
-                            maxPageWidth: 700,
+                  child:  PdfPreview(
+                    initialPageFormat: PdfPageFormat.a4,
+                    useActions: true,
+                    maxPageWidth: 700,
 
-                            build: (format) => generateResume(format,),
-                            //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
-                          );
-
-                        //else{
-                          //return CircularProgressIndicator();
-                        //}
-
-                },
-              )
+                    build: (format) => generateResume(format,userModel:sl<UserModel>() ),
+                    //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
+                  )
               )
             ],
           ),

@@ -3,6 +3,7 @@
 
 import 'dart:math';
 import 'dart:typed_data';
+import 'package:cv_builder/model/user_model.dart';
 import 'package:cv_builder/mvvm/model/entity/skill_model.dart';
 import '../../../mvvm/model/entity/education_model.dart';
 import '../../../mvvm/model/entity/experience_model.dart';
@@ -51,7 +52,7 @@ Future<String> Geticon(SocialModel socialModel)async{
 }
 
 
-Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path}) async {
+Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path, required UserModel userModel}) async {
 
   final doc = pw.Document(title: 'رزومه', author: 'حسام رسولیان');
   final fontData = await rootBundle.load('font/iran_light.ttf');
@@ -66,9 +67,9 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
  // socials.add(pw.Text('sdsd'));
  // socials.add(pw.Text('sdsd'));
 
-  MyHomePage.userModel.socials![0].icon_path = await Geticon(MyHomePage.userModel.socials![0]);
-  MyHomePage.userModel.socials![1].icon_path = await Geticon(MyHomePage.userModel.socials![1]);
-  socials = MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList();
+  userModel.socials![0].icon_path = await Geticon(userModel.socials![0]);
+  userModel.socials![1].icon_path = await Geticon(userModel.socials![1]);
+  socials = userModel.socials!.map((e) => Social(socialModel: e)).toList();
 
 
  print("social1: ${socials[0].socialModel!.address}");
@@ -185,7 +186,9 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                          image and name
                           */
 
-                         Profile1(profile_img: profile_image_path!=null?pw.MemoryImage(profile_image_path!):profileImage),
+                         Profile1(
+                             infoModel: userModel.infoModel!,
+                             profile_img: profile_image_path!=null?pw.MemoryImage(profile_image_path!):profileImage),
 
                          /*
                          experience
