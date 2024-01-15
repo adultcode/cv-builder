@@ -17,6 +17,7 @@ import 'mvvm/model/entity/social_model.dart';
 import 'mvvm/viewmodel/info_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
+import 'mvvm/viewmodel/social_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'widget/pages/cv/cv.dart';
 
@@ -31,6 +32,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ChangeNotifierProvider(create: (context) => InfoVM()),
       ChangeNotifierProvider(create: (context) => UserViewModel()),
+      ChangeNotifierProvider(create: (context) => SocialVM()),
     ],
      child: MyApp(),)
   );
@@ -49,20 +51,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
- // ScreenSizeStream? screenSizeStream;
-//  late ScreenSize screenSize;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // screenSizeStream = sl<ScreenSizeStream>();
-    // screenSizeStream!.controller.stream.listen((event) {
-    //   print("Event: $event");
-    // });
-    // screenSize = sl<ScreenSize>();
-    //
-    // screenSizeStream!.controller.add(screenSize);
+
 
   }
   @override
@@ -89,8 +84,8 @@ class _MyAppState extends State<MyApp> {
               print("---------${ sl<ScreenSize>().width}");
 
               sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-              return LoadingPage();
-             // return Dashboard();
+             // return LoadingPage();
+              return Dashboard();
         },)
 
 
