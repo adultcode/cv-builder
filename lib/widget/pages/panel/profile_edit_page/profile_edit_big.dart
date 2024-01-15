@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:cv_builder/model/user_model.dart';
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/profile_provider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
@@ -239,7 +239,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                       Expanded(
                           child: Consumer<ProfileProvider>(
                             builder: (context, value, child) {
-                              print("Consumer ${value.img_byte?.isEmpty}");
+                            //  print("Consumer ${value.img_byte?.isEmpty}");
                               return ChangeAvatar(profile_img: value.img_byte!=null?value.img_byte:null);
                             },
                           )

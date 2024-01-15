@@ -4,7 +4,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:provider/provider.dart';
 
-import '../../../mvvm/model/entity/social_model.dart';
+import '../../../mvvm/model/entity/social_model/social_model.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/font_size.dart';
 import '../../../util/constant/text_style.dart';

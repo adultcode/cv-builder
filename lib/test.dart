@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cv_builder/model/user_model.dart';
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';

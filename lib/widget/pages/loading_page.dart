@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 // import 'dart:html';
-import 'package:cv_builder/model/user_model.dart';
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
 import 'package:flutter/material.dart';

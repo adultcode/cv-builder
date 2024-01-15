@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:cv_builder/mvvm/model/entity/social_model/social_list.dart';
+import 'package:cv_builder/mvvm/model/entity/social_model/social_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +22,55 @@ class SocialPageBig extends StatefulWidget {
 
 class _SocialPageBigState extends State<SocialPageBig> {
 
-  var _linkedin_controller = TextEditingController();
-  var _github_controller = TextEditingController();
-  var _dribble_controller = TextEditingController();
-  var _website_controller = TextEditingController();
-  var _telegram_controller = TextEditingController();
-  var _instagram_controller = TextEditingController();
+  var _linkedin_controller = TextEditingController(); //0
+  var _github_controller = TextEditingController();   // 1
+  var _dribble_controller = TextEditingController();  // 2
+  var _website_controller = TextEditingController();  // 3
+  var _telegram_controller = TextEditingController(); // 4
+  var _instagram_controller = TextEditingController();  // 5
+
+  List<SocialModel?> _social_list = List<SocialModel?>.filled(6,null);
 
 
+
+
+  List<SocialModel?> GetInputData(){
+
+
+    // check linkedin
+    if(_linkedin_controller.text.isNotEmpty) _social_list[0] = SocialModel(address: _linkedin_controller.text,socialType: SocialType.linkedin);
+    else _social_list[0] = null;
+
+    // check github
+    if(_github_controller.text.isNotEmpty) _social_list[1] = SocialModel(address: _github_controller.text,socialType: SocialType.github);
+    else _social_list[1] = null;
+
+    // check dribble
+    if(_dribble_controller.text.isNotEmpty) _social_list[2] = SocialModel(address: _dribble_controller.text,socialType: SocialType.dribble);
+    else _social_list[2] = null;
+
+    // check website
+    if(_website_controller.text.isNotEmpty) _social_list[3] = SocialModel(address: _website_controller.text,socialType: SocialType.other);
+    else _social_list[3] = null;
+
+    // check telegram
+    if(_telegram_controller.text.isNotEmpty) _social_list[4] = SocialModel(address: _telegram_controller.text,socialType: SocialType.telegram);
+    else _social_list[4] = null;
+
+    // check telegram
+    if(_instagram_controller.text.isNotEmpty) _social_list[5] = SocialModel(address: _instagram_controller.text,socialType: SocialType.instagram);
+    else _social_list[5] = null;
+
+    return _social_list;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<SocialVM>(context,listen: false).GetSocialListData();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +103,26 @@ class _SocialPageBigState extends State<SocialPageBig> {
 
                         InkWell(
                           onTap: () async{
+                            SocialList socialList = SocialList(socialModels: GetInputData());
+                            Provider.of<SocialVM>(context,listen: false).SaveSocialList(social: socialList);
+
                             //   Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+                            // SocialModel social = SocialModel(socialType: SocialType.dribble,address: 'ad',icon_path: 'adasd');
+                            // SocialModel social2 = SocialModel(socialType: SocialType.telegram,address: 'tel',icon_path: 'zz');
+                            // SocialList _list = SocialList();
+                            // List<SocialModel?> soc_list= [
+                            //   social,social2,null
+                            // ];
+                            // _list.socialModels = soc_list;
+                            // print(json.encode(_list.toJson()));
+                           // // _list.socialModels?.add(social2);
+                           // var tem = '{"socialModels":[{"address":"ad","icon_path":"adasd","socialType":"dribble"},{"address":"tel","icon_path":"zz","socialType":"telegram"},null]}';
+                           // SocialList sl2 = SocialList.fromJson(json.decode(tem));
+                           // print(sl2.socialModels![2]?.address.toString());
+
+                          //  if(_linkedin_controller.text.isNotEmpty) social.
+
+                      //      print(social.toJson());
 
 
                             /*

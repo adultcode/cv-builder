@@ -1,14 +1,14 @@
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
-import 'package:cv_builder/mvvm/model/service/info_service.dart';
+import 'package:cv_builder/mvvm/repository/info_repo.dart';
 import 'package:flutter/cupertino.dart';
 
 class InfoVM extends ChangeNotifier{
 
   InfoModel? infoModel;
-  InfoService? infoService;
+  InfoRepository? infoService;
 
   InfoVM(){
-    infoService = InfoService();
+    infoService = InfoRepository();
   }
 
 

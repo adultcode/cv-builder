@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../util/constant/string_const.dart';
+import '../../util/constant/string_const.dart';
 
-class InfoService{
+class InfoRepository{
 
   SharedPreferences? sharedPreferences;
 

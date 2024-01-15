@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cv_builder/model/user_model.dart';
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';

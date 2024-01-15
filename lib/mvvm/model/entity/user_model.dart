@@ -1,9 +1,9 @@
 
-import '../mvvm/model/entity/education_model.dart';
-import '../mvvm/model/entity/experience_model.dart';
-import '../mvvm/model/entity/info_model/info_model.dart';
-import '../mvvm/model/entity/skill_model.dart';
-import '../mvvm/model/entity/social_model.dart';
+import 'education_model.dart';
+import 'experience_model.dart';
+import 'info_model/info_model.dart';
+import 'skill_model.dart';
+import 'social_model/social_model.dart';
 
 class UserModel{
 

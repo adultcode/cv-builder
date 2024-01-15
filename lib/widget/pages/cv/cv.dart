@@ -3,11 +3,11 @@
 
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:cv_builder/model/user_model.dart';
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/model/entity/skill_model.dart';
 import '../../../mvvm/model/entity/education_model.dart';
 import '../../../mvvm/model/entity/experience_model.dart';
-import '../../../mvvm/model/entity/social_model.dart';
+import '../../../mvvm/model/entity/social_model/social_model.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/font_size.dart';
 import '../../../util/constant/text_style.dart';
@@ -42,9 +42,9 @@ Future<String> Geticon(SocialModel socialModel)async{
     case SocialType.dribble:
       return await rootBundle.loadString('assets/linkedin_fill.svg');
       break;
-  // case SocialType.other:
-  //   await rootBundle.loadString('assets/linkedin_fill.svg');
-  //   break;
+  case SocialType.instagram:
+  return  await rootBundle.loadString('assets/linkedin_fill.svg');
+    break;
     default:
       return await rootBundle.loadString('assets/linkedin_fill.svg');
       break;
