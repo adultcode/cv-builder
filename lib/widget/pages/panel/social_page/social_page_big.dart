@@ -34,6 +34,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
 
 
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<SocialVM>(context,listen: false).GetSocialListData();
+
+  }
   List<SocialModel?> GetInputData(){
 
 
@@ -64,13 +72,30 @@ class _SocialPageBigState extends State<SocialPageBig> {
     return _social_list;
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Provider.of<SocialVM>(context,listen: false).GetSocialListData();
+  void PopulateInput(SocialList socialList){
+
+    //linkedin
+    _linkedin_controller.text = socialList.socialModels?[0]?.address??"";
+
+    //github
+    _github_controller.text = socialList.socialModels?[1]?.address??"";
+
+    //dribble
+    _dribble_controller.text = socialList.socialModels?[2]?.address??"";
+
+    //website
+    _website_controller.text = socialList.socialModels?[3]?.address??"";
+
+    //telegram
+    _telegram_controller.text = socialList.socialModels?[4]?.address??"";
+
+    //instagram
+    _instagram_controller.text = socialList.socialModels?[5]?.address??"";
+
+
 
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,14 +109,11 @@ class _SocialPageBigState extends State<SocialPageBig> {
          */
           child:Consumer<SocialVM>(
             builder: (context, value, child) {
+              if(value.socialList!=null){
+                // populate the inputs
+                PopulateInput(value.socialList!);
+              }
 
-              /*
-            check if data get from shared prefences
-            populate the form inputs
-             */
-              // if(value.infoModel!=null){
-              //  // PopulateForm(value.infoModel!);
-              // }
               return  Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
