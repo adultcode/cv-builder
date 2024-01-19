@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cv_builder/mvvm/model/entity/social_model/social_list.dart';
+import 'package:cv_builder/mvvm/model/entity/social_model/social_model.dart';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,13 +27,20 @@ String? result = "";
       if(sharedPreferences.containsKey(StringConst.info_key)){
         debugPrint("Key exist");
          result =    await sharedPreferences?.getString(StringConst.info_key);
-        debugPrint(result);
+      //  debugPrint(result);
         sl<UserModel>().infoModel= InfoModel.fromJson(jsonDecode(result!));
       }else{
         debugPrint("Key NOT exist");
       }
 
 
+      // get social information
+    print(data["socialModels"]);
+      Iterable social_it = data["socialModels"];
+
+      //SocialModel soc = (data["socialModels"][0]);
+     // print(soc.socialType);
+    sl<UserModel>().socials = social_it.map((e) => SocialModel.fromJson(e)).toList();
 
     return  sl<UserModel>();
   }

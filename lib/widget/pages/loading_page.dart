@@ -57,7 +57,7 @@ class _LoadingPageState extends State<LoadingPage> {
             Consumer<UserViewModel>(builder: (context, value, child) {
 
               if(value.userModel!=null){
-                return Text("Info: ${value.userModel?.infoModel?.name}");
+                return Text("Info: ${value.userModel?.socials?.length}");
 
               }else{
                 return Text("Info is null");

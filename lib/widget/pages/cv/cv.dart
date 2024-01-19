@@ -28,6 +28,7 @@ import '../../custom_widgets/cv_1/profile_1.dart';
 import '../../custom_widgets/cv_1/skill.dart';
 import '../../custom_widgets/cv_1/social.dart';
 import '../../custom_widgets/cv_1/widget.dart';
+
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
     case SocialType.linkedin:
@@ -51,28 +52,54 @@ Future<String> Geticon(SocialModel socialModel)async{
   }
 }
 
+List<Social>? socials =  [];
+
+// Future<List<Social>?> GetSocialList(List<SocialModel?> social_models)async{
+//
+//   if(social_models!=null)
+//
+//  social_models =  social_models!.map((e)async {
+//
+//     e?.icon_path = await  Geticon(e!);
+//   },).cast<SocialModel?>().toList();
+//
+//   socials = await social_models?.map((e) => Social(socialModel: e)).toList();
+//   return socials;
+// }
 
 Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path, required UserModel userModel}) async {
+
 
   final doc = pw.Document(title: 'رزومه', author: 'حسام رسولیان');
   final fontData = await rootBundle.load('font/iran_light.ttf');
   final font_light = pw.Font.ttf(fontData);
 
-  //SocialModel socialModel = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin);
- // SocialModel socialModel2 = SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.github);
-//  socialModel.icon_path = await Geticon(socialModel);
-  //socialModel2.icon_path = await Geticon(socialModel2);
 
-  List<Social> socials =  [];
- // socials.add(pw.Text('sdsd'));
- // socials.add(pw.Text('sdsd'));
+ // List<Social>? socials2=[] ;
+ // List<Social>?  socials2 = await  GetSocialList(userModel.socials!) ;
 
-  userModel.socials![0].icon_path = await Geticon(userModel.socials![0]);
-  userModel.socials![1].icon_path = await Geticon(userModel.socials![1]);
-  socials = userModel.socials!.map((e) => Social(socialModel: e)).toList();
+ // List<Social>? socials2 = [];
+  if(socials?.isEmpty==true){
+    userModel.socials?.forEach((element) async{
+      element?.icon_path = await Geticon(element!);
+      socials?.add(Social(socialModel: element));
+
+    });
+  }
+
+  // await userModel.socials!.forEach((socialModel) async {
+  //   socialModel?.icon_path = await Geticon(socialModel!);
+  //   socials2.add(Social(socialModel: socialModel));
+  // });
+
+  //if(userModel.socials!=null)
+  //userModel.socials![0]?.icon_path = await Geticon(userModel.socials![0]!);
+  //userModel.socials![1]?.icon_path = await Geticon(userModel.socials![1]!);
+  //userModel.socials![2]?.icon_path = await Geticon(userModel.socials![2]!);
+//  socials = userModel.socials!.map((e) => Social(socialModel: e)).toList();
 
 
- print("social1: ${socials[0].socialModel!.address}");
+ //print("social1: ${socials[0].socialModel!.address}");
   var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
   company: 'گوگل');
   var ed1 = EducationModel(title: 'کارشناسی مهندسی کامپیوتر',end_date: '1402/09',start_date: '1401/01',description: dump_body,
@@ -154,8 +181,9 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                       */
                      TitleText('اجتماعی'),
 
-                    // if(MyHomePage.userModel.socials!=null)
-                     ...socials,
+               //      if(userModel.socials!=null)
+                     ...?socials,
+
                       //...MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList(),
                      //Social(socialModel: socialModel),
                  //    Social(socialModel: socialModel2),

@@ -84,8 +84,9 @@ class _MyAppState extends State<MyApp> {
               print("---------${ sl<ScreenSize>().width}");
 
               sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-             // return LoadingPage();
-              return Dashboard();
+              return MyHomePage();
+            //  return LoadingPage();
+             // return Dashboard();
         },)
 
 
@@ -126,10 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
     sl<UserModel>().socials = social_list;
 
 
-    // WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
-    //   Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
-    //
-    // });
+    WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
+      //Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+      Provider.of<UserViewModel>(context,listen: false).GetUserModel();
+
+    });
  }
   @override
   Widget build(BuildContext context) {
@@ -150,15 +152,21 @@ class _MyHomePageState extends State<MyHomePage> {
 //                Provider.of<IconProvider>(context,listen: false).SetIcon();
                  }, child: Text("Pick Image")
               ),
-              Expanded(
-                  child:  PdfPreview(
-                    initialPageFormat: PdfPageFormat.a4,
-                    useActions: true,
-                    maxPageWidth: 700,
+              Consumer<UserViewModel>(
+                builder: (context, value, child) {
+                  if(value.userModel!=null){
+                    return Expanded(
+                        child:  PdfPreview(
+                          initialPageFormat: PdfPageFormat.a4,
+                          useActions: true,
+                          maxPageWidth: 700,
 
-                    build: (format) => generateResume(format,userModel:sl<UserModel>() ),
-                    //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
-                  )
+                          build: (format) => generateResume(format,userModel:value.userModel! ),
+                          //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
+                        )
+                    );
+                  }return Text("Loading..");
+                },
               )
             ],
           ),

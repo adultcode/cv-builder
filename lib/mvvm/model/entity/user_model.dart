@@ -10,7 +10,7 @@ class UserModel{
   List<EducationModel>? educations;
   List<ExperienceModel>? experiences;
   List<SkillModel>? skills;
-  List<SocialModel>? socials;
+  List<SocialModel?>? socials;
 
   InfoModel? infoModel;
   UserModel(

@@ -7,8 +7,15 @@
           "bio": "10 سال سابقه کار مرتبط با برنامه نویسی",
           "city": "تهران",
           "birth": "تهران"
-
         },
-  "user": "Hi"
+  "user": "Hi",
+
+
+  "socialModels":[
+    {"address":"llllllli.com","icon_path":null,"socialType":"linkedin"},
+    {"address":"new.com","icon_path":null,"socialType":"telegram"},
+
+    {"address":"github.com","icon_path":null,"socialType":"github"}
+  ]
 
 }
