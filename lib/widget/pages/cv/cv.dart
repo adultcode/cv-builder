@@ -79,24 +79,20 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
  // List<Social>?  socials2 = await  GetSocialList(userModel.socials!) ;
 
  // List<Social>? socials2 = [];
+  print("Social size: ${userModel.socials?.length}");
+
   if(socials?.isEmpty==true){
+  //  print("Not empty!!!");
     userModel.socials?.forEach((element) async{
+      print("Get icon");
       element?.icon_path = await Geticon(element!);
       socials?.add(Social(socialModel: element));
+      print("Social size: ${socials?.length}");
 
     });
   }
 
-  // await userModel.socials!.forEach((socialModel) async {
-  //   socialModel?.icon_path = await Geticon(socialModel!);
-  //   socials2.add(Social(socialModel: socialModel));
-  // });
 
-  //if(userModel.socials!=null)
-  //userModel.socials![0]?.icon_path = await Geticon(userModel.socials![0]!);
-  //userModel.socials![1]?.icon_path = await Geticon(userModel.socials![1]!);
-  //userModel.socials![2]?.icon_path = await Geticon(userModel.socials![2]!);
-//  socials = userModel.socials!.map((e) => Social(socialModel: e)).toList();
 
 
  //print("social1: ${socials[0].socialModel!.address}");
@@ -179,14 +175,13 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                      /*
                      social section
                       */
+                     if(userModel.socials!=null)
                      TitleText('اجتماعی'),
-
-               //      if(userModel.socials!=null)
+                     if(userModel.socials!=null)
                      ...?socials,
 
-                      //...MyHomePage.userModel.socials!.map((e) => Social(socialModel: e)).toList(),
-                     //Social(socialModel: socialModel),
-                 //    Social(socialModel: socialModel2),
+
+
                      /*
                      other section
                       */

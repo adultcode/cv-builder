@@ -118,13 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    List<SocialModel> social_list = [
-      SocialModel(address: '/user/hesam',socialType: SocialType.github),
-      SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin)
-
-    ];
+    // List<SocialModel> social_list = [
+    //   SocialModel(address: '/user/hesam',socialType: SocialType.github),
+    //   SocialModel(address: 'lidsdsdssdson/user/hesam',socialType: SocialType.linkedin)
+    //
+    // ];
   //  userModel = UserModel();
-    sl<UserModel>().socials = social_list;
+   // sl<UserModel>().socials = social_list;
+   // sl<UserModel>().socials?.add(SocialModel(socialType: SocialType.linkedin,address: 'zzz'));
 
 
     WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {

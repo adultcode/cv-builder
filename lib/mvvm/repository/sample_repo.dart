@@ -16,8 +16,10 @@ class DataRepository{
  late SharedPreferences sharedPreferences;
 String? result = "";
 
+List<SocialModel> soc_list = [];
 
-  Future<UserModel> LoadData() async {
+  Future<UserModel?> LoadData() async {
+    soc_list.clear();
     sharedPreferences = await SharedPreferences.getInstance();
     final String response = await rootBundle.loadString('data/info.json');
     final data = await json.decode(response) ;
@@ -35,13 +37,23 @@ String? result = "";
 
 
       // get social information
-    print(data["socialModels"]);
-      Iterable social_it = data["socialModels"];
+   // print(data["socialModels"]);
+    if(sharedPreferences.containsKey('StringConst.social_key')){
+      debugPrint("Social exist");
+    var  result2 =    await sharedPreferences?.getString(StringConst.social_key);
+      Iterable social_it = json.decode(result2!)["socialModels"];
 
-      //SocialModel soc = (data["socialModels"][0]);
-     // print(soc.socialType);
-    sl<UserModel>().socials = social_it.map((e) => SocialModel.fromJson(e)).toList();
+  social_it.forEach((element) {
+    if(element!=null){
+      soc_list.add(SocialModel.fromJson(element));
+    }
+  });
+     sl<UserModel>().socials = soc_list;
+      print(social_it.last);
 
+
+    }
     return  sl<UserModel>();
-  }
+
+}
 }
