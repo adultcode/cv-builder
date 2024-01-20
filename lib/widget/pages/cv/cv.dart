@@ -5,15 +5,11 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/model/entity/skill_model.dart';
+import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
 import '../../../mvvm/model/entity/education_model.dart';
-import '../../../mvvm/model/entity/experience_model.dart';
 import '../../../mvvm/model/entity/social_model/social_model.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/font_size.dart';
-import '../../../util/constant/text_style.dart';
-import 'package:cv_builder/util/constant/color.dart';
-import 'package:cv_builder/util/constant/font_size.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -96,7 +92,7 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
 
 
  //print("social1: ${socials[0].socialModel!.address}");
-  var ex1 = ExperienceModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
+  var ex1 = WorkModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
   company: 'گوگل');
   var ed1 = EducationModel(title: 'کارشناسی مهندسی کامپیوتر',end_date: '1402/09',start_date: '1401/01',description: dump_body,
       university: 'دانشگاه استنفورد');

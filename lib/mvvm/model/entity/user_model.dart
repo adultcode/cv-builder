@@ -1,6 +1,6 @@
 
 import 'education_model.dart';
-import 'experience_model.dart';
+import 'work_model/work_model.dart';
 import 'info_model/info_model.dart';
 import 'skill_model.dart';
 import 'social_model/social_model.dart';
@@ -8,7 +8,7 @@ import 'social_model/social_model.dart';
 class UserModel{
 
   List<EducationModel>? educations;
-  List<ExperienceModel>? experiences;
+  List<WorkModel>? works;
   List<SkillModel>? skills;
   List<SocialModel?>? socials;
 
@@ -16,7 +16,7 @@ class UserModel{
   UserModel(
       {
         this.educations,
-      this.experiences,
+      this.works,
       this.skills,
       this.socials,
       this.infoModel,

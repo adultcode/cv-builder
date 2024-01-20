@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 class SocialVM extends ChangeNotifier{
 
-  SocialModel? socialModel;
+ // SocialModel? socialModel;
   SocialList? socialList;
  late SocialRepository  socialRepository;
   SocialVM(){
@@ -39,30 +39,30 @@ class SocialVM extends ChangeNotifier{
   }
 
 
-  void SaveSocialData({required SocialModel social})async{
-    this.socialModel  = social;
-    var result = await socialRepository.SaveSocialData(socialModel: social);
-    if(result==true){
-      print("Data saved");
-      notifyListeners();
-
-    }else{
-      // show snackbar error
-      print("this is an error");
-    }
-  }
-
-  // fetch data
-  void GetSocialModelData()async{
-    try{
-      var result = await socialRepository.GetSocialData();
-      socialModel = result;
-      notifyListeners();
-      print("Get Data: $result");
-
-    }catch(e){
-      print("Get Data:  ${e.toString()}");
-    }
-
-  }
+  // void SaveSocialData({required SocialModel social})async{
+  //   this.socialModel  = social;
+  //   var result = await socialRepository.SaveSocialData(socialModel: social);
+  //   if(result==true){
+  //     print("Data saved");
+  //     notifyListeners();
+  //
+  //   }else{
+  //     // show snackbar error
+  //     print("this is an error");
+  //   }
+  // }
+  //
+  // // fetch data
+  // void GetSocialModelData()async{
+  //   try{
+  //     var result = await socialRepository.GetSocialData();
+  //     socialModel = result;
+  //     notifyListeners();
+  //     print("Get Data: $result");
+  //
+  //   }catch(e){
+  //     print("Get Data:  ${e.toString()}");
+  //   }
+  //
+  // }
 }

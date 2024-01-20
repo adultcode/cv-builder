@@ -26,4 +26,5 @@ const _$SocialTypeEnumMap = {
   SocialType.telegram: 'telegram',
   SocialType.dribble: 'dribble',
   SocialType.other: 'other',
+  SocialType.instagram: 'instagram',
 };

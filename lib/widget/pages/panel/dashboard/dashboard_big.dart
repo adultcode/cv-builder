@@ -8,6 +8,7 @@ import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../custom_widgets/panel/menu/side_menu.dart';
+import '../experience_page/experience_big.dart';
 import '../profile_edit_page/profile_edit_big.dart';
 import '../social_page/social_page_big.dart';
 
@@ -85,9 +86,14 @@ class _DashboardBigState extends State<DashboardBig>
                     builder: (context, value, child) {
                       if (value.active_item == 0) {
                         return ProfileEditBig();
-                      } else if (value.active_item == 1) {
+                      }
+                      else if (value.active_item == 1) {
                         return SocialPageBig();
-                      } else {
+                      }
+                      else if (value.active_item == 2) {
+                        return ExperienceBig();
+                      }
+                      else {
                         return Text("test");
                       }
                     },

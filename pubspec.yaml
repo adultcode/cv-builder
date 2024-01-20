@@ -63,6 +63,8 @@ dev_dependencies:
   build_runner: ^2.4.7
   freezed: any
   json_serializable: any
+  persian_datetime_picker: ^2.6.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
