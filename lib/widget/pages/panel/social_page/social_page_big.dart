@@ -125,31 +125,12 @@ class _SocialPageBigState extends State<SocialPageBig> {
 
                         InkWell(
                           onTap: () async{
-                            SocialList socialList = SocialList(socialModels: GetInputData());
-                            Provider.of<SocialVM>(context,listen: false).SaveSocialList(social: socialList);
-
-                            //   Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
-                            // SocialModel social = SocialModel(socialType: SocialType.dribble,address: 'ad',icon_path: 'adasd');
-                            // SocialModel social2 = SocialModel(socialType: SocialType.telegram,address: 'tel',icon_path: 'zz');
-                            // SocialList _list = SocialList();
-                            // List<SocialModel?> soc_list= [
-                            //   social,social2,null
-                            // ];
-                            // _list.socialModels = soc_list;
-                            // print(json.encode(_list.toJson()));
-                           // // _list.socialModels?.add(social2);
-                           // var tem = '{"socialModels":[{"address":"ad","icon_path":"adasd","socialType":"dribble"},{"address":"tel","icon_path":"zz","socialType":"telegram"},null]}';
-                           // SocialList sl2 = SocialList.fromJson(json.decode(tem));
-                           // print(sl2.socialModels![2]?.address.toString());
-
-                          //  if(_linkedin_controller.text.isNotEmpty) social.
-
-                      //      print(social.toJson());
-
-
                             /*
                       save user's data
                        */
+                            SocialList socialList = SocialList(socialModels: GetInputData());
+                            Provider.of<SocialVM>(context,listen: false).SaveSocialList(social: socialList);
+
                           },
                           child: Container(
                             width: 40,
@@ -170,9 +151,11 @@ class _SocialPageBigState extends State<SocialPageBig> {
                     Text('ثبت اطلاعات مرتبط با شبکه های اجتماعی ',style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
 
+
+
                     /*
-              first row
-              linkedin and github field
+               first row
+               linkedin and github field
                */
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,

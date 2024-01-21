@@ -1,4 +1,5 @@
 import 'package:cv_builder/mvvm/model/entity/work_model/work_list.dart';
+import 'package:cv_builder/widget/custom_widgets/panel/dashboard/works_item.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../repository/work_repo.dart';
@@ -8,16 +9,41 @@ class WorkVM extends ChangeNotifier{
 
   // SocialModel? socialModel;
   WorklList? worklList;
+  List<Widget>? work_items=[];
   late WorkRepository  workRepository;
-  SocialVM(){
+  WorkVM(){
     workRepository = WorkRepository();
+    worklList = WorklList();
   }
 
+
+  void SaveSocialList2({required WorklList? work})async{
+
+    this.worklList  = work;
+    work_items?.clear();
+    print("works: ${work?.workModels?.length}");
+    //var result = await workRepository.SaveWorkDataList(worklList: work);
+    work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+    if(work_items!=null){
+      print("Data saved");
+      notifyListeners();
+
+    }else{
+      // show snackbar error
+      print("this is an error");
+    }
+  }
   void SaveSocialList({required WorklList work})async{
+
   this.worklList  = work;
+  print("Saving data: ${work.workModels}");
   var result = await workRepository.SaveWorkDataList(worklList: work);
+//var result;
   if(result==true){
-  print("Data saved");
+    work_items?.clear();
+    work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+
+    print("Data saved");
   notifyListeners();
 
   }else{
@@ -26,12 +52,19 @@ class WorkVM extends ChangeNotifier{
   }
   }
 
-  void GetSocialListData()async{
+  void GetWorkListData()async{
   try{
   var result = await workRepository.GetWorkListData();
+
   worklList = result;
+  work_items?.clear();
+//  work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+    if(result.workModels!=null){
+      work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+    }
   notifyListeners();
-  print("Get Data: $result");
+  print("Get size: ${result.workModels}");
+
 
   }catch(e){
   print("Get Data:  ${e.toString()}");

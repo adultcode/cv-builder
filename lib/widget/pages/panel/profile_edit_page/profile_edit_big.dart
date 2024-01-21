@@ -118,6 +118,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                                 mobile: int.parse(phone_controller.text),
                                 city: city_controller.text,
                                 birth: birth_controller.text,);
+
                             Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);
                            // print(userm.toJson());
 

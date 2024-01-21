@@ -19,6 +19,7 @@ import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
 import 'mvvm/viewmodel/social_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
+import 'mvvm/viewmodel/work_viewmodel.dart';
 import 'widget/pages/cv/cv.dart';
 
 void main() async{
@@ -32,6 +33,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ChangeNotifierProvider(create: (context) => InfoVM()),
       ChangeNotifierProvider(create: (context) => UserViewModel()),
+      ChangeNotifierProvider(create: (context) => WorkVM()),
       ChangeNotifierProvider(create: (context) => SocialVM()),
     ],
      child: MyApp(),)
