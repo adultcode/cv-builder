@@ -26,6 +26,36 @@ void SelectWorkModel(WorkModel workModel){
   selected_workmodel = workModel;
   notifyListeners();
 }
+  void DeleteWork(WorkModel workModel){
+
+    print("Selected work model clicked");
+    selected_workmodel = workModel;
+    worklList?.workModels?.remove(workModel);
+
+    // proccess list again
+    work_items?.clear();
+    work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+
+    notifyListeners();
+  }
+
+  /*
+  add new workmodel in list
+   */
+  void AddWork({required WorkModel work})async{
+
+    worklList?.workModels?.add(work);
+   // var result = await workRepository.SaveWorkDataList(worklList: work);
+//var result;
+    //if(result==true){
+      work_items?.clear();
+      work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+
+      print("Data added");
+      notifyListeners();
+
+  }
+
   /*
   save list of work models
    */

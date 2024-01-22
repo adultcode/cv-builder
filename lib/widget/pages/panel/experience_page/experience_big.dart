@@ -43,6 +43,14 @@ class _ExperienceBigState extends State<ExperienceBig> {
     _desc_controller.text = workModel.description!;
   }
 
+  void ClearInpust(){
+    _title_controller.clear();
+    _company_controller.clear();
+    _start_controller.clear();
+    _end_controller.clear();
+    _desc_controller.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,35 +82,33 @@ class _ExperienceBigState extends State<ExperienceBig> {
                           /*
                         save user's data
                          */
-                          if (_formKey.currentState!.validate()) {
+                          if (value.worklList?.workModels!=null) {
                           //  value.worklList = WorklList();
-                            if(value.worklList?.workModels==null){
-                              value.worklList = WorklList();
-                              value.worklList?.workModels = [WorkModel(title:_title_controller.text,
-                                  company: _company_controller.text,
-                                  description: _desc_controller.text,
-                                  start_date: _start_controller.text,
-                                  end_date: _end_controller.text)];
-                            }else{
-                              value.worklList?.workModels?.add(WorkModel(title:_title_controller.text,
-                                  company: _company_controller.text,
-                                  description: _desc_controller.text,
-                                  start_date: _start_controller.text,
-                                  end_date: _end_controller.text));
-                            }
+                          //   if(value.worklList?.workModels==null){
+                          //     value.worklList = WorklList();
+                          //     value.worklList?.workModels = [WorkModel(title:_title_controller.text,
+                          //         company: _company_controller.text,
+                          //         description: _desc_controller.text,
+                          //         start_date: _start_controller.text,
+                          //         end_date: _end_controller.text)];
+                          //   }else{
+                          //     value.worklList?.workModels?.add(WorkModel(title:_title_controller.text,
+                          //         company: _company_controller.text,
+                          //         description: _desc_controller.text,
+                          //         start_date: _start_controller.text,
+                          //         end_date: _end_controller.text));
+                          //   }
 
                              // print("Work size from buld: ${value.worklList?.workModels?.length}");
                               Provider.of<WorkVM>(context,listen: false).SaveSocialList(work: value.worklList!);
                               SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
+                                  print("Size of total works: ${value.worklList?.workModels?.length}");
 
 
                           }else{
-                            ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+                            ErrorSnack(context: context,title: 'شما هیچ سابقه کاری ثبت نکرده اید');
 
                           }
-                        //  SocialList socialList = SocialList(socialModels: GetInputData());
-                         // value.worklList?.workModels?.add(WorkModel(title: ));
-                          //Provider.of<WorkVM>(context,listen: false).SaveSocialList(work: value.worklList);
 
                         },
                         child: Container(
@@ -203,6 +209,23 @@ class _ExperienceBigState extends State<ExperienceBig> {
                     Container(
                       child: ElevatedButton(
                         onPressed: () {
+
+                          if (_formKey.currentState!.validate()){
+                            // add new work model in list of work models
+                            Provider.of<WorkVM>(context,listen: false).AddWork(work:  WorkModel(title:_title_controller.text,
+                                company: _company_controller.text,
+                                description: _desc_controller.text,
+                                start_date: _start_controller.text,
+                                end_date: _end_controller.text));
+
+                                // clear data after add new data
+                            ClearInpust();
+                          }else{
+                            ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+
+                          }
+
+
 
                         },
                         child: Text("اضافه کردن"),

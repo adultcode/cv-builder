@@ -43,10 +43,12 @@ class WorkItem extends StatelessWidget {
 
               // edit icon
               IconButton(onPressed: () {
+                Provider.of<WorkVM>(context,listen: false).SelectWorkModel(workModel);
 
               }, icon: Icon(Icons.wrap_text_rounded,color: work_text,)) ,
-              // edit icon
+              // delete icon
               IconButton(onPressed: () {
+                Provider.of<WorkVM>(context,listen: false).DeleteWork(workModel);
 
               }, icon: Icon(Icons.delete_forever_rounded,color: work_text,))
             ],
