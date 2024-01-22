@@ -29,8 +29,8 @@ class WorkRepository{
 
     sharedPreferences = await SharedPreferences.getInstance();
     var result =    await sharedPreferences?.getString(StringConst.work_key);
-    print("work result: $result");
-    print(result);
+   // print("work result: $result");
+    //print(result);
     if(result!=null){
       return WorklList.fromJson(jsonDecode(result));
 

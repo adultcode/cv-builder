@@ -1,4 +1,5 @@
 import 'package:cv_builder/mvvm/model/entity/work_model/work_list.dart';
+import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/works_item.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,29 +11,24 @@ class WorkVM extends ChangeNotifier{
   // SocialModel? socialModel;
   WorklList? worklList;
   List<Widget>? work_items=[];
+  WorkModel? selected_workmodel;
   late WorkRepository  workRepository;
   WorkVM(){
     workRepository = WorkRepository();
     worklList = WorklList();
+
   }
 
 
-  void SaveSocialList2({required WorklList? work})async{
+void SelectWorkModel(WorkModel workModel){
 
-    this.worklList  = work;
-    work_items?.clear();
-    print("works: ${work?.workModels?.length}");
-    //var result = await workRepository.SaveWorkDataList(worklList: work);
-    work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
-    if(work_items!=null){
-      print("Data saved");
-      notifyListeners();
-
-    }else{
-      // show snackbar error
-      print("this is an error");
-    }
-  }
+    print("Selected work model clicked");
+  selected_workmodel = workModel;
+  notifyListeners();
+}
+  /*
+  save list of work models
+   */
   void SaveSocialList({required WorklList work})async{
 
   this.worklList  = work;
@@ -52,6 +48,9 @@ class WorkVM extends ChangeNotifier{
   }
   }
 
+  /*
+  get list of work models save in shared prefences
+   */
   void GetWorkListData()async{
   try{
   var result = await workRepository.GetWorkListData();

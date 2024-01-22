@@ -40,7 +40,6 @@ class _SocialPageBigState extends State<SocialPageBig> {
     // TODO: implement initState
     super.initState();
     Provider.of<SocialVM>(context,listen: false).GetSocialListData();
-
   }
   List<SocialModel?> GetInputData(){
 

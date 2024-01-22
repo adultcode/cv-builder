@@ -22,7 +22,9 @@ var panel_container_decoration = BoxDecoration(
 
 var input_decoration = BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
-    color: backgroud_color);
+    border: Border.all(width: 2
+        ,color: backgroud_color),
+    color: input_bg);
 
 /*
 decoration for textformfield

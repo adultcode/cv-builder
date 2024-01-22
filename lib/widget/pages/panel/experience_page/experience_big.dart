@@ -35,6 +35,14 @@ class _ExperienceBigState extends State<ExperienceBig> {
 
   }
 
+  void PopulateInputs(WorkModel workModel){
+    _title_controller.text = workModel.title!;
+    _company_controller.text = workModel.company!;
+    _start_controller.text = workModel.start_date!;
+    _end_controller.text = workModel.end_date!;
+    _desc_controller.text = workModel.description!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,10 +53,9 @@ class _ExperienceBigState extends State<ExperienceBig> {
             horizontal: sl<ScreenSize>().width * 0.02),
         child: SingleChildScrollView(
           child: Consumer<WorkVM>(builder: (context, value, child) {
-            ////if(value.socialList!=null){
-            // populate the inputs
-            // PopulateInput(value.socialList!);
-            // },
+            if(value.selected_workmodel!=null && value.selected_workmodel?.title!=null){
+            PopulateInputs(value.selected_workmodel!);
+            }
             return Form(
               key: _formKey,
               child: Column(
