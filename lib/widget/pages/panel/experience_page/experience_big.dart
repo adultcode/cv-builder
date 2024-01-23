@@ -227,21 +227,20 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             //     start_date: _start_controller.text,
                             //     end_date: _end_controller.text);
                             // print(wo.toString());
-                            Provider.of<WorkVM>(context,listen: false).AddWork(work:  WorkModel(title:_title_controller.text,
+
+
+                            Provider.of<WorkVM>(context,listen: false).AddWork(work: WorkModel(title:_title_controller.text,
                                 company: _company_controller.text,
                                 description: _desc_controller.text,
                                 start_date: _start_controller.text,
-                                end_date: _end_controller.text));
+                                end_date: _end_controller.text) );
 
                                 // clear data after add new data
                             ClearInpust();
+
                           }else{
                             ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
-
                           }
-
-
-
                         },
                         child: Text("اضافه کردن"),
                       ),

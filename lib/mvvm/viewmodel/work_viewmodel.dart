@@ -12,6 +12,7 @@ class WorkVM extends ChangeNotifier{
   WorklList? worklList;
   List<Widget>? work_items=[];
   WorkModel? selected_workmodel;
+  bool isForEdit = false;
   late WorkRepository  workRepository;
   WorkVM(){
     workRepository = WorkRepository();
@@ -25,7 +26,9 @@ void SelectWorkModel(WorkModel workModel){
     print("Selected work model clicked");
   selected_workmodel = workModel;
   notifyListeners();
+    isForEdit = true;
 }
+
 
 // delete workmodel from list
   void DeleteWork(WorkModel workModel){
@@ -38,7 +41,11 @@ void SelectWorkModel(WorkModel workModel){
     work_items?.clear();
     work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
 
+    isForEdit = false;
+    selected_workmodel = null;
     notifyListeners();
+
+
   }
 
   /*
@@ -56,8 +63,24 @@ void SelectWorkModel(WorkModel workModel){
     else{
       var last_id = (worklList?.workModels?.last!.id!)! ;
       last_id= last_id + 1;
-      work.id =last_id;
-      worklList?.workModels?.add(work);
+      // check isForEdit is true or not
+      // if true, it's edit not new item
+      if(isForEdit==true){
+        //find index
+
+        int? _index = worklList?.workModels?.indexWhere((item) => item?.id == selected_workmodel?.id);
+
+        print("index for edit is $_index");
+        if(_index!=null) {
+          work.id = selected_workmodel?.id;
+          worklList!.workModels?[_index] = work;
+        }
+
+      }else{
+        work.id =last_id;
+        worklList?.workModels?.add(work);
+
+      }
 
     }
    // worklList?.workModels?.add(work);
@@ -66,6 +89,8 @@ void SelectWorkModel(WorkModel workModel){
      work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
 
       print("Data added");
+    isForEdit = false;
+    selected_workmodel = null;
       notifyListeners();
 
   }
@@ -127,7 +152,7 @@ void SelectWorkModel(WorkModel workModel){
   }
 
   notifyListeners();
-
+  isForEdit = false;
   }
 
 
