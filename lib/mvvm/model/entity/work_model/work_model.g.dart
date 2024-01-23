@@ -13,6 +13,7 @@ _$WorkModelImpl _$$WorkModelImplFromJson(Map<String, dynamic> json) =>
       end_date: json['end_date'] as String?,
       company: json['company'] as String?,
       description: json['description'] as String?,
+      id: json['id'] as int?,
     );
 
 Map<String, dynamic> _$$WorkModelImplToJson(_$WorkModelImpl instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$WorkModelImplToJson(_$WorkModelImpl instance) =>
       'end_date': instance.end_date,
       'company': instance.company,
       'description': instance.description,
+      'id': instance.id,
     };

@@ -3,10 +3,12 @@ import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/work_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/input_form.dart';
@@ -32,9 +34,15 @@ class _ExperienceBigState extends State<ExperienceBig> {
     // TODO: implement initState
     super.initState();
     Provider.of<WorkVM>(context,listen: false).GetWorkListData();
-
+   // GetData();
   }
 
+  void GetData() async{
+  var sharedPreferences = await SharedPreferences.getInstance();
+  var result =    await sharedPreferences.getString(StringConst.work_key);
+  print(result);
+
+}
   void PopulateInputs(WorkModel workModel){
     _title_controller.text = workModel.title!;
     _company_controller.text = workModel.company!;
@@ -100,7 +108,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                           //   }
 
                              // print("Work size from buld: ${value.worklList?.workModels?.length}");
-                              Provider.of<WorkVM>(context,listen: false).SaveSocialList(work: value.worklList!);
+                              Provider.of<WorkVM>(context,listen: false).SaveWorkList(work: value.worklList!);
                               SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
                                   print("Size of total works: ${value.worklList?.workModels?.length}");
 
@@ -135,7 +143,8 @@ class _ExperienceBigState extends State<ExperienceBig> {
                      work list view
                        */
 
-                  ...value.work_items!
+                  if(value.work_items!=null)
+                      ...value.work_items!
 
 
                   /*
@@ -212,6 +221,12 @@ class _ExperienceBigState extends State<ExperienceBig> {
 
                           if (_formKey.currentState!.validate()){
                             // add new work model in list of work models
+                            // var wo = WorkModel(title:_title_controller.text,
+                            //     company: _company_controller.text,
+                            //     description: _desc_controller.text,
+                            //     start_date: _start_controller.text,
+                            //     end_date: _end_controller.text);
+                            // print(wo.toString());
                             Provider.of<WorkVM>(context,listen: false).AddWork(work:  WorkModel(title:_title_controller.text,
                                 company: _company_controller.text,
                                 description: _desc_controller.text,

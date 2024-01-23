@@ -114,16 +114,12 @@
 // // }
 
 
-main(){
-  var current = 3000000;
-  for(int i=0;i<30;i++){
-    current = current*2;
-  }
-  // var formatter = NumberFormat("#,###", "en_US");
+import 'package:cv_builder/util/constant/string_const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// Format the number using the formatter
-  //var formattedNumber = formatter.format(current);
+main()async{
+ var sharedPreferences = await SharedPreferences.getInstance();
+  var result =    await sharedPreferences.getString(StringConst.work_key);
+  print(result);
 
-
-  print("Total: $current");
 }

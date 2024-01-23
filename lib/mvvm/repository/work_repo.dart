@@ -12,6 +12,13 @@ class WorkRepository{
 
   SharedPreferences? sharedPreferences;
 
+
+  Future<bool?> ClearWorklist()async{
+    sharedPreferences = await SharedPreferences.getInstance();
+    var result =    await sharedPreferences?.remove(StringConst.work_key);
+    return result;
+
+  }
 /*
   save user information in shared prefences
    */
@@ -19,6 +26,7 @@ class WorkRepository{
 
     sharedPreferences = await SharedPreferences.getInstance();
     var result =    await sharedPreferences?.setString(StringConst.work_key, jsonEncode(worklList.toJson()));
+    print("Save result: $result");
     return result;
 
   }
@@ -27,7 +35,9 @@ class WorkRepository{
    */
   Future<WorklList> GetWorkListData()async{
 
+
     sharedPreferences = await SharedPreferences.getInstance();
+    print("Keys: ${sharedPreferences?.getKeys()}");
     var result =    await sharedPreferences?.getString(StringConst.work_key);
    // print("work result: $result");
     //print(result);

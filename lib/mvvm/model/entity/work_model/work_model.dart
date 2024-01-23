@@ -14,6 +14,7 @@ class WorkModel with _$WorkModel{
     String? end_date,
     String? company,
     String? description,
+    int? id,
   }) = _WorkModel;
 
   factory WorkModel.fromJson(Map<String, Object?> json)

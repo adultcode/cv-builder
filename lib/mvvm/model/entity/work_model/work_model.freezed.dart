@@ -30,6 +30,8 @@ mixin _$WorkModel {
   set company(String? value) => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   set description(String? value) => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +49,8 @@ abstract class $WorkModelCopyWith<$Res> {
       String? start_date,
       String? end_date,
       String? company,
-      String? description});
+      String? description,
+      int? id});
 }
 
 /// @nodoc
@@ -68,6 +71,7 @@ class _$WorkModelCopyWithImpl<$Res, $Val extends WorkModel>
     Object? end_date = freezed,
     Object? company = freezed,
     Object? description = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -90,6 +94,10 @@ class _$WorkModelCopyWithImpl<$Res, $Val extends WorkModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -107,7 +115,8 @@ abstract class _$$WorkModelImplCopyWith<$Res>
       String? start_date,
       String? end_date,
       String? company,
-      String? description});
+      String? description,
+      int? id});
 }
 
 /// @nodoc
@@ -126,6 +135,7 @@ class __$$WorkModelImplCopyWithImpl<$Res>
     Object? end_date = freezed,
     Object? company = freezed,
     Object? description = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$WorkModelImpl(
       title: freezed == title
@@ -148,6 +158,10 @@ class __$$WorkModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -160,7 +174,8 @@ class _$WorkModelImpl implements _WorkModel {
       this.start_date,
       this.end_date,
       this.company,
-      this.description});
+      this.description,
+      this.id});
 
   factory _$WorkModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WorkModelImplFromJson(json);
@@ -175,10 +190,12 @@ class _$WorkModelImpl implements _WorkModel {
   String? company;
   @override
   String? description;
+  @override
+  int? id;
 
   @override
   String toString() {
-    return 'WorkModel(title: $title, start_date: $start_date, end_date: $end_date, company: $company, description: $description)';
+    return 'WorkModel(title: $title, start_date: $start_date, end_date: $end_date, company: $company, description: $description, id: $id)';
   }
 
   @JsonKey(ignore: true)
@@ -201,7 +218,8 @@ abstract class _WorkModel implements WorkModel {
       String? start_date,
       String? end_date,
       String? company,
-      String? description}) = _$WorkModelImpl;
+      String? description,
+      int? id}) = _$WorkModelImpl;
 
   factory _WorkModel.fromJson(Map<String, dynamic> json) =
       _$WorkModelImpl.fromJson;
@@ -221,6 +239,9 @@ abstract class _WorkModel implements WorkModel {
   @override
   String? get description;
   set description(String? value);
+  @override
+  int? get id;
+  set id(int? value);
   @override
   @JsonKey(ignore: true)
   _$$WorkModelImplCopyWith<_$WorkModelImpl> get copyWith =>

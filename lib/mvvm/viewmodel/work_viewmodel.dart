@@ -26,6 +26,8 @@ void SelectWorkModel(WorkModel workModel){
   selected_workmodel = workModel;
   notifyListeners();
 }
+
+// delete workmodel from list
   void DeleteWork(WorkModel workModel){
 
     print("Selected work model clicked");
@@ -44,12 +46,24 @@ void SelectWorkModel(WorkModel workModel){
    */
   void AddWork({required WorkModel work})async{
 
-    worklList?.workModels?.add(work);
-   // var result = await workRepository.SaveWorkDataList(worklList: work);
-//var result;
-    //if(result==true){
+    print('length: ${worklList?.workModels}');
+    if(worklList?.workModels==null){
+      print("WOrk list is empty");
+      work.id = 1;
+      worklList?.workModels=[work];
+
+    }
+    else{
+      var last_id = (worklList?.workModels?.last!.id!)! ;
+      last_id= last_id + 1;
+      work.id =last_id;
+      worklList?.workModels?.add(work);
+
+    }
+   // worklList?.workModels?.add(work);
+
       work_items?.clear();
-      work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+     work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
 
       print("Data added");
       notifyListeners();
@@ -59,23 +73,31 @@ void SelectWorkModel(WorkModel workModel){
   /*
   save list of work models
    */
-  void SaveSocialList({required WorklList work})async{
+  void SaveWorkList({required WorklList work})async{
+    var result;
+    if(work.workModels?.isEmpty==true){
+      print("List is empty delete all works");
+       result = await workRepository.ClearWorklist();
 
-  this.worklList  = work;
-  print("Saving data: ${work.workModels}");
-  var result = await workRepository.SaveWorkDataList(worklList: work);
-//var result;
-  if(result==true){
-    work_items?.clear();
-    work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+    }else{
+      this.worklList  = work;
+      print("Saving data:");
+       result = await workRepository.SaveWorkDataList(worklList: work);
 
-    print("Data saved");
-  notifyListeners();
 
-  }else{
-  // show snackbar error
-  print("this is an error");
-  }
+    }
+
+    if(result==true){
+      work_items?.clear();
+      work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+
+      print("Data saved");
+      notifyListeners();
+
+    }else{
+      // show snackbar error
+      print("this is an error");
+    }
   }
 
   /*
@@ -88,16 +110,23 @@ void SelectWorkModel(WorkModel workModel){
   worklList = result;
   work_items?.clear();
 //  work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
-    if(result.workModels!=null){
+    if(result!=null){
+      print("Key exist");
       work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+    }else{
+      print("Data is null key nit exist");
+      work_items = null;
     }
-  notifyListeners();
   print("Get size: ${result.workModels}");
 
 
   }catch(e){
-  print("Get Data:  ${e.toString()}");
+    work_items = null;
+
+    print("Get Data:  ${e.toString()}");
   }
+
+  notifyListeners();
 
   }
 

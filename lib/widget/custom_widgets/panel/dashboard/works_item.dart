@@ -57,6 +57,7 @@ class WorkItem extends StatelessWidget {
         Expanded(child: Text(workModel.company!,textAlign: TextAlign.right,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: work_text),),),
       // work title
           Expanded(child: Text(workModel.title!, textAlign: TextAlign.right ,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: work_text),)),
+          Expanded(child: Text(workModel.id.toString()!, textAlign: TextAlign.right ,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: work_text),)),
 
 
 
