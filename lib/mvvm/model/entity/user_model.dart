@@ -1,5 +1,5 @@
 
-import 'education_model.dart';
+import 'education_model/education_model.dart';
 import 'work_model/work_model.dart';
 import 'info_model/info_model.dart';
 import 'skill_model.dart';
