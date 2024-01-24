@@ -2,9 +2,9 @@ import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../mvvm/viewmodel/work_viewmodel.dart';
-import '../../../../util/constant/color.dart';
-import '../../../../util/constant/radius_size.dart';
+import '../../../../../mvvm/viewmodel/work_viewmodel.dart';
+import '../../../../../util/constant/color.dart';
+import '../../../../../util/constant/radius_size.dart';
 
 class WorkItem extends StatelessWidget {
 

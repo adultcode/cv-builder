@@ -1,6 +1,6 @@
 import 'package:cv_builder/mvvm/model/entity/work_model/work_list.dart';
 import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
-import 'package:cv_builder/widget/custom_widgets/panel/dashboard/works_item.dart';
+import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/works_item.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../repository/work_repo.dart';
@@ -37,7 +37,7 @@ void SelectWorkModel(WorkModel workModel){
     selected_workmodel = workModel;
     worklList?.workModels?.remove(workModel);
 
-    // proccess list again
+    // proccess list agained
     work_items?.clear();
     work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
 
@@ -83,6 +83,7 @@ void SelectWorkModel(WorkModel workModel){
       }
 
     }
+
    // worklList?.workModels?.add(work);
 
       work_items?.clear();
