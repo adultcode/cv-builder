@@ -89,6 +89,9 @@ class _EducationBigState extends State<EducationBig> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
+                      /*
+                      save button
+                       */
                       InkWell(
                         onTap: () async{
                           /*
@@ -101,7 +104,9 @@ class _EducationBigState extends State<EducationBig> {
                             print("Size of total works: ${value.educationList?.educationList?.length}");
 
 
-                          }else{
+                          }
+
+                          else{
                             ErrorSnack(context: context,title: 'شما هیچ سابقه تحصیلی ثبت نکرده اید');
 
                           }
@@ -118,6 +123,8 @@ class _EducationBigState extends State<EducationBig> {
                           child: Icon(Icons.done,size: 20,color: panel_green,),
                         ),
                       ),
+
+
                       Text('تحصیلات',style: Theme.of(context).textTheme.titleLarge,)
 
                     ],
