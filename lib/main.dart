@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'config/locator.dart';
 import 'mvvm/model/entity/user_model.dart';
 import 'mvvm/model/entity/social_model/social_model.dart';
+import 'mvvm/viewmodel/education_viewmodel.dart';
 import 'mvvm/viewmodel/info_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
@@ -35,6 +36,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => UserViewModel()),
       ChangeNotifierProvider(create: (context) => WorkVM()),
       ChangeNotifierProvider(create: (context) => SocialVM()),
+      ChangeNotifierProvider(create: (context) => EducationVM()),
     ],
      child: MyApp(),)
   );

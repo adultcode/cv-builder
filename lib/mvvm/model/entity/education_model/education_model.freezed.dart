@@ -22,6 +22,8 @@ EducationModel _$EducationModelFromJson(Map<String, dynamic> json) {
 mixin _$EducationModel {
   String? get title => throw _privateConstructorUsedError;
   set title(String? value) => throw _privateConstructorUsedError;
+  String? get grade => throw _privateConstructorUsedError;
+  set grade(String? value) => throw _privateConstructorUsedError;
   String? get start_date => throw _privateConstructorUsedError;
   set start_date(String? value) => throw _privateConstructorUsedError;
   String? get end_date => throw _privateConstructorUsedError;
@@ -47,6 +49,7 @@ abstract class $EducationModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? title,
+      String? grade,
       String? start_date,
       String? end_date,
       String? university,
@@ -68,6 +71,7 @@ class _$EducationModelCopyWithImpl<$Res, $Val extends EducationModel>
   @override
   $Res call({
     Object? title = freezed,
+    Object? grade = freezed,
     Object? start_date = freezed,
     Object? end_date = freezed,
     Object? university = freezed,
@@ -78,6 +82,10 @@ class _$EducationModelCopyWithImpl<$Res, $Val extends EducationModel>
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      grade: freezed == grade
+          ? _value.grade
+          : grade // ignore: cast_nullable_to_non_nullable
               as String?,
       start_date: freezed == start_date
           ? _value.start_date
@@ -113,6 +121,7 @@ abstract class _$$EducationModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? title,
+      String? grade,
       String? start_date,
       String? end_date,
       String? university,
@@ -132,6 +141,7 @@ class __$$EducationModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = freezed,
+    Object? grade = freezed,
     Object? start_date = freezed,
     Object? end_date = freezed,
     Object? university = freezed,
@@ -142,6 +152,10 @@ class __$$EducationModelImplCopyWithImpl<$Res>
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      grade: freezed == grade
+          ? _value.grade
+          : grade // ignore: cast_nullable_to_non_nullable
               as String?,
       start_date: freezed == start_date
           ? _value.start_date
@@ -172,6 +186,7 @@ class __$$EducationModelImplCopyWithImpl<$Res>
 class _$EducationModelImpl implements _EducationModel {
   _$EducationModelImpl(
       {this.title,
+      this.grade,
       this.start_date,
       this.end_date,
       this.university,
@@ -183,6 +198,8 @@ class _$EducationModelImpl implements _EducationModel {
 
   @override
   String? title;
+  @override
+  String? grade;
   @override
   String? start_date;
   @override
@@ -196,7 +213,7 @@ class _$EducationModelImpl implements _EducationModel {
 
   @override
   String toString() {
-    return 'EducationModel(title: $title, start_date: $start_date, end_date: $end_date, university: $university, description: $description, id: $id)';
+    return 'EducationModel(title: $title, grade: $grade, start_date: $start_date, end_date: $end_date, university: $university, description: $description, id: $id)';
   }
 
   @JsonKey(ignore: true)
@@ -217,6 +234,7 @@ class _$EducationModelImpl implements _EducationModel {
 abstract class _EducationModel implements EducationModel {
   factory _EducationModel(
       {String? title,
+      String? grade,
       String? start_date,
       String? end_date,
       String? university,
@@ -229,6 +247,9 @@ abstract class _EducationModel implements EducationModel {
   @override
   String? get title;
   set title(String? value);
+  @override
+  String? get grade;
+  set grade(String? value);
   @override
   String? get start_date;
   set start_date(String? value);

@@ -9,6 +9,7 @@ part of 'education_model.dart';
 _$EducationModelImpl _$$EducationModelImplFromJson(Map<String, dynamic> json) =>
     _$EducationModelImpl(
       title: json['title'] as String?,
+      grade: json['grade'] as String?,
       start_date: json['start_date'] as String?,
       end_date: json['end_date'] as String?,
       university: json['university'] as String?,
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$EducationModelImplToJson(
         _$EducationModelImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
+      'grade': instance.grade,
       'start_date': instance.start_date,
       'end_date': instance.end_date,
       'university': instance.university,

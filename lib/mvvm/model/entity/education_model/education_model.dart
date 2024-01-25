@@ -11,6 +11,7 @@ class EducationModel with _$EducationModel{
 
   factory EducationModel({
     String? title,
+    String? grade,
     String? start_date,
     String? end_date,
     String? university,

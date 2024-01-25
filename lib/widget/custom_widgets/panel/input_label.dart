@@ -11,8 +11,10 @@ class InputLabel extends StatelessWidget {
   String name;
   TextEditingController? textEditingController;
   bool? isNumber;
+  bool? isOption;
 
-  InputLabel({required  this.name,required  this.hint,this.textEditingController,this.isNumber});
+  InputLabel({required  this.name,required  this.hint,this.textEditingController,this.isNumber,
+  this.isOption});
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,14 @@ class InputLabel extends StatelessWidget {
                 FilteringTextInputFormatter.digitsOnly
               ]:null,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value?.isEmpty==true &&isOption==null) {
                   return 'Please enter some text';
                 }
+                // if(isOption!=null && isOption==true) {
+                // print("$hint: $isOption");
+                //   return null;
+                // }
+
                 return null;
               },
               controller: textEditingController,
