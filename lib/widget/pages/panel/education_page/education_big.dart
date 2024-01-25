@@ -36,7 +36,11 @@ class _EducationBigState extends State<EducationBig> {
   void initState() {
     // TODO: implement initState
     super.initState();
-   // Provider.of<EducationVM>(context,listen: false).GetEducationListData();
+
+    WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
+      Provider.of<EducationVM>(context,listen: false).GetEducationListData();
+
+    });
   }
 
 
@@ -68,6 +72,7 @@ class _EducationBigState extends State<EducationBig> {
             horizontal: sl<ScreenSize>().width * 0.02),
         child: SingleChildScrollView(
           child: Consumer<EducationVM>(builder: (context, value, child) {
+
             if(value.selected_education!=null && value.selected_education?.title!=null){
               PopulateInputs(value.selected_education!);
             }
@@ -126,8 +131,8 @@ class _EducationBigState extends State<EducationBig> {
                      work list view
                        */
 
-                  if(value.work_items!=null)
-                    ...value.work_items!
+                  if(value.education_items!=null)
+                    ...value.education_items!
 
 
                   /*
@@ -234,15 +239,17 @@ class _EducationBigState extends State<EducationBig> {
 
 
 
-                        // Provider.of<EducationVM>(context,listen: false).AddEducation(educationModel: EducationModel(
-                        //     title:_title_controller.text,
-                        //     university: _university_controller.text,
-                        //     description: _desc_controller.text,
-                        //     start_date: _start_controller.text,
-                        //     end_date: _end_controller.text) );
+                        Provider.of<EducationVM>(context,listen: false).AddEducation(
+                            educationModel: EducationModel(
+                            title:_title_controller.text,
+                            university: _university_controller.text,
+                            description: _desc_controller.text,
+                            start_date: _start_controller.text,
+                            grade: _grade_controller.text,
+                            end_date: _end_controller.text) );
                         //
                         // // clear data after add new data
-                        // ClearInpust();
+                         ClearInpust();
                         SuccessSnack(context: context,title: 'دریافت شد');
 
                       }else{

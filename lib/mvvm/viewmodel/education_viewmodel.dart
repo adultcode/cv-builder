@@ -10,14 +10,15 @@ class EducationVM extends ChangeNotifier{
 
   // SocialModel? socialModel;
   EducationList? educationList;
-  List<Widget>? work_items=[];
+  List<Widget>? education_items=[];
   EducationModel? selected_education;
   bool isForEdit = false;
   late EducationRepository  educationRepository;
 
-  WorkVM(){
+  EducationVM(){
     educationRepository = EducationRepository();
     educationList = EducationList();
+  //  educationList?.educationList = [];
 
   }
 
@@ -38,8 +39,8 @@ class EducationVM extends ChangeNotifier{
     educationList?.educationList?.remove(educationModel);
 
     // proccess list again
-    work_items?.clear();
-    work_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
+    education_items?.clear();
+    education_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
 
     isForEdit = false;
     selected_education = null;
@@ -56,9 +57,14 @@ class EducationVM extends ChangeNotifier{
 
     print('length: ${educationList?.educationList}');
     if(educationList?.educationList==null){
-      print("WOrk list is empty");
+      print("education list is empty");
       educationModel.id = 1;
-      educationList?.educationList=[educationModel];
+      print("education $educationModel");
+
+     educationList?.educationList=[educationModel];
+     // educationList?.educationList?.add(educationModel);
+      print('length2: ${educationList?.educationList}');
+
 
     }
     else{
@@ -75,6 +81,7 @@ class EducationVM extends ChangeNotifier{
         if(_index!=null) {
           educationModel.id = selected_education?.id;
           educationList?.educationList?[_index] = educationModel;
+
         }
 
       }else{
@@ -87,13 +94,13 @@ class EducationVM extends ChangeNotifier{
 
     // worklList?.workModels?.add(work);
 
-    work_items?.clear();
-    work_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
+   education_items?.clear();
+    education_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
 
     print("Data added");
-    isForEdit = false;
-    selected_education = null;
-    notifyListeners();
+   isForEdit = false;
+   selected_education = null;
+   notifyListeners();
 
   }
 
@@ -115,8 +122,8 @@ class EducationVM extends ChangeNotifier{
     }
 
     if(result==true){
-      work_items?.clear();
-      work_items = educationList.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
+      education_items?.clear();
+      education_items = educationList.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
 
       print("Data saved");
       notifyListeners();
@@ -135,20 +142,20 @@ class EducationVM extends ChangeNotifier{
       var result = await educationRepository.GetEducationListData();
 
       educationList = result;
-      work_items?.clear();
-//  work_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
+      education_items?.clear();
+//  education_items = worklList?.workModels?.map((e) => WorkItem(e!)).toList();
       if(result!=null){
         print("Key exist");
-        work_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
+        education_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
       }else{
         print("Data is null key nit exist");
-        work_items = null;
+        education_items = null;
       }
       //print("Get size: ${result.workModels}");
 
 
     }catch(e){
-      work_items = null;
+      education_items = null;
 
       print("Get Data:  ${e.toString()}");
     }
