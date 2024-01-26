@@ -18,6 +18,7 @@ import 'mvvm/viewmodel/education_viewmodel.dart';
 import 'mvvm/viewmodel/info_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
+import 'mvvm/viewmodel/skill_viewmodel.dart';
 import 'mvvm/viewmodel/social_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'mvvm/viewmodel/work_viewmodel.dart';
@@ -37,6 +38,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => WorkVM()),
       ChangeNotifierProvider(create: (context) => SocialVM()),
       ChangeNotifierProvider(create: (context) => EducationVM()),
+      ChangeNotifierProvider(create: (context) => SkillVM()),
     ],
      child: MyApp(),)
   );

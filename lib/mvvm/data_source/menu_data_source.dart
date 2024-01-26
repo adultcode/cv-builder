@@ -12,7 +12,7 @@ class MenuDataSource{
     menu_list.add(MenuModel(1,title: 'اطلاعات',active: false,iconData:Icons.event_note_outlined ));
     menu_list.add(MenuModel(2,title: 'سوابق کاری',active: false,iconData:Icons.work ));
     menu_list.add(MenuModel(3,title: 'سوابق تحصیلی',active: false,iconData:Icons.school ));
-    menu_list.add(MenuModel(4,title: 'مهارت ها',active:false,iconData:Icons.settings ));
+    menu_list.add(MenuModel(4,title: 'مهارت ها',active:false,iconData:Icons.add_box_rounded ));
     menu_list.add(MenuModel(5,title: 'زبان',active: false,iconData:Icons.language ));
     menu_list.add(MenuModel(6,title: 'شبکه های اجتماعی',active:false,iconData:Icons.alternate_email ));
 
