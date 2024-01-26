@@ -15,15 +15,7 @@ class WorkItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // child: InkWell(
-      //
-      //   onTap: () {
-      //     print("clicked");
-      //     Provider.of<WorkVM>(context,listen: false).SelectWorkModel(workModel);
-      //
-      //   },
-      //   child: Text(workModel.title!),
-      // ),
+
       decoration: BoxDecoration(
         color: work_background,
         borderRadius: BorderRadius.all(Radius.circular(inner_radius))

@@ -26,7 +26,7 @@ class SkillVM extends ChangeNotifier{
 
   }
 
-  void SelectEducationModel(SkillModel skillModel){
+  void SelectSkillModel(SkillModel skillModel){
 
     print("Selected work model clicked");
     selected_skill = skillModel;
@@ -36,7 +36,7 @@ class SkillVM extends ChangeNotifier{
 
 
 // delete workmodel from list
-  void DeleteWork(SkillModel skillModel){
+  void DeleteSkill(SkillModel skillModel){
 
     print("Selected work model e");
     selected_skill = skillModel;
@@ -57,10 +57,10 @@ class SkillVM extends ChangeNotifier{
   /*
   add new workmodel in list
    */
-  void AddEducation({required SkillModel skillModel})async{
+  void AddSkill({required SkillModel skillModel})async{
 
     print('length: ${skillList?.skill_list}');
-    if(skillList?.skill_list==null){
+    if(skillList?.skill_list==null || skillList?.skill_list?.isEmpty==true){
       print("education list is empty");
       skillModel.id = 1;
       print("education $skillModel");
@@ -111,7 +111,7 @@ class SkillVM extends ChangeNotifier{
   /*
   save list of work models
    */
-  void SaveWorkList({required SkillList skillList})async{
+  void SaveSkillList({required SkillList skillList})async{
     var result;
     if(skillList.skill_list?.isEmpty==true){
       print("List is empty delete all works");

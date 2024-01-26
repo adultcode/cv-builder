@@ -54,7 +54,7 @@ void SelectWorkModel(WorkModel workModel){
   void AddWork({required WorkModel work})async{
 
     print('length: ${worklList?.workModels}');
-    if(worklList?.workModels==null){
+    if(worklList?.workModels==null || worklList?.workModels?.isEmpty==true){
       print("WOrk list is empty");
       work.id = 1;
       worklList?.workModels=[work];

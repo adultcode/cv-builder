@@ -38,7 +38,7 @@ InputDecoration input_text_decoration(
      color: Colors.black,
       fontSize: 0,
     ),
-    contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 12),
+    contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 21),
     hintStyle: style,
     //  hintStyle:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey),
     hintText: hint,

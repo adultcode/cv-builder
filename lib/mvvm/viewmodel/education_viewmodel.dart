@@ -56,7 +56,7 @@ class EducationVM extends ChangeNotifier{
   void AddEducation({required EducationModel educationModel})async{
 
     print('length: ${educationList?.educationList}');
-    if(educationList?.educationList==null){
+    if(educationList?.educationList==null || educationList?.educationList?.isEmpty==true){
       print("education list is empty");
       educationModel.id = 1;
       print("education $educationModel");

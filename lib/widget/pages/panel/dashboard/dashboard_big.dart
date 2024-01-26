@@ -11,6 +11,7 @@ import '../../../custom_widgets/panel/menu/side_menu.dart';
 import '../education_page/education_big.dart';
 import '../experience_page/experience_big.dart';
 import '../profile_edit_page/profile_edit_big.dart';
+import '../skill_page/skill_big.dart';
 import '../social_page/social_page_big.dart';
 
 class DashboardBig extends StatefulWidget {
@@ -93,8 +94,12 @@ class _DashboardBigState extends State<DashboardBig>
                       }
                       else if (value.active_item == 2) {
                         return ExperienceBig();
-                      }    else if (value.active_item == 3) {
+                      }
+                      else if (value.active_item == 3) {
                         return EducationBig();
+                      }
+                      else if (value.active_item == 4) {
+                        return SkillBig();
                       }
                       else {
                         return Text("test");
