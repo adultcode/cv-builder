@@ -145,7 +145,7 @@ class _SkillBigState extends State<SkillBig> {
                                       if (_formKey.currentState!.validate()){
                                         Provider.of<SkillVM>(context,listen: false).AddSkill(skillModel: SkillModel(
                                           title: _title_controller.text,
-                                          id: 1,percent: dropdownValue
+                                            percent: dropdownValue
                                         ));
                                         ClearInpust();
                                       }
@@ -234,23 +234,18 @@ class _SkillBigState extends State<SkillBig> {
                     ),
 
 
+                    /*
+                    list of skill items
+                     */
                     SizedBox(height: sl<ScreenSize>().height*0.05,),
                     if(value.skill_items!=null)
-                      //...value.skill_items!
                       Wrap(
                         spacing: 11, // Add spacing between items
                         runSpacing: 11, // Add spacing between rows
                         alignment: WrapAlignment.end,
                         children: value.skill_items!,
                       )
-                    // Container(
-                    //   height: 400,
-                    // //  width: 100,
-                    //   child: Expanded(child: ListView.builder(
-                    //     itemCount: value.skillList?.skill_list?.length,
-                    //     itemBuilder: (context, index) => value.skill_items?[index],
-                    //   )),
-                    // )
+
 
                   ],
                 ),

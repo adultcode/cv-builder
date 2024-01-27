@@ -16,6 +16,7 @@ import 'mvvm/model/entity/user_model.dart';
 import 'mvvm/model/entity/social_model/social_model.dart';
 import 'mvvm/viewmodel/education_viewmodel.dart';
 import 'mvvm/viewmodel/info_viewmodel.dart';
+import 'mvvm/viewmodel/language_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
 import 'mvvm/viewmodel/skill_viewmodel.dart';
@@ -38,6 +39,7 @@ void main() async{
       ChangeNotifierProvider(create: (context) => WorkVM()),
       ChangeNotifierProvider(create: (context) => SocialVM()),
       ChangeNotifierProvider(create: (context) => EducationVM()),
+      ChangeNotifierProvider(create: (context) => LanguageVM()),
       ChangeNotifierProvider(create: (context) => SkillVM()),
     ],
      child: MyApp(),)

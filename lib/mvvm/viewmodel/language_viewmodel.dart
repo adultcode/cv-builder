@@ -29,7 +29,7 @@ class LanguageVM extends ChangeNotifier{
 
   }
 
-  void SelectSkillModel(LanguageModel language_model){
+  void SelectLangModel(LanguageModel language_model){
 
     print("Selected work model clicked");
     selected_lang = language_model;
@@ -39,7 +39,7 @@ class LanguageVM extends ChangeNotifier{
 
 
 // delete workmodel from list
-  void DeleteSkill(LanguageModel language_model){
+  void DeleteLang(LanguageModel language_model){
 
     print("Selected work model e");
     selected_lang = language_model;
@@ -60,7 +60,7 @@ class LanguageVM extends ChangeNotifier{
   /*
   add new workmodel in list
    */
-  void AddSkill({required LanguageModel language_model})async{
+  void AddLanguage({required LanguageModel language_model})async{
 
     print('length: ${languageList?.lang_list}');
     if(languageList?.lang_list==null || languageList?.lang_list?.isEmpty==true){
