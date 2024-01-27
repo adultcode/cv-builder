@@ -5,4 +5,5 @@ class StringConst{
   static String work_key = "work";
   static String education_key = "education";
   static String skill_key = "skill";
+  static String lang_key = "language";
 }
