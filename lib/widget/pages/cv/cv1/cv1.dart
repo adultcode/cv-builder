@@ -6,24 +6,26 @@ import 'dart:typed_data';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/model/entity/skill_model/skill_model.dart';
 import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
-import '../../../mvvm/model/entity/education_model/education_model.dart';
-import '../../../mvvm/model/entity/social_model/social_model.dart';
-import '../../../util/constant/color.dart';
-import '../../../util/constant/font_size.dart';
+import '../../../../mvvm/model/entity/education_model/education_model.dart';
+import '../../../../mvvm/model/entity/social_model/social_model.dart';
+import '../../../../util/constant/color.dart';
+import '../../../../util/constant/font_size.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../main.dart';
-import '../../../util/constant/text_style.dart';
-import '../../custom_widgets/cv_1/education.dart';
-import '../../custom_widgets/cv_1/experience.dart';
-import '../../custom_widgets/cv_1/profile_1.dart';
-import '../../custom_widgets/cv_1/skill.dart';
-import '../../custom_widgets/cv_1/social.dart';
-import '../../custom_widgets/cv_1/widget.dart';
+import '../../../../main.dart';
+import '../../../../util/constant/text_style.dart';
+import '../../../custom_widgets/cv_1/education.dart';
+import '../../../custom_widgets/cv_1/experience.dart';
+import '../../../custom_widgets/cv_1/profile_1.dart';
+import '../../../custom_widgets/cv_1/skill.dart';
+import '../../../custom_widgets/cv_1/social.dart';
+import '../../../custom_widgets/cv_1/widget.dart';
+import 'cv1_education_section.dart';
+import 'cv1_work_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
@@ -49,20 +51,6 @@ Future<String> Geticon(SocialModel socialModel)async{
 }
 
 List<Social>? socials =  [];
-
-// Future<List<Social>?> GetSocialList(List<SocialModel?> social_models)async{
-//
-//   if(social_models!=null)
-//
-//  social_models =  social_models!.map((e)async {
-//
-//     e?.icon_path = await  Geticon(e!);
-//   },).cast<SocialModel?>().toList();
-//
-//   socials = await social_models?.map((e) => Social(socialModel: e)).toList();
-//   return socials;
-// }
-
 Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path, required UserModel userModel}) async {
 
 
@@ -71,13 +59,9 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
   final font_light = pw.Font.ttf(fontData);
 
 
- // List<Social>? socials2=[] ;
- // List<Social>?  socials2 = await  GetSocialList(userModel.socials!) ;
 
- // List<Social>? socials2 = [];
-  //print("Social size: ${userModel.socials?.length}");
-
-  if(socials?.isEmpty==true){
+  //if(socials?.isEmpty==true ){
+  if(socials?.isEmpty==true && userModel.socials!=null){
   //  print("Not empty!!!");
     userModel.socials?.socialModels?.forEach((element) async{
       print("Get icon");
@@ -91,11 +75,6 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
 
 
 
- //print("social1: ${socials[0].socialModel!.address}");
-  var ex1 = WorkModel(title: 'برنامه نویس',end_date: 'هم اکنون',start_date: '1401/01',description: dump_body,
-  company: 'گوگل');
-  var ed1 = EducationModel(title: 'کارشناسی مهندسی کامپیوتر',end_date: '1402/09',start_date: '1401/01',description: dump_body,
-      university: 'دانشگاه استنفورد');
   final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
 
@@ -212,18 +191,16 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                          /*
                          experience
                           */
-                         TitleText('تجربه کاری',margin_top: top_margin_title_1),
-                      //   TitleText(dump_body,margin_top: 20),
-                         pw.SizedBox(height: 10),
-                         Experience(experienceModel: ex1,),
-                         Experience(experienceModel: ex1,top_margin: top_margin_experience_1),
+                        if(userModel.works!=null)
+                          Cv1WorkPart(userModel: userModel),
+
 
                          /*
                          Education
                           */
-                         TitleText('تحصیلات',margin_top: top_margin_title_1),
-                         pw.SizedBox(height: 10),
-                         Education1(education:ed1)
+                         if(userModel.educations!=null)
+                           Cv1EducationPart(userModel: userModel)
+
 
 
                        ]

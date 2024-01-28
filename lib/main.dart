@@ -4,6 +4,7 @@ import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
 import 'package:cv_builder/test.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
+import 'package:cv_builder/widget/pages/cv/cv1/cv1.dart';
 import 'package:cv_builder/widget/pages/loading_page.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard_page.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,6 @@ import 'mvvm/viewmodel/skill_viewmodel.dart';
 import 'mvvm/viewmodel/social_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'mvvm/viewmodel/work_viewmodel.dart';
-import 'widget/pages/cv/cv.dart';
 
 void main() async{
 

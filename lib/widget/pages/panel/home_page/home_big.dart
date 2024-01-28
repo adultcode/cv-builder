@@ -80,8 +80,9 @@ class _HomeBigPageState extends State<HomeBigPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  if(value.userModel?.infoModel!=null)
-                    Text("user name: ${value.userModel?.infoModel?.name}")
+                  if(value.userModel?.works!=null)
+                   // Text("works no null")
+                    Text("works no null: ${value.userModel?.works?.workModels?.length}")
                 ],
               );
             },

@@ -89,12 +89,6 @@ class Experience extends pw.StatelessWidget {
                     )
                 )),
 
-                // pw.Container(
-                //     width: 2,
-                //   height: double.infinity,
-                //  // height: 50,
-                //   color: black_title1
-                // ),
 
 
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
-import 'cv.dart';
+import 'cv1/cv1.dart';
 
 class PdfPage extends StatelessWidget {
 
