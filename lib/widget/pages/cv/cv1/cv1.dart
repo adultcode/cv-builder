@@ -184,6 +184,7 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                          image and name
                           */
 
+
                          Profile1(
                              infoModel: userModel.infoModel!,
                              profile_img: profile_image_path!=null?pw.MemoryImage(profile_image_path!):profileImage),

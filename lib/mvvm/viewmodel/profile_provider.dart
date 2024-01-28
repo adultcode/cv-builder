@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class ProfileProvider extends ChangeNotifier{
 
   void ReadIMG()async{
     final prefs = await SharedPreferences.getInstance();
-    String? imageBytesString = prefs.getString('profile');
+    String? imageBytesString = prefs.getString(StringConst.avatar_key);
     if (imageBytesString != null) {
       img_byte = base64Decode(imageBytesString);
        notifyListeners();
@@ -28,17 +29,15 @@ class ProfileProvider extends ChangeNotifier{
     final prefs = await SharedPreferences.getInstance();
 
     try {
-      // Await the result of _getImage() and handle potential errors
-  //    var get_data = await _getImage();
-     // profile_image = get_data;
+
       var image_byte = await getImage();
       //print(image_byte.toString());
       img_byte = image_byte;
-      await prefs.setString('profile', base64Encode(img_byte!.toList()));
+      await prefs.setString(StringConst.avatar_key, base64Encode(img_byte!.toList()));
 
       notifyListeners();
       // If there's no error, get_data will contain the image path
-    //  print('Image path: $get_data');
+
       // Proceed with using the image path
     } catch (error) {
       // Handle the error gracefully
