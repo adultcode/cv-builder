@@ -75,11 +75,11 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
  // List<Social>?  socials2 = await  GetSocialList(userModel.socials!) ;
 
  // List<Social>? socials2 = [];
-  print("Social size: ${userModel.socials?.length}");
+  //print("Social size: ${userModel.socials?.length}");
 
   if(socials?.isEmpty==true){
   //  print("Not empty!!!");
-    userModel.socials?.forEach((element) async{
+    userModel.socials?.socialModels?.forEach((element) async{
       print("Get icon");
       element?.icon_path = await Geticon(element!);
       socials?.add(Social(socialModel: element));

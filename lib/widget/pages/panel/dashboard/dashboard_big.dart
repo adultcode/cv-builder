@@ -10,6 +10,7 @@ import '../../../../util/constant/screen_size.dart';
 import '../../../custom_widgets/panel/menu/side_menu.dart';
 import '../education_page/education_big.dart';
 import '../experience_page/experience_big.dart';
+import '../home_page/home_big.dart';
 import '../language_page/language_big.dart';
 import '../profile_edit_page/profile_edit_big.dart';
 import '../skill_page/skill_big.dart';
@@ -103,6 +104,8 @@ class _DashboardBigState extends State<DashboardBig>
                         return SkillBig();
                       } else if (value.active_item == 5) {
                         return LanguageBig();
+                      }else if (value.active_item == 6) {
+                        return HomeBigPage();
                       }
                       else {
                         return Text("test");

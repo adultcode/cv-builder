@@ -7,7 +7,7 @@ import '../../util/constant/string_const.dart';
 
 class InfoRepository{
 
-  SharedPreferences? sharedPreferences;
+  //SharedPreferences? _sharedPreferences;
 
   /*
   save user information in shared prefences
