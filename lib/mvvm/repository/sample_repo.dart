@@ -31,6 +31,7 @@ late LanguageRepository languageRepository;
 late SkillRepository skillRepository;
 late SocialRepository socialRepository;
 late WorkRepository workRepository;
+
  DataRepository(){
    infoRepository = InfoRepository();
    educationRepository = EducationRepository();
@@ -107,6 +108,9 @@ late WorkRepository workRepository;
    }catch (e){
      userModel.works = null;
    }
+
+   // get user avatar
+
 
 
    return userModel;

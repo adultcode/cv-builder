@@ -9,20 +9,28 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../util/profile_image.dart';
+import '../repository/avatar_repo.dart';
 
 class ProfileProvider extends ChangeNotifier{
 
-  String? profile_image;
+  // String? profile_image;
   Uint8List? img_byte;
   SharedPreferences? sharedPreferences;
 
+late  AvatarRepository avatarRepository;
+  ProfileProvider(){
+    avatarRepository = AvatarRepository();
+  }
+
   void ReadIMG()async{
-    final prefs = await SharedPreferences.getInstance();
-    String? imageBytesString = prefs.getString(StringConst.avatar_key);
-    if (imageBytesString != null) {
-      img_byte = base64Decode(imageBytesString);
-       notifyListeners();
+    var result = await avatarRepository.ReadIMG();
+    if(result !=null){
+
+      img_byte = result;
+      notifyListeners();
+
     }
+
 
   }
   void ChangeImage()async{

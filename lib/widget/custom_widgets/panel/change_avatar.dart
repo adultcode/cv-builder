@@ -9,12 +9,27 @@ import '../../../config/locator.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/screen_size.dart';
 
-class ChangeAvatar extends StatelessWidget {
+class ChangeAvatar extends StatefulWidget {
 
   Uint8List? profile_img;
 
   ChangeAvatar({this.profile_img});
 
+  @override
+  State<ChangeAvatar> createState() => _ChangeAvatarState();
+}
+
+class _ChangeAvatarState extends State<ChangeAvatar> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
+      // context.watch<InfoVM>().GetInfoModelData();
+      Provider.of<ProfileProvider>(context,listen: false).ReadIMG();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,36 +55,41 @@ class ChangeAvatar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Stack(
-                children: [
+              Consumer<ProfileProvider>(builder: (context, value, child) {
+
+                return Stack(
+                  children: [
 
 
-                  InkWell(
-                    onTap: (){
-                      context.read<ProfileProvider>().ChangeImage();
-                    },
-                    child: Container(
-                      width: 70,
-                      height: 70,
-                      alignment: Alignment.centerRight,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        //  color: Colors.green,
-                        image: DecorationImage(
-                          fit: BoxFit.fitHeight,
-                        //  image: NetworkImage('df')
-                            image: profile_img != null ? MemoryImage(profile_img!) as ImageProvider<Object> : AssetImage('assets/me.png')
-                        )
+                    InkWell(
+                      onTap: (){
+                        context.read<ProfileProvider>().ChangeImage();
+                      },
+                      child: Container(
+                        width: 70,
+                        height: 70,
+                        alignment: Alignment.centerRight,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            //  color: Colors.green,
+                            image: DecorationImage(
+                                fit: BoxFit.fitHeight,
+                                //  image: NetworkImage('df')
+                                image: value.img_byte != null ? MemoryImage(value.img_byte!) as ImageProvider<Object> : AssetImage('assets/me.png')
+                            )
+                        ),
+
                       ),
-
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 0),
-                    child: Icon(Icons.add_circle,size: 20,color: panel_green,),
-                  )
-                ],
-              ),
+                    Container(
+                      margin: EdgeInsets.only(left: 0),
+                      child: Icon(Icons.add_circle,size: 20,color: panel_green,),
+                    )
+                  ],
+                );
+              },),
+
+
               InkWell(
                 onTap: () {
                   context.read<ProfileProvider>().ReadIMG();

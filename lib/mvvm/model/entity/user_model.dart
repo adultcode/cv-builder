@@ -10,6 +10,7 @@ import 'work_model/work_model.dart';
 import 'info_model/info_model.dart';
 import 'skill_model/skill_model.dart';
 import 'social_model/social_model.dart';
+import 'package:flutter/foundation.dart';
 
 class UserModel{
 
@@ -18,7 +19,7 @@ class UserModel{
   WorklList? works;
  SkillList? skills;
   SocialList? socials;
-
+  Uint8List? image_avatar;
   InfoModel? infoModel;
   UserModel(
       {
@@ -28,5 +29,6 @@ class UserModel{
       this.socials,
       this.infoModel,
       this.languageList,
+        this.image_avatar
       });
 }
