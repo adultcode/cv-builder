@@ -38,7 +38,7 @@ class Education1 extends pw.StatelessWidget {
                     )
                 )
             ),
-            padding: pw.EdgeInsets.only(top: top_margin??0,right: 7),
+            padding: pw.EdgeInsets.only(top: education?.id==1?top_margin_body_1:0,right: 7),
             child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.end,
                 crossAxisAlignment: pw.CrossAxisAlignment.center,
@@ -55,8 +55,8 @@ class Education1 extends pw.StatelessWidget {
                            */
                             pw.Container(
                                 alignment: pw.Alignment.topRight,
-                                margin: pw.EdgeInsets.only(top: 0),
-                                child: pw.Text("${education!.university!} ",
+                                margin: pw.EdgeInsets.only(top: top_margin??0),
+                                child: pw.Text("${education!.grade!}  - ${education!.title!} ",
                                     textDirection: pw.TextDirection.rtl,
 
                                     style: title_experience_1)
@@ -79,7 +79,7 @@ class Education1 extends pw.StatelessWidget {
                             pw.Container(
                                 alignment: pw.Alignment.topRight,
                                 margin: pw.EdgeInsets.only(top: top_margin_body_1*1.2),
-                                child: pw.Text("${education!.title}",
+                                child: pw.Text("${education!.university}",
                                     textDirection: pw.TextDirection.rtl,
                                     textAlign: pw.TextAlign.justify,
                                     style: body_style_1)

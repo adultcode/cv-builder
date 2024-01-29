@@ -22,7 +22,8 @@ class Cv1WorkPart extends pw.StatelessWidget {
 
   Cv1WorkPart({this.userModel}){
     work_list = userModel!.works!.workModels?.map((e) {
-      return Experience(experienceModel: e,);
+
+      return Experience(experienceModel: e,top_margin: e?.id==1?null:top_margin_body_1*1.3);
     },).toList();
 
   }

@@ -25,7 +25,8 @@ import '../../../custom_widgets/cv_1/skill.dart';
 import '../../../custom_widgets/cv_1/social.dart';
 import '../../../custom_widgets/cv_1/widget.dart';
 import 'cv1_education_section.dart';
-import 'cv1_language.dart';
+import 'cv1_language_section.dart';
+import 'cv1_skill_section.dart';
 import 'cv1_work_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
@@ -37,16 +38,16 @@ Future<String> Geticon(SocialModel socialModel)async{
       return await rootBundle.loadString('assets/github_fill.svg');
       break;
     case SocialType.telegram:
-      return await rootBundle.loadString('assets/linkedin_fill.svg');
+      return await rootBundle.loadString('assets/telegram2.svg');
       break;
     case SocialType.dribble:
-      return await rootBundle.loadString('assets/linkedin_fill.svg');
+      return await rootBundle.loadString('assets/dribble.svg');
       break;
   case SocialType.instagram:
-  return  await rootBundle.loadString('assets/linkedin_fill.svg');
+  return  await rootBundle.loadString('assets/instagram.svg');
     break;
     default:
-      return await rootBundle.loadString('assets/linkedin_fill.svg');
+      return await rootBundle.loadString('assets/website.svg');
       break;
   }
 }
@@ -114,45 +115,47 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                      /*
                      profile section
                       */
-                     TitleText('پروفایل',margin_top: 20),
+                     TitleText('پروفایل',margin_top: PdfPageFormat.cm*1.0),
 
-                     RightBody(dump_body,margin_top: 0),
+                     if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                     RightBody(userModel.infoModel?.bio),
 
 
                      /*
                      contact section
                       */
+
                      TitleText('اطلاعات تماس'),
-                     RightBody('call@hesam.cc'),
-                     RightBody('+989019655342'),
+                     if(userModel.infoModel!=null && userModel.infoModel?.email!=null)
+                       RightBody(userModel.infoModel?.email),
+                     if(userModel.infoModel!=null && userModel.infoModel?.mobile!=null)
+                     RightBody(userModel.infoModel?.mobile.toString()),
                      /*
                      skills section
                       */
-                     TitleText('مهارت ها'),
-                     pw.SizedBox(height: 5),
-                     pw.Container(
-                       margin: pw.EdgeInsets.only(top: 10),
-                       child: Skill(skillModel: SkillModel(title: 'Flutter',percent: 0.4))
-                     ),
-                     pw.Container(
-                         margin: pw.EdgeInsets.only(top: 10),
-                         child: Skill(skillModel: SkillModel(title: 'Java',percent: 0.8))
-                     ),
-                     pw.Container(
-                         margin: pw.EdgeInsets.only(top: 10),
-                         child: Skill(skillModel: SkillModel(title: 'Git',percent: 0.7))
-                     ),
+                    if(userModel.skills!=null)
+                      Cv1SkillPart(userModel: userModel),
+                     // TitleText('مهارت ها'),
+                     // pw.SizedBox(height: 5),
+                     // pw.Container(
+                     //   margin: pw.EdgeInsets.only(top: 10),
+                     //   child: Skill(skillModel: SkillModel(title: 'Flutter',percent: 0.4))
+                     // ),
+                     // pw.Container(
+                     //     margin: pw.EdgeInsets.only(top: 10),
+                     //     child: Skill(skillModel: SkillModel(title: 'Java',percent: 0.8))
+                     // ),
+                     // pw.Container(
+                     //     margin: pw.EdgeInsets.only(top: 10),
+                     //     child: Skill(skillModel: SkillModel(title: 'Git',percent: 0.7))
+                     // ),
 
                     /*
                      language section
                       */
                      if(userModel.languageList!=null)
                        Cv1LanguagePart(userModel: userModel),
-                     // TitleText('زبان'),
-                     // pw.Container(
-                     //     margin: pw.EdgeInsets.only(top: 10),
-                     //     child: Skill(skillModel: SkillModel(title: 'English',percent: 0.7))
-                     // ),
+
                      /*
                      social section
                       */
@@ -166,8 +169,8 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                      /*
                      other section
                       */
-                     TitleText('سایر توضیحات'),
-                     RightBody(dump_body),
+                     // TitleText('سایر توضیحات'),
+                     // RightBody(dump_body),
                    ]
                )
              )

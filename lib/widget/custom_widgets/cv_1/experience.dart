@@ -55,6 +55,7 @@ class Experience extends pw.StatelessWidget {
                            */
                            pw.Container(
                               alignment: pw.Alignment.topRight,
+                              margin: pw.EdgeInsets.only(top: top_margin??0),
                               padding: pw.EdgeInsets.only(right: 0),
                               child: pw.Text("${experienceModel!.title!} - ${experienceModel!.company!}",
                                   textDirection: pw.TextDirection.rtl,

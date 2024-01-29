@@ -29,7 +29,7 @@ class Profile1 extends pw.StatelessWidget {
     return pw.Flexible(
         child:  pw.Container(
             width: double.infinity,
-            margin: pw.EdgeInsets.only(top: PdfPageFormat.cm*1.4),
+            margin: pw.EdgeInsets.only(top: PdfPageFormat.cm*1.0),
             child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.end,
                 crossAxisAlignment: pw.CrossAxisAlignment.start,

@@ -39,7 +39,7 @@ class Skill extends pw.StatelessWidget {
                   ),
                   pw.Container(
                     height: 2,
-                    width: (PdfPageFormat.cm*6)*skillModel!.percent!,
+                    width: (PdfPageFormat.cm*6)*(skillModel!.percent!*0.01),
                     color: black_title1,
                   ),
                 ]

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cv_builder/mvvm/model/entity/social_model/social_list.dart';
 import 'package:cv_builder/mvvm/model/entity/social_model/social_model.dart';
+import 'package:cv_builder/util/warning/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -129,6 +130,7 @@ class _SocialPageBigState extends State<SocialPageBig> {
                        */
                             SocialList socialList = SocialList(socialModels: GetInputData());
                             Provider.of<SocialVM>(context,listen: false).SaveSocialList(social: socialList);
+                            SuccessSnack(context: context, title: "اطلاعات ثبت شد");
 
                           },
                           child: Container(
@@ -146,6 +148,7 @@ class _SocialPageBigState extends State<SocialPageBig> {
 
                       ],
                     ),
+
                     SizedBox(height: 10,),
                     Text('ثبت اطلاعات مرتبط با شبکه های اجتماعی ',style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),

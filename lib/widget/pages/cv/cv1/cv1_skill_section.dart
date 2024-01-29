@@ -9,19 +9,25 @@ import 'package:provider/provider.dart';
 
 import '../../../../util/constant/font_size.dart';
 import '../../../custom_widgets/cv_1/education.dart';
+import '../../../custom_widgets/cv_1/experience.dart';
+import '../../../custom_widgets/cv_1/language1.dart';
+import '../../../custom_widgets/cv_1/skill.dart';
 import '../../../custom_widgets/cv_1/widget.dart';
 
-class Cv1EducationPart extends pw.StatelessWidget {
+class Cv1SkillPart extends pw.StatelessWidget {
 
   UserModel? userModel;
 
 
 
-List<Education1>? education_list = [];
+  List<pw.Widget>? skill_list = [];
 
-  Cv1EducationPart({this.userModel}){
-    education_list = userModel!.educations!.educationList?.map((e) {
-      return Education1(education: e,top_margin: e?.id==1?null:top_margin_body_1*2);
+  Cv1SkillPart({this.userModel}){
+    skill_list = userModel!.skills!.skill_list?.map((e) {
+      return pw.Container(
+          margin: pw.EdgeInsets.only(top: 10),
+          child: Skill(skillModel:e,)
+      );
     },).toList();
 
   }
@@ -30,12 +36,12 @@ List<Education1>? education_list = [];
   @override
   pw.Widget build(pw.Context context) {
     return pw.Column(
-      children: [
-        TitleText('تحصیلات',margin_top: top_margin_title_1),
-        pw.SizedBox(height: 10),
-        ...education_list!
+        children: [
+          TitleText('مهارت ها'),
+          pw.SizedBox(height: 3),
+          ...skill_list!
 
-      ]
+        ]
     );
   }
 }
