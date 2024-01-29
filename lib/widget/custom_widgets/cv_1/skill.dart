@@ -23,6 +23,8 @@ class Skill extends pw.StatelessWidget {
         children: [
 
           pw.Text(skillModel!.title!,
+              textDirection: pw.TextDirection.rtl,
+
               style: body_style_1),
           pw.Padding(
             padding: pw.EdgeInsets.only(left: PdfPageFormat.cm,top: top_margin_body_1),

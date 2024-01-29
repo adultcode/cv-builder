@@ -25,6 +25,7 @@ import '../../../custom_widgets/cv_1/skill.dart';
 import '../../../custom_widgets/cv_1/social.dart';
 import '../../../custom_widgets/cv_1/widget.dart';
 import 'cv1_education_section.dart';
+import 'cv1_language.dart';
 import 'cv1_work_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
@@ -63,13 +64,16 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
   //if(socials?.isEmpty==true ){
   if(socials?.isEmpty==true && userModel.socials!=null){
   //  print("Not empty!!!");
-  //   userModel.socials?.socialModels?.forEach((element) async{
-  //     print("Get icon");
-  //     element?.icon_path = await Geticon(element!);
-  //     socials?.add(Social(socialModel: element));
-  //     print("Social size: ${socials?.length}");
-  //
-  //   });
+    userModel.socials?.socialModels?.forEach((element) async{
+      print("Get icon");
+      if(element!=null){
+
+
+      element?.icon_path = await Geticon(element!);
+      socials?.add(Social(socialModel: element));
+      print("Social size: ${socials?.length}");
+      }
+    });
   }
 
 
@@ -142,16 +146,18 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                     /*
                      language section
                       */
-                     TitleText('زبان'),
-                     pw.Container(
-                         margin: pw.EdgeInsets.only(top: 10),
-                         child: Skill(skillModel: SkillModel(title: 'English',percent: 0.7))
-                     ),
+                     if(userModel.languageList!=null)
+                       Cv1LanguagePart(userModel: userModel),
+                     // TitleText('زبان'),
+                     // pw.Container(
+                     //     margin: pw.EdgeInsets.only(top: 10),
+                     //     child: Skill(skillModel: SkillModel(title: 'English',percent: 0.7))
+                     // ),
                      /*
                      social section
                       */
                      if(userModel.socials!=null)
-                     TitleText('اجتماعی'),
+                      TitleText('اجتماعی'),
                      if(userModel.socials!=null)
                      ...?socials,
 
