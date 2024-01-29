@@ -63,13 +63,13 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
   //if(socials?.isEmpty==true ){
   if(socials?.isEmpty==true && userModel.socials!=null){
   //  print("Not empty!!!");
-    userModel.socials?.socialModels?.forEach((element) async{
-      print("Get icon");
-      element?.icon_path = await Geticon(element!);
-      socials?.add(Social(socialModel: element));
-      print("Social size: ${socials?.length}");
-
-    });
+  //   userModel.socials?.socialModels?.forEach((element) async{
+  //     print("Get icon");
+  //     element?.icon_path = await Geticon(element!);
+  //     socials?.add(Social(socialModel: element));
+  //     print("Social size: ${socials?.length}");
+  //
+  //   });
   }
 
 
@@ -185,22 +185,24 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                           */
 
 
-                         Profile1(
-                             infoModel: userModel.infoModel!,
-                             profile_img: profile_image_path!=null?pw.MemoryImage(profile_image_path!):profileImage),
+
+                        Profile1(
+                            userModel: userModel,
+                            profile_img: userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage
+                        ),
 
                          /*
                          experience
                           */
-                        if(userModel.works!=null)
-                          Cv1WorkPart(userModel: userModel),
+                       if(userModel.works!=null)
+                         Cv1WorkPart(userModel: userModel),
 
 
                          /*
                          Education
                           */
-                         if(userModel.educations!=null)
-                           Cv1EducationPart(userModel: userModel)
+                        if(userModel.educations!=null)
+                          Cv1EducationPart(userModel: userModel)
 
 
 

@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/locator.dart';
 import '../../util/constant/string_const.dart';
 import '../model/entity/info_model/info_model.dart';
+import 'avatar_repo.dart';
 import 'education_repo.dart';
 import 'info_repo.dart';
 import 'language_repo.dart';
@@ -31,7 +32,7 @@ late LanguageRepository languageRepository;
 late SkillRepository skillRepository;
 late SocialRepository socialRepository;
 late WorkRepository workRepository;
-
+late AvatarRepository avatarRepository;
  DataRepository(){
    infoRepository = InfoRepository();
    educationRepository = EducationRepository();
@@ -39,6 +40,7 @@ late WorkRepository workRepository;
    skillRepository = SkillRepository();
    socialRepository = SocialRepository();
    workRepository = WorkRepository();
+   avatarRepository = AvatarRepository();
    userModel = UserModel();
  }
 
@@ -111,6 +113,11 @@ late WorkRepository workRepository;
 
    // get user avatar
 
+   var result = await avatarRepository.ReadIMG();
+   if(result !=null){
+     userModel.image_avatar = result;
+
+   }
 
 
    return userModel;

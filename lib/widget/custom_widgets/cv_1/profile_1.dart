@@ -6,6 +6,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 import '../../../main.dart';
 import '../../../mvvm/model/entity/info_model/info_model.dart';
+import '../../../mvvm/model/entity/user_model.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/font_size.dart';
 import '../../../util/constant/text_style.dart';
@@ -17,9 +18,11 @@ class Profile1 extends pw.StatelessWidget {
   // var icon_path = '';
 
   pw.MemoryImage? profile_img;
-  InfoModel infoModel;
+  //InfoModel? infoModel;
 
-  Profile1({this.profile_img,required this.infoModel});
+  UserModel? userModel;
+  Profile1({this.userModel,this.profile_img});
+  //Profile1({this.profile_img,required this.infoModel});
 
   @override
   pw.Widget build(pw.Context context) {
@@ -45,7 +48,7 @@ class Profile1 extends pw.StatelessWidget {
                     name
                      */
                     pw.Container(
-                      child: pw.Text(infoModel.name??"حسام رسولیان",
+                      child: pw.Text(userModel?.infoModel?.name??"بدون نام",
                         textDirection: pw.TextDirection.rtl,
                       style: title_style_1)
                     ),
@@ -54,7 +57,7 @@ class Profile1 extends pw.StatelessWidget {
                      */
                     pw.Container(
                       margin: pw.EdgeInsets.only(top: PdfPageFormat.cm*0.3),
-                        child: pw.Text(infoModel.job??'برنامه نویس موبایل',
+                        child: pw.Text(userModel?.infoModel?.job??'',
                             textDirection: pw.TextDirection.rtl,
                             style: body_style_1)
                     ),
@@ -63,7 +66,7 @@ class Profile1 extends pw.StatelessWidget {
                      */
                     pw.Container(
                         margin: pw.EdgeInsets.only(top: PdfPageFormat.cm*0.1),
-                        child: pw.Text('تهران - ایران',
+                        child: pw.Text(userModel?.infoModel?.city??'',
                             textDirection: pw.TextDirection.rtl,
                             style: body_style_1)
                     ),
