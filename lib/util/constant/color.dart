@@ -12,6 +12,12 @@ var black_text1 = PdfColor.fromHex('#a0a0a0');
 var vertical_div_1 = PdfColor.fromHex('#cdcdcd');
 var vertical_red = PdfColor.fromHex('#ec1c24');
 
+//////// cv 2
+var cv2_bg =  PdfColor.fromHex('#fdfdfd');
+var cv2_primary =  PdfColor.fromHex('#275150');
+var cv2_title_color =  PdfColor.fromHex('#010101');
+var cv2_bodytext_color =  PdfColor.fromHex('#adadad');
+
 
 /*
 panel colors

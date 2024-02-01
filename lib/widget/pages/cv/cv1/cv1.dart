@@ -211,7 +211,8 @@ Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image
                          Education
                           */
                         if(userModel.educations!=null)
-                          Cv1EducationPart(userModel: userModel)
+                          Cv1EducationPart(userModel: userModel),
+
 
 
 

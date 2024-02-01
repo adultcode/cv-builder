@@ -4,6 +4,7 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
 import 'cv1/cv1.dart';
+import 'cv2/cv2.dart';
 
 class PdfPage extends StatelessWidget {
 
@@ -33,7 +34,7 @@ class PdfPage extends StatelessWidget {
                   useActions: true,
                   maxPageWidth: 700,
 
-                  build: (format) => generateResume(format,userModel:userModel! ),
+                  build: (format) => generateResumeCV2(format,userModel:userModel! ),
                   //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
                 )
             )
