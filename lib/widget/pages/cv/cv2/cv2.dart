@@ -29,6 +29,7 @@ import '../cv1/cv1_language_section.dart';
 import '../cv1/cv1_skill_section.dart';
 import '../cv1/cv1_work_section.dart';
 import 'cv2_bio_section.dart';
+import 'cv2_job_section.dart';
 import 'cv2_profile_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
@@ -105,8 +106,16 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
 
                 CV2ProfilePart(userModel: userModel,
                     profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage),
+
+                // bio
                 pw.SizedBox(height: PdfPageFormat.cm),
-                CV2BioPart(userModel: userModel)
+                CV2BioPart(userModel: userModel),
+
+                // work
+                pw.SizedBox(height: PdfPageFormat.cm),
+                CV2WorkPart(userModel: userModel),
+
+
               ]
           )
         )

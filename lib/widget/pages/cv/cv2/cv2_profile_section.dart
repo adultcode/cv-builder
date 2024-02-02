@@ -59,7 +59,7 @@ class CV2ProfilePart extends pw.StatelessWidget {
                       //job
                       pw.Text(userModel!.infoModel!.job??"",textDirection: pw.TextDirection.rtl,
                       textAlign: pw.TextAlign.right,
-                      style:job_style_2 ),
+                      style:name2_style_2 ),
                       pw.SizedBox(height: PdfPageFormat.cm*0.35),
                       pw.Row(
                           mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -83,10 +83,10 @@ class CV2ProfilePart extends pw.StatelessWidget {
                                               children: [
                                               pw.Text(userModel?.infoModel?.mobile.toString()??""
                                                   ,textDirection: pw.TextDirection.rtl,
-                                                  style:job_style_2 ),
+                                                  style:cv2_body1 ),
                                               pw.Text("موبایل "
                                                   ,textDirection: pw.TextDirection.rtl,
-                                                  style:body_grey_style_2 ),
+                                                  style:cv2_body2 ),
                                             ]
                                           ),
                                           pw.SizedBox(height: PdfPageFormat.cm*0.2),
@@ -97,10 +97,10 @@ class CV2ProfilePart extends pw.StatelessWidget {
                                               children: [
                                                 pw.Text(userModel?.infoModel?.birth??""
                                                     ,textDirection: pw.TextDirection.rtl,
-                                                    style:job_style_2 ),
+                                                    style:cv2_body1 ),
                                                 pw.Text("تولد "
                                                     ,textDirection: pw.TextDirection.rtl,
-                                                    style:body_grey_style_2 ),
+                                                    style:cv2_body2 ),
                                               ]
                                           )
                                         ])
@@ -120,10 +120,10 @@ class CV2ProfilePart extends pw.StatelessWidget {
                                        children: [
                                          pw.Text(userModel?.infoModel?.email??""
                                              ,textDirection: pw.TextDirection.rtl,
-                                             style:job_style_2 ),
+                                             style:cv2_body1 ),
                                          pw.Text("ایمیل "
                                              ,textDirection: pw.TextDirection.rtl,
-                                             style:body_grey_style_2 ),
+                                             style:cv2_body2 ),
                                        ]
                                    ),
                                    pw.SizedBox(height: PdfPageFormat.cm*0.2),
@@ -134,10 +134,10 @@ class CV2ProfilePart extends pw.StatelessWidget {
                                        children: [
                                          pw.Text(userModel?.infoModel?.city??""
                                              ,textDirection: pw.TextDirection.rtl,
-                                             style:job_style_2 ),
+                                             style:cv2_body1 ),
                                          pw.Text("شهر "
                                              ,textDirection: pw.TextDirection.rtl,
-                                             style:body_grey_style_2 ),
+                                             style:cv2_body2 ),
                                        ]
                                    ),
                                  ])
