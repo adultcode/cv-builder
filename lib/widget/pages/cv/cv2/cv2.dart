@@ -29,6 +29,7 @@ import '../cv1/cv1_language_section.dart';
 import '../cv1/cv1_skill_section.dart';
 import '../cv1/cv1_work_section.dart';
 import 'cv2_bio_section.dart';
+import 'cv2_education_section.dart';
 import 'cv2_job_section.dart';
 import 'cv2_profile_section.dart';
 
@@ -114,6 +115,10 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
                 // work
                 pw.SizedBox(height: PdfPageFormat.cm),
                 CV2WorkPart(userModel: userModel),
+
+                // education
+                pw.SizedBox(height: PdfPageFormat.cm),
+                CV2EducationPart(userModel: userModel),
 
 
               ]
