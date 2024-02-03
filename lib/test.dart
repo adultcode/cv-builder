@@ -114,12 +114,25 @@
 // // }
 
 
-import 'package:cv_builder/util/constant/string_const.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 main()async{
- var sharedPreferences = await SharedPreferences.getInstance();
-  var result =    await sharedPreferences.getString(StringConst.work_key);
-  print(result);
+
+ List<String> _ls = [
+  "qw",
+  "sdf",
+  "ff",
+  "gh",
+  "vv",
+  "gg",
+  "tt",
+  "u",
+  "s zzzz",
+  "s",
+  "a",
+ ];
+
+ for(var i =0;i < _ls!.length; i+=2){
+  print("i: $i");
+ }
 
 }

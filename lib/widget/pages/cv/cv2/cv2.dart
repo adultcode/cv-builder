@@ -32,6 +32,7 @@ import 'cv2_bio_section.dart';
 import 'cv2_education_section.dart';
 import 'cv2_job_section.dart';
 import 'cv2_profile_section.dart';
+import 'cv2_skill_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
@@ -119,6 +120,10 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
                 // education
                 pw.SizedBox(height: PdfPageFormat.cm),
                 CV2EducationPart(userModel: userModel),
+
+                // skill
+                pw.SizedBox(height: PdfPageFormat.cm),
+                CV2SkillPart(userModel: userModel),
 
 
               ]

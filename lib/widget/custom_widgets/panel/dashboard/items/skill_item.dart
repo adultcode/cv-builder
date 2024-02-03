@@ -27,7 +27,8 @@ class SkillItem extends StatelessWidget {
           Provider.of<SkillVM>(context,listen: false).DeleteSkill(skillModell);
 
         },
-        label: Text("${skillModell.title} "),
+        label: Text("${skillModell.title} - ${skillModell.percent}"
+        ,textDirection: TextDirection.rtl,),
       //  avatar: Icon(Icons.remove),
         onPressed: () {
           print(skillModell.title!);
