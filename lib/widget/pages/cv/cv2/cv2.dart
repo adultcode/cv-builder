@@ -31,6 +31,7 @@ import '../cv1/cv1_work_section.dart';
 import 'cv2_bio_section.dart';
 import 'cv2_education_section.dart';
 import 'cv2_job_section.dart';
+import 'cv2_language_section.dart';
 import 'cv2_profile_section.dart';
 import 'cv2_skill_section.dart';
 
@@ -110,20 +111,24 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
                     profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage),
 
                 // bio
-                pw.SizedBox(height: PdfPageFormat.cm),
+                pw.SizedBox(height: top_margin_title_2 ),
                 CV2BioPart(userModel: userModel),
 
                 // work
-                pw.SizedBox(height: PdfPageFormat.cm),
+                pw.SizedBox(height:top_margin_title_2),
                 CV2WorkPart(userModel: userModel),
 
                 // education
-                pw.SizedBox(height: PdfPageFormat.cm),
+                pw.SizedBox(height: top_margin_title_2),
                 CV2EducationPart(userModel: userModel),
 
                 // skill
-                pw.SizedBox(height: PdfPageFormat.cm),
-                CV2SkillPart(userModel: userModel),
+               pw.SizedBox(height: top_margin_title_2),
+               CV2SkillPart(userModel: userModel),
+
+                // skill
+                pw.SizedBox(height: top_margin_title_2),
+                CV2LanguagePart(userModel: userModel),
 
 
               ]

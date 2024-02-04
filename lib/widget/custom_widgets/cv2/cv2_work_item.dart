@@ -28,7 +28,7 @@ class Experience2 extends pw.StatelessWidget {
             // color: PdfColor.fromHex('#a61010'),
             //height: 100,
 
-            padding: pw.EdgeInsets.only(top: PdfPageFormat.cm*0.6,right: 7),
+            padding: pw.EdgeInsets.only(top: PdfPageFormat.cm*0.4,right: 7),
             child: pw.Column(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
                 crossAxisAlignment: pw.CrossAxisAlignment.end,

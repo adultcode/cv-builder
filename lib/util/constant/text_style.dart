@@ -22,4 +22,5 @@ var cv2_head2 = pw.TextStyle(color: cv2_title_color,fontSize: text_body_2);
 var cv2_head3 = pw.TextStyle(color: cv2_title_color,fontSize: text_body_2);
 var cv2_body1 = pw.TextStyle(color: cv2_bodytext_color,fontSize: text_body_2);
 var cv2_body2 = pw.TextStyle(color: cv2_title_color,fontSize: text_body_2);
+
 var cv2_head1 = pw.TextStyle(color: cv2_primary,fontSize: text_title_1,fontWeight: pw.FontWeight.bold);

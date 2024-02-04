@@ -57,7 +57,7 @@ class CV2SkillPart extends pw.StatelessWidget {
                   children: [
                     pw.Container(
                         height: 1,
-                        width: PdfPageFormat.cm*15,
+                        width: divider_2,
                         color: cv2_primary
 
                     ),

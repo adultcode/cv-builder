@@ -29,7 +29,7 @@ class Skill2 extends pw.StatelessWidget {
         // color: PdfColor.fromHex('#a61010'),
       //  height: 100,
 
-        padding: pw.EdgeInsets.only(top: PdfPageFormat.cm*0.6,right: 7),
+        padding: pw.EdgeInsets.only(top: PdfPageFormat.cm*0.4,right: 7),
         child:
 
               pw.Row(
@@ -48,13 +48,13 @@ class Skill2 extends pw.StatelessWidget {
                                   children: [
                                     pw.Container(
                                       height: 2,
-                                      width: PdfPageFormat.cm*6,
+                                      width: PdfPageFormat.cm*5.5,
 
                                       color: black_text1,
                                     ),
                                     pw.Container(
                                       height: 2,
-                                      width: (PdfPageFormat.cm*6)*(skillModel2!.percent!*0.01),
+                                      width: (PdfPageFormat.cm*5.5)*(skillModel2!.percent!*0.01),
                                       color: cv2_primary,
                                     ),
                                   ]
@@ -85,13 +85,13 @@ class Skill2 extends pw.StatelessWidget {
                                 children: [
                                   pw.Container(
                                     height: 2,
-                                    width: PdfPageFormat.cm*6,
+                                    width: PdfPageFormat.cm*5.5,
 
                                     color: black_text1,
                                   ),
                                   pw.Container(
                                     height: 2,
-                                    width: (PdfPageFormat.cm*6)*(skillModel1!.percent!*0.01),
+                                    width: (PdfPageFormat.cm*5.5)*(skillModel1!.percent!*0.01),
                                     color: cv2_primary,
                                   ),
                                 ]

@@ -8,21 +8,21 @@ import 'package:pdf/widgets.dart' as pw;
 
 import '../../../../mvvm/model/entity/user_model.dart';
 import '../../../../util/constant/text_style.dart';
-import '../../../custom_widgets/cv2/cv2_education_item.dart';
+import '../../../custom_widgets/cv2/cv2_language_item.dart';
 import '../../../custom_widgets/cv2/cv2_work_item.dart';
 
 
-class CV2EducationPart extends pw.StatelessWidget {
+class CV2LanguagePart extends pw.StatelessWidget {
 
 
 
   UserModel? userModel;
-  List<Education2>? education_list = [];
+  List<Language2>? lang_list = [];
 
-  CV2EducationPart({this.userModel}){
-    education_list = userModel!.educations!.educationList?.map((e) {
+  CV2LanguagePart({this.userModel}){
+    lang_list = userModel!.languageList!.lang_list?.map((e) {
 
-      return Education2(educationModel: e,);
+      return Language2(languageModel: e,);
     },).toList();
   }
   //Profile1({this.profile_img,required this.infoModel});
@@ -47,11 +47,11 @@ class CV2EducationPart extends pw.StatelessWidget {
                     ),
                     pw.SizedBox(width: PdfPageFormat.cm),
                     pw.Expanded(
-                        child: pw.Text("تحصیلات",style: cv2_head1, textDirection: pw.TextDirection.rtl)
+                        child: pw.Text("زبان",style: cv2_head1, textDirection: pw.TextDirection.rtl)
                     )
                   ]
               ),
-              ...?education_list
+              ...?lang_list
             ]
         )
     )

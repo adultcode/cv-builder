@@ -27,7 +27,7 @@ class CV2BioPart extends pw.StatelessWidget {
           pw.Row(mainAxisAlignment: pw.MainAxisAlignment.end, children: [
              pw.Container(
                     height: 1,
-                    width: PdfPageFormat.cm * 15,
+                    width: divider_2,
                     color: cv2_primary),
             pw.SizedBox(width: PdfPageFormat.cm),
             pw.Expanded(
