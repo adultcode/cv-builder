@@ -115,7 +115,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                             name: name_controller.text,
                                 bio: bio_controller.text,
                                 job: jobtitle_controller.text,
-                                mobile: int.parse(phone_controller.text),
+                                mobile: phone_controller.text,
                                 city: city_controller.text,
                                 birth: birth_controller.text,);
 
@@ -183,10 +183,11 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                     children: [
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       /*
-                  email field
+                  phone field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,)
+                          child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,
+                          max_length: 11,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       /*

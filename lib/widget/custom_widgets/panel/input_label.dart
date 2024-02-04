@@ -12,9 +12,10 @@ class InputLabel extends StatelessWidget {
   TextEditingController? textEditingController;
   bool? isNumber;
   bool? isOption;
+  int? max_length;
 
   InputLabel({required  this.name,required  this.hint,this.textEditingController,this.isNumber,
-  this.isOption});
+  this.isOption,this.max_length});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class InputLabel extends StatelessWidget {
             alignment: Alignment.centerRight,
             decoration: input_decoration,
             child: TextFormField(
+              maxLength: max_length,
               textAlignVertical : TextAlignVertical.center,
               cursorColor: Colors.black,
               enabled: true,
@@ -55,6 +57,7 @@ class InputLabel extends StatelessWidget {
               decoration: input_text_decoration(
                   controller: textEditingController!,
                   hint: hint!,
+
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
             ),
           )

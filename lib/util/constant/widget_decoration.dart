@@ -34,9 +34,11 @@ InputDecoration input_text_decoration(
     required TextStyle style,
     required TextEditingController controller}) {
   return InputDecoration(
+    counterText: "",
     errorStyle: TextStyle(
      color: Colors.black,
       fontSize: 0,
+
     ),
     contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 21),
     hintStyle: style,

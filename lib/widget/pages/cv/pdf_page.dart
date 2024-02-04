@@ -34,7 +34,7 @@ class PdfPage extends StatelessWidget {
                   useActions: true,
                   maxPageWidth: 700,
 
-                  build: (format) => generateResumeCV2(format,userModel:userModel! ),
+                  build: (format) => generateResume(format,userModel:userModel! ),
                   //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
                 )
             )

@@ -89,7 +89,7 @@ class _DashboardBigState extends State<DashboardBig>
                   child: Consumer<MenuVM>(
                     builder: (context, value, child) {
                       if (value.active_item == 0) {
-                        return HomeBigPage();
+                       // return HomeBigPage();
                         return ProfileEditBig();
                       }
                       else if (value.active_item == 1) {

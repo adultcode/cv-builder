@@ -24,8 +24,8 @@ mixin _$InfoModel {
   set name(String? value) => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   set email(String? value) => throw _privateConstructorUsedError;
-  int? get mobile => throw _privateConstructorUsedError;
-  set mobile(int? value) => throw _privateConstructorUsedError;
+  String? get mobile => throw _privateConstructorUsedError;
+  set mobile(String? value) => throw _privateConstructorUsedError;
   String? get job => throw _privateConstructorUsedError;
   set job(String? value) => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $InfoModelCopyWith<$Res> {
   $Res call(
       {String? name,
       String? email,
-      int? mobile,
+      String? mobile,
       String? job,
       String? bio,
       String? city,
@@ -89,7 +89,7 @@ class _$InfoModelCopyWithImpl<$Res, $Val extends InfoModel>
       mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       job: freezed == job
           ? _value.job
           : job // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ abstract class _$$InfoModelImplCopyWith<$Res>
   $Res call(
       {String? name,
       String? email,
-      int? mobile,
+      String? mobile,
       String? job,
       String? bio,
       String? city,
@@ -159,7 +159,7 @@ class __$$InfoModelImplCopyWithImpl<$Res>
       mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       job: freezed == job
           ? _value.job
           : job // ignore: cast_nullable_to_non_nullable
@@ -200,7 +200,7 @@ class _$InfoModelImpl with DiagnosticableTreeMixin implements _InfoModel {
   @override
   String? email;
   @override
-  int? mobile;
+  String? mobile;
   @override
   String? job;
   @override
@@ -247,7 +247,7 @@ abstract class _InfoModel implements InfoModel {
   factory _InfoModel(
       {String? name,
       String? email,
-      int? mobile,
+      String? mobile,
       String? job,
       String? bio,
       String? city,
@@ -263,8 +263,8 @@ abstract class _InfoModel implements InfoModel {
   String? get email;
   set email(String? value);
   @override
-  int? get mobile;
-  set mobile(int? value);
+  String? get mobile;
+  set mobile(String? value);
   @override
   String? get job;
   set job(String? value);
