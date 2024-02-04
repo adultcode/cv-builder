@@ -110,31 +110,44 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
               mainAxisSize: pw.MainAxisSize.max,
               children: [
 
-                CV2ProfilePart(userModel: userModel,
+                if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                  CV2ProfilePart(userModel: userModel,
                     profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage),
 
                 // bio
-                pw.SizedBox(height: top_margin_title_2 ),
-                CV2BioPart(userModel: userModel),
+                if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                  pw.SizedBox(height: top_margin_title_2 ),
+                if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                  CV2BioPart(userModel: userModel),
 
                 // work
-                pw.SizedBox(height:top_margin_title_2),
+                if(userModel.works!=null && userModel.works?.workModels!=null)
+                  pw.SizedBox(height:top_margin_title_2),
+                if(userModel.works!=null && userModel.works?.workModels!=null)
                 CV2WorkPart(userModel: userModel),
 
                 // education
-                pw.SizedBox(height: top_margin_title_2),
-                CV2EducationPart(userModel: userModel),
+                if(userModel.educations!=null && userModel.educations?.educationList!=null)
+                  pw.SizedBox(height: top_margin_title_2),
+                if(userModel.educations!=null && userModel.educations?.educationList!=null)
+                  CV2EducationPart(userModel: userModel),
 
                 // skill
-               pw.SizedBox(height: top_margin_title_2),
-               CV2SkillPart(userModel: userModel),
+                if(userModel.skills!=null && userModel.skills?.skill_list!=null)
+                  pw.SizedBox(height: top_margin_title_2),
+                if(userModel.skills!=null && userModel.skills?.skill_list!=null)
+                  CV2SkillPart(userModel: userModel),
 
                 // language
-                pw.SizedBox(height: top_margin_title_2),
-                CV2LanguagePart(userModel: userModel),
+                if(userModel.languageList!=null && userModel.languageList?.lang_list!=null)
+                  pw.SizedBox(height: top_margin_title_2),
+                if(userModel.languageList!=null && userModel.languageList?.lang_list!=null)
+                  CV2LanguagePart(userModel: userModel),
             //social
-                pw.SizedBox(height: top_margin_title_2),
-                CV2SocialPart(userModel: userModel),
+                if(userModel.socials!=null && userModel.socials?.socialModels!=null)
+                  pw.SizedBox(height: top_margin_title_2),
+                if(userModel.socials!=null && userModel.socials?.socialModels!=null)
+                  CV2SocialPart(userModel: userModel),
 
 
               ]
