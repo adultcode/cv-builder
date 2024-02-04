@@ -34,6 +34,7 @@ import 'cv2_job_section.dart';
 import 'cv2_language_section.dart';
 import 'cv2_profile_section.dart';
 import 'cv2_skill_section.dart';
+import 'cv2_social_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
@@ -71,16 +72,18 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
   //if(socials?.isEmpty==true ){
   if(socials?.isEmpty==true && userModel.socials!=null){
     //  print("Not empty!!!");
-    userModel.socials?.socialModels?.forEach((element) async{
+    List<SocialModel?>? updatedList = userModel.socials?.socialModels?.where((obj) => obj != null).toList();
+
+    updatedList?.forEach((element) async{
       print("Get icon");
       if(element!=null){
-
-
         element?.icon_path = await Geticon(element!);
         socials?.add(Social(socialModel: element));
         print("Social size: ${socials?.length}");
       }
     });
+
+    userModel.socials?.socialModels = updatedList;
   }
 
 
@@ -126,9 +129,12 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
                pw.SizedBox(height: top_margin_title_2),
                CV2SkillPart(userModel: userModel),
 
-                // skill
+                // language
                 pw.SizedBox(height: top_margin_title_2),
                 CV2LanguagePart(userModel: userModel),
+            //social
+                pw.SizedBox(height: top_margin_title_2),
+                CV2SocialPart(userModel: userModel),
 
 
               ]

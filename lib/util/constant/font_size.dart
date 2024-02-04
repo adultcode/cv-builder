@@ -15,7 +15,7 @@ double top_margin_experience_1 = PdfPageFormat.cm*0.7;
 
 
 //// cv2
-double top_margin_title_2 = PdfPageFormat.cm*0.5;
+double top_margin_title_2 = PdfPageFormat.cm*0.55;
 double divider_2 = PdfPageFormat.cm*15.5;
 
 

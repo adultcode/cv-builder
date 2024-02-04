@@ -12,7 +12,6 @@ import '../../../util/constant/text_style.dart';
 class Social extends pw.StatelessWidget {
 
   SocialModel? socialModel;
-  var icon_path = '';
 
   Social({this.socialModel});
 

@@ -10,36 +10,42 @@ import '../../../../mvvm/model/entity/user_model.dart';
 import '../../../../util/constant/text_style.dart';
 import '../../../custom_widgets/cv2/cv2_education_item.dart';
 import '../../../custom_widgets/cv2/cv2_skill_item.dart';
+import '../../../custom_widgets/cv2/cv2_social_item.dart';
 import '../../../custom_widgets/cv2/cv2_work_item.dart';
 
 
-class CV2SkillPart extends pw.StatelessWidget {
+class CV2SocialPart extends pw.StatelessWidget {
 
 
 
   UserModel? userModel;
-  List<Skill2>? education_list = [];
+  List<Social2>? social_list = [];
 
-  CV2SkillPart({this.userModel}){
+  CV2SocialPart({this.userModel}){
     // education_list = userModel!.skills!.skill_list?.map((e) {
     //
     //   return Skill2(skillModel1: e,);
     // },).toList();
 
-    for(var i =0;i < userModel!.skills!.skill_list!.length; i+=2){
+    for(var i =0;i < userModel!.socials!.socialModels!.length; i+=2){
       //
 
-    //  print("int i: $i ----------");
-      education_list?.add(
-        Skill2(
-          skillModel1: i<userModel!.skills!.skill_list!.length==true?userModel!.skills!.skill_list![i]:null,
-          skillModel2: i+1<userModel!.skills!.skill_list!.length==true?userModel!.skills!.skill_list![i+1]:null,
-        )
+      print("social i: $i ----------");
+      social_list?.add(
+          Social2(
+            social1: i<userModel!.socials!.socialModels!.length==true?userModel!.socials!.socialModels![i]:null,
+            social2: i+1<userModel!.socials!.socialModels!.length==true?userModel!.socials!.socialModels![i+1]:null,
+          )
       );
-     // if(i>6)
-     // break;
 
     }
+    userModel?.socials?.socialModels?.forEach((element) {
+      print("social item: ${element?.address}");
+    });
+
+ //   print(social_list?[0]);
+ //   print(social_list?[1]);
+   // print(social_list?[2]);
   }
   //Profile1({this.profile_img,required this.infoModel});
 
@@ -63,25 +69,12 @@ class CV2SkillPart extends pw.StatelessWidget {
                     ),
                     pw.SizedBox(width: PdfPageFormat.cm),
                     pw.Expanded(
-                        child: pw.Text("مهارت ها",style: cv2_head1, textDirection: pw.TextDirection.rtl)
+                        child: pw.Text("ارتباط",style: cv2_head1, textDirection: pw.TextDirection.rtl)
                     )
                   ]
               ),
-              ...education_list!
-              // pw.Container(
-              //   height: 11+0,
-              //  child: pw.ListView.builder(
-              //      itemCount: education_list!.length,
-              //      itemBuilder: (context, index) {
-              //        return education_list![index];
-              //      },
-              //      // children: [
-              //      //   ...education_list!,
-              //      //
-              //      //
-              //      // ]
-              //  )
-              // )
+              ...social_list!
+
             ]
         )
     )

@@ -11,6 +11,7 @@ var black_title1 = PdfColor.fromHex('#343434');
 var black_text1 = PdfColor.fromHex('#a0a0a0');
 var vertical_div_1 = PdfColor.fromHex('#cdcdcd');
 var vertical_red = PdfColor.fromHex('#ec1c24');
+var white_pdf = PdfColor.fromHex('#ffffff');
 
 //////// cv 2
 var cv2_bg =  PdfColor.fromHex('#fdfdfd');
