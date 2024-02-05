@@ -1,4 +1,5 @@
 import 'package:cv_builder/mvvm/model/entity/template_model.dart';
+import 'package:cv_builder/mvvm/viewmodel/template_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/template_item.dart';
 import 'package:flutter/material.dart';
@@ -27,20 +28,11 @@ class _HomeBigPageState extends State<HomeBigPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    templateModel = TemplateModel(id: 1,title: 'first',img_path: 'screen/1.PNG',selected: false);
-    templateModel2 = TemplateModel(id: 1,title: 'second',img_path: 'screen/2.PNG',selected: false);
-    templateModel3 = TemplateModel(id: 1,title: 'second',img_path: 'screen/2.PNG',selected: true);
-    template_list.add(templateModel);
-    template_list.add(templateModel2);
-    template_list.add(templateModel);
-    template_list.add(templateModel2);
-    template_list.add(templateModel3);
-    template_list.add(templateModel2);
-    template_list.add(templateModel);
-    template_list.add(templateModel2);
+
     WidgetsFlutterBinding.ensureInitialized()
         .scheduleFrameCallback((timeStamp) {
       Provider.of<UserViewModel>(context, listen: false).GetUserModel() ;
+      Provider.of<TemplateVM>(context, listen: false).GetTemplateList() ;
     });
   }
   @override
@@ -54,9 +46,6 @@ class _HomeBigPageState extends State<HomeBigPage> {
 
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
-              //    if(value.selected_workmodel!=null && value.selected_workmodel?.title!=null){
-              //   PopulateInputs(value.selected_workmodel!);
-              //  }
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -98,32 +87,30 @@ class _HomeBigPageState extends State<HomeBigPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  if(value.userModel?.works!=null)
-                   // Text("works no null")
-                  //   Text("works no null: ${value.userModel?.works?.workModels?.length}"),
-                  // SizedBox(height: 20,),
-                 // TemplateItem(templateModel: templateModel)
-               //  Expanded(
-                   //height: double.infinity,
-                  // child:
-                   Container(
-                       height: sl<ScreenSize>().height*0.7,
-                  //   color: Colors.green,
-                     child:
-                     GridView.builder(
-                      // shrinkWrap: true,
-                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                         crossAxisCount: 3, // number of items in each row
-                         mainAxisSpacing: 8.0, // spacing between rows
-                         crossAxisSpacing: 20.0, // spacing between columns
-                       ),
-                       itemCount: template_list.length, // total number of items
 
-                       itemBuilder: (context, index) {
-                         return TemplateItem(templateModel: template_list[index]);
-                       },),
-                   ),
-              //   )
+                   Consumer<TemplateVM>(builder: (context, value, child) {
+                     if(value.template_list!=null){
+                       return   Container(
+                         height: sl<ScreenSize>().height*0.7,
+                         //   color: Colors.green,
+                         child:
+                         GridView.builder(
+                           // shrinkWrap: true,
+                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                             crossAxisCount: 3, // number of items in each row
+                             mainAxisSpacing: 8.0, // spacing between rows
+                             crossAxisSpacing: 20.0, // spacing between columns
+                           ),
+                           itemCount: value.template_list?.length, // total number of items
+
+                           itemBuilder: (context, index) {
+                             return TemplateItem(templateModel: value.template_list![index]);
+                           },),
+                       );
+                     }else return Container();
+                   },),
+
+
                 ],
               );
             },
