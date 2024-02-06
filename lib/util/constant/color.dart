@@ -34,3 +34,8 @@ panel colors
  var panel_orange_accent = Color(0xfffdf4e5);
  var panel_green_accent = Color(0xffe9f8f1);
  var panel_green = Color(0xff44cc89);
+ var black_title = Color(0xff36454F);
+ var primary_title = Color(0xff271903);
+ var primary_container = Color(0xfff9ddb8);
+ var primary_surface = Color(0xffede1d1);
+ var primary_btn = Color(0xfff7efe7);

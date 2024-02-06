@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
 import 'package:cv_builder/test.dart';
+import 'package:cv_builder/util/constant/color.dart';
 import 'package:cv_builder/util/constant/screen_size.dart';
 import 'package:cv_builder/widget/pages/cv/cv1/cv1.dart';
 import 'package:cv_builder/widget/pages/loading_page.dart';
@@ -77,13 +78,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,secondary: Colors.red),
         useMaterial3: true,
         fontFamily: 'sdn',
         textTheme: TextTheme(
-          titleLarge: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,),
-          bodyMedium: TextStyle(fontSize: 15,fontWeight: FontWeight.w400,),
-          bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,),
+          titleLarge: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,color: primary_title),
+          bodyMedium: TextStyle(fontSize: 15,fontWeight: FontWeight.w400,color: primary_title),
+          bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: primary_title),
         )
       ),
       home: LayoutBuilder(
@@ -164,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           useActions: true,
                           maxPageWidth: 700,
 
-                          build: (format) => generateResume(format,userModel:value.userModel! ),
+                          build: (format) => generateResumeCV1(format,userModel:value.userModel! ),
                           //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
                         )
                     );

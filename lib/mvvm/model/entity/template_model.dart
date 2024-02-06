@@ -4,6 +4,8 @@ class TemplateModel{
   int? id;
   String? title;
   bool? selected;
+  bool? is_vip;
 
-  TemplateModel({this.img_path, this.id, this.title,this.selected});
+
+  TemplateModel({this.img_path, this.id, this.title,this.selected,this.is_vip});
 }

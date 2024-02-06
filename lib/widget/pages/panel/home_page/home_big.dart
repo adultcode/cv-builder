@@ -9,6 +9,7 @@ import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
+import '../../../../util/warning/snack_bar.dart';
 import '../../cv/pdf_page.dart';
 
 class HomeBigPage extends StatefulWidget {
@@ -20,9 +21,7 @@ class HomeBigPage extends StatefulWidget {
 
 class _HomeBigPageState extends State<HomeBigPage> {
 
- late TemplateModel templateModel;
- late TemplateModel templateModel2;
- late TemplateModel templateModel3;
+
  List<TemplateModel> template_list = [];
   @override
   void initState() {
@@ -65,8 +64,14 @@ class _HomeBigPageState extends State<HomeBigPage> {
                           padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
                         ),
                         onPressed: () {
+                          if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: value.userModel,
+                            selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
 
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: value.userModel),));
+                          }
+                          else{
+                            ErrorSnack(context: context,title: "هیچ قالبی انتخاب نکرده اید");
+                          }
                         },
                         child: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
                       ),
@@ -98,8 +103,9 @@ class _HomeBigPageState extends State<HomeBigPage> {
                            // shrinkWrap: true,
                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                              crossAxisCount: 3, // number of items in each row
-                             mainAxisSpacing: 8.0, // spacing between rows
-                             crossAxisSpacing: 20.0, // spacing between columns
+                             mainAxisSpacing: sl<ScreenSize>().height*0.02, // spacing between rows
+                             crossAxisSpacing: sl<ScreenSize>().width*0.04, // spacing between columns
+                             childAspectRatio: 0.85
                            ),
                            itemCount: value.template_list?.length, // total number of items
 

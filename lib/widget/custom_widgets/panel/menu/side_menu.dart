@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/radius_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
-import 'active_menu.dart';
+import 'big_menu_item.dart';
 
 
 class SideMenu extends StatelessWidget {
@@ -35,7 +35,7 @@ class SideMenu extends StatelessWidget {
           return ListView.builder(
             itemCount: value.menu_list.length,
             itemBuilder: (context, index) {
-              return ActiveMenuItem(value.menu_list[index]);
+              return BigMenuItem(value.menu_list[index]);
             },
           );
         },

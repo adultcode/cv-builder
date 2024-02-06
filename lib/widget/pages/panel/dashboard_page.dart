@@ -1,10 +1,15 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../config/locator.dart';
 import '../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../util/constant/screen_size.dart';
+import '../../custom_widgets/panel/menu/drawer_menu.dart';
 import 'dashboard/dashboard_big.dart';
+import 'dashboard/dashboard_small.dart';
 class Dashboard extends StatefulWidget {
 
 
@@ -29,29 +34,32 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      body:
+    return
       StreamBuilder(
         stream: sl<ScreenSizeStream>().controller.stream,
         initialData: sl<ScreenSize>(),
         builder: (context, snapshot) {
           if(snapshot.hasData){
-            if(snapshot.data!.width<ScreenSize.smallwidth){
-              return Center(child: Text("Small ${snapshot.data!.width}"),);
-            }else{
-              return DashboardBig();
-            }
+            return Scaffold(
+
+              appBar: snapshot.data!.width<ScreenSize.smallwidth?AppBar(
+
+              ):null,
+              endDrawer: snapshot.data!.width<ScreenSize.smallwidth?MobileDrawer():null,
+              body: snapshot.data!.width<ScreenSize.smallwidth?DashboardSmall():DashboardBig(),
+            );
+            // if(snapshot.data!.width<ScreenSize.smallwidth){
+            //   return DashboardSmall();
+            // }else{
+            //   return DashboardBig();
+            // }
 
           }else{
-             return Center(child: InkWell(
-               onTap: (){
-               },
-               child: Text("Empty"),
-             ),);
+             return DashboardSmall();
           }
 
         },
-      ),
+
     );
   }
 }

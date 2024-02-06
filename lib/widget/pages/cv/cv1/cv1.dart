@@ -53,7 +53,7 @@ Future<String> Geticon(SocialModel socialModel)async{
 }
 
 List<Social>? socials =  [];
-Future<Uint8List> generateResume(PdfPageFormat format, {Uint8List? profile_image_path, required UserModel userModel}) async {
+Future<Uint8List> generateResumeCV1(PdfPageFormat format, {Uint8List? profile_image_path, required UserModel userModel}) async {
 
 
   final doc = pw.Document(title: 'رزومه', author: 'حسام رسولیان');

@@ -9,8 +9,9 @@ import 'cv2/cv2.dart';
 class PdfPage extends StatelessWidget {
 
   UserModel? userModel;
+  int? selected_template;
 
-  PdfPage({this.userModel});
+  PdfPage({this.userModel,required this.selected_template});
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +23,20 @@ class PdfPage extends StatelessWidget {
 
         child: Column(
           children: [
-            ElevatedButton(onPressed: () async{
-             // Navigator.push(context, MaterialPageRoute(builder: (context) => Dashboard(),));
-              // context.read<IconProvider>()
-//                Provider.of<IconProvider>(context,listen: false).SetIcon();
-            }, child: Text("Pick Image")
-            ),
+
             Expanded(
                 child:  PdfPreview(
                   initialPageFormat: PdfPageFormat.a4,
                   useActions: true,
                   maxPageWidth: 700,
-
-                  build: (format) => generateResumeCV2(format,userModel:userModel! ),
+//build: (format) => generateResumeCV2(format,userModel:userModel! ),
+                  build: (format) {
+                    switch(selected_template){
+                      case 1: return  generateResumeCV1(format,userModel:userModel! );
+                      case 2: return  generateResumeCV2(format,userModel:userModel! );
+                      default: return generateResumeCV1(format, userModel: userModel!);
+                    }
+                  },
                   //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
                 )
             )

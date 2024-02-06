@@ -217,6 +217,12 @@ class _ExperienceBigState extends State<ExperienceBig> {
                     SizedBox(width: sl<ScreenSize>().width*0.05),
                     Container(
                       child: ElevatedButton(
+
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 40,vertical: 15),
+                          backgroundColor: primary_btn,
+
+                        ),
                         onPressed: () {
 
                           if (_formKey.currentState!.validate()){
@@ -238,7 +244,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
                           }
                         },
-                        child: Text("اضافه کردن"),
+                        child: Text("اضافه کردن",style: Theme.of(context).textTheme.bodyMedium!),
                       ),
                     ),
                     Expanded(

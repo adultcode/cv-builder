@@ -25,6 +25,10 @@ class TemplateVM extends ChangeNotifier{
     notifyListeners();
 
   }
+  int? getSelected(){
+    if(_selected_template!=null) return _selected_template?.id;
+    else return null;
+  }
   void GetTemplateList() async{
     try{
       template_list?.clear();

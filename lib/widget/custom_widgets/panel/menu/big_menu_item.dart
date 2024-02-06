@@ -11,29 +11,30 @@ import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/radius_size.dart';
 
-class ActiveMenuItem extends StatefulWidget {
+class BigMenuItem extends StatefulWidget {
   MenuModel menuModel;
 
-  ActiveMenuItem(this.menuModel){
-  //  print("Active: ${menuModel.id}----------");
+  BigMenuItem(this.menuModel){
+    //  print("Active: ${menuModel.id}----------");
   }
 
   @override
-  State<ActiveMenuItem> createState() => _ActiveMenuItemState();
+  State<BigMenuItem> createState() => _BigMenuItemState();
 }
 
-class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStateMixin {
+class _BigMenuItemState extends State<BigMenuItem> with TickerProviderStateMixin {
   final Duration animationDuration = const Duration(seconds: 6);
 
 
   final DecorationTween decorationTween = DecorationTween(
-    begin: BoxDecoration(
-      color: Colors.white,
-    ),
-    end: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
-      color: panel_orange_accent,
-    )
+      begin: BoxDecoration(
+        color: Colors.white,
+      ),
+      end: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
+        //color: panel_orange_accent,
+        color: primary_container,
+      )
   );
 
   late final AnimationController _controller = AnimationController(
@@ -47,13 +48,13 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
   void initState() {
     // TODO: implement initState
     super.initState();
-  //  _controller.forward();
+    //  _controller.forward();
     if(widget.menuModel.id==0){
       _controller.forward();
     }
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<MenuVM>().addListener(() {
-      //  print("listener ${widget.menuModel.id}");
+        //  print("listener ${widget.menuModel.id}");
         var current_item =  context.read<MenuVM>().active_item;
         var pre_item =  context.read<MenuVM>().pre_item;
         if(current_item==widget.menuModel.id){
@@ -63,7 +64,7 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
           });
         }
         if(pre_item==widget.menuModel.id){
-         // _controller.reset();
+          // _controller.reset();
           _controller.reverse();
           setState(() {
 
@@ -75,10 +76,10 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
   }
   @override
   Widget build(BuildContext context) {
- // print("Item ${widget.menuModel.id}");
+    // print("Item ${widget.menuModel.id}");
     return InkWell(
       onTap: () {
-       // print("---------CLicked--------");
+        // print("---------CLicked--------");
 
         context.read<MenuVM>().setActiveItem(widget.menuModel.id);
 
@@ -99,7 +100,7 @@ class _ActiveMenuItemState extends State<ActiveMenuItem> with TickerProviderStat
             child: Icon(
               widget.menuModel.iconData,
               size: widget.menuModel.active ==true? 24 : 26,
-              color: widget.menuModel.active ==true? panel_orange : panel_grey,
+              color: widget.menuModel.active ==true? primary_title : panel_grey,
             ),
           ),
         ),

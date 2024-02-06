@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../widget/custom_widgets/panel/menu/big_menu_item.dart';
 import '../model/entity/menu_model.dart';
-import '../../widget/custom_widgets/panel/menu/active_menu.dart';
 import '../viewmodel/menu_viewmodel.dart';
 
 class MenuRepo{
@@ -18,7 +18,7 @@ class MenuRepo{
     menu_list_widget =   menu_list!.map((menu) {
 
         return InkWell(
-          child: ActiveMenuItem(menu),
+          child: BigMenuItem(menu),
          // child: menu.active==true?ActiveMenuItem(menu):UnActiveMenuItem(menu),
           onTap: () {
             actionHandler.onMenuItemTap(menu.id);

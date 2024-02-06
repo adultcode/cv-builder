@@ -1,4 +1,8 @@
 import 'package:pdf/pdf.dart';
+// panel mobile
+
+double menu_font = 13;
+
 
 double text_title_1 = 13.0;
 double text_body_1 = 11.0;
