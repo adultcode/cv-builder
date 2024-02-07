@@ -27,7 +27,8 @@ class InputForm extends StatelessWidget {
           Container(
             alignment: Alignment.topRight,
             decoration: input_decoration,
-            height: sl<ScreenSize>().height*0.25,
+            height:  sl<ScreenSize>().width<ScreenSize.smallwidth? sl<ScreenSize>().height*0.17
+                : sl<ScreenSize>().height*0.25,
             child: TextFormField(
               maxLines: 10,
            //   maxLength: 500,

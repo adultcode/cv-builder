@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../home_page/home_small.dart';
 import '../profile_edit_page/profile_edit_big.dart';
+import '../profile_edit_page/profile_edit_small.dart';
 
 class DashboardSmall extends StatefulWidget {
   const DashboardSmall({Key? key}) : super(key: key);
@@ -21,6 +22,8 @@ class _DashboardSmallState extends State<DashboardSmall> {
           if (value.active_item == 0) {
              return HomePageSmall();
             //return Text("Small profile edit");
+          }  else if (value.active_item == 1) {
+             return ProfileEditSmall();
           }
           else return Text("sfsdjh");
         },

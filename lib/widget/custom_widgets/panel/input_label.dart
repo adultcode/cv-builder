@@ -44,10 +44,6 @@ class InputLabel extends StatelessWidget {
                 if (value?.isEmpty==true &&isOption==null) {
                   return 'Please enter some text';
                 }
-                // if(isOption!=null && isOption==true) {
-                // print("$hint: $isOption");
-                //   return null;
-                // }
 
                 return null;
               },

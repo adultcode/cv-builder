@@ -33,7 +33,8 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:  sl<ScreenSize>().height*0.25,
+      height:  sl<ScreenSize>().width<ScreenSize.smallwidth? sl<ScreenSize>().height*0.17
+          : sl<ScreenSize>().height*0.25,
       margin: EdgeInsets.only(top: sl<ScreenSize>().height*0.035),
       child: DottedBorder(
         color: panel_orange,

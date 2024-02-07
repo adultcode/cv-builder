@@ -42,7 +42,7 @@ class _DashboardState extends State<Dashboard> {
           if (snapshot.hasData) {
             return snapshot.data!.width < ScreenSize.smallwidth
                 ? DashboardSmall()
-                : DashboardBig();
+                : Scaffold(body: DashboardBig(),);
           } else
             return Text("EMpty");
         }

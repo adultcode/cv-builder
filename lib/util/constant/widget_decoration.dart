@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:cv_builder/util/constant/radius_size.dart';
+import 'package:cv_builder/util/constant/screen_size.dart';
 import 'package:flutter/material.dart';
 
+import '../../config/locator.dart';
 import 'color.dart';
 
 var panel_container_decoration = BoxDecoration(
@@ -40,9 +42,10 @@ InputDecoration input_text_decoration(
       fontSize: 0,
 
     ),
-    contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 21),
+    contentPadding: EdgeInsets.symmetric(horizontal: 5,
+        vertical: sl<ScreenSize>().width<ScreenSize.smallwidth?15:21
+    ),
     hintStyle: style,
-    //  hintStyle:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey),
     hintText: hint,
 
     prefixIcon: Column(

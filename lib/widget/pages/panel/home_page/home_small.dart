@@ -93,7 +93,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
                     height: sl<ScreenSize>().height * 0.02,
                   ),
                   Text(
-                    'خوش آمدید '+"${value.userModel?.infoModel?.name}",
+                    'خوش آمدید '+"${value.userModel?.infoModel?.name?? ""}",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(

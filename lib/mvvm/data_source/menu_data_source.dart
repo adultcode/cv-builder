@@ -8,8 +8,8 @@ class MenuDataSource{
 
   List<MenuModel> menu_list=[];
   MenuDataSource(){
-    menu_list.add(MenuModel(0,title: 'داشبورد',active: true,iconData:Icons.person ));
-    menu_list.add(MenuModel(1,title: 'اطلاعات',active: false,iconData:Icons.event_note_outlined ));
+    menu_list.add(MenuModel(0,title: 'پروفایل',active: true,iconData:Icons.person ));
+    menu_list.add(MenuModel(1,title: 'اطلاعات شخصی',active: false,iconData:Icons.event_note_outlined ));
     menu_list.add(MenuModel(2,title: 'سوابق کاری',active: false,iconData:Icons.work ));
     menu_list.add(MenuModel(3,title: 'سوابق تحصیلی',active: false,iconData:Icons.school ));
     menu_list.add(MenuModel(4,title: 'مهارت ها',active:false,iconData:Icons.add_box_rounded ));
