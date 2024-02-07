@@ -121,6 +121,8 @@ class _HomeBigPageState extends State<HomeBigPage> {
               );
             },
 
-        ));
+        )
+
+    );
   }
 }

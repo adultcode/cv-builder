@@ -25,7 +25,7 @@ class TemplateItem extends StatelessWidget {
         padding: EdgeInsets.all( 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
-          color: templateModel.selected==true?panel_orange.withOpacity(0.5):Color(0xffefefef),
+          color: templateModel.selected==true?primary_container:Color(0xffefefef),
         ),
         child: Image.asset(templateModel.img_path!,width: 80,height: 80,fit: BoxFit.fill,),
       ),

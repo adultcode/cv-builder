@@ -39,27 +39,14 @@ class _DashboardState extends State<Dashboard> {
         stream: sl<ScreenSizeStream>().controller.stream,
         initialData: sl<ScreenSize>(),
         builder: (context, snapshot) {
-          if(snapshot.hasData){
-            return Scaffold(
-
-              appBar: snapshot.data!.width<ScreenSize.smallwidth?AppBar(
-
-              ):null,
-              endDrawer: snapshot.data!.width<ScreenSize.smallwidth?MobileDrawer():null,
-              body: snapshot.data!.width<ScreenSize.smallwidth?DashboardSmall():DashboardBig(),
-            );
-            // if(snapshot.data!.width<ScreenSize.smallwidth){
-            //   return DashboardSmall();
-            // }else{
-            //   return DashboardBig();
-            // }
-
-          }else{
-             return DashboardSmall();
-          }
-
-        },
-
+          if (snapshot.hasData) {
+            return snapshot.data!.width < ScreenSize.smallwidth
+                ? DashboardSmall()
+                : DashboardBig();
+          } else
+            return Text("EMpty");
+        }
     );
   }
 }
+

@@ -28,3 +28,26 @@ class _DashboardSmallState extends State<DashboardSmall> {
     );
   }
 }
+
+
+
+class DashboarHelper extends StatelessWidget {
+
+  AppBar? appBar;
+  Widget? drawer;
+  Widget? body;
+
+  Widget? fab;
+
+  DashboarHelper({this.appBar, this.drawer, this.body,this.fab});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    floatingActionButton: fab,
+      appBar: appBar,
+      endDrawer: drawer,
+      body: body,
+    );
+  }
+}
