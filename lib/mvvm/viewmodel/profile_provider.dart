@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -56,6 +56,19 @@ late  AvatarRepository avatarRepository;
 
   Future<Uint8List?> getImage() async {
     final ImagePicker picker = ImagePicker();
+
+    if(Platform.isAndroid){
+      // check for permission
+      var status = await Permission.storage.status;
+      if (status.isDenied) {
+        // We haven't asked for permission yet or the permission has been denied before, but not permanently.
+        openAppSettings();
+      }
+
+    }else{
+
+
+    }
 
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 

@@ -30,13 +30,7 @@ class ProfileEditSmall extends StatefulWidget {
 }
 
 class _ProfileEditSmallState extends State<ProfileEditSmall> {
-  var name_controller = TextEditingController();
-  var email_controller = TextEditingController();
-  var phone_controller = TextEditingController();
-  var bio_controller = TextEditingController();
-  var jobtitle_controller = TextEditingController();
-  var city_controller = TextEditingController();
-  var birth_controller = TextEditingController();
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -46,24 +40,28 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
     // TODO: implement initState
     super.initState();
     /// call to get Data
-
     WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
       // context.watch<InfoVM>().GetInfoModelData();
       Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
     });
-
-
-  }
-  void PopulateForm(InfoModel _infoModel){
-    name_controller.text = _infoModel.name!;
-    jobtitle_controller.text = _infoModel.job!;
-    bio_controller.text = _infoModel.bio!;
-    phone_controller.text = _infoModel.mobile!.toString();
-    email_controller.text = _infoModel.email!;
-    city_controller.text = _infoModel.city!;
-    birth_controller.text = _infoModel.birth!;
   }
 
+  // void PopulateForm(InfoModel _infoModel){
+  //   name_controller.text = _infoModel.name!;
+  //   jobtitle_controller.text = _infoModel.job!;
+  //   bio_controller.text = _infoModel.bio!;
+  //   phone_controller.text = _infoModel.mobile!.toString();
+  //   email_controller.text = _infoModel.email!;
+  //   city_controller.text = _infoModel.city!;
+  //   birth_controller.text = _infoModel.birth!;
+  // }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+  }
   @override
   Widget build(BuildContext context) {
     return DashboarHelper(
@@ -79,8 +77,17 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
         centerTitle: true,
         leadingWidth: 55,
         leading:        InkWell(
-          onTap: () {
+          onTap: () async{
+            if(_formKey.currentState?.validate()==true){
+              var resul = await     Provider.of<InfoVM>(context,listen: false).SaveInfoData();
+            if(resul==true)     SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
 
+            else     ErrorSnack(context: context,title: 'خطایی رخ داده است');
+
+            }
+            else{
+              ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+            }
           },
           child: Container(
             margin: EdgeInsets.only(left:sl<ScreenSize>().width*0.04 ),
@@ -90,6 +97,13 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: panel_green_accent,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 5
+                )
+              ]
             ),
             child: Icon(Icons.done,size: 20,color: panel_green,),
           ),
@@ -112,7 +126,8 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
               populate the form inputs
                */
                 if(value.infoModel!=null){
-                  PopulateForm(value.infoModel!);
+                 // PopulateForm(value.infoModel!);
+                  value.PopulateForm();
                 }
                 return  Form(
                   key: _formKey,
@@ -134,13 +149,13 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                           /*
                     email field
                      */
-                          InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: email_controller,),
+                          InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: value.email_controller,),
 
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                     name field
                      */
-                          InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: name_controller,)
+                          InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: value.name_controller,)
                       ,
       
       
@@ -154,14 +169,14 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                           /*
                     phone field
                      */
-                           InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,
+                           InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: value.phone_controller,isNumber: true,
                                 max_length: 11,),
 
                       SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                     name field
                      */
-                           InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: jobtitle_controller,),
+                           InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: value.jobtitle_controller,),
 
       
 
@@ -173,11 +188,11 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                           /*
                     birth field
                      */
-                     InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: birth_controller,),
+                     InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: value.birth_controller,),
                       SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                     name field
-                     */InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: city_controller,),
+                     */InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: value.city_controller,),
       
 
                       /*
@@ -189,7 +204,7 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                       /*
                     desc field
                      */
-                      InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: bio_controller,),
+                      InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: value.bio_controller,),
                       SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                     Change avatar section

@@ -28,13 +28,13 @@ class ProfileEditBig extends StatefulWidget {
 }
 
 class _ProfileEditBigState extends State<ProfileEditBig> {
-  var name_controller = TextEditingController();
-  var email_controller = TextEditingController();
-  var phone_controller = TextEditingController();
-  var bio_controller = TextEditingController();
-  var jobtitle_controller = TextEditingController();
-  var city_controller = TextEditingController();
-  var birth_controller = TextEditingController();
+  // var name_controller = TextEditingController();
+  // var email_controller = TextEditingController();
+  // var phone_controller = TextEditingController();
+  // var bio_controller = TextEditingController();
+  // var jobtitle_controller = TextEditingController();
+  // var city_controller = TextEditingController();
+  // var birth_controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -52,15 +52,15 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
 
 
   }
-  void PopulateForm(InfoModel _infoModel){
-    name_controller.text = _infoModel.name!;
-    jobtitle_controller.text = _infoModel.job!;
-    bio_controller.text = _infoModel.bio!;
-    phone_controller.text = _infoModel.mobile!.toString();
-    email_controller.text = _infoModel.email!;
-    city_controller.text = _infoModel.city!;
-    birth_controller.text = _infoModel.birth!;
-  }
+  // void PopulateForm(InfoModel _infoModel){
+  //   name_controller.text = _infoModel.name!;
+  //   jobtitle_controller.text = _infoModel.job!;
+  //   bio_controller.text = _infoModel.bio!;
+  //   phone_controller.text = _infoModel.mobile!.toString();
+  //   email_controller.text = _infoModel.email!;
+  //   city_controller.text = _infoModel.city!;
+  //   birth_controller.text = _infoModel.birth!;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
             populate the form inputs
              */
              if(value.infoModel!=null){
-                 PopulateForm(value.infoModel!);
+                 value.PopulateForm();
              }
             return  Form(
               key: _formKey,
@@ -111,15 +111,15 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                              */
                             SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
 
-                            InfoModel userm = InfoModel(email: email_controller.text,
-                            name: name_controller.text,
-                                bio: bio_controller.text,
-                                job: jobtitle_controller.text,
-                                mobile: phone_controller.text,
-                                city: city_controller.text,
-                                birth: birth_controller.text,);
+                            // InfoModel userm = InfoModel(email: email_controller.text,
+                            // name: name_controller.text,
+                            //     bio: bio_controller.text,
+                            //     job: jobtitle_controller.text,
+                            //     mobile: phone_controller.text,
+                            //     city: city_controller.text,
+                            //     birth: birth_controller.text,);
 
-                            Provider.of<InfoVM>(context,listen: false).SaveInfoData(infoModel: userm);
+                           value.SaveInfoData();
                            // print(userm.toJson());
 
                           }
@@ -160,14 +160,14 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   email field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: email_controller,)
+                          child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: value.email_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       /*
                   name field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: name_controller,)
+                          child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: value.name_controller,)
                       ),
 
 
@@ -186,7 +186,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   phone field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: phone_controller,isNumber: true,
+                          child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: value.phone_controller,isNumber: true,
                           max_length: 11,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
@@ -194,7 +194,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   name field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: jobtitle_controller,)
+                          child: InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: value.jobtitle_controller,)
                       ),
 
 
@@ -213,14 +213,14 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   birth field
                    */
                       Expanded(
-                          child: InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: birth_controller,)
+                          child: InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: value.birth_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       /*
                   name field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: city_controller,)
+                          child: InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: value.city_controller,)
                       ),
 
 
@@ -251,7 +251,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   name field
                    */
                       Expanded(
-                          child: InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: bio_controller,)
+                          child: InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: value.bio_controller,)
                       ),
 
 

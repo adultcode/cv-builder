@@ -64,6 +64,7 @@ dev_dependencies:
   freezed: any
   json_serializable: any
   persian_datetime_picker: ^2.6.0
+  permission_handler: ^11.2.1
 
 
 # For information on the generic Dart part of this file, see the
