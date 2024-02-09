@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
+import '../experience_page/experience_big.dart';
+import '../experience_page/experience_small.dart';
 import '../home_page/home_small.dart';
 import '../profile_edit_page/profile_edit_big.dart';
 import '../profile_edit_page/profile_edit_small.dart';
@@ -22,8 +24,12 @@ class _DashboardSmallState extends State<DashboardSmall> {
           if (value.active_item == 0) {
              return HomePageSmall();
             //return Text("Small profile edit");
-          }  else if (value.active_item == 1) {
+          }
+          else if (value.active_item == 1) {
              return ProfileEditSmall();
+          }
+          else if (value.active_item == 2) {
+             return   ExperienceSmall();();
           }
           else return Text("sfsdjh");
         },

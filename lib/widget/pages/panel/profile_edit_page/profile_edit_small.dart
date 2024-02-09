@@ -68,11 +68,9 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
 
       drawer: MobileDrawer(),
       appBar: AppBar(
-     //   backgroundColor: Colors.red,
         surfaceTintColor: panel_orange,
       primary: true,
       shadowColor: Colors.black54,
-        //elevation: 2,
         title: Text("اطلاعات شخصی"),
         centerTitle: true,
         leadingWidth: 55,
