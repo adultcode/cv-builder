@@ -14,12 +14,28 @@ class WorkVM extends ChangeNotifier{
   WorkModel? selected_workmodel;
   bool isForEdit = false;
   late WorkRepository  workRepository;
+
+  /// controllers
+     var title_controller = TextEditingController();
+    var company_controller = TextEditingController();
+    var start_controller = TextEditingController();
+    var end_controller = TextEditingController();
+    var desc_controller = TextEditingController();
   WorkVM(){
     workRepository = WorkRepository();
     worklList = WorklList();
 
   }
 
+  void ClearControllers(){
+      title_controller.clear();
+      company_controller.clear();
+      start_controller.clear();
+      end_controller.clear();
+      desc_controller.clear();
+
+      notifyListeners();
+  }
 
 void SelectWorkModel(WorkModel workModel){
 
@@ -51,13 +67,17 @@ void SelectWorkModel(WorkModel workModel){
   /*
   add new workmodel in list
    */
-  void AddWork({required WorkModel work})async{
-
+  void AddWork()async{
+var temp_work = WorkModel(title:title_controller.text,
+        company: company_controller.text,
+        description: desc_controller.text,
+        start_date: start_controller.text,
+        end_date: end_controller.text);
     print('length: ${worklList?.workModels}');
     if(worklList?.workModels==null || worklList?.workModels?.isEmpty==true){
       print("WOrk list is empty");
-      work.id = 1;
-      worklList?.workModels=[work];
+      temp_work.id = 1;
+      worklList?.workModels=[temp_work];
 
     }
     else{
@@ -72,13 +92,13 @@ void SelectWorkModel(WorkModel workModel){
 
         print("index for edit is $_index");
         if(_index!=null) {
-          work.id = selected_workmodel?.id;
-          worklList!.workModels?[_index] = work;
+          temp_work.id = selected_workmodel?.id;
+          worklList!.workModels?[_index] = temp_work;
         }
 
       }else{
-        work.id =last_id;
-        worklList?.workModels?.add(work);
+        temp_work.id =last_id;
+        worklList?.workModels?.add(temp_work);
 
       }
 
@@ -92,8 +112,7 @@ void SelectWorkModel(WorkModel workModel){
       print("Data added");
     isForEdit = false;
     selected_workmodel = null;
-      notifyListeners();
-
+    ClearControllers();
   }
 
   /*

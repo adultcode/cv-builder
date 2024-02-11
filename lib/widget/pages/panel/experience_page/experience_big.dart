@@ -23,11 +23,6 @@ class ExperienceBig extends StatefulWidget {
 
 class _ExperienceBigState extends State<ExperienceBig> {
 
-  var _title_controller = TextEditingController();
-  var _company_controller = TextEditingController();
-  var _start_controller = TextEditingController();
-  var _end_controller = TextEditingController();
-  var _desc_controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -44,21 +39,21 @@ class _ExperienceBigState extends State<ExperienceBig> {
   print(result);
 
 }
-  void PopulateInputs(WorkModel workModel){
-    _title_controller.text = workModel.title!;
-    _company_controller.text = workModel.company!;
-    _start_controller.text = workModel.start_date!;
-    _end_controller.text = workModel.end_date!;
-    _desc_controller.text = workModel.description!;
-  }
-
-  void ClearInpust(){
-    _title_controller.clear();
-    _company_controller.clear();
-    _start_controller.clear();
-    _end_controller.clear();
-    _desc_controller.clear();
-  }
+  // void PopulateInputs(WorkModel workModel){
+  //   _title_controller.text = workModel.title!;
+  //   _company_controller.text = workModel.company!;
+  //   _start_controller.text = workModel.start_date!;
+  //   _end_controller.text = workModel.end_date!;
+  //   _desc_controller.text = workModel.description!;
+  // }
+  //
+  // void ClearInpust(){
+  //   _title_controller.clear();
+  //   _company_controller.clear();
+  //   _start_controller.clear();
+  //   _end_controller.clear();
+  //   _desc_controller.clear();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +67,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
           child: SingleChildScrollView(
             child: Consumer<WorkVM>(builder: (context, value, child) {
               if(value.selected_workmodel!=null && value.selected_workmodel?.title!=null){
-              PopulateInputs(value.selected_workmodel!);
+             // PopulateInputs(value.selected_workmodel!);
               }
               return Form(
                 key: _formKey,
@@ -93,22 +88,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                           save user's data
                            */
                             if (value.worklList?.workModels!=null) {
-                            //  value.worklList = WorklList();
-                            //   if(value.worklList?.workModels==null){
-                            //     value.worklList = WorklList();
-                            //     value.worklList?.workModels = [WorkModel(title:_title_controller.text,
-                            //         company: _company_controller.text,
-                            //         description: _desc_controller.text,
-                            //         start_date: _start_controller.text,
-                            //         end_date: _end_controller.text)];
-                            //   }else{
-                            //     value.worklList?.workModels?.add(WorkModel(title:_title_controller.text,
-                            //         company: _company_controller.text,
-                            //         description: _desc_controller.text,
-                            //         start_date: _start_controller.text,
-                            //         end_date: _end_controller.text));
-                            //   }
-      
+
                                // print("Work size from buld: ${value.worklList?.workModels?.length}");
                                 Provider.of<WorkVM>(context,listen: false).SaveWorkList(work: value.worklList!);
                                 SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
@@ -162,7 +142,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: 'گوگل',name: 'نام شرکت',textEditingController: _company_controller,)
+                            child: InputLabel(hint: 'گوگل',name: 'نام شرکت',textEditingController: value.company_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
       
@@ -170,7 +150,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: _title_controller,)
+                            child: InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: value.title_controller,)
                         ),
       
       
@@ -192,7 +172,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: _end_controller,)
+                            child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
       
@@ -200,7 +180,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: _start_controller,)
+                            child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
                         ),
       
       
@@ -232,15 +212,15 @@ class _ExperienceBigState extends State<ExperienceBig> {
                               // var wo = WorkModel(title:_title_controller.text,
       
       
-      
-                              Provider.of<WorkVM>(context,listen: false).AddWork(work: WorkModel(title:_title_controller.text,
-                                  company: _company_controller.text,
-                                  description: _desc_controller.text,
-                                  start_date: _start_controller.text,
-                                  end_date: _end_controller.text) );
+                              //
+                              // Provider.of<WorkVM>(context,listen: false).AddWork(work: WorkModel(title:_title_controller.text,
+                              //     company: _company_controller.text,
+                              //     description: _desc_controller.text,
+                              //     start_date: _start_controller.text,
+                              //     end_date: _end_controller.text) );
       
                                   // clear data after add new data
-                              ClearInpust();
+                           //  ClearInpust();
       
                             }else{
                               ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
@@ -252,7 +232,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       Expanded(
                         child: Container(
                             margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.05),
-                            child: InputForm(hint: 'توضیحات موقعیت شغلی',name: 'توضیحات',textEditingController: _desc_controller,)
+                            child: InputForm(hint: 'توضیحات موقعیت شغلی',name: 'توضیحات',textEditingController: value.desc_controller,)
                         ),
                       ),
       

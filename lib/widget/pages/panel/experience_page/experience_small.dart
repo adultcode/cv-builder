@@ -24,11 +24,6 @@ class ExperienceSmall extends StatefulWidget {
 
 class _ExperienceSmallState extends State<ExperienceSmall> {
 
-  var _title_controller = TextEditingController();
-  var _company_controller = TextEditingController();
-  var _start_controller = TextEditingController();
-  var _end_controller = TextEditingController();
-  var _desc_controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -45,21 +40,21 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
     print(result);
 
   }
-  void PopulateInputs(WorkModel workModel){
-    _title_controller.text = workModel.title!;
-    _company_controller.text = workModel.company!;
-    _start_controller.text = workModel.start_date!;
-    _end_controller.text = workModel.end_date!;
-    _desc_controller.text = workModel.description!;
-  }
-
-  void ClearInpust(){
-    _title_controller.clear();
-    _company_controller.clear();
-    _start_controller.clear();
-    _end_controller.clear();
-    _desc_controller.clear();
-  }
+  // void PopulateInputs(WorkModel workModel){
+  //   _title_controller.text = workModel.title!;
+  //   _company_controller.text = workModel.company!;
+  //   _start_controller.text = workModel.start_date!;
+  //   _end_controller.text = workModel.end_date!;
+  //   _desc_controller.text = workModel.description!;
+  // }
+  //
+  // void ClearInpust(){
+  //   _title_controller.clear();
+  //   _company_controller.clear();
+  //   _start_controller.clear();
+  //   _end_controller.clear();
+  //   _desc_controller.clear();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +110,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
           child: SingleChildScrollView(
             child: Consumer<WorkVM>(builder: (context, value, child) {
               if(value.selected_workmodel!=null && value.selected_workmodel?.title!=null){
-                PopulateInputs(value.selected_workmodel!);
+             //   PopulateInputs(value.selected_workmodel!);
               }
               return Form(
                 key: _formKey,
@@ -146,14 +141,14 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                         /*
                       company field
                        */
-                         InputLabel(hint: 'گوگل',name: 'نام شرکت',textEditingController: _company_controller,),
+                         InputLabel(hint: 'گوگل',name: 'نام شرکت',textEditingController: value.company_controller,),
 
                         SizedBox(height: sl<ScreenSize>().height*0.02),
 
                         /*
                       job title field
                        */
-                        InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: _title_controller,),
+                        InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: value.title_controller,),
 
 
                     SizedBox(height: sl<ScreenSize>().height*0.04),
@@ -165,13 +160,13 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(width: sl<ScreenSize>().width*0.05),
+                      //  SizedBox(width: sl<ScreenSize>().width*0.01),
 
                         /*
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: _end_controller,)
+                            child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -179,7 +174,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: _start_controller,)
+                            child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
                         ),
 
 
@@ -195,13 +190,16 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                       mainAxisAlignment: MainAxisAlignment.end,
 
                       children: [
-                        SizedBox(width: sl<ScreenSize>().width*0.05),
+                        //SizedBox(width: sl<ScreenSize>().width*0.05),
                         Container(
                           child: ElevatedButton(
 
                             style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(60),
+                              ),
                             //  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                              backgroundColor: primary_btn,
+                              backgroundColor: primary_container,
 
                             ),
                             onPressed: () {
@@ -212,26 +210,22 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
 
 
 
-                                Provider.of<WorkVM>(context,listen: false).AddWork(work: WorkModel(title:_title_controller.text,
-                                    company: _company_controller.text,
-                                    description: _desc_controller.text,
-                                    start_date: _start_controller.text,
-                                    end_date: _end_controller.text) );
-
-                                // clear data after add new data
-                                ClearInpust();
+                                Provider.of<WorkVM>(context,listen: false).AddWork();
+                                //
+                                // // clear data after add new data
+                                // ClearInpust();
 
                               }else{
                                 ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
                               }
                             },
-                            child: Icon(Icons.add),
+                            child: Icon(Icons.add,color: primary_title,),
                           ),
                         ),
                         Expanded(
                           child: Container(
                               margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.03),
-                              child: InputForm(hint: 'توضیحات موقعیت شغلی',name: 'توضیحات',textEditingController: _desc_controller,)
+                              child: InputForm(hint: 'توضیحات موقعیت شغلی',name: 'توضیحات',textEditingController: value.desc_controller,)
                           ),
                         ),
 
