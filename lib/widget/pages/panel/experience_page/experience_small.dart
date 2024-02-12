@@ -1,3 +1,4 @@
+
 import 'package:cv_builder/mvvm/model/entity/work_model/work_list.dart';
 import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/work_viewmodel.dart';
@@ -69,16 +70,24 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
           leadingWidth: 55,
           leading:        InkWell(
             onTap: () async{
-              if(_formKey.currentState?.validate()==true){
+
                 // var resul = await     Provider.of<InfoVM>(context,listen: false).SaveInfoData();
                 // if(resul==true)     SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                //
-                // else     ErrorSnack(context: context,title: 'خطایی رخ داده است');
+              var _result = await  Provider.of<WorkVM>(context,listen: false).SaveWorkList();
 
-              }
-              else{
-                ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
-              }
+              if(_result==true){
+                if(Provider.of<WorkVM>(context,listen: false).worklList==null ||
+                    Provider.of<WorkVM>(context,listen: false).worklList?.workModels?.isEmpty==true)
+                                SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
+                else
+                  SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+
+
+              }else{
+
+                ErrorSnack(context: context,title: 'خطایی رخ داده است');
+
+            }
             },
             child: Container(
               margin: EdgeInsets.only(left:sl<ScreenSize>().width*0.04 ),
@@ -110,7 +119,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
           child: SingleChildScrollView(
             child: Consumer<WorkVM>(builder: (context, value, child) {
               if(value.selected_workmodel!=null && value.selected_workmodel?.title!=null){
-             //   PopulateInputs(value.selected_workmodel!);
+                value.PopulateInputs();
               }
               return Form(
                 key: _formKey,

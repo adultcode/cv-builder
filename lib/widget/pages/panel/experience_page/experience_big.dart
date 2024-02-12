@@ -67,7 +67,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
           child: SingleChildScrollView(
             child: Consumer<WorkVM>(builder: (context, value, child) {
               if(value.selected_workmodel!=null && value.selected_workmodel?.title!=null){
-             // PopulateInputs(value.selected_workmodel!);
+                value.PopulateInputs();
               }
               return Form(
                 key: _formKey,
@@ -87,17 +87,20 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             /*
                           save user's data
                            */
-                            if (value.worklList?.workModels!=null) {
+                            var _result = await  Provider.of<WorkVM>(context,listen: false).SaveWorkList();
 
-                               // print("Work size from buld: ${value.worklList?.workModels?.length}");
-                                Provider.of<WorkVM>(context,listen: false).SaveWorkList(work: value.worklList!);
-                                SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                                    print("Size of total works: ${value.worklList?.workModels?.length}");
-      
-      
+                            if(_result==true){
+                              if(Provider.of<WorkVM>(context,listen: false).worklList==null ||
+                                  Provider.of<WorkVM>(context,listen: false).worklList?.workModels?.isEmpty==true)
+                                SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
+                              else
+                                SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+
+
                             }else{
-                              ErrorSnack(context: context,title: 'شما هیچ سابقه کاری ثبت نکرده اید');
-      
+
+                              ErrorSnack(context: context,title: 'خطایی رخ داده است');
+
                             }
       
                           },

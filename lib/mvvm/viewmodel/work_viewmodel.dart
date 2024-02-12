@@ -37,11 +37,20 @@ class WorkVM extends ChangeNotifier{
       notifyListeners();
   }
 
+  void PopulateInputs(){
+      title_controller.text = selected_workmodel!.title!;
+      company_controller.text = selected_workmodel!.company!;
+      start_controller.text = selected_workmodel!.start_date!;
+      end_controller.text = selected_workmodel!.end_date!;
+      desc_controller.text = selected_workmodel!.description!;
+   //   notifyListeners();
+
+  }
 void SelectWorkModel(WorkModel workModel){
 
     print("Selected work model clicked");
   selected_workmodel = workModel;
-  notifyListeners();
+    PopulateInputs();
     isForEdit = true;
 }
 
@@ -68,7 +77,7 @@ void SelectWorkModel(WorkModel workModel){
   add new workmodel in list
    */
   void AddWork()async{
-var temp_work = WorkModel(title:title_controller.text,
+  var temp_work = WorkModel(title:title_controller.text,
         company: company_controller.text,
         description: desc_controller.text,
         start_date: start_controller.text,
@@ -118,17 +127,17 @@ var temp_work = WorkModel(title:title_controller.text,
   /*
   save list of work models
    */
-  void SaveWorkList({required WorklList work})async{
+  Future<bool> SaveWorkList()async{
     var result;
-    if(work.workModels?.isEmpty==true){
+    // if list is empty delete all saved data
+    if(worklList==null || worklList?.workModels?.isEmpty==true){
       print("List is empty delete all works");
        result = await workRepository.ClearWorklist();
 
     }else{
-      this.worklList  = work;
+      //this.worklList  = work;
       print("Saving data:");
-       result = await workRepository.SaveWorkDataList(worklList: work);
-
+       result = await workRepository.SaveWorkDataList(worklList: worklList!);
 
     }
 
@@ -143,7 +152,11 @@ var temp_work = WorkModel(title:title_controller.text,
       // show snackbar error
       print("this is an error");
     }
+
+    return result;
   }
+
+
 
   /*
   get list of work models save in shared prefences
