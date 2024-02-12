@@ -173,8 +173,7 @@ class _SkillSmallState extends State<SkillSmall> {
                             },
 
                           ),
-                          // Expanded(child: Container()),
-                          SizedBox(width: 40,),
+                          SizedBox(width: sl<ScreenSize>().width * 0.3,),
                           // skil grade menu
                           Expanded(
                             child:  Container(

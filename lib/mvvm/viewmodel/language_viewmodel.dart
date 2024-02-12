@@ -22,22 +22,31 @@ class LanguageVM extends ChangeNotifier{
   bool isForEdit = false;
   late LanguageRepository  languageRepository;
 
+
+  var title_controller = TextEditingController();
+  var dropdownValue = 1.0;
   LanguageVM(){
     languageRepository = LanguageRepository();
     languageList = LanguageList();
-    //  languageList?.languageList = [];
 
   }
 
+  // select item
+  // populate item with selected data
   void SelectLangModel(LanguageModel language_model){
 
     print("Selected work model clicked");
     selected_lang = language_model;
+    title_controller.text = selected_lang!.title!;
+    dropdownValue = selected_lang!.percent!.toDouble();
     notifyListeners();
     isForEdit = true;
   }
 
-
+void ClearInput(){
+    title_controller.clear();
+    dropdownValue = 1.0;
+}
 // delete workmodel from list
   void DeleteLang(LanguageModel language_model){
 
@@ -60,8 +69,12 @@ class LanguageVM extends ChangeNotifier{
   /*
   add new workmodel in list
    */
-  void AddLanguage({required LanguageModel language_model})async{
+  void AddLanguage()async{
 
+    var language_model = LanguageModel(
+      title: title_controller.text,
+      percent: dropdownValue.toInt()
+    );
     print('length: ${languageList?.lang_list}');
     if(languageList?.lang_list==null || languageList?.lang_list?.isEmpty==true){
       print("lang list is empty");
@@ -107,6 +120,7 @@ class LanguageVM extends ChangeNotifier{
     print("Data added");
     isForEdit = false;
     selected_lang = null;
+    ClearInput();
     notifyListeners();
 
   }
@@ -114,23 +128,23 @@ class LanguageVM extends ChangeNotifier{
   /*
   save list of work models
    */
-  void SavelanguageList({required LanguageList languageList})async{
+  Future<bool> SavelanguageList()async{
     var result;
-    if(languageList.lang_list?.isEmpty==true){
+    if(languageList==null || languageList?.lang_list?.isEmpty==true){
       print("List is empty delete all works");
       result = await languageRepository.ClearLanguageList();
 
     }else{
       this.languageList  = languageList;
       print("Saving data:");
-      result = await languageRepository.SaveLanguageDataList(languageList: languageList);
+      result = await languageRepository.SaveLanguageDataList(languageList: languageList!);
 
 
     }
 
     if(result==true){
       lang_items?.clear();
-      lang_items = languageList.lang_list?.map((e) => LanguageItem(languageModel: e!)).toList();
+      lang_items = languageList?.lang_list?.map((e) => LanguageItem(languageModel: e!)).toList();
 
       print("Data saved");
       notifyListeners();
@@ -139,6 +153,8 @@ class LanguageVM extends ChangeNotifier{
       // show snackbar error
       print("this is an error");
     }
+
+    return result;
   }
 
   /*
@@ -170,5 +186,8 @@ class LanguageVM extends ChangeNotifier{
     notifyListeners();
     isForEdit = false;
   }
-
+  void ChangeValue(double newValue) {
+    dropdownValue = newValue;
+    notifyListeners();
+  }
 }

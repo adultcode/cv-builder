@@ -6,6 +6,7 @@ import '../education_page/education_small.dart';
 import '../experience_page/experience_big.dart';
 import '../experience_page/experience_small.dart';
 import '../home_page/home_small.dart';
+import '../language_page/language_small.dart';
 import '../profile_edit_page/profile_edit_big.dart';
 import '../profile_edit_page/profile_edit_small.dart';
 import '../skill_page/skill_small.dart';
@@ -38,6 +39,9 @@ class _DashboardSmallState extends State<DashboardSmall> {
           }
           else if (value.active_item == 4) {
              return   SkillSmall();();
+          }
+          else if (value.active_item == 5) {
+             return   LanguageSmall();();
           }
           else return Text("sfsdjh");
         },

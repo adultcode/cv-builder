@@ -18,10 +18,8 @@ class LanguageBig extends StatefulWidget {
 
 class _LanguageBigState extends State<LanguageBig> {
 
-var _title_controller = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 
-var dropdownValue = 1.0;
 
 
 @override
@@ -35,13 +33,6 @@ void initState() {
   });
 }
 
-void PopulateInputs(LanguageModel languageModel) {
-  _title_controller.text = languageModel.title!;
-}
-
-void ClearInpust() {
-  _title_controller.clear();
-}
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +46,7 @@ void ClearInpust() {
           child: Consumer<LanguageVM>(builder: (context, value, child) {
             if (value.selected_lang != null &&
                 value.selected_lang?.title != null) {
-              PopulateInputs(value.selected_lang!);
+             // PopulateInputs(value.selected_lang!);
             }
             return Form(
               key: _formKey,
@@ -73,18 +64,22 @@ void ClearInpust() {
                           /*
                         save user's data
                          */
-                          if (value.languageList?.lang_list!=null) {
-                            Provider.of<LanguageVM>(context,listen: false).SavelanguageList(languageList: value.languageList!);
-                            SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                            // print("Size of total works: ${value.educationList?.educationList?.length}");
+                          var _result = await  Provider.of<LanguageVM>(context,listen: false).SavelanguageList();
 
+                          if(_result==true){
+                            if(Provider.of<LanguageVM>(context,listen: false).languageList==null ||
+                                Provider.of<LanguageVM>(context,listen: false).languageList?.lang_list?.isEmpty==true)
+                              SuccessSnack(context: context,title: 'لیست زبان شما خالی است');
+                            else
+                              SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+
+
+                          }else{
+
+                            ErrorSnack(context: context,title: 'خطایی رخ داده است');
 
                           }
 
-                          else{
-                            ErrorSnack(context: context,title: 'شما هیچ سابقه تحصیلی ثبت نکرده اید');
-
-                          }
                         },
                         child: Container(
                           width: 40,
@@ -128,11 +123,8 @@ void ClearInpust() {
                                 child: Text("ثبت"),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()){
-                                    Provider.of<LanguageVM>(context,listen: false).AddLanguage(language_model: LanguageModel(
-                                        title: _title_controller.text,
-                                        percent: dropdownValue.toInt()
-                                    ));
-                                    ClearInpust();
+                                    Provider.of<LanguageVM>(context,listen: false).AddLanguage();
+                                    //ClearInpust();
                                   }
                                 },
                               )),
@@ -151,7 +143,7 @@ void ClearInpust() {
                                         child: Icon(Icons.arrow_drop_down,size: 20,),
                                       ),
                                       // Step 3.
-                                      value: dropdownValue,
+                                      value: value.dropdownValue,
                                       // Step 4.
                                       items: <double>[1,2,3,4,5]
                                           .map<DropdownMenuItem<double>>((double value) {
@@ -167,9 +159,7 @@ void ClearInpust() {
                                       }).toList(),
                                       // Step 5.
                                       onChanged: (double? newValue) {
-                                        setState(() {
-                                          dropdownValue = newValue!;
-                                        });
+                                        value.ChangeValue(newValue!);
                                       },
                                     ),
                                   ),
@@ -198,15 +188,13 @@ void ClearInpust() {
                                 if (value?.isEmpty==true ) {
                                   return 'Please enter some text';
                                 }
-
-
                                 return null;
                               },
-                              controller: _title_controller,
+                              controller: value.title_controller,
                               textDirection: TextDirection.rtl,
                               style: Theme.of(context).textTheme.bodyMedium,
                               decoration: input_text_decoration(
-                                  controller: _title_controller,
+                                  controller: value.title_controller,
                                   hint: 'انگلیسی',
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                             ),

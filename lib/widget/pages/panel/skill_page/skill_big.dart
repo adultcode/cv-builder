@@ -133,8 +133,15 @@ class _SkillBigState extends State<SkillBig> {
                               padding: EdgeInsets.only(top: 0),
                               child: Row(
                                 children: [
-                                  Expanded(child: ElevatedButton(
-                                    child: Text("ثبت"),
+                                  Expanded(
+                                      child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(60),
+                                      ),
+                                      backgroundColor: primary_container,
+                                    ),
+                                    child: Icon(Icons.add,color: primary_title,),
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()){
                                         Provider.of<SkillVM>(context,listen: false).AddSkill();
