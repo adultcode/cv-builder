@@ -19,10 +19,8 @@ class SkillBig extends StatefulWidget {
 }
 
 class _SkillBigState extends State<SkillBig> {
-  var _title_controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  var dropdownValue = 10.0;
 
   @override
   void initState() {
@@ -35,13 +33,6 @@ class _SkillBigState extends State<SkillBig> {
     });
   }
 
-  void PopulateInputs(SkillModel skillModel) {
-    _title_controller.text = skillModel.title!;
-  }
-
-  void ClearInpust() {
-    _title_controller.clear();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +47,7 @@ class _SkillBigState extends State<SkillBig> {
             builder: (context, value, child) {
               if (value.selected_skill != null &&
                   value.selected_skill?.title != null) {
-                PopulateInputs(value.selected_skill!);
+               // PopulateInputs(value.selected_skill!);
               }
 
               return Form(
@@ -79,16 +70,19 @@ class _SkillBigState extends State<SkillBig> {
                             /*
                         save user's data
                          */
-                            if (value.skillList?.skill_list!=null) {
-                              Provider.of<SkillVM>(context,listen: false).SaveSkillList(skillList: value.skillList!);
-                              SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                             // print("Size of total works: ${value.educationList?.educationList?.length}");
+                            var _result = await  Provider.of<SkillVM>(context,listen: false).SaveSkillList();
+
+                            if(_result==true){
+                              if(Provider.of<SkillVM>(context,listen: false).skillList==null ||
+                                  Provider.of<SkillVM>(context,listen: false).skillList?.skill_list?.isEmpty==true)
+                                SuccessSnack(context: context,title: 'لیست مهارت های شما خالی است');
+                              else
+                                SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
 
 
-                            }
+                            }else{
 
-                            else{
-                              ErrorSnack(context: context,title: 'شما هیچ سابقه تحصیلی ثبت نکرده اید');
+                              ErrorSnack(context: context,title: 'خطایی رخ داده است');
 
                             }
 
@@ -143,11 +137,8 @@ class _SkillBigState extends State<SkillBig> {
                                     child: Text("ثبت"),
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()){
-                                        Provider.of<SkillVM>(context,listen: false).AddSkill(skillModel: SkillModel(
-                                          title: _title_controller.text,
-                                            percent: dropdownValue
-                                        ));
-                                        ClearInpust();
+                                        Provider.of<SkillVM>(context,listen: false).AddSkill();
+                                       // ClearInpust();
                                       }
                                     },
                                   )),
@@ -166,7 +157,7 @@ class _SkillBigState extends State<SkillBig> {
                                             child: Icon(Icons.arrow_drop_down,size: 20,),
                                           ),
                                           // Step 3.
-                                          value: dropdownValue,
+                                          value: value.dropdownValue,
                                           // Step 4.
                                           items: <double>[10,20,30,40,50,60,70,80,90,100]
                                               .map<DropdownMenuItem<double>>((double value) {
@@ -182,9 +173,8 @@ class _SkillBigState extends State<SkillBig> {
                                           }).toList(),
                                           // Step 5.
                                           onChanged: (double? newValue) {
-                                            setState(() {
-                                              dropdownValue = newValue!;
-                                            });
+                                            value.ChangeValue(newValue!);
+
                                           },
                                         ),
                                       ),
@@ -217,11 +207,11 @@ class _SkillBigState extends State<SkillBig> {
 
                                   return null;
                                 },
-                                controller: _title_controller,
+                                controller: value.title_controller,
                                 textDirection: TextDirection.rtl,
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 decoration: input_text_decoration(
-                                    controller: _title_controller,
+                                    controller: value.title_controller,
                                     hint: 'برنامه نویسی',
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                               ),

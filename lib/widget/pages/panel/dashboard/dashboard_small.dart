@@ -8,6 +8,7 @@ import '../experience_page/experience_small.dart';
 import '../home_page/home_small.dart';
 import '../profile_edit_page/profile_edit_big.dart';
 import '../profile_edit_page/profile_edit_small.dart';
+import '../skill_page/skill_small.dart';
 
 class DashboardSmall extends StatefulWidget {
   const DashboardSmall({Key? key}) : super(key: key);
@@ -34,6 +35,9 @@ class _DashboardSmallState extends State<DashboardSmall> {
           }
           else if (value.active_item == 3) {
              return   EducationSmall();();
+          }
+          else if (value.active_item == 4) {
+             return   SkillSmall();();
           }
           else return Text("sfsdjh");
         },

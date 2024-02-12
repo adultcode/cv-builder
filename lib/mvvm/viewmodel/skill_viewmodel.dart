@@ -19,6 +19,9 @@ class SkillVM extends ChangeNotifier{
   bool isForEdit = false;
   late SkillRepository  skillRepository;
 
+  var title_controller = TextEditingController();
+  double dropdownValue = 10.0;
+
   SkillVM(){
     skillRepository = SkillRepository();
     skillList = SkillList();
@@ -30,6 +33,8 @@ class SkillVM extends ChangeNotifier{
 
     print("Selected work model clicked");
     selected_skill = skillModel;
+    title_controller.text = selected_skill!.title!;
+    dropdownValue = selected_skill!.percent!;
     notifyListeners();
     isForEdit = true;
   }
@@ -52,13 +57,20 @@ class SkillVM extends ChangeNotifier{
 
 
   }
-
-
+// reset inputs and dropdown
+void ClearnInput(){
+    title_controller.clear();
+    dropdownValue = 10.0;
+}
   /*
   add new workmodel in list
    */
-  void AddSkill({required SkillModel skillModel})async{
+  void AddSkill()async{
 
+    var skillModel = SkillModel(
+        title: title_controller.text,
+        percent: dropdownValue
+    );
     print('length: ${skillList?.skill_list}');
     if(skillList?.skill_list==null || skillList?.skill_list?.isEmpty==true){
       print("education list is empty");
@@ -104,6 +116,7 @@ class SkillVM extends ChangeNotifier{
     print("Data added");
     isForEdit = false;
     selected_skill = null;
+    ClearnInput();
     notifyListeners();
 
   }
@@ -111,23 +124,24 @@ class SkillVM extends ChangeNotifier{
   /*
   save list of work models
    */
-  void SaveSkillList({required SkillList skillList})async{
+  Future<bool> SaveSkillList()async{
     var result;
-    if(skillList.skill_list?.isEmpty==true){
+    if(skillList==null || skillList?.skill_list?.isEmpty==true){
       print("List is empty delete all works");
       result = await skillRepository.ClearSkillList();
 
     }else{
       this.skillList  = skillList;
       print("Saving data:");
-      result = await skillRepository.SaveSkillDataList(skillList: skillList);
+      result = await skillRepository.SaveSkillDataList(skillList: skillList!);
+
 
 
     }
 
     if(result==true){
       skill_items?.clear();
-      skill_items = skillList.skill_list?.map((e) => SkillItem(skillModell: e!)).toList();
+      skill_items = skillList?.skill_list?.map((e) => SkillItem(skillModell: e!)).toList();
 
       print("Data saved");
       notifyListeners();
@@ -136,6 +150,8 @@ class SkillVM extends ChangeNotifier{
       // show snackbar error
       print("this is an error");
     }
+
+    return result;
   }
 
   /*
@@ -166,6 +182,11 @@ class SkillVM extends ChangeNotifier{
 
     notifyListeners();
     isForEdit = false;
+  }
+
+  void ChangeValue(double newValue) {
+    dropdownValue = newValue;
+    notifyListeners();
   }
 
 }
