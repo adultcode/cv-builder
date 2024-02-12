@@ -109,19 +109,10 @@ class _SkillSmallState extends State<SkillSmall> {
                     crossAxisAlignment: CrossAxisAlignment.end,
       
                     children: [
-      
-      
 
-      
-                     // SizedBox(height: 10,),
                       Text('لیست مهارت ها خود را در این بخش اضافه کنید ',style: Theme.of(context).textTheme.bodyMedium,),
                       SizedBox(height: 30,),
-      
-                      /*
-                       work list view
-                         */
-      
-      
+
       
       
                       /*

@@ -46,15 +46,7 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
     });
   }
 
-  // void PopulateForm(InfoModel _infoModel){
-  //   name_controller.text = _infoModel.name!;
-  //   jobtitle_controller.text = _infoModel.job!;
-  //   bio_controller.text = _infoModel.bio!;
-  //   phone_controller.text = _infoModel.mobile!.toString();
-  //   email_controller.text = _infoModel.email!;
-  //   city_controller.text = _infoModel.city!;
-  //   birth_controller.text = _infoModel.birth!;
-  // }
+
 
   @override
   void dispose() {
@@ -134,7 +126,6 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
 
-                      SizedBox(height: 10,),
                       Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
                       SizedBox(height: 30,),
       

@@ -40,24 +40,6 @@ class _EducationSmallState extends State<EducationSmall> {
   }
 
 
-  // void PopulateInputs(EducationModel educationModel){
-  //   _title_controller.text = educationModel.title!;
-  //   _grade_controller.text = educationModel.grade!;
-  //   _university_controller.text = educationModel.university!;
-  //   _start_controller.text = educationModel.start_date!;
-  //   _end_controller.text = educationModel.end_date!;
-  //   _desc_controller.text = educationModel.description!;
-  // }
-  //
-  // void ClearInpust(){
-  //   _title_controller.clear();
-  //   _university_controller.clear();
-  //   _start_controller.clear();
-  //   _end_controller.clear();
-  //   _desc_controller.clear();
-  //   _grade_controller.clear();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return DashboarHelper(
@@ -73,10 +55,7 @@ class _EducationSmallState extends State<EducationSmall> {
 
             onTap: () async{
 
-              // var resul = await     Provider.of<InfoVM>(context,listen: false).SaveInfoData();
-              // if(resul==true)     SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
               var _result = await  Provider.of<EducationVM>(context,listen: false).SaveEducationList();
-
               if(_result==true){
                 if(Provider.of<EducationVM>(context,listen: false).educationList==null ||
                     Provider.of<EducationVM>(context,listen: false).educationList?.educationList?.isEmpty==true)
@@ -115,7 +94,6 @@ class _EducationSmallState extends State<EducationSmall> {
         drawer: MobileDrawer(),
       body: Container(
           height: sl<ScreenSize>().height,
-         // decoration: panel_container_decoration,
           padding: EdgeInsets.symmetric(
               vertical: sl<ScreenSize>().height * 0.02,
               horizontal: sl<ScreenSize>().width * 0.02),
@@ -132,7 +110,6 @@ class _EducationSmallState extends State<EducationSmall> {
 
                   children: [
 
-                    SizedBox(height: sl<ScreenSize>().height*0.02,),
 
                     Text('لیست تحصیلات و دوره های گذرانده شده در دانشگاه و موسسات ',
                       textDirection: TextDirection.rtl,
@@ -197,8 +174,6 @@ class _EducationSmallState extends State<EducationSmall> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                       // SizedBox(width: sl<ScreenSize>().width*0.05),
-
                         /*
                       company field
                        */
@@ -228,7 +203,6 @@ class _EducationSmallState extends State<EducationSmall> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(60),
                         ),
-                        //  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
                         backgroundColor: primary_container,
 
                       ),
@@ -236,14 +210,9 @@ class _EducationSmallState extends State<EducationSmall> {
 
                         if (_formKey.currentState!.validate()){
                           // add new work model in list of work models
-                          // var wo = WorkModel(title:_title_controller.text,
-
 
 
                           Provider.of<EducationVM>(context,listen: false).AddEducation();
-                          //
-                          // // clear data after add new data
-                        //  ClearInpust();
                           SuccessSnack(context: context,title: 'دریافت شد');
 
                         }else{

@@ -113,7 +113,6 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                   crossAxisAlignment: CrossAxisAlignment.end,
 
                   children: [
-                    SizedBox(height: 10,),
                     Text('لیست سوابق کاری خود را در این قسمت ثبت کنید ',
                       textDirection: TextDirection.rtl,
 
@@ -134,7 +133,6 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                    */
               ,SizedBox(height: 20,),
 
-                      //  SizedBox(width: sl<ScreenSize>().width*0.05),
 
                         /*
                       company field
@@ -148,9 +146,6 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                        */
                         InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: value.title_controller,),
 
-
-                    //SizedBox(height: sl<ScreenSize>().height*0.04),
-
                     /*
                   second row
                   start and end date field
@@ -158,7 +153,6 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                      //  SizedBox(width: sl<ScreenSize>().width*0.01),
 
                         /*
                       company field
@@ -174,13 +168,9 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                         Expanded(
                             child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
                         ),
-
-
-
                       ],
                     ),
                     SizedBox(height: sl<ScreenSize>().height*0.04),
-
                     /*
                     description input
                      */
@@ -188,7 +178,6 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                       mainAxisAlignment: MainAxisAlignment.end,
 
                       children: [
-                        //SizedBox(width: sl<ScreenSize>().width*0.05),
                         Container(
                           child: ElevatedButton(
 
@@ -196,15 +185,12 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(60),
                               ),
-                            //  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
                               backgroundColor: primary_container,
-
                             ),
                             onPressed: () {
 
                               if (_formKey.currentState!.validate()){
                                 // add new work model in list of work models
-
                                 Provider.of<WorkVM>(context,listen: false).AddWork();
                               }else{
                                 ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');

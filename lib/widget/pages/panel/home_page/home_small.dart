@@ -49,28 +49,9 @@ class _HomePageSmallState extends State<HomePageSmall> {
         },
       ),
       appBar: AppBar(
-       // backgroundColor: primary_btn,
-       // elevation: 1,
       title: Text("پروفایل"),
         centerTitle: true,
-        // actions:[    ElevatedButton(
-        //
-        //   style: ElevatedButton.styleFrom(
-        //       backgroundColor: panel_green,
-        //       padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
-        //   ),
-        //   onPressed: () {
-        //     if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-        //     //  Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: value.userModel,
-        //      //     selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
-        //
-        //     }
-        //     else{
-        //       ErrorSnack(context: context,title: "هیچ قالبی انتخاب نکرده اید");
-        //     }
-        //   },
-        //   child: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
-        // ),]
+
       ),
 
       drawer: MobileDrawer(),
@@ -89,9 +70,9 @@ class _HomePageSmallState extends State<HomePageSmall> {
                 crossAxisAlignment: CrossAxisAlignment.end,
 
                 children: [
-                  SizedBox(
-                    height: sl<ScreenSize>().height * 0.02,
-                  ),
+                  // SizedBox(
+                  //   height: sl<ScreenSize>().height * 0.02,
+                  // ),
                   Text(
                     'خوش آمدید '+"${value.userModel?.infoModel?.name?? ""}",
                     style: Theme.of(context).textTheme.titleLarge,

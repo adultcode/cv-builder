@@ -23,14 +23,6 @@ class SocialPageBig extends StatefulWidget {
 
 class _SocialPageBigState extends State<SocialPageBig> {
 
-  var _linkedin_controller = TextEditingController(); //0
-  var _github_controller = TextEditingController();   // 1
-  var _dribble_controller = TextEditingController();  // 2
-  var _website_controller = TextEditingController();  // 3
-  var _telegram_controller = TextEditingController(); // 4
-  var _instagram_controller = TextEditingController();  // 5
-
-  List<SocialModel?> _social_list = List<SocialModel?>.filled(6,null);
 
 
 
@@ -42,59 +34,7 @@ class _SocialPageBigState extends State<SocialPageBig> {
     super.initState();
     Provider.of<SocialVM>(context,listen: false).GetSocialListData();
   }
-  List<SocialModel?> GetInputData(){
 
-
-    // check linkedin
-    if(_linkedin_controller.text.isNotEmpty) _social_list[0] = SocialModel(address: _linkedin_controller.text,socialType: SocialType.linkedin);
-    else _social_list[0] = null;
-
-    // check github
-    if(_github_controller.text.isNotEmpty) _social_list[1] = SocialModel(address: _github_controller.text,socialType: SocialType.github);
-    else _social_list[1] = null;
-
-    // check dribble
-    if(_dribble_controller.text.isNotEmpty) _social_list[2] = SocialModel(address: _dribble_controller.text,socialType: SocialType.dribble);
-    else _social_list[2] = null;
-
-    // check website
-    if(_website_controller.text.isNotEmpty) _social_list[3] = SocialModel(address: _website_controller.text,socialType: SocialType.other);
-    else _social_list[3] = null;
-
-    // check telegram
-    if(_telegram_controller.text.isNotEmpty) _social_list[4] = SocialModel(address: _telegram_controller.text,socialType: SocialType.telegram);
-    else _social_list[4] = null;
-
-    // check telegram
-    if(_instagram_controller.text.isNotEmpty) _social_list[5] = SocialModel(address: _instagram_controller.text,socialType: SocialType.instagram);
-    else _social_list[5] = null;
-
-    return _social_list;
-  }
-
-  void PopulateInput(SocialList socialList){
-
-    //linkedin
-    _linkedin_controller.text = socialList.socialModels?[0]?.address??"";
-
-    //github
-    _github_controller.text = socialList.socialModels?[1]?.address??"";
-
-    //dribble
-    _dribble_controller.text = socialList.socialModels?[2]?.address??"";
-
-    //website
-    _website_controller.text = socialList.socialModels?[3]?.address??"";
-
-    //telegram
-    _telegram_controller.text = socialList.socialModels?[4]?.address??"";
-
-    //instagram
-    _instagram_controller.text = socialList.socialModels?[5]?.address??"";
-
-
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +51,7 @@ class _SocialPageBigState extends State<SocialPageBig> {
             builder: (context, value, child) {
               if(value.socialList!=null){
                 // populate the inputs
-                PopulateInput(value.socialList!);
+             //   PopulateInput(value.socialList!);
               }
 
               return  Column(
@@ -128,8 +68,7 @@ class _SocialPageBigState extends State<SocialPageBig> {
                             /*
                       save user's data
                        */
-                            SocialList socialList = SocialList(socialModels: GetInputData());
-                            Provider.of<SocialVM>(context,listen: false).SaveSocialList(social: socialList);
+                            Provider.of<SocialVM>(context,listen: false).SaveSocialList();
                             SuccessSnack(context: context, title: "اطلاعات ثبت شد");
 
                           },
@@ -167,14 +106,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
                   github field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'github.com',name: 'گیتهاب',textEditingController: _github_controller,)
+                            child: InputLabel(hint: 'github.com',name: 'گیتهاب',textEditingController: value.github_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
                         /*
                   linkedin field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'linkedin.com',name: 'لینکدین',textEditingController: _linkedin_controller,)
+                            child: InputLabel(hint: 'linkedin.com',name: 'لینکدین',textEditingController: value.linkedin_controller,)
                         ),
 
 
@@ -193,14 +132,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
                   Telegram field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Telegram.me',name: 'تلگرام',textEditingController: _telegram_controller,)
+                            child: InputLabel(hint: 'Telegram.me',name: 'تلگرام',textEditingController: value.telegram_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
                         /*
                   Instagram field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Instagram.com',name: 'اینستاگرام',textEditingController: _instagram_controller,)
+                            child: InputLabel(hint: 'Instagram.com',name: 'اینستاگرام',textEditingController: value.instagram_controller,)
                         ),
 
 
@@ -219,14 +158,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
                   birth field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Dribble.com',name: 'دریبل',textEditingController: _dribble_controller,)
+                            child: InputLabel(hint: 'Dribble.com',name: 'دریبل',textEditingController: value.dribble_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
                         /*
                   name field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Site.com',name: 'وبسایت',textEditingController: _website_controller,)
+                            child: InputLabel(hint: 'Site.com',name: 'وبسایت',textEditingController: value.website_controller,)
                         ),
 
 

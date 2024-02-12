@@ -10,6 +10,7 @@ import '../language_page/language_small.dart';
 import '../profile_edit_page/profile_edit_big.dart';
 import '../profile_edit_page/profile_edit_small.dart';
 import '../skill_page/skill_small.dart';
+import '../social_page/social_page_small.dart';
 
 class DashboardSmall extends StatefulWidget {
   const DashboardSmall({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _DashboardSmallState extends State<DashboardSmall> {
           else if (value.active_item == 5) {
              return   LanguageSmall();();
           }
-          else return Text("sfsdjh");
+          else return SocialPageSmall();
         },
       ),
     );
