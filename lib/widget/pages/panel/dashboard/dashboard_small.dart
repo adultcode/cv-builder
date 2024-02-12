@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
+import '../education_page/education_small.dart';
 import '../experience_page/experience_big.dart';
 import '../experience_page/experience_small.dart';
 import '../home_page/home_small.dart';
@@ -30,6 +31,9 @@ class _DashboardSmallState extends State<DashboardSmall> {
           }
           else if (value.active_item == 2) {
              return   ExperienceSmall();();
+          }
+          else if (value.active_item == 3) {
+             return   EducationSmall();();
           }
           else return Text("sfsdjh");
         },

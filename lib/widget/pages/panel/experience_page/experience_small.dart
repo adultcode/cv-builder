@@ -41,21 +41,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
     print(result);
 
   }
-  // void PopulateInputs(WorkModel workModel){
-  //   _title_controller.text = workModel.title!;
-  //   _company_controller.text = workModel.company!;
-  //   _start_controller.text = workModel.start_date!;
-  //   _end_controller.text = workModel.end_date!;
-  //   _desc_controller.text = workModel.description!;
-  // }
-  //
-  // void ClearInpust(){
-  //   _title_controller.clear();
-  //   _company_controller.clear();
-  //   _start_controller.clear();
-  //   _end_controller.clear();
-  //   _desc_controller.clear();
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +114,10 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
 
                   children: [
                     SizedBox(height: 10,),
-                    Text('لیست سوابق کاری خود را در این قسمت ثبت کنید ',style: Theme.of(context).textTheme.bodyMedium,),
+                    Text('لیست سوابق کاری خود را در این قسمت ثبت کنید ',
+                      textDirection: TextDirection.rtl,
+
+                      style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
 
                     /*
@@ -160,7 +149,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                         InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: value.title_controller,),
 
 
-                    SizedBox(height: sl<ScreenSize>().height*0.04),
+                    //SizedBox(height: sl<ScreenSize>().height*0.04),
 
                     /*
                   second row
@@ -215,15 +204,8 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
 
                               if (_formKey.currentState!.validate()){
                                 // add new work model in list of work models
-                                // var wo = WorkModel(title:_title_controller.text,
-
-
 
                                 Provider.of<WorkVM>(context,listen: false).AddWork();
-                                //
-                                // // clear data after add new data
-                                // ClearInpust();
-
                               }else{
                                 ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
                               }

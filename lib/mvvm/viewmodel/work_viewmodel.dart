@@ -77,6 +77,7 @@ void SelectWorkModel(WorkModel workModel){
   add new workmodel in list
    */
   void AddWork()async{
+
   var temp_work = WorkModel(title:title_controller.text,
         company: company_controller.text,
         description: desc_controller.text,

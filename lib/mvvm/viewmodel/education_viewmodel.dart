@@ -15,6 +15,15 @@ class EducationVM extends ChangeNotifier{
   bool isForEdit = false;
   late EducationRepository  educationRepository;
 
+  /// controllers
+  ///
+  var title_controller = TextEditingController();
+  var grade_controller = TextEditingController();
+  var university_controller = TextEditingController();
+  var start_controller = TextEditingController();
+  var end_controller = TextEditingController();
+  var desc_controller = TextEditingController();
+
   EducationVM(){
     educationRepository = EducationRepository();
     educationList = EducationList();
@@ -22,11 +31,20 @@ class EducationVM extends ChangeNotifier{
 
   }
 
+  void PopulateInputs(){
+    title_controller.text = selected_education!.title!;
+    grade_controller.text = selected_education!.grade!;
+    university_controller.text = selected_education!.university!;
+    start_controller.text = selected_education!.start_date!;
+    end_controller.text = selected_education!.end_date!;
+    desc_controller.text = selected_education!.description!;
+  }
   void SelectEducationModel(EducationModel educationModel){
 
     print("Selected work model clicked");
     selected_education = educationModel;
-    notifyListeners();
+    PopulateInputs();
+   // notifyListeners();
     isForEdit = true;
   }
 
@@ -49,11 +67,27 @@ class EducationVM extends ChangeNotifier{
 
   }
 
+  void ClearInpust(){
+    title_controller.clear();
+    university_controller.clear();
+    start_controller.clear();
+    end_controller.clear();
+    desc_controller.clear();
+    grade_controller.clear();
+  }
 
   /*
   add new workmodel in list
    */
-  void AddEducation({required EducationModel educationModel})async{
+  void AddEducation()async{
+
+    var educationModel =  EducationModel(
+          title:title_controller.text,
+          university: university_controller.text,
+          description: desc_controller.text,
+          start_date: start_controller.text,
+          grade: grade_controller.text,
+          end_date: end_controller.text);
 
     print('length: ${educationList?.educationList}');
     if(educationList?.educationList==null || educationList?.educationList?.isEmpty==true){
@@ -100,6 +134,7 @@ class EducationVM extends ChangeNotifier{
     print("Data added");
    isForEdit = false;
    selected_education = null;
+    ClearInpust();
    notifyListeners();
 
   }
@@ -107,23 +142,24 @@ class EducationVM extends ChangeNotifier{
   /*
   save list of work models
    */
-  void SaveWorkList({required EducationList educationList})async{
+  Future<bool> SaveEducationList()async{
+
     var result;
-    if(educationList.educationList?.isEmpty==true){
+    if(educationList==null || educationList?.educationList?.isEmpty==true){
       print("List is empty delete all works");
       result = await educationRepository.ClearEducationist();
 
     }else{
       this.educationList  = educationList;
       print("Saving data:");
-      result = await educationRepository.SaveWorkDataList(educationList: educationList);
+      result = await educationRepository.SaveWorkDataList(educationList: educationList!);
 
 
     }
 
     if(result==true){
       education_items?.clear();
-      education_items = educationList.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
+      education_items = educationList?.educationList?.map((e) => EducationItem(educationModel: e!)).toList();
 
       print("Data saved");
       notifyListeners();
@@ -132,6 +168,7 @@ class EducationVM extends ChangeNotifier{
       // show snackbar error
       print("this is an error");
     }
+    return result;
   }
 
   /*

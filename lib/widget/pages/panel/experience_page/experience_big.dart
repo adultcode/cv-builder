@@ -212,17 +212,9 @@ class _ExperienceBigState extends State<ExperienceBig> {
       
                             if (_formKey.currentState!.validate()){
                               // add new work model in list of work models
-                              // var wo = WorkModel(title:_title_controller.text,
-      
-      
-                              //
-                              // Provider.of<WorkVM>(context,listen: false).AddWork(work: WorkModel(title:_title_controller.text,
-                              //     company: _company_controller.text,
-                              //     description: _desc_controller.text,
-                              //     start_date: _start_controller.text,
-                              //     end_date: _end_controller.text) );
-      
-                                  // clear data after add new data
+                              Provider.of<WorkVM>(context,listen: false).AddWork();
+
+                              // clear data after add new data
                            //  ClearInpust();
       
                             }else{

@@ -24,12 +24,6 @@ class EducationBig extends StatefulWidget {
 
 class _EducationBigState extends State<EducationBig> {
 
-  var _title_controller = TextEditingController();
-  var _grade_controller = TextEditingController();
-  var _university_controller = TextEditingController();
-  var _start_controller = TextEditingController();
-  var _end_controller = TextEditingController();
-  var _desc_controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -44,23 +38,23 @@ class _EducationBigState extends State<EducationBig> {
   }
 
 
-  void PopulateInputs(EducationModel educationModel){
-    _title_controller.text = educationModel.title!;
-    _grade_controller.text = educationModel.grade!;
-    _university_controller.text = educationModel.university!;
-    _start_controller.text = educationModel.start_date!;
-    _end_controller.text = educationModel.end_date!;
-    _desc_controller.text = educationModel.description!;
-  }
-
-  void ClearInpust(){
-    _title_controller.clear();
-    _university_controller.clear();
-    _start_controller.clear();
-    _end_controller.clear();
-    _desc_controller.clear();
-    _grade_controller.clear();
-  }
+  // void PopulateInputs(EducationModel educationModel){
+  //   _title_controller.text = educationModel.title!;
+  //   _grade_controller.text = educationModel.grade!;
+  //   _university_controller.text = educationModel.university!;
+  //   _start_controller.text = educationModel.start_date!;
+  //   _end_controller.text = educationModel.end_date!;
+  //   _desc_controller.text = educationModel.description!;
+  // }
+  //
+  // void ClearInpust(){
+  //   _title_controller.clear();
+  //   _university_controller.clear();
+  //   _start_controller.clear();
+  //   _end_controller.clear();
+  //   _desc_controller.clear();
+  //   _grade_controller.clear();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +68,7 @@ class _EducationBigState extends State<EducationBig> {
           child: Consumer<EducationVM>(builder: (context, value, child) {
 
             if(value.selected_education!=null && value.selected_education?.title!=null){
-              PopulateInputs(value.selected_education!);
+             // PopulateInputs(value.selected_education!);
             }
             return Form(
               key: _formKey,
@@ -97,19 +91,22 @@ class _EducationBigState extends State<EducationBig> {
                           /*
                         save user's data
                          */
-                          if (value.educationList?.educationList!=null) {
-                            // print("Work size from buld: ${value.worklList?.workModels?.length}");
-                            Provider.of<EducationVM>(context,listen: false).SaveWorkList(educationList: value.educationList!);
-                            SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-                            print("Size of total works: ${value.educationList?.educationList?.length}");
+                          var _result = await  Provider.of<EducationVM>(context,listen: false).SaveEducationList();
 
+                          if(_result==true){
+                            if(Provider.of<EducationVM>(context,listen: false).educationList==null ||
+                                Provider.of<EducationVM>(context,listen: false).educationList?.educationList?.isEmpty==true)
+                              SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
+                            else
+                              SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+
+
+                          }else{
+
+                            ErrorSnack(context: context,title: 'خطایی رخ داده است');
 
                           }
 
-                          else{
-                            ErrorSnack(context: context,title: 'شما هیچ سابقه تحصیلی ثبت نکرده اید');
-
-                          }
 
                         },
                         child: Container(
@@ -155,7 +152,7 @@ class _EducationBigState extends State<EducationBig> {
                     grade field
                      */
                       Expanded(
-                          child: InputLabel(hint: 'کارشناسی ارشد',name: 'مقطع',textEditingController: _grade_controller,)
+                          child: InputLabel(hint: 'کارشناسی ارشد',name: 'مقطع',textEditingController: value.grade_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -163,7 +160,7 @@ class _EducationBigState extends State<EducationBig> {
                     education title field
                      */
                       Expanded(
-                          child: InputLabel(hint: 'مهندسی کامپیوتر',name: 'رشته تحصیلی',textEditingController: _title_controller,)
+                          child: InputLabel(hint: 'مهندسی کامپیوتر',name: 'رشته تحصیلی',textEditingController: value.title_controller,)
                       ),
 
 
@@ -185,7 +182,7 @@ class _EducationBigState extends State<EducationBig> {
                           grade field
                            */
                   Expanded(
-                  child: InputLabel(hint: 'توضیحات',name: 'توضیحات(اختیاری)',textEditingController: _desc_controller,isOption: true,)
+                  child: InputLabel(hint: 'توضیحات',name: 'توضیحات(اختیاری)',textEditingController: value.desc_controller,isOption: true,)
                   ),
                   SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -193,7 +190,7 @@ class _EducationBigState extends State<EducationBig> {
                     education title field
                      */
                     Expanded(
-                    child: InputLabel(hint: 'صنعتی شریف',name: 'دانشگاه',textEditingController: _university_controller,)
+                    child: InputLabel(hint: 'صنعتی شریف',name: 'دانشگاه',textEditingController: value.university_controller,)
                     ),
 
 
@@ -217,7 +214,7 @@ class _EducationBigState extends State<EducationBig> {
                     company field
                      */
                       Expanded(
-                          child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: _end_controller,)
+                          child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -225,7 +222,7 @@ class _EducationBigState extends State<EducationBig> {
                     job title field
                      */
                       Expanded(
-                          child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: _start_controller,)
+                          child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
                       ),
 
 
@@ -245,18 +242,12 @@ class _EducationBigState extends State<EducationBig> {
                         // var wo = WorkModel(title:_title_controller.text,
 
 
+                        //
+                        Provider.of<EducationVM>(context,listen: false).AddEducation();
 
-                        Provider.of<EducationVM>(context,listen: false).AddEducation(
-                            educationModel: EducationModel(
-                            title:_title_controller.text,
-                            university: _university_controller.text,
-                            description: _desc_controller.text,
-                            start_date: _start_controller.text,
-                            grade: _grade_controller.text,
-                            end_date: _end_controller.text) );
                         //
                         // // clear data after add new data
-                         ClearInpust();
+                         //ClearInpust();
                         SuccessSnack(context: context,title: 'دریافت شد');
 
                       }else{
