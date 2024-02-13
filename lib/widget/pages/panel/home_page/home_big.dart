@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:cv_builder/mvvm/model/entity/template_model.dart';
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/template_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/template_item.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../config/locator.dart';
@@ -10,7 +14,10 @@ import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
+import '../../cv/cv1/cv1.dart';
+import 'dart:html' as html;
 import '../../cv/pdf_page.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class HomeBigPage extends StatefulWidget {
   const HomeBigPage({Key? key}) : super(key: key);
@@ -23,6 +30,16 @@ class _HomeBigPageState extends State<HomeBigPage> {
 
 
  List<TemplateModel> template_list = [];
+
+ void DownloadCV(UserModel userModel)async{
+  // PdfPageFormat format = PdfPageFormat();
+   List<int> fileInts = List.from(await generateResumeCV1(PdfPageFormat.a4,userModel:userModel ));
+   html.AnchorElement(
+       href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
+     ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
+     ..click();
+
+ }
   @override
   void initState() {
     // TODO: implement initState
@@ -65,8 +82,10 @@ class _HomeBigPageState extends State<HomeBigPage> {
                         ),
                         onPressed: () {
                           if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: value.userModel,
-                            selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
+                           // DownloadCV(value.userModel!);
+                            Provider.of<TemplateVM>(context, listen: false).DownloadCVWeb(value.userModel!);
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: value.userModel,
+                            // selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
 
                           }
                           else{

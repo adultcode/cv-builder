@@ -160,6 +160,107 @@ Future<Uint8List> generateResumeCV2(PdfPageFormat format, {Uint8List? profile_im
   return doc.save();
 }
 
+Future<pw.Document> DownloadResumeCV2(PdfPageFormat format, {Uint8List? profile_image_path, required UserModel userModel}) async {
+
+
+  final doc = pw.Document(title: 'رزومه', author: 'حسام رسولیان');
+  final fontData = await rootBundle.load('font/iran_light.ttf');
+  final font_light = pw.Font.ttf(fontData);
+
+
+
+  //if(socials?.isEmpty==true ){
+  if(socials?.isEmpty==true && userModel.socials!=null){
+    //  print("Not empty!!!");
+    List<SocialModel?>? updatedList = userModel.socials?.socialModels?.where((obj) => obj != null).toList();
+
+    updatedList?.forEach((element) async{
+      print("Get icon");
+      if(element!=null){
+        element?.icon_path = await Geticon(element!);
+        socials?.add(Social(socialModel: element));
+        print("Social size: ${socials?.length}");
+      }
+    });
+
+    userModel.socials?.socialModels = updatedList;
+  }
+
+
+
+
+  final bgShape = await rootBundle.loadString('assets/linkedin_fill.svg');
+  // final bgShape2 = await rootBundle.loadString('assets/linkedin_outline.svg');
+
+  final profileImage = pw.MemoryImage(
+    (await rootBundle.load('assets/me.png')).buffer.asUint8List(),
+  );
+
+  final pageTheme = await _myPageTheme(format);
+  doc.addPage(
+
+    pw.MultiPage(
+
+      pageTheme: pageTheme,
+      // pageFormat: format,,
+      build: (pw.Context context) => [
+        pw.Container(
+            padding: pw.EdgeInsets.all( PdfPageFormat.cm),
+            child: pw.Column(
+                mainAxisSize: pw.MainAxisSize.max,
+                children: [
+
+                  if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                    CV2ProfilePart(userModel: userModel,
+                        profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage),
+
+                  // bio
+                  if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                    pw.SizedBox(height: top_margin_title_2 ),
+                  if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                    CV2BioPart(userModel: userModel),
+
+                  // work
+                  if(userModel.works!=null && userModel.works?.workModels!=null)
+                    pw.SizedBox(height:top_margin_title_2),
+                  if(userModel.works!=null && userModel.works?.workModels!=null)
+                    CV2WorkPart(userModel: userModel),
+
+                  // education
+                  if(userModel.educations!=null && userModel.educations?.educationList!=null)
+                    pw.SizedBox(height: top_margin_title_2),
+                  if(userModel.educations!=null && userModel.educations?.educationList!=null)
+                    CV2EducationPart(userModel: userModel),
+
+                  // skill
+                  if(userModel.skills!=null && userModel.skills?.skill_list!=null)
+                    pw.SizedBox(height: top_margin_title_2),
+                  if(userModel.skills!=null && userModel.skills?.skill_list!=null)
+                    CV2SkillPart(userModel: userModel),
+
+                  // language
+                  if(userModel.languageList!=null && userModel.languageList?.lang_list!=null)
+                    pw.SizedBox(height: top_margin_title_2),
+                  if(userModel.languageList!=null && userModel.languageList?.lang_list!=null)
+                    CV2LanguagePart(userModel: userModel),
+                  //social
+                  if(userModel.socials!=null && userModel.socials?.socialModels!=null)
+                    pw.SizedBox(height: top_margin_title_2),
+                  if(userModel.socials!=null && userModel.socials?.socialModels!=null)
+                    CV2SocialPart(userModel: userModel),
+
+
+                ]
+            )
+        )
+
+      ],
+    ),
+  );
+  doc.save();
+  return doc;
+
+}
 
 Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
   final bgShape = await rootBundle.loadString('assets/resume.svg');
