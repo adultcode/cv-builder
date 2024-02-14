@@ -57,8 +57,8 @@ Future<Uint8List> generateResumeCV1(PdfPageFormat format, {Uint8List? profile_im
 
 
   final doc = pw.Document(title: 'رزومه', author: 'حسام رسولیان');
-  final fontData = await rootBundle.load('font/iran_light.ttf');
-  final font_light = pw.Font.ttf(fontData);
+  final fontData = await rootBundle.load('assets/font/iran_light.ttf');
+ final font_light = pw.Font.ttf(fontData);
 
 
 
@@ -93,7 +93,7 @@ Future<Uint8List> generateResumeCV1(PdfPageFormat format, {Uint8List? profile_im
     pw.MultiPage(
 
      pageTheme: pageTheme,
-     // pageFormat: format,,
+     // pageFormat: format,
       build: (pw.Context context) => [
        pw.Partitions(
          mainAxisSize: pw.MainAxisSize.max,
@@ -232,8 +232,8 @@ Future<Uint8List> generateResumeCV1(PdfPageFormat format, {Uint8List? profile_im
 
 Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
   final bgShape = await rootBundle.loadString('assets/resume.svg');
-  final fontData = await rootBundle.load('font/iran.ttf');
-  final fontData_bold = await rootBundle.load('font/iran_bold.ttf');
+  final fontData = await rootBundle.load('assets/font/iran.ttf');
+  final fontData_bold = await rootBundle.load('assets/font/iran_bold.ttf');
   final font = pw.Font.ttf(fontData);
   final font_bold = pw.Font.ttf(fontData_bold);
 

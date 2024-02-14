@@ -15,7 +15,6 @@ import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../cv/cv1/cv1.dart';
-import 'dart:html' as html;
 import '../../cv/pdf_page.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -31,15 +30,15 @@ class _HomeBigPageState extends State<HomeBigPage> {
 
  List<TemplateModel> template_list = [];
 
- void DownloadCV(UserModel userModel)async{
-  // PdfPageFormat format = PdfPageFormat();
-   List<int> fileInts = List.from(await generateResumeCV1(PdfPageFormat.a4,userModel:userModel ));
-   html.AnchorElement(
-       href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
-     ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
-     ..click();
-
- }
+ // void DownloadCV(UserModel userModel)async{
+ //  // PdfPageFormat format = PdfPageFormat();
+ //   List<int> fileInts = List.from(await generateResumeCV1(PdfPageFormat.a4,userModel:userModel ));
+ //   html.AnchorElement(
+ //       href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
+ //     ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
+ //     ..click();
+ //
+ // }
   @override
   void initState() {
     // TODO: implement initState

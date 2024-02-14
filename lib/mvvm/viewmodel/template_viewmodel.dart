@@ -1,13 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pdf/pdf.dart';
-import 'dart:html' as html;
-
+// import 'dart:html' as html;
+import 'package:path_provider/path_provider.dart';
 import '../../widget/pages/cv/cv1/cv1.dart';
 import '../../widget/pages/cv/cv2/cv2.dart';
+import '../data_source/web_pdf_source.dart';
 import '../model/entity/template_model.dart';
 import '../repository/template_repo.dart';
 
@@ -33,13 +35,34 @@ class TemplateVM extends ChangeNotifier{
     }
   }
 
+
+  // generate pdf cv for web platform
   void DownloadCVWeb(UserModel userModel) async{
     // PdfPageFormat format = PdfPageFormat();
     List<int> fileInts =await GetTemplate(userModel);
-    html.AnchorElement(
-        href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
-      ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
-      ..click();
+    //WebPdf.DownloadCVWeb(fileInts);
+    // html.AnchorElement(
+    //     href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
+    //   ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
+    //   ..click();
+
+  }
+
+
+  // generate pdf cv for android platform
+  Future<bool> DownloadCVAndroid(UserModel userModel) async{
+    // PdfPageFormat format = PdfPageFormat();
+
+    Directory generalDownload = Directory('/storage/emulated/0/Download');
+
+    List<int> fileInts =await GetTemplate(userModel);
+    try{
+      final file = File("${generalDownload.path}/cv.pdf");
+      await file.writeAsBytes(await  fileInts);
+      return true;
+    }catch(e){
+      return false;
+    }
 
   }
 

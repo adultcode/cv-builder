@@ -1,3 +1,4 @@
+import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
 
   List<TemplateModel> template_list = [];
+  late UserModel userModel;
   @override
   void initState() {
     // TODO: implement initState
@@ -44,8 +46,24 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
         backgroundColor: primary_container,
         label: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
-        onPressed: () {
+        onPressed: () async{
+          if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+            // DownloadCV(value.userModel!);
+          var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCVAndroid(userModel);
+          if(result){
+            SuccessSnack(context: context,title: "رزومه شما با موفقیت دانلود شد");
 
+          }else{
+            ErrorSnack(context: context,title: "خطایی رخ داده است");
+
+          }
+           //  Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: userModel,
+           //  selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
+
+          }
+          else{
+            ErrorSnack(context: context,title: "هیچ قالبی انتخاب نکرده اید");
+          }
         },
       ),
       appBar: AppBar(
@@ -65,7 +83,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
-
+                userModel = value.userModel!;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
 
