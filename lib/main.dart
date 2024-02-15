@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
@@ -12,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'config/locator.dart';
 import 'mvvm/model/entity/user_model.dart';
@@ -25,11 +29,81 @@ import 'mvvm/viewmodel/skill_viewmodel.dart';
 import 'mvvm/viewmodel/social_viewmodel.dart';
 import 'mvvm/viewmodel/template_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'mvvm/viewmodel/work_viewmodel.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'notification_controller.dart';
+
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+// FlutterLocalNotificationsPlugin();
+late AwesomeNotifications notifications;
 
 void main() async{
-
   WidgetsFlutterBinding.ensureInitialized();
+  notifications = AwesomeNotifications();
+  var channel =  NotificationChannel(
+      channelKey: 'main_channel2',
+      channelName: 'Flutter Main notification ',
+      channelDescription: 'Notification channel description',
+      playSound: false,
+
+      defaultColor: Colors.blueAccent);
+
+  AwesomeNotifications().initialize(
+      null,
+      [
+        channel
+      ],
+      channelGroups: [
+        NotificationChannelGroup(
+            channelGroupKey: 'channel_group1',
+            channelGroupName: 'Channel group name')
+      ],
+      debug: true
+  );
+
+  AwesomeNotifications().setListeners(
+      onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+      onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
+      onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
+      onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod
+  );
+
+
+
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  // Listneing to the foreground messages
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+      showNotification(message.notification!.title!, message.notification!.body!,
+          url_target: message.data["url"]);
+    }
+  });
+
+  print('User granted permission: ${settings.authorizationStatus}');
+ // showNotification("title","body",url_target: "google.ir");
   setUpSL();
   runApp(
     MultiProvider(providers: [
@@ -47,8 +121,51 @@ void main() async{
     ],
      child: MyApp(),)
   );
+
+
 }
 
+
+Future<void> showNotification(String title,String body,{String? url_target}) async {
+
+  AwesomeNotifications().isNotificationAllowed().then((value) {
+    if(!value){
+      AwesomeNotifications().requestPermissionToSendNotifications();
+      print("Permission: false");
+    }else{
+
+
+      notifications.createNotification(
+        actionButtons:url_target!=null? [
+          NotificationActionButton(key: "key", label: "مشاهده")
+        ]:null,
+          content: NotificationContent(
+            id: 2,
+            channelKey: 'main_channel2',
+            title: title,
+            //bigPicture: 'asset://assets/top.jpg',
+            locked: false,
+            notificationLayout: NotificationLayout.BigText,
+            wakeUpScreen: true,
+
+            actionType: ActionType.Default,
+            payload: {'data':url_target},
+
+            body: body,)
+      );
+    }
+
+  });
+}
+
+// Lisitnening to the background messages
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  showNotification(message.notification!.title!, message.notification!.body!,
+  url_target: message.data["url"]);
+
+  print("Handling a background message: ${message.messageId}");
+}
 class MyApp extends StatefulWidget {
 
 
@@ -100,14 +217,6 @@ class _MyAppState extends State<MyApp> {
               return Dashboard();
         },)
 
-
-
-
-
-
-      //   },
-      // ),
-     // home: const PickImageTest(),
     );
   }
 }

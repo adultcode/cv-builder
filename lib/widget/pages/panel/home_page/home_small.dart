@@ -2,11 +2,14 @@ import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import '../../../../config/locator.dart';
+import '../../../../main.dart';
 import '../../../../mvvm/model/entity/template_model.dart';
 import '../../../../mvvm/viewmodel/template_viewmodel.dart';
 import '../../../../mvvm/viewmodel/user_viewmodel.dart';
+import '../../../../notification_controller.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
@@ -27,11 +30,45 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
   List<TemplateModel> template_list = [];
   late UserModel userModel;
+  late AwesomeNotifications notifications;
+
+    // notifications = AwesomeNotifications();
+    // var channel =  NotificationChannel(
+    //     channelKey: 'main_channel2',
+    //     channelName: 'Flutter Main notification ',
+    //     channelDescription: 'Notification channel description',
+    //     playSound: false,
+    //
+    //     defaultColor: Colors.blueAccent);
+    //
+    // AwesomeNotifications().initialize(
+    //     null,
+    //     [
+    //       channel
+    //     ],
+    //     channelGroups: [
+    //       NotificationChannelGroup(
+    //           channelGroupKey: 'channel_group1',
+    //           channelGroupName: 'Channel group name')
+    //     ],
+    //     debug: true
+    // );
+    //
+    // AwesomeNotifications().setListeners(
+    //     onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+    //     onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
+    //     onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
+    //     onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod
+    // );
+
+
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    notifications = AwesomeNotifications();
     WidgetsFlutterBinding.ensureInitialized()
         .scheduleFrameCallback((timeStamp) {
       Provider.of<UserViewModel>(context, listen: false).GetUserModel() ;
@@ -47,6 +84,13 @@ class _HomePageSmallState extends State<HomePageSmall> {
         backgroundColor: primary_container,
         label: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
         onPressed: () async{
+        
+
+            if (!await launchUrl(Uri.parse("https://google.ir"),mode: LaunchMode.externalApplication)) {
+              throw Exception('Could not launch ');
+            }
+          
+            //showNotification();
           if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
             // DownloadCV(value.userModel!);
           var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCVAndroid(userModel);
@@ -57,14 +101,14 @@ class _HomePageSmallState extends State<HomePageSmall> {
             ErrorSnack(context: context,title: "خطایی رخ داده است");
 
           }
-           //  Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: userModel,
-           //  selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
-
+        //    //  Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: userModel,
+        //    //  selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
+        //
           }
           else{
             ErrorSnack(context: context,title: "هیچ قالبی انتخاب نکرده اید");
-          }
-        },
+           }
+         },
       ),
       appBar: AppBar(
       title: Text("پروفایل"),
