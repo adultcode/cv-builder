@@ -150,12 +150,14 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                   second row
                   start and end date field
                    */
+                    SizedBox(height: sl<ScreenSize>().height*0.02),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
 
                         /*
-                      company field
+                      end date
                        */
                         Expanded(
                             child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
@@ -163,7 +165,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                         SizedBox(width: sl<ScreenSize>().width*0.05),
 
                         /*
-                      job title field
+                      start date
                        */
                         Expanded(
                             child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)

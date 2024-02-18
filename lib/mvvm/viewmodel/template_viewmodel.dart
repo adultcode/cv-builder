@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,7 @@ class TemplateVM extends ChangeNotifier{
   List<TemplateModel>? template_list;
   TemplateModel? _selected_template;
  late TemplateRepository templateRepository;
+
   TemplateVM(){
     template_list = [];
     templateRepository = TemplateRepository();
@@ -48,7 +50,24 @@ class TemplateVM extends ChangeNotifier{
 
   }
 
+Future<bool> DownloadCV(UserModel userModel)async{
 
+    try{
+      if(kIsWeb){
+        late WebPdf webPdf;
+
+        webPdf = WebPdf();
+
+        List<int> fileInts =await GetTemplate(userModel);
+      return await webPdf.DownloadCVWeb(fileInts);
+      }else{
+      return await DownloadCVAndroid(userModel);
+
+      }
+    }catch(e){
+      return false;
+    }
+}
   // generate pdf cv for android platform
   Future<bool> DownloadCVAndroid(UserModel userModel) async{
     // PdfPageFormat format = PdfPageFormat();

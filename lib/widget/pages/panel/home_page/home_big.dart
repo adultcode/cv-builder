@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../cv/cv1/cv1.dart';
@@ -79,32 +80,45 @@ class _HomeBigPageState extends State<HomeBigPage> {
                           backgroundColor: panel_green,
                           padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
                         ),
-                        onPressed: () {
-                          if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-                           // DownloadCV(value.userModel!);
-                            Provider.of<TemplateVM>(context, listen: false).DownloadCVWeb(value.userModel!);
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: value.userModel,
-                            // selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
-
-                          }
-                          else{
-                            ErrorSnack(context: context,title: "هیچ قالبی انتخاب نکرده اید");
-                          }
+                        onPressed: () async{
+                          Provider.of<TemplateVM>(context, listen: false).DownloadCV(value.userModel!);
+                          // if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+                          //   // DownloadCV(value.userModel!);
+                          //   var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV(value.userModel!);
+                          //   if(result){
+                          //     SuccessSnack(context: context,title: StringConst.home_cv_downloaded);
+                          //
+                          //   }else{
+                          //     ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
+                          //
+                          //   }
+                          //
+                          // }
+                          // else{
+                          //   ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
+                          // }
                         },
-                        child: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
+                        child: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
                       ),
                       Text(
-                        'پروفایل ',
+                         StringConst.home_profile,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       
                     ],
                   ),
+                  Text(
+                    StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'قالب رزومه مورد نظر خود را از لیست زیر انتخاب نمایید ',
+                    StringConst.home_subtitle,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(

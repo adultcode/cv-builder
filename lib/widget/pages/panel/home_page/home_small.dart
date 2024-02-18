@@ -83,7 +83,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
       fab: FloatingActionButton.extended(
 
         backgroundColor: primary_container,
-        label: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
+        label: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
         onPressed: () async{
         
             //
@@ -94,25 +94,23 @@ class _HomePageSmallState extends State<HomePageSmall> {
             //showNotification();
           if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
             // DownloadCV(value.userModel!);
-          var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCVAndroid(userModel);
+          var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV(userModel);
           if(result){
-            SuccessSnack(context: context,title: "رزومه شما با موفقیت دانلود شد");
+            SuccessSnack(context: context,title: StringConst.home_cv_downloaded);
 
           }else{
-            ErrorSnack(context: context,title: "خطایی رخ داده است");
+            ErrorSnack(context: context,title: StringConst.home_cv_error);
 
           }
-        //    //  Navigator.push(context, MaterialPageRoute(builder: (context) => PdfPage(userModel: userModel,
-        //    //  selected_template: Provider.of<TemplateVM>(context, listen: false).getSelected()),));
-        //
+
           }
           else{
-            ErrorSnack(context: context,title: "هیچ قالبی انتخاب نکرده اید");
+            ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
            }
          },
       ),
       appBar: AppBar(
-      title: Text("پروفایل"),
+      title: Text(StringConst.home_profile),
         centerTitle: true,
 
       ),
@@ -137,7 +135,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
                   //   height: sl<ScreenSize>().height * 0.02,
                   // ),
                   Text(
-                    'خوش آمدید '+"${value.userModel?.infoModel?.name?? ""}",
+                    StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(

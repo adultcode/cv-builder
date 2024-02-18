@@ -75,6 +75,7 @@ dev_dependencies:
   awesome_notifications  : any
   url_launcher  : any
   flutter_local_notifications   : any
+  universal_html   : any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

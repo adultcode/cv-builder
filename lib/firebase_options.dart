@@ -17,19 +17,13 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -52,11 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBih7Sriex9osDasAEL_Iyg_ng4hl566Mw',
+    appId: '1:1016175004585:web:690b4d366d3335ddbbd2b8',
+    messagingSenderId: '1016175004585',
+    projectId: 'cv-builder-faea0',
+    authDomain: 'cv-builder-faea0.firebaseapp.com',
+    storageBucket: 'cv-builder-faea0.appspot.com',
+    measurementId: 'G-8YQKJZMHT7',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAx_RaAPhT4yECAvupVQKYdyV6TpsdX-9Q',
     appId: '1:1016175004585:android:41a6286af408dc2abbd2b8',
     messagingSenderId: '1016175004585',
     projectId: 'cv-builder-faea0',
     storageBucket: 'cv-builder-faea0.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCnLs9S2ONrhzMYHQfYaYI65C8iZbaJWy4',
+    appId: '1:1016175004585:ios:e89e2f1cdb699c49bbd2b8',
+    messagingSenderId: '1016175004585',
+    projectId: 'cv-builder-faea0',
+    storageBucket: 'cv-builder-faea0.appspot.com',
+    iosBundleId: 'com.example.cvBuilder',
   );
 }
