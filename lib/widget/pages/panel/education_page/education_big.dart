@@ -38,23 +38,6 @@ class _EducationBigState extends State<EducationBig> {
   }
 
 
-  // void PopulateInputs(EducationModel educationModel){
-  //   _title_controller.text = educationModel.title!;
-  //   _grade_controller.text = educationModel.grade!;
-  //   _university_controller.text = educationModel.university!;
-  //   _start_controller.text = educationModel.start_date!;
-  //   _end_controller.text = educationModel.end_date!;
-  //   _desc_controller.text = educationModel.description!;
-  // }
-  //
-  // void ClearInpust(){
-  //   _title_controller.clear();
-  //   _university_controller.clear();
-  //   _start_controller.clear();
-  //   _end_controller.clear();
-  //   _desc_controller.clear();
-  //   _grade_controller.clear();
-  // }
 
   @override
   Widget build(BuildContext context) {

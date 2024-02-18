@@ -12,6 +12,7 @@ import '../../../../mvvm/viewmodel/user_viewmodel.dart';
 import '../../../../notification_controller.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/dashboard/items/template_item.dart';
@@ -85,10 +86,10 @@ class _HomePageSmallState extends State<HomePageSmall> {
         label: Text("دریافت رزومه",style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
         onPressed: () async{
         
-
-            if (!await launchUrl(Uri.parse("https://google.ir"),mode: LaunchMode.externalApplication)) {
-              throw Exception('Could not launch ');
-            }
+            //
+            // if (!await launchUrl(Uri.parse("https://google.ir"),mode: LaunchMode.externalApplication)) {
+            //   throw Exception('Could not launch ');
+            // }
           
             //showNotification();
           if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
@@ -123,7 +124,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
         //decoration: panel_container_decoration,
           padding: EdgeInsets.symmetric(
               vertical: sl<ScreenSize>().height * 0.02,
-              horizontal: sl<ScreenSize>().width * 0.02),
+              horizontal: sl<ScreenSize>().width * 0.04),
 
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
@@ -143,17 +144,17 @@ class _HomePageSmallState extends State<HomePageSmall> {
                     height: 10,
                   ),
                   Text(
-                    'قالب رزومه مورد نظر خود را از لیست زیر انتخاب نمایید ',
+                    StringConst.home_subtitle,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
 
                   Consumer<TemplateVM>(builder: (context, value, child) {
                     if(value.template_list!=null){
                       return   Container(
-                        height: sl<ScreenSize>().height*0.7,
+                        height: sl<ScreenSize>().height*0.6,
                         //   color: Colors.green,
                         child:
                         Directionality(
@@ -162,7 +163,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
                             // shrinkWrap: true,
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3, // number of items in each row
+                                crossAxisCount: 2, // number of items in each row
                                 mainAxisSpacing: sl<ScreenSize>().height*0.02, // spacing between rows
                                 crossAxisSpacing: sl<ScreenSize>().width*0.04, // spacing between columns
                                 childAspectRatio: 0.85
