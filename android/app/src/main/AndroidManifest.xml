@@ -9,7 +9,7 @@
         </intent>
     </queries>
     <application
-        android:label="cv_builder"
+        android:label="رزومه ساز"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

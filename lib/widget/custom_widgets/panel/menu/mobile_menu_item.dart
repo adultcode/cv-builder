@@ -65,11 +65,14 @@ class _MobileMenuItemState extends State<MobileMenuItem>  {
         alignment: Alignment.center,
        // margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
 
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child:  Container(
             alignment: Alignment.center,
-
-            padding: EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
+              color: widget.menuModel.active==true? primary_surface:Colors.transparent
+            ),
+            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
 
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -78,12 +81,12 @@ class _MobileMenuItemState extends State<MobileMenuItem>  {
                 Expanded(child: Text(widget.menuModel.title!,
                   textAlign: TextAlign.right,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: menu_font,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: widget.menuModel.active ==true? FontWeight.w800 : FontWeight.w500,
                       color: widget.menuModel.active==true? panel_orange:black_title ),)),
                 SizedBox(width: 20,),
                 Icon(
                   widget.menuModel.iconData,
-                  size: widget.menuModel.active ==true? 20 : 22,
+                  size: widget.menuModel.active ==true? 24 : 22,
                   color: widget.menuModel.active ==true? panel_orange : panel_grey,
 
                 ),

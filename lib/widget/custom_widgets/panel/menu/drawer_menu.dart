@@ -1,3 +1,4 @@
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class MobileDrawer extends StatelessWidget {
                 ]
               ),
               child: Center(
-                child: Text("رزومه ساز",
+                child: Text(StringConst.app_name,
                 style:  Theme.of(context).textTheme.titleLarge,),
               ),
             ),

@@ -11,6 +11,7 @@ class StringConst{
   ///
    static String home_subtitle = """قالب رزومه مورد نظر خود را از لیست زیر انتخاب نمایید\nبرای مشاهده پیش نمایش  گزینه مورد نظر را نگهدارید""";
    static String template_preview_title = """پیش نمایش قالب شماره """;
+   static String app_name = "جاب یار";
 
    // home page
 static String download_cv = "دریافت رزومه";
