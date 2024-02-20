@@ -31,15 +31,6 @@ class _HomeBigPageState extends State<HomeBigPage> {
 
  List<TemplateModel> template_list = [];
 
- // void DownloadCV(UserModel userModel)async{
- //  // PdfPageFormat format = PdfPageFormat();
- //   List<int> fileInts = List.from(await generateResumeCV1(PdfPageFormat.a4,userModel:userModel ));
- //   html.AnchorElement(
- //       href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
- //     ..setAttribute("download", "${DateTime.now().millisecondsSinceEpoch}.pdf")
- //     ..click();
- //
- // }
   @override
   void initState() {
     // TODO: implement initState
@@ -51,6 +42,33 @@ class _HomeBigPageState extends State<HomeBigPage> {
       Provider.of<TemplateVM>(context, listen: false).GetTemplateList() ;
     });
   }
+
+ Widget FabOrIndicator(bool isLoading){
+   if(isLoading) return Expanded(
+     child: Container(
+       margin: EdgeInsets.only(right: 30),
+       height: 4,
+       width: 100,
+       child: LinearProgressIndicator(
+         backgroundColor: primary_container,
+         color: panel_orange,
+         minHeight: 3,
+       ),
+     ),
+   );
+   else return  ElevatedButton(
+
+     style: ElevatedButton.styleFrom(
+         backgroundColor: panel_green,
+         padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
+     ),
+     onPressed: () async{
+       Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+
+     },
+     child: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
+   );
+ }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,87 +81,73 @@ class _HomeBigPageState extends State<HomeBigPage> {
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
 
+              Provider.of<TemplateVM>(context, listen: false).userModel = value.userModel;
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
 
                 children: [
-                  SizedBox(
-                    height: sl<ScreenSize>().height * 0.02,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Container(
+        //            height: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
 
-                    children: [
-                      ElevatedButton(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: panel_green,
-                          padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
+                          children: [
+                            Consumer<TemplateVM>(builder: (context, value, child){
+                              return FabOrIndicator(value.loading);
+                            }),
+
+
+
+                            Text(
+                              StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ],
                         ),
-                        onPressed: () async{
-                          Provider.of<TemplateVM>(context, listen: false).DownloadCV(value.userModel!);
-                          // if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-                          //   // DownloadCV(value.userModel!);
-                          //   var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV(value.userModel!);
-                          //   if(result){
-                          //     SuccessSnack(context: context,title: StringConst.home_cv_downloaded);
-                          //
-                          //   }else{
-                          //     ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
-                          //
-                          //   }
-                          //
-                          // }
-                          // else{
-                          //   ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
-                          // }
-                        },
-                        child: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
-                      ),
-                      Text(
-                         StringConst.home_profile,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      
-                    ],
+
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                        Text(
+                          StringConst.home_subtitle,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    StringConst.home_subtitle,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
+
+
 
                    Consumer<TemplateVM>(builder: (context, value, child) {
                      if(value.template_list!=null){
-                       return   Container(
-                         height: sl<ScreenSize>().height*0.7,
-                         //   color: Colors.green,
-                         child:
-                         GridView.builder(
-                           // shrinkWrap: true,
-                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                             crossAxisCount: 3, // number of items in each row
-                             mainAxisSpacing: sl<ScreenSize>().height*0.02, // spacing between rows
-                             crossAxisSpacing: sl<ScreenSize>().width*0.04, // spacing between columns
-                             childAspectRatio: 0.85
-                           ),
-                           itemCount: value.template_list?.length, // total number of items
+                       return   Expanded(
+                         child: Container(
+                                               //   height: sl<ScreenSize>().height*0.70,
+                       //       color: Colors.green,
+                           child:
+                           GridView.builder(
+                             // shrinkWrap: true,
+                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                               crossAxisCount: 3, // number of items in each row
+                               mainAxisSpacing: sl<ScreenSize>().height*0.02, // spacing between rows
+                               crossAxisSpacing: sl<ScreenSize>().width*0.04, // spacing between columns
+                               childAspectRatio: 0.85
+                             ),
+                             itemCount: value.template_list?.length, // total number of items
 
-                           itemBuilder: (context, index) {
-                             return TemplateItem(templateModel: value.template_list![index]);
-                           },),
+                             itemBuilder: (context, index) {
+                               return TemplateItem(templateModel: value.template_list![index]);
+                             },),
+                         ),
                        );
                      }else return Container();
                    },),

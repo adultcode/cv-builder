@@ -19,7 +19,10 @@ class TemplateVM extends ChangeNotifier{
   List<TemplateModel>? template_list;
   TemplateModel? _selected_template;
  late TemplateRepository templateRepository;
+  late UserModel? userModel;
 
+
+  bool loading = false;
   TemplateVM(){
     template_list = [];
     templateRepository = TemplateRepository();
@@ -39,9 +42,9 @@ class TemplateVM extends ChangeNotifier{
 
 
   // generate pdf cv for web platform
-  void DownloadCVWeb(UserModel userModel) async{
+  void DownloadCVWeb() async{
     // PdfPageFormat format = PdfPageFormat();
-    List<int> fileInts =await GetTemplate(userModel);
+    List<int> fileInts =await GetTemplate(userModel!);
     //WebPdf.DownloadCVWeb(fileInts);
     // html.AnchorElement(
     //     href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(fileInts)}")
@@ -50,22 +53,35 @@ class TemplateVM extends ChangeNotifier{
 
   }
 
-Future<bool> DownloadCV(UserModel userModel)async{
-
+Future<bool> DownloadCV()async{
+  loading = true;
+  var result = null;
+  notifyListeners();
     try{
       if(kIsWeb){
         late WebPdf webPdf;
 
         webPdf = WebPdf();
 
-        List<int> fileInts =await GetTemplate(userModel);
-      return await webPdf.DownloadCVWeb(fileInts);
+        List<int> fileInts =await GetTemplate(userModel!);
+        result = await webPdf.DownloadCVWeb(fileInts);
+        loading = false;
+        notifyListeners();
+
+        return result;
+
       }else{
         print("start download Android");
-      return await DownloadCVAndroid(userModel);
+       result =  await DownloadCVAndroid(userModel!);
+       loading = false;
+        notifyListeners();
 
+        return result;
       }
     }catch(e){
+      loading = false;
+      notifyListeners();
+
       return false;
     }
 }

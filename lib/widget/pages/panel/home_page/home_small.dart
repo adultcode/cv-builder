@@ -50,23 +50,23 @@ class _HomePageSmallState extends State<HomePageSmall> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return DashboarHelper(
-      fab: FloatingActionButton.extended(
+  Widget FabOrIndicator(bool isLoading){
+    if(isLoading) return LinearProgressIndicator(
+      backgroundColor: primary_container,
+      color: panel_orange,
+      minHeight: 3,
+    );
+    else return FloatingActionButton.extended(
 
-        backgroundColor: primary_container,
-        label: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
-        onPressed: () async{
-        
-            //
-            // if (!await launchUrl(Uri.parse("https://google.ir"),mode: LaunchMode.externalApplication)) {
-            //   throw Exception('Could not launch ');
-            // }
-          
-          if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-            // DownloadCV(value.userModel!);
-          var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV(userModel);
+      backgroundColor: primary_container,
+      label: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
+      onPressed: () async{
+
+
+
+        if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+          // DownloadCV(value.userModel!);
+          var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
           if(result){
             SuccessSnack(context: context,title: StringConst.home_cv_downloaded);
 
@@ -75,12 +75,20 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
           }
 
-          }
-          else{
-            ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
-           }
-         },
-      ),
+        }
+        else{
+          ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DashboarHelper(
+      fab: Consumer<TemplateVM>(builder: (context, value, child){
+        return FabOrIndicator(value.loading);
+    }),
       appBar: AppBar(
       title: Text(StringConst.home_profile),
         centerTitle: true,
@@ -98,14 +106,13 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
-                userModel = value.userModel!;
+              Provider.of<TemplateVM>(context, listen: false).userModel = value.userModel!;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
 
                 children: [
-                  // SizedBox(
-                  //   height: sl<ScreenSize>().height * 0.02,
-                  // ),
+
+
                   Text(
                     StringConst.home_welcome+" ${value.userModel?.infoModel?.name?? ""}",
                     style: Theme.of(context).textTheme.titleLarge,
