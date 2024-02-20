@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
+import 'package:cv_builder/util/constant/color.dart';
+import 'package:cv_builder/widget/pages/panel/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../config/locator.dart';
 import '../../main.dart';
 import '../../test.dart';
+import '../../util/constant/screen_size.dart';
 
 
 class LoadingPage extends StatefulWidget {
@@ -39,31 +42,35 @@ class _LoadingPageState extends State<LoadingPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //loadFakeProfiles();
-  //  UpdateFile();
+
     Provider.of<UserViewModel>(context,listen: false).GetUserModel();
+    Future.delayed(Duration(seconds: 3),() {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(),));
+    },);
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            InkWell(child: Text("Loading...."),onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage( ),));
-            },),
-            SizedBox(height: 40,),
 
-            Consumer<UserViewModel>(builder: (context, value, child) {
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+             // SizedBox(height:  sl<ScreenSize>().height*0.1,),
 
-              if(value.userModel!=null){
-                return Text("Info: ${value.userModel?.socials?.socialModels?.length}");
-
-              }else{
-                return Text("Info is null");
-              }
-            },)
-          ],
+              Container(
+                child: Image.asset('assets/app_icon.png',width: 100,height: 100,),
+              ),
+              SizedBox(height:  sl<ScreenSize>().height*0.05,),
+              Text("جاب یار",
+              style:  Theme.of(context).textTheme.titleLarge?.copyWith(color: primary_title,fontSize: 20),),
+              SizedBox(height:  sl<ScreenSize>().height*0.05,),
+              Text("رزومه ساز آنلاین",
+              style:  Theme.of(context).textTheme.titleLarge?.copyWith(color: primary_title,fontSize: 16),)
+            ],
+          ),
         ),
       ),
     );

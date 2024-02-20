@@ -215,7 +215,7 @@ class _MyAppState extends State<MyApp> {
               sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
              // return MyHomePage();
             //  return LoadingPage();
-              return Dashboard();
+              return LoadingPage();
         },)
 
     );

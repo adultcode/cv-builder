@@ -61,6 +61,7 @@ Future<bool> DownloadCV(UserModel userModel)async{
         List<int> fileInts =await GetTemplate(userModel);
       return await webPdf.DownloadCVWeb(fileInts);
       }else{
+        print("start download Android");
       return await DownloadCVAndroid(userModel);
 
       }
@@ -71,15 +72,18 @@ Future<bool> DownloadCV(UserModel userModel)async{
   // generate pdf cv for android platform
   Future<bool> DownloadCVAndroid(UserModel userModel) async{
     // PdfPageFormat format = PdfPageFormat();
+    final Directory? appDir = await getExternalStorageDirectory();//use this please instead of  getExternalStorageDirectory
 
-    Directory generalDownload = Directory('/storage/emulated/0/Download');
+    Directory generalDownload = Directory('storage/emulated/0/Download');
 
     List<int> fileInts =await GetTemplate(userModel);
     try{
-      final file = File("${generalDownload.path}/cv.pdf");
+      final file = File("${generalDownload?.path}/cv.pdf");
       await file.writeAsBytes(await  fileInts);
+      print("----- Downloaded: ${file.path}");
       return true;
     }catch(e){
+      print("------Error download: ${e.toString()}");
       return false;
     }
 

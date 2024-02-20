@@ -33,34 +33,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
   late UserModel userModel;
   late AwesomeNotifications notifications;
 
-    // notifications = AwesomeNotifications();
-    // var channel =  NotificationChannel(
-    //     channelKey: 'main_channel2',
-    //     channelName: 'Flutter Main notification ',
-    //     channelDescription: 'Notification channel description',
-    //     playSound: false,
-    //
-    //     defaultColor: Colors.blueAccent);
-    //
-    // AwesomeNotifications().initialize(
-    //     null,
-    //     [
-    //       channel
-    //     ],
-    //     channelGroups: [
-    //       NotificationChannelGroup(
-    //           channelGroupKey: 'channel_group1',
-    //           channelGroupName: 'Channel group name')
-    //     ],
-    //     debug: true
-    // );
-    //
-    // AwesomeNotifications().setListeners(
-    //     onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-    //     onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
-    //     onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
-    //     onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod
-    // );
+
 
 
 
@@ -91,7 +64,6 @@ class _HomePageSmallState extends State<HomePageSmall> {
             //   throw Exception('Could not launch ');
             // }
           
-            //showNotification();
           if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
             // DownloadCV(value.userModel!);
           var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV(userModel);
@@ -135,7 +107,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
                   //   height: sl<ScreenSize>().height * 0.02,
                   // ),
                   Text(
-                    StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
+                    StringConst.home_welcome+" ${value.userModel?.infoModel?.name?? ""}",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(
