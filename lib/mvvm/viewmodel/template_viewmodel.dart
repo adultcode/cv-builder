@@ -12,6 +12,7 @@ import '../../widget/pages/cv/cv1/cv1.dart';
 import '../../widget/pages/cv/cv2/cv2.dart';
 import '../data_source/web_pdf_source.dart';
 import '../model/entity/template_model.dart';
+import '../model/service/permission.dart';
 import '../repository/template_repo.dart';
 
 class TemplateVM extends ChangeNotifier{
@@ -56,6 +57,8 @@ class TemplateVM extends ChangeNotifier{
 Future<bool> DownloadCV()async{
   loading = true;
   var result = null;
+  var check_permission  = await requestStoragePermission();
+  if(check_permission==false || check_permission ==null) return false;
   notifyListeners();
     try{
       if(kIsWeb){

@@ -59,7 +59,7 @@ late  AvatarRepository avatarRepository;
 
     if(Platform.isAndroid){
       // check for permission
-      var status = await Permission.storage.status;
+      var status = await Permission.manageExternalStorage.status;
       if (status.isDenied) {
         // We haven't asked for permission yet or the permission has been denied before, but not permanently.
         openAppSettings();
