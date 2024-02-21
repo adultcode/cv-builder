@@ -106,7 +106,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
-              Provider.of<TemplateVM>(context, listen: false).userModel = value.userModel!;
+              Provider.of<TemplateVM>(context, listen: false).userModel = value.userModel;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
 

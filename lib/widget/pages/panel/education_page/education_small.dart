@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/education_viewmodel.dart';
+import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
@@ -18,6 +19,7 @@ import '../../../custom_widgets/panel/input_form.dart';
 import '../../../custom_widgets/panel/input_label.dart';
 import '../../../custom_widgets/panel/menu/drawer_menu.dart';
 import '../dashboard_page.dart';
+import '../home_page/home_small.dart';
 
 class EducationSmall extends StatefulWidget {
 
@@ -44,10 +46,10 @@ class _EducationSmallState extends State<EducationSmall> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,
-      onPopInvoked: (didPop) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(),));
-
+      canPop: false,
+      onPopInvoked: (v)async {
+        Provider.of<MenuVM>(context,listen: false).setActiveItem(0);
+       //   return false;
       },
       child: DashboarHelper(
         appBar: AppBar(

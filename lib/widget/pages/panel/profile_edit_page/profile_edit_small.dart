@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/model/entity/info_model/info_model.dart';
 import '../../../../mvvm/viewmodel/info_viewmodel.dart';
+import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/radius_size.dart';
 import '../../../../util/constant/screen_size.dart';
@@ -23,6 +24,7 @@ import '../../../custom_widgets/panel/change_avatar.dart';
 import '../../../custom_widgets/panel/input_form.dart';
 import '../../../custom_widgets/panel/input_label.dart';
 import '../dashboard_page.dart';
+import '../home_page/home_small.dart';
 
 class ProfileEditSmall extends StatefulWidget {
 
@@ -58,10 +60,11 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-     onPopInvoked: (didPop) {
-       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(),));
-
-     },
+      canPop: false,
+      onPopInvoked: (v)async {
+        Provider.of<MenuVM>(context,listen: false).setActiveItem(0);
+        //   return false;
+      },
       child: DashboarHelper(
 
         drawer: MobileDrawer(),
