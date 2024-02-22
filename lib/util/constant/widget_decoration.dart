@@ -64,7 +64,7 @@ InputDecoration input_text_decoration(
       ],
     ),
     hintTextDirection: TextDirection.rtl,
-  hoverColor: Colors.green,
+  //hoverColor: Colors.green,
    focusedBorder: InputBorder.none,
    enabledBorder: InputBorder.none,
     disabledBorder: InputBorder.none,

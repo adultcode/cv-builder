@@ -7,6 +7,7 @@ class StringConst{
   static String education_key = "education";
   static String skill_key = "skill";
   static String lang_key = "language";
+  static String os_key = "osversion";
 
   ///
    static String home_subtitle = """قالب رزومه مورد نظر خود را از لیست زیر انتخاب نمایید برای مشاهده پیش نمایش  گزینه مورد نظر را نگهدارید""";

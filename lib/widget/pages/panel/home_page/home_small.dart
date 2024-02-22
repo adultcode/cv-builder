@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -10,6 +13,7 @@ import '../../../../mvvm/model/entity/template_model.dart';
 import '../../../../mvvm/viewmodel/template_viewmodel.dart';
 import '../../../../mvvm/viewmodel/user_viewmodel.dart';
 import '../../../../notification_controller.dart';
+import '../../../../util/constant/android_version.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
@@ -42,7 +46,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    notifications = AwesomeNotifications();
+
     WidgetsFlutterBinding.ensureInitialized()
         .scheduleFrameCallback((timeStamp) {
       Provider.of<UserViewModel>(context, listen: false).GetUserModel() ;
@@ -99,6 +103,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
       body: Container(
         height: sl<ScreenSize>().height,
         //color: primary_btn,
+
         //decoration: panel_container_decoration,
           padding: EdgeInsets.symmetric(
               vertical: sl<ScreenSize>().height * 0.02,

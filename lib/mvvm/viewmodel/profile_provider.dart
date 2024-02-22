@@ -7,8 +7,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../../util/profile_image.dart';
+import '../model/service/permission.dart';
 import '../repository/avatar_repo.dart';
 
 class ProfileProvider extends ChangeNotifier{
@@ -17,6 +19,7 @@ class ProfileProvider extends ChangeNotifier{
   Uint8List? img_byte;
   SharedPreferences? sharedPreferences;
 
+ late ImagePicker picker;
 late  AvatarRepository avatarRepository;
   ProfileProvider(){
     avatarRepository = AvatarRepository();
@@ -33,72 +36,63 @@ late  AvatarRepository avatarRepository;
 
 
   }
-  void ChangeImage()async{
-    final prefs = await SharedPreferences.getInstance();
 
-    try {
 
-      var image_byte = await getImage();
-      //print(image_byte.toString());
-      img_byte = image_byte;
-      await prefs.setString(StringConst.avatar_key, base64Encode(img_byte!.toList()));
+  //android platform for pick image
+  void PickAndroidImage()async{
+    if (await requestStoragePermission()==true) {
+      // We haven't asked for permission yet or the permission has been denied before, but not permanently.
 
-      notifyListeners();
-      // If there's no error, get_data will contain the image path
 
-      // Proceed with using the image path
-    } catch (error) {
-      // Handle the error gracefully
-      print('Error getting image: $error');
-      // Display an error message to the user or take other appropriate actions
-    }
-  }
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if(image!=null){
+        img_byte = await image.readAsBytes();
 
-  Future<Uint8List?> getImage() async {
-    final ImagePicker picker = ImagePicker();
+        await sharedPreferences?.setString(StringConst.avatar_key, base64Encode(img_byte!.toList()));
 
-    if(Platform.isAndroid){
-      // check for permission
-      var status = await Permission.manageExternalStorage.status;
-      if (status.isDenied) {
-        // We haven't asked for permission yet or the permission has been denied before, but not permanently.
-        openAppSettings();
+        notifyListeners();
+
       }
 
-    }else{
-
-
     }
 
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  }
+// General method for pick image
+  void PickImage()async{
+    var check_permission  = await requestStoragePermission();
+    if(check_permission==true && check_permission !=null) {
 
-    if (image != null) {
-      print(image.path);
-      return await image.readAsBytes();
 
-    } else {
-      print("No image selected");
-      return null;
+    picker = ImagePicker();
+    sharedPreferences = await SharedPreferences.getInstance();
+
+    if(kIsWeb){
+      // call web method
+      await PickWebImage();
+
+    }else{
+      // call android method
+       PickAndroidImage();
     }
   }
-
-  Future<String> _getImage() async {
-    final ImagePicker picker = ImagePicker();
+  }
+  // web platform image picker
+   PickWebImage() async {
 
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
       if (image != null) {
         print(image.path);
-        return image.path;
-        // if (kIsWeb) { // Check if this is a browser session
-        //   profile_image = Image.network(image.path);
-        // } else {
-        //   profile_image = Image.file(File(image.path));
-        // }
+        img_byte = await image.readAsBytes();
+
+        await sharedPreferences?.setString(StringConst.avatar_key, base64Encode(img_byte!.toList()));
+
+        notifyListeners();
+
       } else {
         print("No image selected");
-        return Future.error('image error');
       }
 
   }
+
 }

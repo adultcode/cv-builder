@@ -25,7 +25,8 @@ panel colors
  */
 
  var backgroud_color = Color(0xfff3f3f5);
- var input_bg = Color(0xfffbfbfc);
+ //var input_bg =Color(0xffb5bdd1);
+ var input_bg = Color(0xfffbfbfd);
  var panel_grey = Color(0xffb5bdd1);
  var work_background = Color(0xfff6f6f6);
  var work_text = Color(0xffb8b8b8);

@@ -10,7 +10,7 @@
         </intent>
     </queries>
     <application
-        android:label="جاب یار"
+        android:label="JobYar"
         android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

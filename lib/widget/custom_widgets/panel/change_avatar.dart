@@ -64,7 +64,7 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
 
                     InkWell(
                       onTap: (){
-                        context.read<ProfileProvider>().ChangeImage();
+                        context.read<ProfileProvider>().PickImage();
                       },
                       child: Container(
                         width: 70,
@@ -74,7 +74,7 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
                             shape: BoxShape.circle,
                             //  color: Colors.green,
                             image: DecorationImage(
-                                fit: BoxFit.fitHeight,
+                                fit: BoxFit.fill,
                                 //  image: NetworkImage('df')
                                 image: value.img_byte != null ? MemoryImage(value.img_byte!) as ImageProvider<Object> : AssetImage('assets/me.png')
                             )
@@ -93,7 +93,7 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
 
               InkWell(
                 onTap: () {
-                  context.read<ProfileProvider>().ReadIMG();
+                  context.read<ProfileProvider>().PickImage();
 
                 },
                 child: Text("تصویر پروفایل خود \n را انتخاب کنید",textAlign: TextAlign.right,

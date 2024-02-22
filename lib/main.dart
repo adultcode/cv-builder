@@ -1,5 +1,10 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:cv_builder/util/constant/android_version.dart';
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -42,6 +47,7 @@ late AwesomeNotifications notifications;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   notifications = AwesomeNotifications();
+  print("---version------${Platform.version}");
   var channel =  NotificationChannel(
       channelKey: 'main_channel2',
       channelName: 'Flutter Main notification ',
@@ -171,23 +177,38 @@ class MyApp extends StatefulWidget {
 
 
 
-  // MyApp(){
-  // }
-
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
 
+  var channel_name = "com.platform";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+    if(Platform.isAndroid){
+      final platform = MethodChannel("com.platform");
+      platform.setMethodCallHandler((call) async{
+        if(call.method=="GetVersion"){
+          print("--------ANDROID: ${call.arguments}");
+          OSVersion.AndroidVersion = call.arguments;
+          //GetSMS(call.arguments);
+          SaveVersion(call.arguments);
+          return 0;
 
+        }else{
+          return MissingPluginException("not implemented");
+        }
+      },);
+    }
+  }
+  void SaveVersion(int _version)async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setInt(StringConst.os_key, _version);
   }
   @override
   Widget build(BuildContext context) {
