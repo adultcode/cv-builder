@@ -102,7 +102,7 @@ class _SkillSmallState extends State<SkillSmall> {
             height: sl<ScreenSize>().height,
             padding: EdgeInsets.symmetric(
                 vertical: sl<ScreenSize>().height * 0.02,
-                horizontal: sl<ScreenSize>().width * 0.02),
+                horizontal: sl<ScreenSize>().width * 0.03),
             child: SingleChildScrollView(
               child: Consumer<SkillVM>(
                 builder: (context, value, child) {
@@ -221,12 +221,8 @@ class _SkillSmallState extends State<SkillSmall> {
                          */
                         SizedBox(height: sl<ScreenSize>().height*0.05,),
                         if(value.skill_items!=null)
-                          Wrap(
-                            spacing: 11, // Add spacing between items
-                            runSpacing: 11, // Add spacing between rows
-                            alignment: WrapAlignment.end,
-                            children: value.skill_items!,
-                          )
+                          ...value.skill_items!
+
 
 
                       ],

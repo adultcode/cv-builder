@@ -74,8 +74,8 @@ dev_dependencies:
   cloud_firestore  : any
   awesome_notifications  : any
   url_launcher  : any
-  flutter_local_notifications   : any
   universal_html   : any
+  syncfusion_flutter_sliders    : any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

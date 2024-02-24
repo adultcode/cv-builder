@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cv_builder/mvvm/model/entity/language/language_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/language_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 
@@ -69,14 +72,14 @@ void initState() {
                           if(_result==true){
                             if(Provider.of<LanguageVM>(context,listen: false).languageList==null ||
                                 Provider.of<LanguageVM>(context,listen: false).languageList?.lang_list?.isEmpty==true)
-                              SuccessSnack(context: context,title: 'لیست زبان شما خالی است');
+                              SuccessSnack(context: context,title: StringConst.lang_isempty);
                             else
-                              SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+                              SuccessSnack(context: context,title: StringConst.success_submit);
 
 
                           }else{
 
-                            ErrorSnack(context: context,title: 'خطایی رخ داده است');
+                            ErrorSnack(context: context,title: StringConst.error);
 
                           }
 
@@ -92,13 +95,13 @@ void initState() {
                           child: Icon(Icons.done,size: 20,color: panel_green,),
                         ),
                       ),
-                      Text('زبان',style: Theme.of(context).textTheme.titleLarge,)
+                      Text(StringConst.language,style: Theme.of(context).textTheme.titleLarge,)
 
                     ],
                   ),
 
                   SizedBox(height: 10,),
-                  Text('مهارت های زبانی خود را در این قسمت میتوانید ثبت کنید ',style: Theme.of(context).textTheme.bodyMedium,),
+                  Text(StringConst.lang_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
                   SizedBox(height: 30,),
 
 
@@ -119,15 +122,21 @@ void initState() {
                           padding: EdgeInsets.only(top: 0),
                           child: Row(
                             children: [
-                              Expanded(child: ElevatedButton(
-                                child: Text("ثبت"),
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()){
+                              Container(
+                                width:min( sl<ScreenSize>().width*0.04,36),
+                                height: min( sl<ScreenSize>().width*0.04,36),
+                               //   alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: primary_container
+                                ),
+                                  child: IconButton(icon:Icon(Icons.add),color: primary_title,
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () {
                                     Provider.of<LanguageVM>(context,listen: false).AddLanguage();
-                                    //ClearInpust();
-                                  }
-                                },
-                              )),
+                                  },),
+
+                                ),
                               Expanded(child: Container()),
                               // skil grade menu
                               Expanded(
@@ -211,12 +220,13 @@ void initState() {
                      */
                   SizedBox(height: sl<ScreenSize>().height*0.05,),
                   if(value.lang_items!=null)
-                    Wrap(
-                      spacing: 11, // Add spacing between items
-                      runSpacing: 11, // Add spacing between rows
-                      alignment: WrapAlignment.end,
-                      children: value.lang_items!,
-                    )
+                    ...value.lang_items!
+                    // Wrap(
+                    //   spacing: 11, // Add spacing between items
+                    //   runSpacing: 11, // Add spacing between rows
+                    //   alignment: WrapAlignment.end,
+                    //   children: value.lang_items!,
+                    // )
                 ],
               ),
             );

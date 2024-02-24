@@ -38,7 +38,7 @@ class SkillItem extends StatelessWidget {
             Text(skillModell.title!,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),)
           ],
         ),
-        content: Text(StringConst.skill_dialog_content,
+        content: Text(StringConst.skill_dialog_content,textAlign: TextAlign.right, textDirection: TextDirection.rtl,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title),),
 
         actions: [
@@ -79,7 +79,7 @@ class SkillItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(skillModell.percent.toString()+"%"!,
+                Text(skillModell.percent!.toInt().toString()+"%"!,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),),
                 Text(skillModell.title!,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600)),

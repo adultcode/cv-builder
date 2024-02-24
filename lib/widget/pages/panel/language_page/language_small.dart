@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:cv_builder/mvvm/model/entity/language/language_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/language_viewmodel.dart';
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,14 +53,14 @@ class _LanguageSmallState extends State<LanguageSmall> {
       child: DashboarHelper(
         drawer: MobileDrawer(),
         appBar: AppBar(
-            title:      Text("زبان"),
+            title:      Text(StringConst.language),
             centerTitle: true,
             surfaceTintColor: panel_orange,
             primary: true,
             shadowColor: Colors.black54,
 
             leadingWidth: 55,
-            leading:        InkWell(
+            leading:  InkWell(
               onTap: () async{
 
                 var _result = await  Provider.of<LanguageVM>(context,listen: false).SavelanguageList();
@@ -65,14 +68,14 @@ class _LanguageSmallState extends State<LanguageSmall> {
                 if(_result==true){
                   if(Provider.of<LanguageVM>(context,listen: false).languageList==null ||
                       Provider.of<LanguageVM>(context,listen: false).languageList?.lang_list?.isEmpty==true)
-                    SuccessSnack(context: context,title: 'لیست زبان شما خالی است');
+                    SuccessSnack(context: context,title:StringConst.lang_isempty);
                   else
-                    SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+                    SuccessSnack(context: context,title: StringConst.success_submit);
 
 
                 }else{
 
-                  ErrorSnack(context: context,title: 'خطایی رخ داده است');
+                  ErrorSnack(context: context,title: StringConst.error);
 
                 }
               },
@@ -100,7 +103,7 @@ class _LanguageSmallState extends State<LanguageSmall> {
             height: sl<ScreenSize>().height,
             padding: EdgeInsets.symmetric(
                 vertical: sl<ScreenSize>().height * 0.02,
-                horizontal: sl<ScreenSize>().width * 0.02),
+                horizontal: sl<ScreenSize>().width * 0.03),
             child: SingleChildScrollView(
               child: Consumer<LanguageVM>(builder: (context, value, child) {
                 if (value.selected_lang != null &&
@@ -115,7 +118,7 @@ class _LanguageSmallState extends State<LanguageSmall> {
 
 
                      // SizedBox(height: 10,),
-                      Text('مهارت های زبانی خود را در این قسمت میتوانید ثبت کنید ',style: Theme.of(context).textTheme.bodyMedium,),
+                      Text(StringConst.lang_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
                       SizedBox(height: 30,),
 
 
@@ -157,23 +160,21 @@ class _LanguageSmallState extends State<LanguageSmall> {
                            */
                       Row(
                         children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(60),
-                              ),
-                              //  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                              backgroundColor: primary_container,
+                          Container(
+                            width:max( sl<ScreenSize>().width*0.04,36),
+                            height: max( sl<ScreenSize>().width*0.04,36),
 
+                            //   alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: primary_container
                             ),
-                            child: Icon(Icons.add,color: primary_title,),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()){
+                            child: IconButton(icon:Icon(Icons.add,size: 25,),color: primary_title,
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
                                 Provider.of<LanguageVM>(context,listen: false).AddLanguage();
-                                //   ClearInpust();
+                              },),
 
-                              }
-                            },
                           ),
                           SizedBox(width: sl<ScreenSize>().width * 0.3,),
                           // skil grade menu
@@ -223,12 +224,8 @@ class _LanguageSmallState extends State<LanguageSmall> {
                          */
                       SizedBox(height: sl<ScreenSize>().height*0.05,),
                       if(value.lang_items!=null)
-                        Wrap(
-                          spacing: 11, // Add spacing between items
-                          runSpacing: 11, // Add spacing between rows
-                          alignment: WrapAlignment.end,
-                          children: value.lang_items!,
-                        )
+                        ...value.lang_items!
+
                     ],
                   ),
                 );

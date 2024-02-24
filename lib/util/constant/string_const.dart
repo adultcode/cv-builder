@@ -26,4 +26,12 @@ static String home_cv_downloaded = "رزومه شما با موفقیت دانل
 static String skill_dialog_content = "عملیات مورد نظر را برای این آیتم مشخص کنید";
 static String delete = "حذف";
 static String edit = "ویرایش";
+
+// language
+static String lang_subtitle = 'مهارت های زبانی خود را در این قسمت میتوانید ثبت کنید ';
+static String language = 'زبان';
+static String lang_isempty = "لیست زبان شما خالی است";
+static String success_submit = "لیست زبان شما خالی است";
+static String error = "خطایی رخ داده است";
+static String save = "ثبت";
 }

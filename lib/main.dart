@@ -20,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'config/locator.dart';
 import 'mvvm/model/entity/user_model.dart';
