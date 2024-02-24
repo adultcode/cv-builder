@@ -15,55 +15,77 @@ class SkillItem extends StatelessWidget {
   SkillModel skillModell;
 
   double _margin_percent = 0;
+  late Color _active_bar;
   SkillItem({required this.skillModell}){
     _margin_percent = 100 - skillModell.percent!;
     _margin_percent = _margin_percent/100;
+
+    //switch(skillModell.percent.toInt())
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //height: 50,
-      width: min(sl<ScreenSize>().width,450),
-    //  color: Colors.green,
-     margin: EdgeInsets.only(top: sl<ScreenSize>().height*0.03),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(skillModell.percent.toString()+"%"!,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),),
-              Text(skillModell.title!,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600)),
+    return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: () {
+        Provider.of<SkillVM>(context,listen: false).SelectSkillModel(skillModell);
+      },
+      child: Container(
+        //height: 50,
+        width: min(sl<ScreenSize>().width,450),
+      //  color: Colors.green,
+       margin: EdgeInsets.only(top: sl<ScreenSize>().height*0.03),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(skillModell.percent.toString()+"%"!,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),),
+                Text(skillModell.title!,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600)),
 
-            ],
-          ),
-          SizedBox(height: 7,),
-          Stack(
-            children: [
-              Container(
-                height: 8,
-                decoration: BoxDecoration(
-                    color: Colors.red,
+              ],
+            ),
+            SizedBox(height: 7,),
+            Stack(
+              children: [
+                Container(
+                  height: 8,
+                  decoration: BoxDecoration(
 
-                    borderRadius: BorderRadius.all(Radius.circular(inner_radius))
+                      color: work_background,
+
+                      borderRadius: BorderRadius.all(Radius.circular(inner_radius))
+                  ),
                 ),
-              ),
-              // the percentage
-              Container(
-                height: 8,
-                margin: EdgeInsets.only(left: min(sl<ScreenSize>().width,450)*  _margin_percent),
-                decoration: BoxDecoration(
-                    color: Colors.green,
+                // the percentage
+                Container(
+                  height: 8,
+                  margin: EdgeInsets.only(left: min(sl<ScreenSize>().width,450)*  _margin_percent),
+                  decoration: BoxDecoration(
+                      color:  Provider.of<SkillVM>(context,listen: false).getItemBackgroundColor(skillModell.id!),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Provider.of<SkillVM>(context,listen: false).getItemBackgroundColor(skillModell.id!).withOpacity(0.7),
+                          blurRadius: 4,
+                      blurStyle: BlurStyle.outer,
+                          spreadRadius: 0,
 
-                    borderRadius: BorderRadius.all(Radius.circular(inner_radius))
-                ),
-              )
-            ],
-          )
-        ],
+                        )
+                      ],
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(inner_radius),bottomRight: Radius.circular(inner_radius),
+                      topLeft: Radius.circular(skillModell!.percent==100?inner_radius:0),
+                      bottomLeft:  Radius.circular(skillModell!.percent==100?inner_radius:0)
+                      )
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
    // return Container(

@@ -6,6 +6,7 @@ import 'package:cv_builder/mvvm/repository/education_repo.dart';
 import 'package:cv_builder/mvvm/repository/skill_repo.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../util/constant/color.dart';
 import '../../widget/custom_widgets/panel/dashboard/items/education_item.dart';
 import '../../widget/custom_widgets/panel/dashboard/items/skill_item.dart';
 
@@ -39,7 +40,21 @@ class SkillVM extends ChangeNotifier{
     isForEdit = true;
   }
 
-
+// get color based on id item
+  // for active container of skill bar
+  Color getItemBackgroundColor(int itemId) {
+    switch (itemId) {
+      case 0:
+        return purple_bar;
+      case 1:
+        return redyellow_bar;
+      case 2:
+        return green_bar;
+      default:
+      // Use modulo for other items
+        return itemId % 4 == 0 ? purple_bar : itemId % 4 == 1 ? redyellow_bar : itemId % 4 == 2 ? green_bar : yellow_bar;
+    }
+  }
 // delete workmodel from list
   void DeleteSkill(SkillModel skillModel){
 
