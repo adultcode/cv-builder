@@ -109,9 +109,6 @@ class _SkillBigState extends State<SkillBig> {
                     Text('لیست مهارت ها خود را در این بخش اضافه کنید ',style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
 
-                    /*
-                     work list view
-                       */
 
 
 
@@ -236,14 +233,26 @@ class _SkillBigState extends State<SkillBig> {
                      */
                     SizedBox(height: sl<ScreenSize>().height*0.05,),
                     if(value.skill_items!=null)
-                      Wrap(
-                        spacing: 11, // Add spacing between items
-                        runSpacing: 11, // Add spacing between rows
-                        alignment: WrapAlignment.end,
-                        children: value.skill_items!,
-                      )
+                      // Expanded(child:
+                      // Container(
+                      //   height: 100,
+                      //   child: ListView.builder(
+                      //     itemCount: value.skillList!.skill_list!.length,
+                      //     itemBuilder: (context, index) {
+                      //       return SkillItem(skillModell: value.skillList!.skill_list![index]!);
+                      //     },
+                      //   ),
+                      // )
+                      // )
+                 //    value.skill_items
+                 //      Wrap(
+                 //        spacing: 11, // Add spacing between items
+                 //        runSpacing: 11, // Add spacing between rows
+                 //        alignment: WrapAlignment.end,
+                 //        children: value.skill_items!,
+                 //      )
 
-
+                      ...value.skill_items!
                   ],
                 ),
               );

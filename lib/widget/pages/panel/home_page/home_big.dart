@@ -91,29 +91,22 @@ class _HomeBigPageState extends State<HomeBigPage> {
         //            height: 200,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
-
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                           children: [
                             Consumer<TemplateVM>(builder: (context, value, child){
                               return FabOrIndicator(value.loading);
                             }),
-
-
-
                             Text(
                               StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ],
                         ),
-
                         SizedBox(
                           height: 10,
                         ),
-
                         Text(
                           StringConst.home_subtitle,
                           style: Theme.of(context).textTheme.bodyMedium,

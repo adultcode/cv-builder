@@ -37,6 +37,7 @@ import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'mvvm/viewmodel/work_viewmodel.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'notification_controller.dart';
 
@@ -47,7 +48,7 @@ late AwesomeNotifications notifications;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   notifications = AwesomeNotifications();
-  print("---version------${Platform.version}");
+ // print("---version------${Platform.version}");
   var channel =  NotificationChannel(
       channelKey: 'main_channel2',
       channelName: 'Flutter Main notification ',
@@ -190,7 +191,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
 
-    if(Platform.isAndroid){
+    if(!kIsWeb){
       final platform = MethodChannel("com.platform");
       platform.setMethodCallHandler((call) async{
         if(call.method=="GetVersion"){
