@@ -21,4 +21,9 @@ static String home_welcome = "خوش آمدید";
 static String home_no_template_choosed = "هیچ قالبی انتخاب نکرده اید";
 static String home_cv_error = "خطایی رخ داده است";
 static String home_cv_downloaded = "رزومه شما با موفقیت دانلود شد";
+
+// skill page
+static String skill_dialog_content = "عملیات مورد نظر را برای این آیتم مشخص کنید";
+static String delete = "حذف";
+static String edit = "ویرایش";
 }

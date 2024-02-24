@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cv_builder/mvvm/model/entity/skill_model/skill_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/skill_viewmodel.dart';
 import 'package:cv_builder/util/constant/radius_size.dart';
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,13 +25,49 @@ class SkillItem extends StatelessWidget {
   }
 
 
+  void ShodDialogItem(BuildContext context){
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(onPressed: () {
+              Navigator.pop(context);
+            }, icon: Icon(Icons.arrow_circle_left_outlined,size: 28,)),
+            Text(skillModell.title!,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),)
+          ],
+        ),
+        content: Text(StringConst.skill_dialog_content,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title),),
+
+        actions: [
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: red_bar
+              ),
+              onPressed: () {
+
+                Navigator.pop(context);
+                Provider.of<SkillVM>(context,listen: false).DeleteSkill(skillModell);
+          }, child: Text(StringConst.delete,style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white) )),
+
+          ElevatedButton(onPressed: () {
+            Provider.of<SkillVM>(context,listen: false).SelectSkillModel(skillModell);
+            Navigator.pop(context);
+          }, child: Text(StringConst.edit,style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title))),
+        ],
+      );
+    },);
+  }
   @override
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       onTap: () {
-        Provider.of<SkillVM>(context,listen: false).SelectSkillModel(skillModell);
+       // Provider.of<SkillVM>(context,listen: false).SelectSkillModel(skillModell);
+        ShodDialogItem(context);
       },
       child: Container(
         //height: 50,

@@ -47,12 +47,12 @@ class SkillVM extends ChangeNotifier{
       case 0:
         return purple_bar;
       case 1:
-        return redyellow_bar;
+        return red_bar;
       case 2:
         return green_bar;
       default:
       // Use modulo for other items
-        return itemId % 4 == 0 ? purple_bar : itemId % 4 == 1 ? redyellow_bar : itemId % 4 == 2 ? green_bar : yellow_bar;
+        return itemId % 4 == 0 ? purple_bar : itemId % 4 == 1 ? red_bar : itemId % 4 == 2 ? green_bar : yellow_bar;
     }
   }
 // delete workmodel from list

@@ -43,6 +43,6 @@ panel colors
 
  // bar colors
  var yellow_bar = Color(0xfff5d547);
- var redyellow_bar = Color(0xfff25f5c);
+ var red_bar = Color(0xfff25f5c);
  var green_bar = Color(0xff84dcc6);
  var purple_bar = Color(0xffa370f7);
