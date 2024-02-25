@@ -159,15 +159,16 @@ class _SkillSmallState extends State<SkillSmall> {
                         SizedBox(height: 20,),
                         Row(
                           children: [
+                            // save btn
                             Container(
                               width:min_icon_width,
                               height: min_icon_width,
                               //   alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: panel_orange_accent
+                                  color: primary_container
                               ),
-                              child: IconButton(icon:Icon(Icons.add),color: panel_orange,
+                              child: IconButton(icon:Icon(Icons.add),color: primary_title,
                                 padding: EdgeInsets.zero,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()){
@@ -177,7 +178,7 @@ class _SkillSmallState extends State<SkillSmall> {
                                 },),
 
                             ),
-                     //       SizedBox(width: sl<ScreenSize>().width * 0.3,),
+                            SizedBox(width: 6,),
                             // skil grade menu
                             Expanded(
                               child: Container(
@@ -185,8 +186,8 @@ class _SkillSmallState extends State<SkillSmall> {
                                   textDirection: TextDirection.rtl,
 
                                   child: SfSlider(
-                                    activeColor: panel_green,
-                                    inactiveColor: panel_green_accent,
+                                    activeColor: panel_orange,
+                                    inactiveColor: panel_orange_accent,
                                     min: 10.0,
                                     max: 100.0,
                                     //    minorTicksPerInterval: 1,

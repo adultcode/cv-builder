@@ -4,6 +4,7 @@ import 'package:cv_builder/mvvm/model/entity/language/language_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/language_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
@@ -111,18 +112,12 @@ void initState() {
                   title and grade field
                    */
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(width: sl<ScreenSize>().width*0.05),
 
-                      /*
-                      grade field
-                       */
-                      Expanded(
-                        child:  Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Row(
-                            children: [
+
+
+                      //  save btn
                               Container(
                                 width:min( sl<ScreenSize>().width*0.041, min_icon_width),
                                 height: min( sl<ScreenSize>().width*0.041, min_icon_width),
@@ -138,58 +133,47 @@ void initState() {
                                   },),
 
                                 ),
-                              Expanded(child: Container()),
-                              // skil grade menu
-                              Expanded(
-                                child:  Container(
-                                  //color: Colors.redAccent,
-                                  alignment: Alignment.center,
-                                  decoration: input_decoration,
-                                  child: DropdownButtonHideUnderline(
 
-                                    child: DropdownButton<double>(
-                                      icon: Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: Icon(Icons.arrow_drop_down,size: 20,),
-                                      ),
-                                      // Step 3.
-                                      value: value.dropdownValue,
-                                      // Step 4.
-                                      items: <double>[1,2,3,4,5]
-                                          .map<DropdownMenuItem<double>>((double value) {
-                                        return DropdownMenuItem<double>(
-                                          value: value,
-                                          child: Container(
-                                            child: Text(
-                                              value.toString(),
-                                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 17),
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      // Step 5.
-                                      onChanged: (double? newValue) {
-                                        value.ChangeValue(newValue!);
-                                      },
-                                    ),
+                              // skil grade menu
+                              Container(
+                                // margin: EdgeInsets.symmetric(horizontal: max(sl<ScreenSize>().width*0.04,20)),
+                                width: min(sl<ScreenSize>().width*0.35,400),
+                                child: Directionality(
+                                  textDirection: TextDirection.rtl,
+
+                                  child: SfSlider(
+                                    activeColor: panel_orange,
+                                    inactiveColor: panel_orange_accent,
+                                    min: 1.0,
+                                    max: 5.0,
+                                    //    minorTicksPerInterval: 1,
+                                    shouldAlwaysShowTooltip: true,
+                                    value: value.dropdownValue,
+                                    interval: 1,
+                                    showTicks: true,
+                                    tickShape: SfTickShape(),
+                                    //    showLabels: true,
+                                    enableTooltip: true,
+                                    onChanged: (dynamic newValue){
+                                      setState(() {
+                                        //    _value = value;
+                                        value.dropdownValue =  Provider.of<LanguageVM>(context, listen: false).allowedValues.reduce((closest, value) => (value - newValue).abs() < (closest - newValue).abs() ? value : closest) as double;
+
+                                      });
+                                    },
                                   ),
                                 ),
-
                               ),
 
-                            ],
-                          ),
-                        ),
 
-                      ),
-                      SizedBox(width: sl<ScreenSize>().width*0.05),
+                   //   SizedBox(width: sl<ScreenSize>().width*0.05),
 
                       /*
-                      skill title field
+                       title field
                        */
-                      Expanded(
-                          child:  Container(
+                        Container(
                             alignment: Alignment.centerRight,
+                          width: min(sl<ScreenSize>().width*0.3,330),
                             decoration: input_decoration,
                             child: TextFormField(
                               textAlignVertical : TextAlignVertical.center,
@@ -208,8 +192,8 @@ void initState() {
                                   hint: 'انگلیسی',
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                             ),
-                          )
-                      ),
+                          ),
+
 
 
 

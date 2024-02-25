@@ -139,9 +139,9 @@ class _SkillBigState extends State<SkillBig> {
                           //   alignment: Alignment.center,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: panel_orange_accent
+                              color: primary_container
                           ),
-                          child: IconButton(icon:Icon(Icons.add),color: panel_orange,
+                          child: IconButton(icon:Icon(Icons.add),color: primary_title,
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               if (_formKey.currentState!.validate()){
@@ -162,8 +162,8 @@ class _SkillBigState extends State<SkillBig> {
                               textDirection: TextDirection.rtl,
 
                               child: SfSlider(
-                                activeColor: panel_green,
-                                inactiveColor: panel_green_accent,
+                                activeColor: panel_orange,
+                                inactiveColor: panel_orange_accent,
                                 min: 10.0,
                                 max: 100.0,
                                 //    minorTicksPerInterval: 1,
@@ -185,8 +185,6 @@ class _SkillBigState extends State<SkillBig> {
                             ),
                           ),
                        // ),
-                      //  Text("میزان مهارت"),
-                      //  SizedBox(width: sl<ScreenSize>().width*0.05),
 
                         /*
                     skill title field

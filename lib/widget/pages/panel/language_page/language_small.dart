@@ -6,6 +6,7 @@ import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
@@ -176,39 +177,33 @@ class _LanguageSmallState extends State<LanguageSmall> {
                               },),
 
                           ),
-                          SizedBox(width: sl<ScreenSize>().width * 0.3,),
+                          SizedBox(width: 6,),
                           // skil grade menu
                           Expanded(
                             child:  Container(
-                              //color: Colors.redAccent,
-                              alignment: Alignment.center,
-                              decoration: input_decoration,
-                              child: DropdownButtonHideUnderline(
+                              // margin: EdgeInsets.symmetric(horizontal: max(sl<ScreenSize>().width*0.04,20)),
+                              child: Directionality(
+                                textDirection: TextDirection.rtl,
 
-                                child: DropdownButton<double>(
-                                  icon: Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Icon(Icons.arrow_drop_down,size: 20,),
-                                  ),
-                                  // Step 3.
+                                child: SfSlider(
+                                  activeColor: panel_orange,
+                                  inactiveColor: panel_orange_accent,
+                                  min: 1.0,
+                                  max: 5.0,
+                                  //    minorTicksPerInterval: 1,
+                                 // shouldAlwaysShowTooltip: true,
                                   value: value.dropdownValue,
-                                  // Step 4.
-                                  items: <double>[1,2,3,4,5]
-                                      .map<DropdownMenuItem<double>>((double value) {
-                                    return DropdownMenuItem<double>(
-                                      value: value,
-                                      child: Container(
-                                        child: Text(
-                                          value.toString(),
-                                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 17),
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  // Step 5.
-                                  onChanged: (double? newValue) {
-                                    value.ChangeValue(newValue!);
+                                  interval: 1,
+                                  showTicks: true,
+                                  tickShape: SfTickShape(),
+                                  //    showLabels: true,
+                                  enableTooltip: true,
+                                  onChanged: (dynamic newValue){
+                                    setState(() {
+                                      //    _value = value;
+                                      value.dropdownValue =  Provider.of<LanguageVM>(context, listen: false).allowedValues.reduce((closest, value) => (value - newValue).abs() < (closest - newValue).abs() ? value : closest) as double;
 
+                                    });
                                   },
                                 ),
                               ),

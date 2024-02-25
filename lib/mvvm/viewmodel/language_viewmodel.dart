@@ -26,6 +26,8 @@ class LanguageVM extends ChangeNotifier{
 
   var title_controller = TextEditingController();
   var dropdownValue = 1.0;
+  final allowedValues = [ 1,2,3,4,5];
+
   LanguageVM(){
     languageRepository = LanguageRepository();
     languageList = LanguageList();
