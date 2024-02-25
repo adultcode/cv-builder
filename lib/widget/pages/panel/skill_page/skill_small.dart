@@ -1,15 +1,20 @@
+import 'dart:math';
+
 import 'package:cv_builder/mvvm/model/entity/skill_model/skill_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/skill_viewmodel.dart';
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/skill_item.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../mvvm/viewmodel/work_viewmodel.dart';
 import '../../../../util/constant/color.dart';
+import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
@@ -118,7 +123,7 @@ class _SkillSmallState extends State<SkillSmall> {
 
                       children: [
 
-                        Text('لیست مهارت ها خود را در این بخش اضافه کنید ',style: Theme.of(context).textTheme.bodyMedium,),
+                        Text(StringConst.skill_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
                         SizedBox(height: 30,),
 
 
@@ -154,61 +159,54 @@ class _SkillSmallState extends State<SkillSmall> {
                         SizedBox(height: 20,),
                         Row(
                           children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(60),
-                                ),
-                                //  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                                backgroundColor: primary_container,
-
+                            Container(
+                              width:min_icon_width,
+                              height: min_icon_width,
+                              //   alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: panel_orange_accent
                               ),
-                              child: Icon(Icons.add,color: primary_title,),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()){
-                                  Provider.of<SkillVM>(context,listen: false).AddSkill();
-                                //  ClearInpust();
-                                }
-                              },
+                              child: IconButton(icon:Icon(Icons.add),color: panel_orange,
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()){
+                                    Provider.of<SkillVM>(context,listen: false).AddSkill();
+                                    // ClearInpust();
+                                  }
+                                },),
 
                             ),
-                            SizedBox(width: sl<ScreenSize>().width * 0.3,),
+                     //       SizedBox(width: sl<ScreenSize>().width * 0.3,),
                             // skil grade menu
                             Expanded(
-                              child:  Container(
-                                //color: Colors.redAccent,
-                                alignment: Alignment.center,
-                                decoration: input_decoration,
-                                child: DropdownButtonHideUnderline(
+                              child: Container(
+                                child:  Directionality(
+                                  textDirection: TextDirection.rtl,
 
-                                  child: DropdownButton<double>(
-                                    icon: Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: Icon(Icons.arrow_drop_down,size: 20,),
-                                    ),
-                                    // Step 3.
+                                  child: SfSlider(
+                                    activeColor: panel_green,
+                                    inactiveColor: panel_green_accent,
+                                    min: 10.0,
+                                    max: 100.0,
+                                    //    minorTicksPerInterval: 1,
+                               //     shouldAlwaysShowTooltip: true,
                                     value: value.dropdownValue,
-                                    // Step 4.
-                                    items: <double>[10,20,30,40,50,60,70,80,90,100]
-                                        .map<DropdownMenuItem<double>>((double value) {
-                                      return DropdownMenuItem<double>(
-                                        value: value,
-                                        child: Container(
-                                          child: Text(
-                                            value.toString(),
-                                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 17),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    // Step 5.
-                                    onChanged: (double? newValue) {
-                                      value.ChangeValue(newValue!);
+                                    interval: 10,
+                                    showTicks: true,
+                                    tickShape: SfTickShape(),
+                                    //    showLabels: true,
+                                    enableTooltip: true,
+                                    onChanged: (dynamic newValue){
+                                      setState(() {
+                                        //    _value = value;
+                                        value.dropdownValue = Provider.of<SkillVM>(context, listen: false).allowedValues.reduce((closest, value) => (value - newValue).abs() < (closest - newValue).abs() ? value : closest) as double;
 
+                                      });
                                     },
                                   ),
                                 ),
-                              ),
+                              )
 
                             ),
 

@@ -19,6 +19,7 @@ class SkillVM extends ChangeNotifier{
   SkillModel? selected_skill;
   bool isForEdit = false;
   late SkillRepository  skillRepository;
+  final allowedValues = [ 10, 20, 30, 40,50,60,70,80,90, 100];
 
   var title_controller = TextEditingController();
   double dropdownValue = 10.0;

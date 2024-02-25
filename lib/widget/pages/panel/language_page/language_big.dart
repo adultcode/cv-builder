@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
+import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
@@ -123,8 +124,8 @@ void initState() {
                           child: Row(
                             children: [
                               Container(
-                                width:min( sl<ScreenSize>().width*0.04,36),
-                                height: min( sl<ScreenSize>().width*0.04,36),
+                                width:min( sl<ScreenSize>().width*0.041, min_icon_width),
+                                height: min( sl<ScreenSize>().width*0.041, min_icon_width),
                                //   alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,

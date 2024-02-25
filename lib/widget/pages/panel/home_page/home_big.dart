@@ -110,6 +110,8 @@ class _HomeBigPageState extends State<HomeBigPage> {
                         Text(
                           StringConst.home_subtitle,
                           style: Theme.of(context).textTheme.bodyMedium,
+                          textDirection: TextDirection.rtl,
+
                         ),
                         SizedBox(
                           height: 30,

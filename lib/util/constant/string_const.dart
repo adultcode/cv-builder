@@ -24,6 +24,7 @@ static String home_cv_downloaded = "رزومه شما با موفقیت دانل
 
 // skill page
 static String skill_dialog_content = "عملیات مورد نظر را برای این آیتم مشخص کنید";
+static String skill_subtitle = 'لیست مهارت ها خود را در این بخش اضافه کنید ';
 static String delete = "حذف";
 static String edit = "ویرایش";
 

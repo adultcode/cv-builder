@@ -33,7 +33,7 @@ class _BigMenuItemState extends State<BigMenuItem> with TickerProviderStateMixin
       end: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(inner_radius)),
         //color: panel_orange_accent,
-        color: primary_container,
+        color: panel_orange_accent,
       )
   );
 
@@ -100,7 +100,7 @@ class _BigMenuItemState extends State<BigMenuItem> with TickerProviderStateMixin
             child: Icon(
               widget.menuModel.iconData,
               size: widget.menuModel.active ==true? 24 : 26,
-              color: widget.menuModel.active ==true? primary_title : panel_grey,
+              color: widget.menuModel.active ==true? panel_orange : panel_grey,
             ),
           ),
         ),

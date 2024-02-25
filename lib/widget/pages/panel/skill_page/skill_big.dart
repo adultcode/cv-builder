@@ -1,12 +1,17 @@
+import 'dart:math';
+
 import 'package:cv_builder/mvvm/model/entity/skill_model/skill_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/skill_viewmodel.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/skill_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
+import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/input_label.dart';
@@ -21,6 +26,7 @@ class SkillBig extends StatefulWidget {
 class _SkillBigState extends State<SkillBig> {
   final _formKey = GlobalKey<FormState>();
 
+  double _value = 40.0;
 
   @override
   void initState() {
@@ -106,7 +112,9 @@ class _SkillBigState extends State<SkillBig> {
                     ),
 
                     SizedBox(height: 10,),
-                    Text('لیست مهارت ها خود را در این بخش اضافه کنید ',style: Theme.of(context).textTheme.bodyMedium,),
+                    Text(StringConst.skill_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                    SizedBox(height: 30,),
+
                     SizedBox(height: 30,),
 
 
@@ -118,86 +126,73 @@ class _SkillBigState extends State<SkillBig> {
                 title and grade field
                  */
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(width: sl<ScreenSize>().width*0.05),
+                       // SizedBox(width: sl<ScreenSize>().width*0.05),
 
                         /*
-                    grade field
+                    save btn
                      */
-                        Expanded(
-                            child:  Padding(
-                              padding: EdgeInsets.only(top: 0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(60),
-                                      ),
-                                      backgroundColor: primary_container,
-                                    ),
-                                    child: Icon(Icons.add,color: primary_title,),
-                                    onPressed: () {
-                                      if (_formKey.currentState!.validate()){
-                                        Provider.of<SkillVM>(context,listen: false).AddSkill();
-                                       // ClearInpust();
-                                      }
-                                    },
-                                  )),
-                                  Expanded(child: Container()),
-                                  // skil grade menu
-                                  Expanded(
-                                    child:  Container(
-                                      //color: Colors.redAccent,
-                                      alignment: Alignment.center,
-                                      decoration: input_decoration,
-                                      child: DropdownButtonHideUnderline(
-
-                                        child: DropdownButton<double>(
-                                          icon: Padding(
-                                            padding: EdgeInsets.only(left: 10),
-                                            child: Icon(Icons.arrow_drop_down,size: 20,),
-                                          ),
-                                          // Step 3.
-                                          value: value.dropdownValue,
-                                          // Step 4.
-                                          items: <double>[10,20,30,40,50,60,70,80,90,100]
-                                              .map<DropdownMenuItem<double>>((double value) {
-                                            return DropdownMenuItem<double>(
-                                              value: value,
-                                              child: Container(
-                                                child: Text(
-                                                  value.toString(),
-                                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 17),
-                                                ),
-                                              ),
-                                            );
-                                          }).toList(),
-                                          // Step 5.
-                                          onChanged: (double? newValue) {
-                                            value.ChangeValue(newValue!);
-
-                                          },
-                                        ),
-                                      ),
-                                    ),
-
-                                  ),
-
-                                ],
-                              ),
-                            ),
+                        Container(
+                          width:min_icon_width,
+                          height: min_icon_width,
+                          //   alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: panel_orange_accent
+                          ),
+                          child: IconButton(icon:Icon(Icons.add),color: panel_orange,
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()){
+                                Provider.of<SkillVM>(context,listen: false).AddSkill();
+                                // ClearInpust();
+                              }
+                            },),
 
                         ),
-                        SizedBox(width: sl<ScreenSize>().width*0.05),
+
+                        // slider
+
+
+                          Container(
+                           // margin: EdgeInsets.symmetric(horizontal: max(sl<ScreenSize>().width*0.04,20)),
+                            width: min(sl<ScreenSize>().width*0.35,400),
+                            child: Directionality(
+                              textDirection: TextDirection.rtl,
+
+                              child: SfSlider(
+                                activeColor: panel_green,
+                                inactiveColor: panel_green_accent,
+                                min: 10.0,
+                                max: 100.0,
+                                //    minorTicksPerInterval: 1,
+                                shouldAlwaysShowTooltip: true,
+                                value: value.dropdownValue,
+                                interval: 10,
+                                showTicks: true,
+                                                    tickShape: SfTickShape(),
+                                //    showLabels: true,
+                                enableTooltip: true,
+                                onChanged: (dynamic newValue){
+                                  setState(() {
+                                    //    _value = value;
+                                    value.dropdownValue =  Provider.of<SkillVM>(context, listen: false).allowedValues.reduce((closest, value) => (value - newValue).abs() < (closest - newValue).abs() ? value : closest) as double;
+
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                       // ),
+                      //  Text("میزان مهارت"),
+                      //  SizedBox(width: sl<ScreenSize>().width*0.05),
 
                         /*
                     skill title field
                      */
-                        Expanded(
-                            child:  Container(
+                         Container(
+                           width: min(sl<ScreenSize>().width*0.3,330),
                               alignment: Alignment.centerRight,
                               decoration: input_decoration,
                               child: TextFormField(
@@ -219,8 +214,8 @@ class _SkillBigState extends State<SkillBig> {
                                     hint: 'برنامه نویسی',
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                               ),
-                            )
-                        ),
+                            ),
+
 
 
 

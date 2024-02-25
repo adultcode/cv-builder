@@ -128,6 +128,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
                   Text(
                     StringConst.home_subtitle,
                     style: Theme.of(context).textTheme.bodyMedium,
+                    textDirection: TextDirection.rtl,
                   ),
                   SizedBox(
                     height: 15,
