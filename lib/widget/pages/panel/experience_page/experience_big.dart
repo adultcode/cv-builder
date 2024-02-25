@@ -115,13 +115,13 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             child: Icon(Icons.done,size: 20,color: panel_green,),
                           ),
                         ),
-                        Text('تجربه های کاری',style: Theme.of(context).textTheme.titleLarge,)
+                        Text(StringConst.work_title,style: Theme.of(context).textTheme.titleLarge,)
       
                       ],
                     ),
       
                     SizedBox(height: 10,),
-                    Text('لیست سوابق کاری خود را در این قسمت ثبت کنید ',style: Theme.of(context).textTheme.bodyMedium,),
+                    Text(StringConst.work_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
       
                     /*
@@ -145,7 +145,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: 'گوگل',name: 'نام شرکت',textEditingController: value.company_controller,)
+                            child: InputLabel(hint: StringConst.company_title,name: StringConst.company_title,textEditingController: value.company_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
       
@@ -153,7 +153,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: value.title_controller,)
+                            child: InputLabel(hint: StringConst.job_hint,name: StringConst.job_title,textEditingController: value.title_controller,)
                         ),
       
       
@@ -175,7 +175,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
+                            child: InputLabel(hint: '1402/02/01',name: StringConst.date_end,textEditingController: value.end_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
       
@@ -183,7 +183,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
+                            child: InputLabel(hint: '1402/01/02',name: StringConst.date_start,textEditingController: value.start_controller,)
                         ),
       
       
@@ -218,7 +218,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                            //  ClearInpust();
       
                             }else{
-                              ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+                              ErrorSnack(context: context,title: StringConst.fill_all);
                             }
                           },
                           child: Text("اضافه کردن",style: Theme.of(context).textTheme.bodyMedium!),
@@ -227,7 +227,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       Expanded(
                         child: Container(
                             margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.05),
-                            child: InputForm(hint: 'توضیحات موقعیت شغلی',name: 'توضیحات',textEditingController: value.desc_controller,)
+                            child: InputForm(hint: StringConst.desc_hint,name: StringConst.desc,textEditingController: value.desc_controller,)
                         ),
                       ),
       

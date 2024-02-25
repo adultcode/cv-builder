@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../util/constant/color.dart';
+import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
@@ -56,7 +57,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
       },
       child: DashboarHelper(
         appBar: AppBar(
-          title:      Text("تجربه های کاری"),
+          title:      Text(StringConst.work_title),
           centerTitle: true,
             surfaceTintColor: panel_orange,
             primary: true,
@@ -75,12 +76,12 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                       Provider.of<WorkVM>(context,listen: false).worklList?.workModels?.isEmpty==true)
                                   SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
                   else
-                    SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+                    SuccessSnack(context: context,title: StringConst.success_submit);
 
 
                 }else{
 
-                  ErrorSnack(context: context,title: 'خطایی رخ داده است');
+                  ErrorSnack(context: context,title: StringConst.error);
 
               }
               },
@@ -122,7 +123,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                     crossAxisAlignment: CrossAxisAlignment.end,
 
                     children: [
-                      Text('لیست سوابق کاری خود را در این قسمت ثبت کنید ',
+                      Text( StringConst.work_subtitle,
                         textDirection: TextDirection.rtl,
 
                         style: Theme.of(context).textTheme.bodyMedium,),
@@ -146,14 +147,14 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                           /*
                         company field
                          */
-                           InputLabel(hint: 'گوگل',name: 'نام شرکت',textEditingController: value.company_controller,),
+                      InputLabel(hint: StringConst.company_title,name: StringConst.company_title,textEditingController: value.company_controller,),
 
                           SizedBox(height: sl<ScreenSize>().height*0.02),
 
                           /*
                         job title field
                          */
-                          InputLabel(hint: 'برنامه نویس',name: 'عنوان شغل',textEditingController: value.title_controller,),
+                       InputLabel(hint: StringConst.job_hint,name: StringConst.job_title,textEditingController: value.title_controller,),
 
                       /*
                     second row
@@ -169,7 +170,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                         end date
                          */
                           Expanded(
-                              child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
+                              child: InputLabel(hint: '1402/02/01',name: StringConst.date_end,textEditingController: value.end_controller,)
                           ),
                           SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -177,7 +178,7 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
                         start date
                          */
                           Expanded(
-                              child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
+                              child: InputLabel(hint: '1402/01/02',name: StringConst.date_start,textEditingController: value.start_controller,)
                           ),
                         ],
                       ),
@@ -190,30 +191,30 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
 
                         children: [
                           Container(
-                            child: ElevatedButton(
-
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(60),
-                                ),
-                                backgroundColor: primary_container,
-                              ),
+                            width:min_icon_width,
+                            height: min_icon_width,
+                            //   alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: primary_container
+                            ),
+                            child: IconButton(icon:Icon(Icons.add),color: primary_title,
+                              padding: EdgeInsets.zero,
                               onPressed: () {
 
                                 if (_formKey.currentState!.validate()){
                                   // add new work model in list of work models
                                   Provider.of<WorkVM>(context,listen: false).AddWork();
                                 }else{
-                                  ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+                                  ErrorSnack(context: context,title: StringConst.fill_all);
                                 }
-                              },
-                              child: Icon(Icons.add,color: primary_title,),
-                            ),
+                              },),
+
                           ),
                           Expanded(
                             child: Container(
                                 margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.03),
-                                child: InputForm(hint: 'توضیحات موقعیت شغلی',name: 'توضیحات',textEditingController: value.desc_controller,)
+                                child: InputForm(hint: StringConst.desc_hint,name: StringConst.desc,textEditingController: value.desc_controller,)
                             ),
                           ),
 

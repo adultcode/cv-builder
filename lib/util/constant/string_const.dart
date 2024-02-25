@@ -35,4 +35,17 @@ static String lang_isempty = "لیست زبان شما خالی است";
 static String success_submit = "لیست زبان شما خالی است";
 static String error = "خطایی رخ داده است";
 static String save = "ثبت";
+
+// work
+static String fill_all = "تمام مقادیر را تکمیل کنید";
+static String desc = "توضیحات";
+static String desc_hint = "توضیحات موقعیت شغلی";
+static String date_start = "تاریخ شروع";
+static String date_end = "تاریخ پایان";
+static String job_title = "عنوان شغل";
+static String job_hint = "برنامه نویس";
+static String company_title = "نام شرکت";
+static String company_hint = "مایکروسافت";
+static String work_subtitle = "لیست سوابق کاری خود را در این قسمت ثبت کنید";
+static String work_title = "تجربه های کاری";
 }
