@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
+import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
@@ -92,14 +93,14 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             if(_result==true){
                               if(Provider.of<WorkVM>(context,listen: false).worklList==null ||
                                   Provider.of<WorkVM>(context,listen: false).worklList?.workModels?.isEmpty==true)
-                                SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
+                                SuccessSnack(context: context,title: StringConst.work_empty);
                               else
-                                SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+                                SuccessSnack(context: context,title: StringConst.success_submit);
 
 
                             }else{
 
-                              ErrorSnack(context: context,title: 'خطایی رخ داده است');
+                              ErrorSnack(context: context,title: StringConst.error);
 
                             }
       
@@ -136,7 +137,8 @@ class _ExperienceBigState extends State<ExperienceBig> {
                   first row
                   title and company field
                    */
-                    ,Row(
+                   , SizedBox(height: sl<ScreenSize>().height*0.02),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         SizedBox(width: sl<ScreenSize>().width*0.05),
@@ -201,28 +203,25 @@ class _ExperienceBigState extends State<ExperienceBig> {
                     children: [
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       Container(
-                        child: ElevatedButton(
-      
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 40,vertical: 15),
-                            backgroundColor: primary_btn,
-      
-                          ),
+                        width:min_icon_width,
+                        height: min_icon_width,
+                        //   alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: primary_container
+                        ),
+                        child: IconButton(icon:Icon(Icons.add),color: primary_title,
+                          padding: EdgeInsets.zero,
                           onPressed: () {
-      
+
                             if (_formKey.currentState!.validate()){
                               // add new work model in list of work models
                               Provider.of<WorkVM>(context,listen: false).AddWork();
-
-                              // clear data after add new data
-                           //  ClearInpust();
-      
                             }else{
                               ErrorSnack(context: context,title: StringConst.fill_all);
                             }
-                          },
-                          child: Text("اضافه کردن",style: Theme.of(context).textTheme.bodyMedium!),
-                        ),
+                          },),
+
                       ),
                       Expanded(
                         child: Container(

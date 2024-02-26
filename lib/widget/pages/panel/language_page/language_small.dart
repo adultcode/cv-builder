@@ -193,7 +193,7 @@ class _LanguageSmallState extends State<LanguageSmall> {
                                   //    minorTicksPerInterval: 1,
                                  // shouldAlwaysShowTooltip: true,
                                   value: value.dropdownValue,
-                                  interval: 1,
+                                  interval: 1.0,
                                   showTicks: true,
                                   tickShape: SfTickShape(),
                                   //    showLabels: true,

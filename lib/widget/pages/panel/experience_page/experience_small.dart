@@ -67,14 +67,12 @@ class _ExperienceSmallState extends State<ExperienceSmall> {
             leading:        InkWell(
               onTap: () async{
 
-                  // var resul = await     Provider.of<InfoVM>(context,listen: false).SaveInfoData();
-                  // if(resul==true)     SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
                 var _result = await  Provider.of<WorkVM>(context,listen: false).SaveWorkList();
 
                 if(_result==true){
                   if(Provider.of<WorkVM>(context,listen: false).worklList==null ||
                       Provider.of<WorkVM>(context,listen: false).worklList?.workModels?.isEmpty==true)
-                                  SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
+                                  SuccessSnack(context: context,title: StringConst.work_empty);
                   else
                     SuccessSnack(context: context,title: StringConst.success_submit);
 

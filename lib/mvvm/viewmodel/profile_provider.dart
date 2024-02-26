@@ -59,8 +59,8 @@ late  AvatarRepository avatarRepository;
   }
 // General method for pick image
   void PickImage()async{
-    var check_permission  = await requestStoragePermission();
-    if(check_permission==true && check_permission !=null) {
+    //var check_permission  = await requestStoragePermission();
+    //if(check_permission==true && check_permission !=null) {
 
 
     picker = ImagePicker();
@@ -74,7 +74,7 @@ late  AvatarRepository avatarRepository;
       // call android method
        PickAndroidImage();
     }
-  }
+//  }
   }
   // web platform image picker
    PickWebImage() async {

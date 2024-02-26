@@ -57,8 +57,6 @@ class TemplateVM extends ChangeNotifier{
 Future<bool> DownloadCV()async{
   loading = true;
   var result = null;
-  var check_permission  = await requestStoragePermission();
-  if(check_permission==false || check_permission ==null) return false;
   notifyListeners();
     try{
       if(kIsWeb){
@@ -74,6 +72,9 @@ Future<bool> DownloadCV()async{
         return result;
 
       }else{
+        var check_permission  = await requestStoragePermission();
+        if(check_permission==false || check_permission ==null) return false;
+
         print("start download Android");
        result =  await DownloadCVAndroid(userModel!);
        loading = false;

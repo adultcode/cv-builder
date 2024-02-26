@@ -27,6 +27,7 @@ static String skill_dialog_content = "عملیات مورد نظر را برای
 static String skill_subtitle = 'لیست مهارت ها خود را در این بخش اضافه کنید ';
 static String delete = "حذف";
 static String edit = "ویرایش";
+static String skill_hint = "برنامه نویسی";
 
 // language
 static String lang_subtitle = 'مهارت های زبانی خود را در این قسمت میتوانید ثبت کنید ';
@@ -48,4 +49,18 @@ static String company_title = "نام شرکت";
 static String company_hint = "مایکروسافت";
 static String work_subtitle = "لیست سوابق کاری خود را در این قسمت ثبت کنید";
 static String work_title = "تجربه های کاری";
+static String work_empty = "سوابق کاری شما خالی است";
+
+/// education
+static String ed_subtitle = "لیست تحصیلات و دوره های گذرانده شده در دانشگاه و موسسات";
+static String ed_pagetitle = "تحصیلات";
+static String ed_empty = "سوابق کاری شما خالی است";
+static String ed_title_hint = "مهندسی کامپیوتر";
+static String ed_title = "رشته تحصیلی";
+static String ed_grade = "مقطع";
+static String ed_grade_hint = "کارشناسی ارشد";
+static String ed_desc = "توضیحات(اختیاری'";
+static String ed_uni = "دانشگاه";
+static String ed_uni_hint = "صنعتی شریف";
+static String add = "اضافه کردن";
 }

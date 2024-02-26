@@ -167,7 +167,7 @@ class _SkillBigState extends State<SkillBig> {
                                 min: 10.0,
                                 max: 100.0,
                                 //    minorTicksPerInterval: 1,
-                                shouldAlwaysShowTooltip: true,
+                           //     shouldAlwaysShowTooltip: true,
                                 value: value.dropdownValue,
                                 interval: 10,
                                 showTicks: true,
@@ -209,7 +209,7 @@ class _SkillBigState extends State<SkillBig> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 decoration: input_text_decoration(
                                     controller: value.title_controller,
-                                    hint: 'برنامه نویسی',
+                                    hint: StringConst.skill_hint,
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                               ),
                             ),

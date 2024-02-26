@@ -79,14 +79,14 @@ class _EducationBigState extends State<EducationBig> {
                           if(_result==true){
                             if(Provider.of<EducationVM>(context,listen: false).educationList==null ||
                                 Provider.of<EducationVM>(context,listen: false).educationList?.educationList?.isEmpty==true)
-                              SuccessSnack(context: context,title: 'سوابق کاری شما خالی است');
+                              SuccessSnack(context: context,title: StringConst.ed_empty);
                             else
-                              SuccessSnack(context: context,title: 'اطلاعات شما با موفقیت ثبت شد');
+                              SuccessSnack(context: context,title: StringConst.success_submit);
 
 
                           }else{
 
-                            ErrorSnack(context: context,title: 'خطایی رخ داده است');
+                            ErrorSnack(context: context,title: StringConst.error);
 
                           }
 
@@ -105,13 +105,13 @@ class _EducationBigState extends State<EducationBig> {
                       ),
 
 
-                      Text('تحصیلات',style: Theme.of(context).textTheme.titleLarge,)
+                      Text(StringConst.ed_pagetitle,style: Theme.of(context).textTheme.titleLarge,)
 
                     ],
                   ),
 
                   SizedBox(height: 10,),
-                  Text('لیست تحصیلات و دوره های گذرانده شده در دانشگاه و موسسات ',style: Theme.of(context).textTheme.bodyMedium,),
+                  Text(StringConst.ed_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
                   SizedBox(height: 30,),
 
                   /*
@@ -126,7 +126,9 @@ class _EducationBigState extends State<EducationBig> {
                 first row
                 title and grade field
                  */
-                  ,Row(
+                    , SizedBox(height: sl<ScreenSize>().height*0.02),
+
+                    Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SizedBox(width: sl<ScreenSize>().width*0.05),
@@ -135,7 +137,7 @@ class _EducationBigState extends State<EducationBig> {
                     grade field
                      */
                       Expanded(
-                          child: InputLabel(hint: 'کارشناسی ارشد',name: 'مقطع',textEditingController: value.grade_controller,)
+                          child: InputLabel(hint: StringConst.ed_grade_hint,name: StringConst.ed_grade,textEditingController: value.grade_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -143,7 +145,7 @@ class _EducationBigState extends State<EducationBig> {
                     education title field
                      */
                       Expanded(
-                          child: InputLabel(hint: 'مهندسی کامپیوتر',name: 'رشته تحصیلی',textEditingController: value.title_controller,)
+                          child: InputLabel(hint: StringConst.ed_title_hint,name: StringConst.ed_title,textEditingController: value.title_controller,)
                       ),
 
 
@@ -165,7 +167,7 @@ class _EducationBigState extends State<EducationBig> {
                           grade field
                            */
                   Expanded(
-                  child: InputLabel(hint: 'توضیحات',name: 'توضیحات(اختیاری)',textEditingController: value.desc_controller,isOption: true,)
+                  child: InputLabel(hint: StringConst.desc,name: StringConst.ed_desc,textEditingController: value.desc_controller,isOption: true,)
                   ),
                   SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -173,7 +175,7 @@ class _EducationBigState extends State<EducationBig> {
                     education title field
                      */
                     Expanded(
-                    child: InputLabel(hint: 'صنعتی شریف',name: 'دانشگاه',textEditingController: value.university_controller,)
+                    child: InputLabel(hint:StringConst.ed_uni_hint,name: StringConst.ed_uni,textEditingController: value.university_controller,)
                     ),
 
 
@@ -197,7 +199,7 @@ class _EducationBigState extends State<EducationBig> {
                     company field
                      */
                       Expanded(
-                          child: InputLabel(hint: '1402/02/01',name: 'تاریخ اتمام',textEditingController: value.end_controller,)
+                          child: InputLabel(hint: '1402/02/01',name: StringConst.date_end,textEditingController: value.end_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -205,7 +207,7 @@ class _EducationBigState extends State<EducationBig> {
                     job title field
                      */
                       Expanded(
-                          child: InputLabel(hint: '1402/01/02',name: 'تاریخ شروع',textEditingController: value.start_controller,)
+                          child: InputLabel(hint: '1402/01/02',name: StringConst.date_start,textEditingController: value.start_controller,)
                       ),
 
 
@@ -218,26 +220,23 @@ class _EducationBigState extends State<EducationBig> {
                   save button
                    */
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:  primary_container,
+                    ),
                     onPressed: () {
 
                       if (_formKey.currentState!.validate()){
-                        // add new work model in list of work models
-                        // var wo = WorkModel(title:_title_controller.text,
 
-
-                        //
                         Provider.of<EducationVM>(context,listen: false).AddEducation();
 
-                        //
-                        // // clear data after add new data
-                         //ClearInpust();
-                        SuccessSnack(context: context,title: 'دریافت شد');
+
 
                       }else{
-                        ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+                        ErrorSnack(context: context,title: StringConst.fill_all);
                       }
                     },
-                    child: Text("اضافه کردن"),
+                    child: Text(StringConst.add,
+                    style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
                   ),
 
 

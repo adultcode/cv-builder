@@ -151,7 +151,7 @@ class _SkillSmallState extends State<SkillSmall> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 decoration: input_text_decoration(
                                     controller: value.title_controller,
-                                    hint: 'برنامه نویسی',
+                                    hint: StringConst.skill_hint,
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                               ),
                             ),
@@ -179,6 +179,7 @@ class _SkillSmallState extends State<SkillSmall> {
 
                             ),
                             SizedBox(width: 6,),
+
                             // skil grade menu
                             Expanded(
                               child: Container(
@@ -193,7 +194,7 @@ class _SkillSmallState extends State<SkillSmall> {
                                     //    minorTicksPerInterval: 1,
                                //     shouldAlwaysShowTooltip: true,
                                     value: value.dropdownValue,
-                                    interval: 10,
+                                    interval: 10.0,
                                     showTicks: true,
                                     tickShape: SfTickShape(),
                                     //    showLabels: true,

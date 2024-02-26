@@ -44,7 +44,8 @@ class _HomeBigPageState extends State<HomeBigPage> {
   }
 
  Widget FabOrIndicator(bool isLoading){
-   if(isLoading) return Expanded(
+   if(isLoading) {
+     return Expanded(
      child: Container(
        margin: EdgeInsets.only(right: 30),
        height: 4,
@@ -56,18 +57,20 @@ class _HomeBigPageState extends State<HomeBigPage> {
        ),
      ),
    );
-   else return  ElevatedButton(
+   } else {
+     return  ElevatedButton(
 
-     style: ElevatedButton.styleFrom(
-         backgroundColor: panel_green,
-         padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
-     ),
-     onPressed: () async{
-       Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+       style: ElevatedButton.styleFrom(
+           backgroundColor: panel_green,
+           padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
+       ),
+       onPressed: () async{
+         Provider.of<TemplateVM>(context, listen: false).DownloadCV();
 
-     },
-     child: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
-   );
+       },
+       child: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
+     );
+   }
  }
   @override
   Widget build(BuildContext context) {
