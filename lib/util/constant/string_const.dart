@@ -63,4 +63,20 @@ static String ed_desc = "توضیحات(اختیاری'";
 static String ed_uni = "دانشگاه";
 static String ed_uni_hint = "صنعتی شریف";
 static String add = "اضافه کردن";
+
+// social
+static String social_title = "شبکه های اجتماعی";
+static String social_subtitle = "ثبت اطلاعات مرتبط با شبکه های اجتماعی";
+static String social_github = "گیتهاب";
+static String social_github_hint = "github.com";
+static String social_linkedin = "لینکدین";
+static String social_linkedin_hint = "linkedin.com";
+static String social_telegram = "تلگرام";
+static String social_telegram_hint = "Telegram.me";
+static String social_instagram = "اینستاگرام";
+static String social_instagram_hint = "Instagram.com";
+static String social_dribble = "دریبل";
+static String social_dribble_hint = "Dribble.com";
+static String social_site = "وبسایت";
+static String social_site_hint = "Site.com";
 }

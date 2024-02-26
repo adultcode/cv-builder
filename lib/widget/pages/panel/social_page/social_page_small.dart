@@ -13,6 +13,7 @@ import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../mvvm/viewmodel/social_viewmodel.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
+import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../custom_widgets/panel/input_form.dart';
 import '../../../custom_widgets/panel/input_label.dart';
@@ -45,7 +46,7 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
       child: DashboarHelper(
       drawer: MobileDrawer(),
         appBar: AppBar(
-            title:      Text("شبکه های اجتماعی"),
+            title:    Text(StringConst.social_title),
             centerTitle: true,
             surfaceTintColor: panel_orange,
             primary: true,
@@ -55,7 +56,7 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
             leading:        InkWell(
               onTap: () async{
                 Provider.of<SocialVM>(context,listen: false).SaveSocialList();
-                SuccessSnack(context: context, title: "اطلاعات ثبت شد");
+                SuccessSnack(context: context, title: StringConst.success_submit);
 
 
               },
@@ -96,18 +97,18 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
                   return  Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text('ثبت اطلاعات مرتبط با شبکه های اجتماعی ',style: Theme.of(context).textTheme.bodyMedium,),
+                      Text(StringConst.social_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
                       SizedBox(height: 30,),
 
                           /*
                       github field
                        */
-                          InputLabel(hint: 'github.com',name: 'گیتهاب',textEditingController: value.github_controller,),
+                          InputLabel(hint: StringConst.social_github_hint,name: StringConst.social_github,textEditingController: value.github_controller,),
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                       linkedin field
                        */
-                           InputLabel(hint: 'linkedin.com',name: 'لینکدین',textEditingController: value.linkedin_controller,),
+                           InputLabel(hint: StringConst.social_linkedin_hint,name: StringConst.social_linkedin,textEditingController: value.linkedin_controller,),
 
 
 
@@ -116,13 +117,13 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
                       /*
                       Telegram field
                        */
-                           InputLabel(hint: 'Telegram.me',name: 'تلگرام',textEditingController: value.telegram_controller,),
+                           InputLabel(hint: StringConst.social_telegram_hint,name: StringConst.social_telegram,textEditingController: value.telegram_controller,),
 
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                       Instagram field
                        */
-                          InputLabel(hint: 'Instagram.com',name: 'اینستاگرام',textEditingController: value.instagram_controller,),
+                          InputLabel(hint: StringConst.social_instagram_hint,name: StringConst.social_instagram,textEditingController: value.instagram_controller,),
 
 
 
@@ -132,12 +133,12 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
                           /*
                       birth field
                        */
-                           InputLabel(hint: 'Dribble.com',name: 'دریبل',textEditingController: value.dribble_controller,),
+                           InputLabel(hint: StringConst.social_dribble_hint,name: StringConst.social_dribble,textEditingController: value.dribble_controller,),
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                       name field
                        */
-                          InputLabel(hint: 'Site.com',name: 'وبسایت',textEditingController: value.website_controller,),
+                          InputLabel(hint: StringConst.social_site_hint,name: StringConst.social_site,textEditingController: value.website_controller,),
 
                       /*
                   fourth row

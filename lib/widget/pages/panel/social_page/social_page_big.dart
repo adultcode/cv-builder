@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cv_builder/mvvm/model/entity/social_model/social_list.dart';
 import 'package:cv_builder/mvvm/model/entity/social_model/social_model.dart';
+import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:cv_builder/util/warning/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,7 @@ class _SocialPageBigState extends State<SocialPageBig> {
                       save user's data
                        */
                             Provider.of<SocialVM>(context,listen: false).SaveSocialList();
-                            SuccessSnack(context: context, title: "اطلاعات ثبت شد");
+                            SuccessSnack(context: context, title: StringConst.success_submit);
 
                           },
                           child: Container(
@@ -83,13 +84,13 @@ class _SocialPageBigState extends State<SocialPageBig> {
                             child: Icon(Icons.done,size: 20,color: panel_green,),
                           ),
                         ),
-                        Text('شبکه های اجتماعی',style: Theme.of(context).textTheme.titleLarge,)
+                        Text(StringConst.social_title,style: Theme.of(context).textTheme.titleLarge,)
 
                       ],
                     ),
 
                     SizedBox(height: 10,),
-                    Text('ثبت اطلاعات مرتبط با شبکه های اجتماعی ',style: Theme.of(context).textTheme.bodyMedium,),
+                    Text(StringConst.social_subtitle ,style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
 
 
@@ -106,14 +107,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
                   github field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'github.com',name: 'گیتهاب',textEditingController: value.github_controller,)
+                            child: InputLabel(hint: StringConst.social_github_hint,name: StringConst.social_github,textEditingController: value.github_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
                         /*
                   linkedin field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'linkedin.com',name: 'لینکدین',textEditingController: value.linkedin_controller,)
+                            child: InputLabel(hint: StringConst.social_linkedin_hint,name: StringConst.social_linkedin ,textEditingController: value.linkedin_controller,)
                         ),
 
 
@@ -132,14 +133,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
                   Telegram field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Telegram.me',name: 'تلگرام',textEditingController: value.telegram_controller,)
+                            child: InputLabel(hint: StringConst.social_telegram_hint,name: StringConst.social_telegram,textEditingController: value.telegram_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
                         /*
                   Instagram field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Instagram.com',name: 'اینستاگرام',textEditingController: value.instagram_controller,)
+                            child: InputLabel(hint: StringConst.social_instagram_hint,name: StringConst.social_instagram,textEditingController: value.instagram_controller,)
                         ),
 
 
@@ -158,14 +159,14 @@ class _SocialPageBigState extends State<SocialPageBig> {
                   birth field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Dribble.com',name: 'دریبل',textEditingController: value.dribble_controller,)
+                            child: InputLabel(hint: StringConst.social_dribble_hint,name: StringConst.social_dribble,textEditingController: value.dribble_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
                         /*
                   name field
                    */
                         Expanded(
-                            child: InputLabel(hint: 'Site.com',name: 'وبسایت',textEditingController: value.website_controller,)
+                            child: InputLabel(hint: StringConst.social_site_hint,name: StringConst.social_site,textEditingController: value.website_controller,)
                         ),
 
 
