@@ -33,7 +33,7 @@ static String skill_hint = "برنامه نویسی";
 static String lang_subtitle = 'مهارت های زبانی خود را در این قسمت میتوانید ثبت کنید ';
 static String language = 'زبان';
 static String lang_isempty = "لیست زبان شما خالی است";
-static String success_submit = "لیست زبان شما خالی است";
+static String success_submit = "اطلاعات شما ثبت شد";
 static String error = "خطایی رخ داده است";
 static String save = "ثبت";
 

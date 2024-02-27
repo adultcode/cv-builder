@@ -102,7 +102,7 @@ class _HomeBigPageState extends State<HomeBigPage> {
                               return FabOrIndicator(value.loading);
                             }),
                             Text(
-                              StringConst.home_welcome+"${value.userModel?.infoModel?.name?? ""}",
+                              StringConst.home_welcome+" ${value.userModel?.infoModel?.name?? ""}",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ],

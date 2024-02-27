@@ -50,7 +50,7 @@ class EducationItem extends StatelessWidget {
           // company field
           Expanded(child: Text(educationModel.university!,textAlign: TextAlign.right,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: work_text),),),
           // work title
-          Expanded(child: Text("${educationModel.title!} - ${educationModel.grade!}", textAlign: TextAlign.right ,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: work_text),)),
+          Expanded(child: Text("${educationModel.title!} ", textAlign: TextAlign.right ,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: work_text),)),
 
 
 
