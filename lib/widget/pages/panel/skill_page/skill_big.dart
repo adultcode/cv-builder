@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:cv_builder/mvvm/model/entity/skill_model/skill_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/skill_viewmodel.dart';
-import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/skill_item.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/font_size.dart';
@@ -112,7 +113,8 @@ class _SkillBigState extends State<SkillBig> {
                     ),
 
                     SizedBox(height: 10,),
-                    Text(StringConst.skill_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                    Text(AppLocale.skill_subtitle.getString(context),
+                      style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
 
                     SizedBox(height: 30,),
@@ -209,7 +211,7 @@ class _SkillBigState extends State<SkillBig> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 decoration: input_text_decoration(
                                     controller: value.title_controller,
-                                    hint: StringConst.skill_hint,
+                                    hint: AppLocale.skill_hint.getString(context),
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                               ),
                             ),
@@ -226,24 +228,7 @@ class _SkillBigState extends State<SkillBig> {
                      */
                     SizedBox(height: sl<ScreenSize>().height*0.05,),
                     if(value.skill_items!=null)
-                      // Expanded(child:
-                      // Container(
-                      //   height: 100,
-                      //   child: ListView.builder(
-                      //     itemCount: value.skillList!.skill_list!.length,
-                      //     itemBuilder: (context, index) {
-                      //       return SkillItem(skillModell: value.skillList!.skill_list![index]!);
-                      //     },
-                      //   ),
-                      // )
-                      // )
-                 //    value.skill_items
-                 //      Wrap(
-                 //        spacing: 11, // Add spacing between items
-                 //        runSpacing: 11, // Add spacing between rows
-                 //        alignment: WrapAlignment.end,
-                 //        children: value.skill_items!,
-                 //      )
+
 
                       ...value.skill_items!
                   ],

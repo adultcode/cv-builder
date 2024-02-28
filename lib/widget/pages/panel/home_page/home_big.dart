@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+
 import '../../../../util/warning/snack_bar.dart';
-import '../../cv/cv1/cv1.dart';
-import '../../cv/pdf_page.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 class HomeBigPage extends StatefulWidget {
   const HomeBigPage({Key? key}) : super(key: key);
@@ -30,10 +30,12 @@ class _HomeBigPageState extends State<HomeBigPage> {
 
 
  List<TemplateModel> template_list = [];
+final FlutterLocalization localization = FlutterLocalization.instance;
 
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
 
     WidgetsFlutterBinding.ensureInitialized()
@@ -65,10 +67,28 @@ class _HomeBigPageState extends State<HomeBigPage> {
            padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
        ),
        onPressed: () async{
-         Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+          localization.translate("en");
+      //   print("change translate");
+         // setState(() {
+         //
+         // });
+         if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+           // DownloadCV(value.userModel!);
+           var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+           if(result){
+             SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
 
+           }else{
+             ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
+
+           }
+
+         }
+         else{
+           ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
+         }
        },
-       child: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
+       child: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
      );
    }
  }
@@ -102,7 +122,8 @@ class _HomeBigPageState extends State<HomeBigPage> {
                               return FabOrIndicator(value.loading);
                             }),
                             Text(
-                              StringConst.home_welcome+" ${value.userModel?.infoModel?.name?? ""}",
+                              AppLocale.home_welcome.getString(context)+" ${value.userModel?.infoModel?.name?? ""}",
+
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ],
@@ -111,7 +132,7 @@ class _HomeBigPageState extends State<HomeBigPage> {
                           height: 10,
                         ),
                         Text(
-                          StringConst.home_subtitle,
+                          AppLocale.home_subtitle.getString(context),
                           style: Theme.of(context).textTheme.bodyMedium,
                           textDirection: TextDirection.rtl,
 

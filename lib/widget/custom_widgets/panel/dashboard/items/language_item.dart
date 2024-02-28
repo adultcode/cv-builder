@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:cv_builder/config/localize/languages.dart';
 import 'package:cv_builder/mvvm/model/entity/language/language_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/language_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 import '../../../../../config/locator.dart';
 import '../../../../../util/constant/color.dart';
 import '../../../../../util/constant/radius_size.dart';
@@ -34,7 +35,7 @@ class LanguageItem extends StatelessWidget {
             Text(languageModel.title!,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),)
           ],
         ),
-        content: Text(StringConst.skill_dialog_content,textAlign: TextAlign.right, textDirection: TextDirection.rtl,
+        content: Text(AppLocale.skill_dialog_content.getString(context),textAlign: TextAlign.right, textDirection: TextDirection.rtl,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title),),
 
         actions: [
@@ -46,12 +47,12 @@ class LanguageItem extends StatelessWidget {
 
                 Navigator.pop(context);
                 Provider.of<LanguageVM>(context,listen: false).DeleteLang(languageModel);
-                }, child: Text(StringConst.delete,style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white) )),
+                }, child: Text(AppLocale.delete.getString(context),style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white) )),
 
           ElevatedButton(onPressed: () {
             Provider.of<LanguageVM>(context,listen: false).SelectLangModel(languageModel);
             Navigator.pop(context);
-          }, child: Text(StringConst.edit,style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title))),
+          }, child: Text(AppLocale.edit.getString(context),style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title))),
         ],
       );
     },);
@@ -76,7 +77,7 @@ class LanguageItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(languageModel.percent!.toInt().toString()+"%"!,
+                Text((languageModel.percent!.toInt()*20).toString()+"%"!,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),),
                 Text(languageModel.title!,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600)),

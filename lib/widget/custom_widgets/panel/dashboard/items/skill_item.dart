@@ -6,7 +6,8 @@ import 'package:cv_builder/util/constant/radius_size.dart';
 import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../../config/localize/languages.dart';
 import '../../../../../config/locator.dart';
 import '../../../../../util/constant/color.dart';
 import '../../../../../util/constant/screen_size.dart';
@@ -38,7 +39,7 @@ class SkillItem extends StatelessWidget {
             Text(skillModell.title!,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),)
           ],
         ),
-        content: Text(StringConst.skill_dialog_content,textAlign: TextAlign.right, textDirection: TextDirection.rtl,
+        content: Text(AppLocale.skill_dialog_content.getString(context),textAlign: TextAlign.right, textDirection: TextDirection.rtl,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title),),
 
         actions: [
@@ -50,12 +51,12 @@ class SkillItem extends StatelessWidget {
 
                 Navigator.pop(context);
                 Provider.of<SkillVM>(context,listen: false).DeleteSkill(skillModell);
-          }, child: Text(StringConst.delete,style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white) )),
+          }, child: Text(AppLocale.delete.getString(context),style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white) )),
 
           ElevatedButton(onPressed: () {
             Provider.of<SkillVM>(context,listen: false).SelectSkillModel(skillModell);
             Navigator.pop(context);
-          }, child: Text(StringConst.edit,style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title))),
+          }, child: Text(AppLocale.edit.getString(context),style:Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title))),
         ],
       );
     },);

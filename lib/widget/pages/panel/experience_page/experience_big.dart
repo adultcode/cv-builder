@@ -1,14 +1,12 @@
-import 'package:cv_builder/mvvm/model/entity/work_model/work_list.dart';
-import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/work_viewmodel.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
-import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
 import '../../../../util/constant/widget_decoration.dart';
@@ -93,14 +91,14 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             if(_result==true){
                               if(Provider.of<WorkVM>(context,listen: false).worklList==null ||
                                   Provider.of<WorkVM>(context,listen: false).worklList?.workModels?.isEmpty==true)
-                                SuccessSnack(context: context,title: StringConst.work_empty);
+                                SuccessSnack(context: context,title: AppLocale.work_empty.getString(context));
                               else
-                                SuccessSnack(context: context,title: StringConst.success_submit);
+                                SuccessSnack(context: context,title: AppLocale.success_submit.getString(context));
 
 
                             }else{
 
-                              ErrorSnack(context: context,title: StringConst.error);
+                              ErrorSnack(context: context,title: AppLocale.error.getString(context));
 
                             }
       
@@ -116,13 +114,13 @@ class _ExperienceBigState extends State<ExperienceBig> {
                             child: Icon(Icons.done,size: 20,color: panel_green,),
                           ),
                         ),
-                        Text(StringConst.work_title,style: Theme.of(context).textTheme.titleLarge,)
+                        Text(AppLocale.work_title.getString(context),style: Theme.of(context).textTheme.titleLarge,)
       
                       ],
                     ),
       
                     SizedBox(height: 10,),
-                    Text(StringConst.work_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                    Text(AppLocale.work_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                     SizedBox(height: 30,),
       
                     /*
@@ -147,7 +145,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: StringConst.company_title,name: StringConst.company_title,textEditingController: value.company_controller,)
+                            child: InputLabel(hint: AppLocale.company_hint.getString(context),name: AppLocale.company_title.getString(context),textEditingController: value.company_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
       
@@ -155,7 +153,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: StringConst.job_hint,name: StringConst.job_title,textEditingController: value.title_controller,)
+                            child: InputLabel(hint: AppLocale.job_hint.getString(context),name: AppLocale.job_title.getString(context),textEditingController: value.title_controller,)
                         ),
       
       
@@ -177,7 +175,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       company field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/02/01',name: StringConst.date_end,textEditingController: value.end_controller,)
+                            child: InputLabel(hint: '1402/02/01',name: AppLocale.date_end.getString(context),textEditingController: value.end_controller,)
                         ),
                         SizedBox(width: sl<ScreenSize>().width*0.05),
       
@@ -185,7 +183,7 @@ class _ExperienceBigState extends State<ExperienceBig> {
                       job title field
                        */
                         Expanded(
-                            child: InputLabel(hint: '1402/01/02',name: StringConst.date_start,textEditingController: value.start_controller,)
+                            child: InputLabel(hint: '1402/01/02',name: AppLocale.date_start.getString(context),textEditingController: value.start_controller,)
                         ),
       
       
@@ -202,31 +200,26 @@ class _ExperienceBigState extends State<ExperienceBig> {
       
                     children: [
                       SizedBox(width: sl<ScreenSize>().width*0.05),
-                      Container(
-                        width:min_icon_width,
-                        height: min_icon_width,
-                        //   alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: primary_container
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:  primary_container,
                         ),
-                        child: IconButton(icon:Icon(Icons.add),color: primary_title,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
+                        onPressed: () {
 
-                            if (_formKey.currentState!.validate()){
-                              // add new work model in list of work models
-                              Provider.of<WorkVM>(context,listen: false).AddWork();
-                            }else{
-                              ErrorSnack(context: context,title: StringConst.fill_all);
-                            }
-                          },),
-
+                          if (_formKey.currentState!.validate()){
+                            // add new work model in list of work models
+                            Provider.of<WorkVM>(context,listen: false).AddWork();
+                          }else{
+                            ErrorSnack(context: context,title: AppLocale.fill_all.getString(context));
+                          }
+                        },
+                        child: Text( AppLocale.add.getString(context),
+                            style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
                       ),
                       Expanded(
                         child: Container(
-                            margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.05),
-                            child: InputForm(hint: StringConst.desc_hint,name: StringConst.desc,textEditingController: value.desc_controller,)
+                            margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.25),
+                            child: InputForm(hint: AppLocale.desc_hint.getString(context),name: AppLocale.desc.getString(context),textEditingController: value.desc_controller,)
                         ),
                       ),
       

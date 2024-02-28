@@ -1,25 +1,20 @@
-import 'dart:math';
 
-import 'package:cv_builder/mvvm/model/entity/skill_model/skill_model.dart';
+import 'package:cv_builder/config/localize/languages.dart';
 import 'package:cv_builder/mvvm/viewmodel/skill_viewmodel.dart';
 import 'package:cv_builder/util/constant/string_const.dart';
-import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/skill_item.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
-import '../../../../mvvm/viewmodel/work_viewmodel.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/font_size.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
-import '../../../custom_widgets/panel/input_label.dart';
-import '../home_page/home_small.dart';
 
 class SkillSmall extends StatefulWidget {
   const SkillSmall({Key? key}) : super(key: key);
@@ -123,7 +118,7 @@ class _SkillSmallState extends State<SkillSmall> {
 
                       children: [
 
-                        Text(StringConst.skill_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                        Text(AppLocale.skill_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                         SizedBox(height: 30,),
 
 
@@ -151,7 +146,7 @@ class _SkillSmallState extends State<SkillSmall> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 decoration: input_text_decoration(
                                     controller: value.title_controller,
-                                    hint: StringConst.skill_hint,
+                                    hint: AppLocale.skill_hint.getString(context),
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                               ),
                             ),

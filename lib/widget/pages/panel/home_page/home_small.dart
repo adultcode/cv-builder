@@ -1,28 +1,23 @@
 import 'dart:io';
 
+import 'package:cv_builder/config/localize/languages.dart';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import '../../../../config/locator.dart';
-import '../../../../main.dart';
 import '../../../../mvvm/model/entity/template_model.dart';
 import '../../../../mvvm/viewmodel/template_viewmodel.dart';
 import '../../../../mvvm/viewmodel/user_viewmodel.dart';
-import '../../../../notification_controller.dart';
-import '../../../../util/constant/android_version.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
-import '../../../../util/constant/widget_decoration.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/dashboard/items/template_item.dart';
-import '../../cv/pdf_page.dart';
 import '../dashboard/dashboard_small.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 class HomePageSmall extends StatefulWidget {
   const HomePageSmall({Key? key}) : super(key: key);
 
@@ -63,7 +58,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
     else return FloatingActionButton.extended(
 
       backgroundColor: primary_container,
-      label: Text(StringConst.download_cv,style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
+      label: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
       onPressed: () async{
 
 
@@ -72,16 +67,16 @@ class _HomePageSmallState extends State<HomePageSmall> {
           // DownloadCV(value.userModel!);
           var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
           if(result){
-            SuccessSnack(context: context,title: StringConst.home_cv_downloaded);
+            SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
 
           }else{
-            ErrorSnack(context: context,title: StringConst.home_cv_error);
+            ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
 
           }
 
         }
         else{
-          ErrorSnack(context: context,title: StringConst.home_no_template_choosed);
+          ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
         }
       },
     );
@@ -94,7 +89,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
         return FabOrIndicator(value.loading);
     }),
       appBar: AppBar(
-      title: Text(StringConst.home_profile),
+      title: Text(AppLocale.home_profile.getString(context)),
         centerTitle: true,
 
       ),
@@ -119,14 +114,14 @@ class _HomePageSmallState extends State<HomePageSmall> {
 
 
                   Text(
-                    StringConst.home_welcome+" ${value.userModel?.infoModel?.name?? ""}",
+                    AppLocale.home_welcome.getString(context)+" ${value.userModel?.infoModel?.name?? ""}",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    StringConst.home_subtitle,
+                    AppLocale.home_subtitle.getString(context),
                     style: Theme.of(context).textTheme.bodyMedium,
                     textDirection: TextDirection.rtl,
                   ),

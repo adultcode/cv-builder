@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:cv_builder/mvvm/model/entity/social_model/social_list.dart';
-import 'package:cv_builder/mvvm/model/entity/social_model/social_model.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:cv_builder/util/warning/snack_bar.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/menu/drawer_menu.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../mvvm/viewmodel/social_viewmodel.dart';
@@ -46,7 +47,7 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
       child: DashboarHelper(
       drawer: MobileDrawer(),
         appBar: AppBar(
-            title:    Text(StringConst.social_title),
+            title:    Text(AppLocale.social_title.getString(context)),
             centerTitle: true,
             surfaceTintColor: panel_orange,
             primary: true,
@@ -56,7 +57,7 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
             leading:        InkWell(
               onTap: () async{
                 Provider.of<SocialVM>(context,listen: false).SaveSocialList();
-                SuccessSnack(context: context, title: StringConst.success_submit);
+                SuccessSnack(context: context, title: AppLocale.success_submit.getString(context));
 
 
               },
@@ -97,18 +98,18 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
                   return  Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(StringConst.social_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                      Text(AppLocale.social_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                       SizedBox(height: 30,),
 
                           /*
                       github field
                        */
-                          InputLabel(hint: StringConst.social_github_hint,name: StringConst.social_github,textEditingController: value.github_controller,),
+                          InputLabel(hint: AppLocale.social_github_hint.getString(context),name: AppLocale.social_github.getString(context),textEditingController: value.github_controller,),
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                       linkedin field
                        */
-                           InputLabel(hint: StringConst.social_linkedin_hint,name: StringConst.social_linkedin,textEditingController: value.linkedin_controller,),
+                           InputLabel(hint: AppLocale.social_linkedin_hint.getString(context),name: AppLocale.social_linkedin.getString(context),textEditingController: value.linkedin_controller,),
 
 
 
@@ -117,13 +118,13 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
                       /*
                       Telegram field
                        */
-                           InputLabel(hint: StringConst.social_telegram_hint,name: StringConst.social_telegram,textEditingController: value.telegram_controller,),
+                           InputLabel(hint: AppLocale.social_telegram_hint.getString(context),name: AppLocale.social_telegram.getString(context),textEditingController: value.telegram_controller,),
 
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                       Instagram field
                        */
-                          InputLabel(hint: StringConst.social_instagram_hint,name: StringConst.social_instagram,textEditingController: value.instagram_controller,),
+                          InputLabel(hint: AppLocale.social_instagram_hint.getString(context),name: AppLocale.social_instagram.getString(context),textEditingController: value.instagram_controller,),
 
 
 
@@ -133,12 +134,12 @@ class _SocialPageSmallState extends State<SocialPageSmall> {
                           /*
                       birth field
                        */
-                           InputLabel(hint: StringConst.social_dribble_hint,name: StringConst.social_dribble,textEditingController: value.dribble_controller,),
+                           InputLabel(hint: AppLocale.social_dribble_hint.getString(context),name: AppLocale.social_dribble.getString(context),textEditingController: value.dribble_controller,),
                           SizedBox(height: sl<ScreenSize>().height*0.02),
                           /*
                       name field
                        */
-                          InputLabel(hint: StringConst.social_site_hint,name: StringConst.social_site,textEditingController: value.website_controller,),
+                          InputLabel(hint: AppLocale.social_site_hint.getString(context),name: AppLocale.social_site.getString(context),textEditingController: value.website_controller,),
 
                       /*
                   fourth row

@@ -6,7 +6,8 @@ import 'package:cv_builder/widget/pages/panel/dashboard/dashboard_small.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/education_viewmodel.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
@@ -51,7 +52,7 @@ class _EducationSmallState extends State<EducationSmall> {
       },
       child: DashboarHelper(
         appBar: AppBar(
-            title: Text(StringConst.ed_pagetitle),
+            title: Text( AppLocale.ed_pagetitle.getString(context)),
             centerTitle: true,
             surfaceTintColor: panel_orange,
             primary: true,
@@ -71,12 +72,12 @@ class _EducationSmallState extends State<EducationSmall> {
                               ?.educationList
                               ?.isEmpty ==
                           true)
-                    SuccessSnack(context: context, title: StringConst.ed_empty);
+                    SuccessSnack(context: context, title:  AppLocale.ed_empty.getString(context));
                   else
                     SuccessSnack(
-                        context: context, title: StringConst.success_submit);
+                        context: context, title: AppLocale.success_submit.getString(context));
                 } else {
-                  ErrorSnack(context: context, title: StringConst.error);
+                  ErrorSnack(context: context, title: AppLocale.error.getString(context));
                 }
               },
               child: Container(
@@ -118,7 +119,7 @@ class _EducationSmallState extends State<EducationSmall> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        StringConst.ed_subtitle,
+                        AppLocale.ed_subtitle.getString(context),
                         textDirection: TextDirection.rtl,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
@@ -147,8 +148,8 @@ class _EducationSmallState extends State<EducationSmall> {
                         grade field
                          */
                       InputLabel(
-                        hint: StringConst.ed_grade_hint,
-                        name: StringConst.ed_grade,
+                        hint:  AppLocale.ed_grade_hint.getString(context),
+                        name:  AppLocale.ed_grade.getString(context),
                         textEditingController: value.grade_controller,
                       ),
                       SizedBox(height: sl<ScreenSize>().height * 0.02),
@@ -157,8 +158,8 @@ class _EducationSmallState extends State<EducationSmall> {
                         education title field
                          */
                       InputLabel(
-                        hint: StringConst.ed_title_hint,
-                        name: StringConst.ed_title,
+                        hint:  AppLocale.ed_title_hint.getString(context),
+                        name:  AppLocale.ed_title.getString(context),
                         textEditingController: value.title_controller,
                       ),
                       SizedBox(height: sl<ScreenSize>().height * 0.02),
@@ -172,8 +173,8 @@ class _EducationSmallState extends State<EducationSmall> {
                               grade field
                                */
                       InputLabel(
-                        hint: StringConst.ed_uni_hint,
-                        name: StringConst.ed_uni,
+                        hint:  AppLocale.ed_uni_hint.getString(context),
+                        name:  AppLocale.ed_uni.getString(context),
                         textEditingController: value.university_controller,
                       ),
                       SizedBox(height: sl<ScreenSize>().height * 0.02),
@@ -182,8 +183,8 @@ class _EducationSmallState extends State<EducationSmall> {
                         education title field
                          */
                       InputLabel(
-                        hint: StringConst.desc,
-                        name: StringConst.ed_desc,
+                        hint: AppLocale.desc_hint.getString(context),
+                        name:  AppLocale.ed_desc.getString(context),
                         textEditingController: value.desc_controller,
                         isOption: true,
                       ),
@@ -202,7 +203,7 @@ class _EducationSmallState extends State<EducationSmall> {
                           Expanded(
                               child: InputLabel(
                             hint: '1402/02/01',
-                            name: StringConst.date_end,
+                            name: AppLocale.date_end.getString(context),
                             textEditingController: value.end_controller,
                           )),
                           SizedBox(width: sl<ScreenSize>().width * 0.05),
@@ -213,7 +214,7 @@ class _EducationSmallState extends State<EducationSmall> {
                           Expanded(
                               child: InputLabel(
                             hint: '1402/01/02',
-                            name: StringConst.date_start,
+                            name: AppLocale.date_start.getString(context),
                             textEditingController: value.start_controller,
                           )),
                         ],
@@ -243,7 +244,7 @@ class _EducationSmallState extends State<EducationSmall> {
                             } else {
                               ErrorSnack(
                                   context: context,
-                                  title: StringConst.fill_all);
+                                  title: AppLocale.fill_all.getString(context));
                             }
                           },
                         ),

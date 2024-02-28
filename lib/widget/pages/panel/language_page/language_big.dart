@@ -5,7 +5,8 @@ import 'package:cv_builder/mvvm/viewmodel/language_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../util/constant/color.dart';
 import '../../../../util/constant/font_size.dart';
@@ -74,14 +75,14 @@ void initState() {
                           if(_result==true){
                             if(Provider.of<LanguageVM>(context,listen: false).languageList==null ||
                                 Provider.of<LanguageVM>(context,listen: false).languageList?.lang_list?.isEmpty==true)
-                              SuccessSnack(context: context,title: StringConst.lang_isempty);
+                              SuccessSnack(context: context,title: AppLocale.lang_isempty.getString(context));
                             else
-                              SuccessSnack(context: context,title: StringConst.success_submit);
+                              SuccessSnack(context: context,title: AppLocale.success_submit.getString(context));
 
 
                           }else{
 
-                            ErrorSnack(context: context,title: StringConst.error);
+                            ErrorSnack(context: context,title: AppLocale.error.getString(context));
 
                           }
 
@@ -97,13 +98,13 @@ void initState() {
                           child: Icon(Icons.done,size: 20,color: panel_green,),
                         ),
                       ),
-                      Text(StringConst.language,style: Theme.of(context).textTheme.titleLarge,)
+                      Text(AppLocale.language.getString(context),style: Theme.of(context).textTheme.titleLarge,)
 
                     ],
                   ),
 
                   SizedBox(height: 10,),
-                  Text(StringConst.lang_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                  Text(AppLocale.lang_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                   SizedBox(height: 30,),
 
 

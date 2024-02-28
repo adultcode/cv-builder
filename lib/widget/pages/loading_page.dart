@@ -1,18 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 // import 'dart:html';
-import 'package:cv_builder/mvvm/model/entity/user_model.dart';
-import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
 import 'package:cv_builder/util/constant/color.dart';
 import 'package:cv_builder/widget/pages/panel/dashboard_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
+import '../../config/localize/languages.dart';
 import '../../config/locator.dart';
-import '../../main.dart';
-import '../../test.dart';
 import '../../util/constant/screen_size.dart';
 
 
@@ -64,10 +61,10 @@ class _LoadingPageState extends State<LoadingPage> {
                 child: Image.asset('assets/app_icon.png',width: 100,height: 100,),
               ),
               SizedBox(height:  sl<ScreenSize>().height*0.05,),
-              Text("جاب یار",
+              Text(AppLocale.app_name.getString(context),
               style:  Theme.of(context).textTheme.titleLarge?.copyWith(color: primary_title,fontSize: 20),),
               SizedBox(height:  sl<ScreenSize>().height*0.05,),
-              Text("رزومه ساز آنلاین",
+              Text(AppLocale.cv_builder.getString(context),
               style:  Theme.of(context).textTheme.titleLarge?.copyWith(color: primary_title,fontSize: 16),)
             ],
           ),

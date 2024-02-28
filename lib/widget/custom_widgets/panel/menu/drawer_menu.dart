@@ -1,7 +1,9 @@
 import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/menu_viewmodel.dart';
 import '../../../../util/constant/color.dart';
@@ -34,7 +36,7 @@ class MobileDrawer extends StatelessWidget {
                 ]
               ),
               child: Center(
-                child: Text(StringConst.app_name,
+                child: Text( AppLocale.app_name.getString(context),
                 style:  Theme.of(context).textTheme.titleLarge,),
               ),
             ),

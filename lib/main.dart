@@ -5,6 +5,7 @@ import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'config/localize/languages.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -35,7 +36,7 @@ import 'mvvm/viewmodel/template_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'mvvm/viewmodel/work_viewmodel.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'notification_controller.dart';
@@ -184,12 +185,24 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   var channel_name = "com.platform";
+  final FlutterLocalization localization = FlutterLocalization.instance;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  /// init localization package
+    localization.init(
+      mapLocales: [
+         MapLocale('en', AppLocale.EN),
+         MapLocale('fa', AppLocale.FA),
+      ],
+      initLanguageCode: 'en'
 
+    );
+    localization.onTranslatedLanguage = _onTranslatedLanguage;
+
+    /// init platform channel
     if(!kIsWeb){
       final platform = MethodChannel("com.platform");
       platform.setMethodCallHandler((call) async{
@@ -206,6 +219,10 @@ class _MyAppState extends State<MyApp> {
       },);
     }
   }
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
+
   void SaveVersion(int _version)async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setInt(StringConst.os_key, _version);
@@ -215,7 +232,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'جاب یار - رزومه ساز آنلاین',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+        supportedLocales: localization.supportedLocales,
+        localizationsDelegates: localization.localizationsDelegates,
+
+        theme: ThemeData(
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,secondary: Colors.red),
         useMaterial3: true,
@@ -235,8 +255,8 @@ class _MyAppState extends State<MyApp> {
 
               sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
              // return MyHomePage();
-            //  return LoadingPage();
-              return Dashboard();
+              return LoadingPage();
+             // return Dashboard();
         },)
 
     );

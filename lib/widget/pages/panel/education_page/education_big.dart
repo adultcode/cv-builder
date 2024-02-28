@@ -1,11 +1,8 @@
-import 'package:cv_builder/mvvm/model/entity/education_model/education_model.dart';
-import 'package:cv_builder/mvvm/model/entity/work_model/work_list.dart';
-import 'package:cv_builder/mvvm/model/entity/work_model/work_model.dart';
-import 'package:cv_builder/mvvm/viewmodel/work_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/viewmodel/education_viewmodel.dart';
 import '../../../../util/constant/color.dart';
@@ -79,14 +76,14 @@ class _EducationBigState extends State<EducationBig> {
                           if(_result==true){
                             if(Provider.of<EducationVM>(context,listen: false).educationList==null ||
                                 Provider.of<EducationVM>(context,listen: false).educationList?.educationList?.isEmpty==true)
-                              SuccessSnack(context: context,title: StringConst.ed_empty);
+                              SuccessSnack(context: context,title:  AppLocale.ed_empty.getString(context));
                             else
-                              SuccessSnack(context: context,title: StringConst.success_submit);
+                              SuccessSnack(context: context,title: AppLocale.success_submit.getString(context));
 
 
                           }else{
 
-                            ErrorSnack(context: context,title: StringConst.error);
+                            ErrorSnack(context: context,title: AppLocale.error.getString(context));
 
                           }
 
@@ -105,13 +102,13 @@ class _EducationBigState extends State<EducationBig> {
                       ),
 
 
-                      Text(StringConst.ed_pagetitle,style: Theme.of(context).textTheme.titleLarge,)
+                      Text( AppLocale.ed_pagetitle.getString(context),style: Theme.of(context).textTheme.titleLarge,)
 
                     ],
                   ),
 
                   SizedBox(height: 10,),
-                  Text(StringConst.ed_subtitle,style: Theme.of(context).textTheme.bodyMedium,),
+                  Text( AppLocale.ed_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                   SizedBox(height: 30,),
 
                   /*
@@ -137,7 +134,7 @@ class _EducationBigState extends State<EducationBig> {
                     grade field
                      */
                       Expanded(
-                          child: InputLabel(hint: StringConst.ed_grade_hint,name: StringConst.ed_grade,textEditingController: value.grade_controller,)
+                          child: InputLabel(hint:  AppLocale.ed_grade_hint.getString(context),name:  AppLocale.ed_grade.getString(context),textEditingController: value.grade_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -145,7 +142,7 @@ class _EducationBigState extends State<EducationBig> {
                     education title field
                      */
                       Expanded(
-                          child: InputLabel(hint: StringConst.ed_title_hint,name: StringConst.ed_title,textEditingController: value.title_controller,)
+                          child: InputLabel(hint:  AppLocale.ed_title_hint.getString(context),name:  AppLocale.ed_title.getString(context),textEditingController: value.title_controller,)
                       ),
 
 
@@ -167,7 +164,7 @@ class _EducationBigState extends State<EducationBig> {
                           grade field
                            */
                   Expanded(
-                  child: InputLabel(hint: StringConst.desc,name: StringConst.ed_desc,textEditingController: value.desc_controller,isOption: true,)
+                  child: InputLabel(hint: AppLocale.desc_hint.getString(context),name: AppLocale.desc.getString(context),textEditingController: value.desc_controller,isOption: true,)
                   ),
                   SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -175,7 +172,7 @@ class _EducationBigState extends State<EducationBig> {
                     education title field
                      */
                     Expanded(
-                    child: InputLabel(hint:StringConst.ed_uni_hint,name: StringConst.ed_uni,textEditingController: value.university_controller,)
+                    child: InputLabel(hint: AppLocale.ed_uni_hint.getString(context),name:  AppLocale.ed_uni.getString(context),textEditingController: value.university_controller,)
                     ),
 
 
@@ -199,7 +196,7 @@ class _EducationBigState extends State<EducationBig> {
                     company field
                      */
                       Expanded(
-                          child: InputLabel(hint: '1402/02/01',name: StringConst.date_end,textEditingController: value.end_controller,)
+                          child: InputLabel(hint: '1402/02/01',name: AppLocale.date_end.getString(context),textEditingController: value.end_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
 
@@ -207,7 +204,7 @@ class _EducationBigState extends State<EducationBig> {
                     job title field
                      */
                       Expanded(
-                          child: InputLabel(hint: '1402/01/02',name: StringConst.date_start,textEditingController: value.start_controller,)
+                          child: InputLabel(hint: '1402/01/02',name: AppLocale.date_start.getString(context),textEditingController: value.start_controller,)
                       ),
 
 
@@ -232,10 +229,10 @@ class _EducationBigState extends State<EducationBig> {
 
 
                       }else{
-                        ErrorSnack(context: context,title: StringConst.fill_all);
+                        ErrorSnack(context: context,title: AppLocale.fill_all.getString(context));
                       }
                     },
-                    child: Text(StringConst.add,
+                    child: Text( AppLocale.add.getString(context),
                     style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
                   ),
 

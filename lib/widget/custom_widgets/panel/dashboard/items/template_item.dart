@@ -2,7 +2,8 @@ import 'package:cv_builder/mvvm/model/entity/template_model.dart';
 import 'package:cv_builder/util/constant/radius_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../../config/localize/languages.dart';
 import '../../../../../config/locator.dart';
 import '../../../../../mvvm/viewmodel/template_viewmodel.dart';
 import '../../../../../util/constant/color.dart';
@@ -44,7 +45,7 @@ class TemplateItem extends StatelessWidget {
                    ),
                  ),
                   SizedBox(height:  sl<ScreenSize>().height * 0.02),
-                  Text(StringConst.template_preview_title+templateModel.id.toString(),
+                  Text( AppLocale.template_preview_title.getString(context)+templateModel.id.toString(),
                     style: Theme.of(context).textTheme.titleLarge,),
                   SizedBox(height:  sl<ScreenSize>().height * 0.02),
                   Container(
