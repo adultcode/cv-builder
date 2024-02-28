@@ -22,6 +22,7 @@ const Map<String, dynamic> fa_string = {
 
   AppLocale.lang_subtitle:'مهارت های زبانی خود را در این قسمت میتوانید ثبت کنید ',
   AppLocale.language:'زبان ',
+  AppLocale.language_hint:'انگلیسی ',
   AppLocale.lang_isempty:'لیست زبان شما خالی است ',
   AppLocale.success_submit:'اطلاعات شما ثبت شد ',
   AppLocale.error:'خطایی رخ داده است ',
@@ -65,5 +66,24 @@ const Map<String, dynamic> fa_string = {
  AppLocale.social_dribble_hint : "Dribble.com",
  AppLocale.social_site : "وبسایت",
  AppLocale.social_site_hint : "Site.com",
+
+
+ AppLocale.personal_info : "اطلاعات شخصی",
+ AppLocale.personal_info_subtitle : "ویرایش اطلاعات و مشخصات شخصی",
+ AppLocale.email_hint : "آدرس ایمیل",
+ AppLocale.email : "ایمیل",
+ AppLocale.name_hint : "نام و نام خانوادگی",
+ AppLocale.name : "نام",
+ AppLocale.mobile_hint : "شماره تماس",
+ AppLocale.mobile : "موبایل",
+ AppLocale.bio_job_hint : "عنوان شغلی",
+ AppLocale.bio_job : "شغل",
+ AppLocale.birthday : "تاریخ تولد",
+ AppLocale.birthday_date : "1402/1/1",
+ AppLocale.location_hint : "محل زندگی",
+ AppLocale.city : "شهر",
+ AppLocale.bio_hint : "درباره خودتان توضیحاتی را بنویسید",
+ AppLocale.bio : " بیوگرافی",
+ AppLocale.choose_image : "تصویر پروفایل خود \n را انتخاب کنید",
 
 };

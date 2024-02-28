@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:cv_builder/config/localize/languages.dart';
 import 'package:cv_builder/mvvm/viewmodel/profile_provider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 import '../../../config/locator.dart';
 import '../../../util/constant/color.dart';
 import '../../../util/constant/screen_size.dart';
@@ -96,7 +97,7 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
                   context.read<ProfileProvider>().PickImage();
 
                 },
-                child: Text("تصویر پروفایل خود \n را انتخاب کنید",textAlign: TextAlign.right,
+                child: Text(AppLocale.choose_image.getString(context),textAlign: TextAlign.right,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: panel_orange),),
               ),
             ],

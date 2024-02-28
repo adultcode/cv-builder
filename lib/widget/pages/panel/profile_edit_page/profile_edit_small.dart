@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/model/entity/info_model/info_model.dart';
 import '../../../../mvvm/viewmodel/info_viewmodel.dart';
@@ -25,7 +26,7 @@ import '../../../custom_widgets/panel/input_form.dart';
 import '../../../custom_widgets/panel/input_label.dart';
 import '../dashboard_page.dart';
 import '../home_page/home_small.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 class ProfileEditSmall extends StatefulWidget {
 
   @override
@@ -72,20 +73,20 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
           surfaceTintColor: panel_orange,
         primary: true,
         shadowColor: Colors.black54,
-          title: Text("اطلاعات شخصی"),
+          title: Text(AppLocale.personal_info.getString(context)),
           centerTitle: true,
           leadingWidth: 55,
           leading:        InkWell(
             onTap: () async{
               if(_formKey.currentState?.validate()==true){
                 var resul = await     Provider.of<InfoVM>(context,listen: false).SaveInfoData();
-              if(resul==true)     SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
+              if(resul==true)     SuccessSnack(context: context,title: AppLocale.success_submit.getString(context));
 
-              else     ErrorSnack(context: context,title: 'خطایی رخ داده است');
+              else     ErrorSnack(context: context,title:  AppLocale.error.getString(context));
 
               }
               else{
-                ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
+                ErrorSnack(context: context,title: AppLocale.fill_all.getString(context));
               }
             },
             child: Container(
@@ -135,7 +136,7 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
 
-                        Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
+                        Text(AppLocale.personal_info_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                         SizedBox(height: 30,),
 
                         /*
@@ -147,13 +148,13 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                             /*
                       email field
                        */
-                            InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: value.email_controller,),
+                            InputLabel(hint:AppLocale.email_hint.getString(context),name: AppLocale.email.getString(context),textEditingController: value.email_controller,),
 
                             SizedBox(height: sl<ScreenSize>().height*0.02),
                             /*
                       name field
                        */
-                            InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: value.name_controller,)
+                            InputLabel(hint: AppLocale.name_hint.getString(context),name: AppLocale.name.getString(context),textEditingController: value.name_controller,)
                         ,
 
 
@@ -167,14 +168,14 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                             /*
                       phone field
                        */
-                             InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: value.phone_controller,isNumber: true,
+                             InputLabel(hint: AppLocale.mobile_hint.getString(context),name: AppLocale.mobile.getString(context),textEditingController: value.phone_controller,isNumber: true,
                                   max_length: 11,),
 
                         SizedBox(height: sl<ScreenSize>().height*0.02),
                             /*
                       name field
                        */
-                             InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: value.jobtitle_controller,),
+                             InputLabel(hint: AppLocale.bio_job_hint.getString(context),name: AppLocale.bio_job.getString(context),textEditingController: value.jobtitle_controller,),
 
 
 
@@ -186,11 +187,11 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                             /*
                       birth field
                        */
-                       InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: value.birth_controller,),
+                       InputLabel(hint: AppLocale.birthday_date.getString(context),name: AppLocale.birthday.getString(context),textEditingController: value.birth_controller,),
                         SizedBox(height: sl<ScreenSize>().height*0.02),
                             /*
                       name field
-                       */InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: value.city_controller,),
+                       */InputLabel(hint: AppLocale.location_hint.getString(context),name: AppLocale.city.getString(context),textEditingController: value.city_controller,),
 
 
                         /*
@@ -202,7 +203,7 @@ class _ProfileEditSmallState extends State<ProfileEditSmall> {
                         /*
                       desc field
                        */
-                        InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: value.bio_controller,),
+                        InputForm(hint: AppLocale.bio.getString(context),name: AppLocale.bio.getString(context),textEditingController: value.bio_controller,),
                         SizedBox(height: sl<ScreenSize>().height*0.02),
                             /*
                       Change avatar section

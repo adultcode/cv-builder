@@ -190,7 +190,7 @@ void initState() {
                               style: Theme.of(context).textTheme.bodyMedium,
                               decoration: input_text_decoration(
                                   controller: value.title_controller,
-                                  hint: 'انگلیسی',
+                                  hint: AppLocale.language_hint.getString(context),
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: panel_grey)),
                             ),
                           ),

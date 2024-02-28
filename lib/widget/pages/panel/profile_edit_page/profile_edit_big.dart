@@ -8,7 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import '../../../../config/localize/languages.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/model/entity/info_model/info_model.dart';
 import '../../../../mvvm/viewmodel/info_viewmodel.dart';
@@ -28,13 +29,7 @@ class ProfileEditBig extends StatefulWidget {
 }
 
 class _ProfileEditBigState extends State<ProfileEditBig> {
-  // var name_controller = TextEditingController();
-  // var email_controller = TextEditingController();
-  // var phone_controller = TextEditingController();
-  // var bio_controller = TextEditingController();
-  // var jobtitle_controller = TextEditingController();
-  // var city_controller = TextEditingController();
-  // var birth_controller = TextEditingController();
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -52,15 +47,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
 
 
   }
-  // void PopulateForm(InfoModel _infoModel){
-  //   name_controller.text = _infoModel.name!;
-  //   jobtitle_controller.text = _infoModel.job!;
-  //   bio_controller.text = _infoModel.bio!;
-  //   phone_controller.text = _infoModel.mobile!.toString();
-  //   email_controller.text = _infoModel.email!;
-  //   city_controller.text = _infoModel.city!;
-  //   birth_controller.text = _infoModel.birth!;
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,37 +83,15 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
 
                       InkWell(
                         onTap: () async{
-                          //   Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+                          if(_formKey.currentState?.validate()==true){
+                            var resul = await     Provider.of<InfoVM>(context,listen: false).SaveInfoData();
+                            if(resul==true)     SuccessSnack(context: context,title: AppLocale.success_submit.getString(context));
 
-
-                          /*
-                      save user's data
-                       */
-                          if (_formKey.currentState!.validate()) {
-
-                            /*
-                             If the form is valid, display a snackbar,
-                             save data in shared prefences
-
-                             */
-                            SuccessSnack(context: context,title: 'اطلاعات شما ثبت شد');
-
-                            // InfoModel userm = InfoModel(email: email_controller.text,
-                            // name: name_controller.text,
-                            //     bio: bio_controller.text,
-                            //     job: jobtitle_controller.text,
-                            //     mobile: phone_controller.text,
-                            //     city: city_controller.text,
-                            //     birth: birth_controller.text,);
-
-                           value.SaveInfoData();
-                           // print(userm.toJson());
+                            else     ErrorSnack(context: context,title:  AppLocale.error.getString(context));
 
                           }
                           else{
-                            print("-------Invalid Form");
-                            ErrorSnack(context: context,title: 'تمام مقادیر را تکمیل کنید');
-
+                            ErrorSnack(context: context,title: AppLocale.fill_all.getString(context));
                           }
                         },
                         child: Container(
@@ -140,12 +105,12 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                           child: Icon(Icons.done,size: 20,color: panel_green,),
                         ),
                       ),
-                      Text('اطلاعات شخصی',style: Theme.of(context).textTheme.titleLarge,)
+                      Text( AppLocale.personal_info.getString(context),style: Theme.of(context).textTheme.titleLarge,)
 
                     ],
                   ),
                   SizedBox(height: 10,),
-                  Text('ویرایش اطلاعات و مشخصات شخصی ',style: Theme.of(context).textTheme.bodyMedium,),
+                  Text(AppLocale.personal_info_subtitle.getString(context),style: Theme.of(context).textTheme.bodyMedium,),
                   SizedBox(height: 30,),
 
                   /*
@@ -160,14 +125,14 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   email field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'آدرس ایمیل',name: 'ایمیل',textEditingController: value.email_controller,)
+                          child: InputLabel(hint: AppLocale.email_hint.getString(context),name: AppLocale.email.getString(context),textEditingController: value.email_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       /*
                   name field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'نام و نام خانوادگی',name: 'نام',textEditingController: value.name_controller,)
+                          child: InputLabel(hint: AppLocale.name_hint.getString(context),name: AppLocale.name.getString(context),textEditingController: value.name_controller,)
                       ),
 
 
@@ -186,7 +151,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   phone field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'شماره تماس',name: 'موبایل',textEditingController: value.phone_controller,isNumber: true,
+                          child: InputLabel(hint: AppLocale.mobile_hint.getString(context),name: AppLocale.mobile.getString(context),textEditingController: value.phone_controller,isNumber: true,
                           max_length: 11,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
@@ -194,7 +159,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   name field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'عنوان شغلی',name: 'شغل',textEditingController: value.jobtitle_controller,)
+                          child: InputLabel(hint: AppLocale.bio_job_hint.getString(context),name: AppLocale.bio_job.getString(context),textEditingController: value.jobtitle_controller,)
                       ),
 
 
@@ -213,14 +178,14 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   birth field
                    */
                       Expanded(
-                          child: InputLabel(hint: '1390/10-1',name: 'تاریخ تولد',textEditingController: value.birth_controller,)
+                          child: InputLabel(hint:AppLocale.birthday_date.getString(context),name: AppLocale.birthday.getString(context),textEditingController: value.birth_controller,)
                       ),
                       SizedBox(width: sl<ScreenSize>().width*0.05),
                       /*
                   name field
                    */
                       Expanded(
-                          child: InputLabel(hint: 'محل زندگی',name: 'شهر',textEditingController: value.city_controller,)
+                          child: InputLabel(hint: AppLocale.location_hint.getString(context),name: AppLocale.city.getString(context),textEditingController: value.city_controller,)
                       ),
 
 
@@ -251,7 +216,7 @@ class _ProfileEditBigState extends State<ProfileEditBig> {
                   name field
                    */
                       Expanded(
-                          child: InputForm(hint: 'درباره خودتان توضیحاتی را بنویسید',name: 'بیوگرافی',textEditingController: value.bio_controller,)
+                          child: InputForm(hint: AppLocale.bio.getString(context),name: AppLocale.bio.getString(context),textEditingController: value.bio_controller,)
                       ),
 
 

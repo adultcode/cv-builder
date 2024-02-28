@@ -19,6 +19,7 @@ mixin AppLocale {
   static const String skill_hint = 'skill_hint';
 
   static const String lang_subtitle = 'lang_subtitle';
+  static const String language_hint = 'language_hint';
   static const String language = 'language';
   static const String lang_isempty = 'lang_isempty';
   static const String success_submit = 'success_submit';
@@ -66,6 +67,25 @@ mixin AppLocale {
   static const String social_dribble_hint = "Dribble.com";
   static const String social_site = "وبسایت";
   static const String social_site_hint = "Site.com";
+
+
+  static const String personal_info = "personal_info";
+  static const String personal_info_subtitle = "personal_info_subtitle";
+  static const String email_hint = "email_hint";
+  static const String email = "email";
+  static const String name_hint = "name_hint";
+  static const String name = "name";
+  static const String mobile_hint = "mobile_hint";
+  static const String mobile = "mobile";
+  static const String bio_job_hint = "bio_job_hint";
+  static const String bio_job = "bio_job";
+  static const String birthday = "birthday";
+  static const String birthday_date = "birthday_date";
+  static const String location_hint = "location_hint";
+  static const String city = "city";
+  static const String bio_hint = "bio_hint";
+  static const String bio = "bio";
+  static const String choose_image = "choose_image";
 
   static  Map<String, dynamic> EN = en_string;
   static var FA = fa_string;

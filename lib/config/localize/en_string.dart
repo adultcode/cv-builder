@@ -19,6 +19,7 @@ const Map<String, dynamic> en_string = {
 
  , AppLocale.lang_subtitle: 'You can register your language skills in this section'
   ,AppLocale.language: 'Language'
+  ,AppLocale.language_hint: 'English'
   ,AppLocale.lang_isempty: 'Your language list is empty'
   ,AppLocale.success_submit: 'Your information has been submitted'
   ,AppLocale.error: 'An error has occurred'
@@ -60,6 +61,26 @@ const Map<String, dynamic> en_string = {
   AppLocale.social_dribble: "Dribble",
   AppLocale.social_dribble_hint: "Dribble.com",
   AppLocale.social_site: "Website",
-  AppLocale.social_site_hint: "Site.com"
+  AppLocale.social_site_hint: "Site.com",
+
+  AppLocale.personal_info: "Personal Information",
+  AppLocale.personal_info_subtitle: "Edit personal information and details",
+  AppLocale.email_hint: "Email Address",
+  AppLocale.email: "Email",
+  AppLocale.name_hint: "Full Name",
+  AppLocale.name: "Name",
+  AppLocale.mobile_hint: "Phone Number",
+  AppLocale.mobile: "Mobile",
+  AppLocale.bio_job_hint: "Job Title",
+  AppLocale.bio_job: "Job",
+  AppLocale.birthday: "Date of Birth",
+  AppLocale.birthday_date: "2022-01-01",
+  AppLocale.location_hint: "Location",
+  AppLocale.city: "City",
+  AppLocale.bio_hint: "Write some descriptions about yourself",
+  AppLocale.bio: "Biography",
+  AppLocale.choose_image : "Choose profile image",
+
+
 
 };
