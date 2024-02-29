@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cv_builder/mvvm/model/entity/template_model.dart';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
+import 'package:cv_builder/mvvm/viewmodel/setting_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/template_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
 import 'package:cv_builder/util/constant/radius_size.dart';
@@ -20,6 +21,7 @@ import '../../../../util/constant/widget_decoration.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../../../util/warning/snack_bar.dart';
+import '../../../custom_widgets/panel/dashboard/items/language_setting_item.dart';
 
 class HomeBigPage extends StatefulWidget {
   const HomeBigPage({Key? key}) : super(key: key);
@@ -39,48 +41,55 @@ ShowSetting(BuildContext context){
   showDialog(context:context,
 
   builder: (context) {
-    return Dialog(
+    return AlertDialog(
 
-      backgroundColor: primary_surface,
-      child: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset('assets/25.png',width: 150,height: 150,),
-            SizedBox(height: 20,),
-            Text(AppLocale.lang_setting_title.getString(context),
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: primary_title),),
-            SizedBox(height: 20,),
-            Container(
-              height: 70,
-              padding: EdgeInsets.symmetric(vertical: 4,horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //second optin
-                  Expanded(child: Container()),
-                  // first option
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 4,horizontal: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(inner_radius))
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/english.png',),
-                          Text("English")
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
+      backgroundColor: Colors.white,
+      titlePadding: EdgeInsets.only(left: 5,top: 3),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15),
+      title:  Align(
+        alignment: Alignment.topLeft,
+        child: IconButton(onPressed: () {
+          Navigator.pop(context);
+        }, icon: Icon(Icons.arrow_circle_left_outlined,size: 28,color: primary_title,)),
+      ),
+      content: Container(
+        child: Consumer<SettingVM>(
+          builder: (context, value, child) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset('assets/25.png',width: 150,height: 150,),
+                SizedBox(height: 20,),
+                Text(AppLocale.lang_setting_title.getString(context),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: primary_title),),
+                SizedBox(height: 20,),
+                Container(
+                  height: sl<ScreenSize>().height*0.06,
+                  //  padding: EdgeInsets.symmetric(vertical: 4,horizontal: 3),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //second option
+                      Expanded(child: LangSettingItem(flag: "assets/iran.png",
+                        isActive: value.current_language==1?true:false,
+                        title: "فارسی",),),
 
-          ],
-        ),
+                      SizedBox(width: 10,),
+                      // first option
+                      Expanded(
+                          child: LangSettingItem(flag: "assets/english.png",
+                            isActive: value.current_language==2?true:false,
+                            title: StringConst.english_flag,)
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20,)
+
+              ],
+            );
+          },
+        )
       ),
     );
   }
