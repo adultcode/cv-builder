@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:cv_builder/mvvm/model/entity/template_model.dart';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
 import 'package:cv_builder/mvvm/viewmodel/template_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
+import 'package:cv_builder/util/constant/radius_size.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/template_item.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -32,6 +34,59 @@ class _HomeBigPageState extends State<HomeBigPage> {
  List<TemplateModel> template_list = [];
 final FlutterLocalization localization = FlutterLocalization.instance;
 
+ShowSetting(BuildContext context){
+
+  showDialog(context:context,
+
+  builder: (context) {
+    return Dialog(
+
+      backgroundColor: primary_surface,
+      child: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset('assets/25.png',width: 150,height: 150,),
+            SizedBox(height: 20,),
+            Text(AppLocale.lang_setting_title.getString(context),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: primary_title),),
+            SizedBox(height: 20,),
+            Container(
+              height: 70,
+              padding: EdgeInsets.symmetric(vertical: 4,horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //second optin
+                  Expanded(child: Container()),
+                  // first option
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 4,horizontal: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(inner_radius))
+                      ),
+                      child: Row(
+                        children: [
+                          Image.asset('assets/english.png',),
+                          Text("English")
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
+
+          ],
+        ),
+      ),
+    );
+  }
+    );
+
+}
   @override
   void initState() {
     // TODO: implement initState
@@ -67,7 +122,8 @@ final FlutterLocalization localization = FlutterLocalization.instance;
            padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
        ),
        onPressed: () async{
-          localization.translate("en");
+         ShowSetting(context);
+         // localization.translate("en");
       //   print("change translate");
          // setState(() {
          //

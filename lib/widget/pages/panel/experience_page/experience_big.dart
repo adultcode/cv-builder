@@ -216,9 +216,10 @@ class _ExperienceBigState extends State<ExperienceBig> {
                         child: Text( AppLocale.add.getString(context),
                             style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
                       ),
+                      Expanded(child: SizedBox(width: sl<ScreenSize>().width*0.05)),
                       Expanded(
                         child: Container(
-                            margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.25),
+                           // margin: EdgeInsets.only(left: sl<ScreenSize>().width*0.15 ),
                             child: InputForm(hint: AppLocale.desc_hint.getString(context),name: AppLocale.desc.getString(context),textEditingController: value.desc_controller,)
                         ),
                       ),

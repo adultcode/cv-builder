@@ -85,5 +85,7 @@ const Map<String, dynamic> fa_string = {
  AppLocale.bio_hint : "درباره خودتان توضیحاتی را بنویسید",
  AppLocale.bio : " بیوگرافی",
  AppLocale.choose_image : "تصویر پروفایل خود \n را انتخاب کنید",
+  AppLocale.lang_setting_title : "زبان مورد نظر را انتخاب کنید",
+
 
 };

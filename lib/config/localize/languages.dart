@@ -86,6 +86,7 @@ mixin AppLocale {
   static const String bio_hint = "bio_hint";
   static const String bio = "bio";
   static const String choose_image = "choose_image";
+  static const String lang_setting_title = "lang_setting_title";
 
   static  Map<String, dynamic> EN = en_string;
   static var FA = fa_string;

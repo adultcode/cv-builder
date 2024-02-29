@@ -80,6 +80,7 @@ const Map<String, dynamic> en_string = {
   AppLocale.bio_hint: "Write some descriptions about yourself",
   AppLocale.bio: "Biography",
   AppLocale.choose_image : "Choose profile image",
+  AppLocale.lang_setting_title : "Choose a language",
 
 
 
