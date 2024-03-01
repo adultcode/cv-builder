@@ -251,7 +251,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'جاب یار - رزومه ساز آنلاین',
+      title: "جاب یار - رزومه ساز آنلاین",
+      //title: AppLocale.app_title.getString(context),
       debugShowCheckedModeBanner: false,
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,
@@ -278,7 +279,7 @@ class _MyAppState extends State<MyApp> {
 
             sl<ScreenSize>().width =constraints.maxWidth;
             sl<ScreenSize>().height =constraints.maxHeight;
-            print("---------${ sl<ScreenSize>().width}");
+         //   print("---------${ sl<ScreenSize>().width}");
 
             sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
             // return MyHomePage();

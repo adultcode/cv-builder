@@ -22,6 +22,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/dashboard/items/language_setting_item.dart';
+import '../../../custom_widgets/panel/dashboard/language_setting.dart';
 
 class HomeBigPage extends StatefulWidget {
   const HomeBigPage({Key? key}) : super(key: key);
@@ -36,66 +37,7 @@ class _HomeBigPageState extends State<HomeBigPage> {
  List<TemplateModel> template_list = [];
 final FlutterLocalization localization = FlutterLocalization.instance;
 
-ShowSetting(BuildContext context){
 
-  showDialog(context:context,
-
-  builder: (context) {
-    return AlertDialog(
-
-      backgroundColor: Colors.white,
-      titlePadding: EdgeInsets.only(left: 5,top: 3),
-      contentPadding: EdgeInsets.symmetric(horizontal: 15),
-      title:  Align(
-        alignment: Alignment.topLeft,
-        child: IconButton(onPressed: () {
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_circle_left_outlined,size: 28,color: primary_title,)),
-      ),
-      content: Container(
-        child: Consumer<SettingVM>(
-          builder: (context, value, child) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset('assets/25.png',width: 150,height: 150,),
-                SizedBox(height: 20,),
-                Text(AppLocale.lang_setting_title.getString(context),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: primary_title),),
-                SizedBox(height: 20,),
-                Container(
-                  height: sl<ScreenSize>().height*0.06,
-                  //  padding: EdgeInsets.symmetric(vertical: 4,horizontal: 3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //second option
-                      Expanded(child: LangSettingItem(flag: "assets/iran.png",
-                        isActive: value.current_language==1?true:false,
-                        title: "فارسی",),),
-
-                      SizedBox(width: 10,),
-                      // first option
-                      Expanded(
-                          child: LangSettingItem(flag: "assets/english.png",
-                            isActive: value.current_language==2?true:false,
-                            title: StringConst.english_flag,)
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20,)
-
-              ],
-            );
-          },
-        )
-      ),
-    );
-  }
-    );
-
-}
   @override
   void initState() {
     // TODO: implement initState
@@ -124,36 +66,40 @@ ShowSetting(BuildContext context){
      ),
    );
    } else {
-     return  ElevatedButton(
+     return  Row(
+       children: [
+        ElevatedButton(
 
-       style: ElevatedButton.styleFrom(
-           backgroundColor: panel_green,
-           padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
-       ),
+         style: ElevatedButton.styleFrom(
+         backgroundColor: panel_green,
+             padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
+         ),
        onPressed: () async{
-         ShowSetting(context);
-         // localization.translate("en");
-      //   print("change translate");
-         // setState(() {
-         //
-         // });
-         if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-           // DownloadCV(value.userModel!);
-           var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
-           if(result){
-             SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
+       if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+       // DownloadCV(value.userModel!);
+       var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+       if(result){
+       SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
 
-           }else{
-             ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
+       }else{
+       ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
 
-           }
+       }
 
-         }
-         else{
-           ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
-         }
+       }
+       else{
+       ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
+       }
        },
        child: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
+       ),
+         SizedBox(width: 5,),
+
+         IconButton(onPressed: () {
+           ShowSetting(context);
+
+         }, icon: Icon(Icons.settings,color: work_text,))
+       ],
      );
    }
  }

@@ -31,7 +31,7 @@ class LanguageItem extends StatelessWidget {
           children: [
             IconButton(onPressed: () {
               Navigator.pop(context);
-            }, icon: Icon(Icons.arrow_circle_left_outlined,size: 28,)),
+            }, icon: Icon(Icons.cancel_outlined,size: 28,color: work_text)),
             Text(languageModel.title!,style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontWeight: FontWeight.w600),)
           ],
         ),

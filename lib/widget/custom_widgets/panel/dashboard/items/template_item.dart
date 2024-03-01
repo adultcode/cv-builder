@@ -41,23 +41,25 @@ class TemplateItem extends StatelessWidget {
                        shape: BoxShape.circle,
                        color: primary_surface,
                      ),
-                     child: Icon(Icons.close,size: 20,color: primary_title,),
+                     child: Icon(Icons.cancel_outlined,size: 20,color: work_text ,),
                    ),
                  ),
                   SizedBox(height:  sl<ScreenSize>().height * 0.02),
                   Text( AppLocale.template_preview_title.getString(context)+templateModel.id.toString(),
                     style: Theme.of(context).textTheme.titleLarge,),
                   SizedBox(height:  sl<ScreenSize>().height * 0.02),
-                  Container(
+                   SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        padding: EdgeInsets.all( 2),
+                        alignment: Alignment.center,
 
-                    margin: EdgeInsets.only(bottom: 10),
-                    padding: EdgeInsets.all( 2),
-                    alignment: Alignment.center,
+                        child: Image.asset(templateModel.img_path!,width:(sl<ScreenSize>().height * 0.75)*0.85,
+                          height:  sl<ScreenSize>().height * 0.75,
+                          fit: BoxFit.fill,),
+                      ),
+                    )
 
-                    child: Image.asset(templateModel.img_path!,width:(sl<ScreenSize>().height * 0.75)*0.85,
-                      height:  sl<ScreenSize>().height * 0.75,
-                      fit: BoxFit.fill,),
-                  )
                 ],
               ),
 

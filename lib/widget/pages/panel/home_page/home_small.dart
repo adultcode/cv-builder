@@ -16,6 +16,7 @@ import '../../../../util/constant/screen_size.dart';
 import '../../../../util/constant/string_const.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/dashboard/items/template_item.dart';
+import '../../../custom_widgets/panel/dashboard/language_setting.dart';
 import '../dashboard/dashboard_small.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 class HomePageSmall extends StatefulWidget {
@@ -89,6 +90,10 @@ class _HomePageSmallState extends State<HomePageSmall> {
         return FabOrIndicator(value.loading);
     }),
       appBar: AppBar(
+        leading:  IconButton(onPressed: () {
+          ShowSetting(context);
+
+        }, icon: Icon(Icons.settings,color: black_title,)),
       title: Text(AppLocale.home_profile.getString(context)),
         centerTitle: true,
 

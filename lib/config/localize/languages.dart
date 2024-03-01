@@ -3,6 +3,7 @@ import 'fa_string.dart';
 
 mixin AppLocale {
   static const String app_name = 'app_name';
+  static const String app_title = 'app_title';
   static const String home_subtitle = 'home_subtitle';
   static const String template_preview_title = 'template_preview_title';
   static const String cv_builder = 'cv_builder';

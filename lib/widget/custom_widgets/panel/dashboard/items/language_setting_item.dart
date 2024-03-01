@@ -29,7 +29,7 @@ class LangSettingItem extends StatelessWidget {
       //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(),));
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 9,horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
         decoration: BoxDecoration(
           color: isActive==true?primary_container:Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(outer_radius)),
@@ -47,7 +47,7 @@ class LangSettingItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: [
-            Text(title!, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
+            Text(title!, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title,fontSize: 13)),
             //SizedBox(width: 3,),
             Image.asset(flag!,),
 

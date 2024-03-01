@@ -3,6 +3,7 @@
 const Map<String, dynamic> fa_string = {
 
   AppLocale.app_name: 'جاب یار',
+  AppLocale.app_title: 'جاب یار - رزومه ساز آنلاین',
   AppLocale.home_subtitle:'قالب رزومه مورد نظر خود را از لیست زیر انتخاب نمایید برای مشاهده پیش نمایش  گزینه مورد نظر را نگهدارید',
   AppLocale.template_preview_title:'پیش نمایش قالب شماره',
   AppLocale.cv_builder:'رزومه ساز آنلاین',

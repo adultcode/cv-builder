@@ -2,7 +2,9 @@ import 'languages.dart';
 
 const Map<String, dynamic> en_string = {
   AppLocale.app_name: 'JobYar',
-  AppLocale.home_subtitle: 'Select your desired resume template from the list below. To see a preview, hold down the desired option.',
+ AppLocale.app_title: 'JobYar - Online Resume Builder',
+
+ AppLocale.home_subtitle: 'Select your desired resume template from the list below. To see a preview, hold down the desired option.',
   AppLocale.template_preview_title: 'Preview of template number',
   AppLocale.cv_builder: 'Online Resume Builder',
   AppLocale.home_welcome: 'Welcome',
