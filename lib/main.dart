@@ -220,6 +220,25 @@ class _MyAppState extends State<MyApp> {
         }
       },);
     }
+
+    WidgetsFlutterBinding.ensureInitialized()
+        .scheduleFrameCallback((timeStamp) {
+      LoadLanguage();
+    });
+  }
+
+  void LoadLanguage({int? current_lang}) async{
+
+    if(current_lang==null)
+        current_lang =  await Provider.of<SettingVM>(context, listen: false).LoadSetting() ;
+    if(current_lang==1){
+      localization.translate("fa");
+    }
+    if(current_lang==2){
+      localization.translate("en");
+
+    }
+
   }
   void _onTranslatedLanguage(Locale? locale) {
     setState(() {});
@@ -248,18 +267,26 @@ class _MyAppState extends State<MyApp> {
           bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: primary_title),
         )
       ),
-      home: LayoutBuilder(
+      home: Consumer<SettingVM>(
+        builder: (context, value, child) {
+          WidgetsFlutterBinding.ensureInitialized()
+              .scheduleFrameCallback((timeStamp) {
+            LoadLanguage(current_lang: value.current_language);
+          });
+          return LayoutBuilder(
+          builder: (context, constraints) {
 
-            builder: (context, constraints) {
-              sl<ScreenSize>().width =constraints.maxWidth;
-              sl<ScreenSize>().height =constraints.maxHeight;
-              print("---------${ sl<ScreenSize>().width}");
+            sl<ScreenSize>().width =constraints.maxWidth;
+            sl<ScreenSize>().height =constraints.maxHeight;
+            print("---------${ sl<ScreenSize>().width}");
 
-              sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-             // return MyHomePage();
-             // return LoadingPage();
-              return Dashboard();
-        },)
+            sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
+            // return MyHomePage();
+            // return LoadingPage();
+            return Dashboard();
+          },);
+        }
+      )
 
     );
   }

@@ -1,5 +1,6 @@
 import 'package:cv_builder/mvvm/viewmodel/setting_viewmodel.dart';
 import 'package:cv_builder/util/constant/string_const.dart';
+import 'package:cv_builder/widget/pages/panel/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,8 @@ class LangSettingItem extends StatelessWidget {
         Provider.of<SettingVM>(context, listen: false).ChangeLanguage(
           title==StringConst.english_flag?2:1
         );
+        Navigator.pop(context);
+      //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(),));
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 9,horizontal: 5),

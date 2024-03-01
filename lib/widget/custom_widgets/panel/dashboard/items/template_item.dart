@@ -52,8 +52,10 @@ class TemplateItem extends StatelessWidget {
 
                     margin: EdgeInsets.only(bottom: 10),
                     padding: EdgeInsets.all( 2),
+                    alignment: Alignment.center,
 
-                    child: Image.asset(templateModel.img_path!,width: sl<ScreenSize>().width * 0.95 ,height:  sl<ScreenSize>().height * 0.55,
+                    child: Image.asset(templateModel.img_path!,width:(sl<ScreenSize>().height * 0.75)*0.85,
+                      height:  sl<ScreenSize>().height * 0.75,
                       fit: BoxFit.fill,),
                   )
                 ],
