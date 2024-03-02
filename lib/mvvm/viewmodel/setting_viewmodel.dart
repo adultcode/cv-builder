@@ -31,6 +31,12 @@ late SettingRepository settingRepository;
 
    return current_language;
   }
+  Future<bool?> CheckSetting()async{
+
+  //  current_language = _select;
+    return   await settingRepository.CheckLanguageSetting();
+
+  }
 
 
 }

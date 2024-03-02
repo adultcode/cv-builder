@@ -45,12 +45,17 @@ final FlutterLocalization localization = FlutterLocalization.instance;
     super.initState();
 
     WidgetsFlutterBinding.ensureInitialized()
-        .scheduleFrameCallback((timeStamp) {
+        .scheduleFrameCallback((timeStamp) async{
       Provider.of<UserViewModel>(context, listen: false).GetUserModel() ;
       Provider.of<TemplateVM>(context, listen: false).GetTemplateList() ;
+      if(await Provider.of<SettingVM>(context, listen: false).CheckSetting()==false ){
+        ShowSetting(context);
+      }
     });
   }
 
+
+  // Show fab widget and loading
  Widget FabOrIndicator(bool isLoading){
    if(isLoading) {
      return Expanded(
@@ -103,6 +108,7 @@ final FlutterLocalization localization = FlutterLocalization.instance;
      );
    }
  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

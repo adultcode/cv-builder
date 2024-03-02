@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/model/entity/template_model.dart';
+import '../../../../mvvm/viewmodel/setting_viewmodel.dart';
 import '../../../../mvvm/viewmodel/template_viewmodel.dart';
 import '../../../../mvvm/viewmodel/user_viewmodel.dart';
 import '../../../../util/constant/color.dart';
@@ -44,9 +45,12 @@ class _HomePageSmallState extends State<HomePageSmall> {
     super.initState();
 
     WidgetsFlutterBinding.ensureInitialized()
-        .scheduleFrameCallback((timeStamp) {
+        .scheduleFrameCallback((timeStamp) async{
       Provider.of<UserViewModel>(context, listen: false).GetUserModel() ;
       Provider.of<TemplateVM>(context, listen: false).GetTemplateList() ;
+      if(await Provider.of<SettingVM>(context, listen: false).CheckSetting()==false ){
+      ShowSetting(context);
+      }
     });
   }
 

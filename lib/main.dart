@@ -37,8 +37,8 @@ import 'mvvm/viewmodel/template_viewmodel.dart';
 import 'mvvm/viewmodel/user_viewmodel.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'mvvm/viewmodel/work_viewmodel.dart';
-import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_localization/flutter_localization.dart';
 
 import 'notification_controller.dart';
 
@@ -248,48 +248,53 @@ class _MyAppState extends State<MyApp> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setInt(StringConst.os_key, _version);
   }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "جاب یار - رزومه ساز آنلاین",
-      //title: AppLocale.app_title.getString(context),
-      debugShowCheckedModeBanner: false,
+    return      MaterialApp(
+      //title: "جاب یار - رزومه ساز آنلاین",
+        title: AppLocale.app_title.getString(context),
+        onGenerateTitle: (context) {
+          return AppLocale.app_title.getString(context);
+        },
+        debugShowCheckedModeBanner: false,
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,
 
         theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,secondary: Colors.red),
-        useMaterial3: true,
-        fontFamily: 'sdn',
-        textTheme: TextTheme(
-          titleLarge: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,color: primary_title),
-          bodyMedium: TextStyle(fontSize: 15,fontWeight: FontWeight.w400,color: primary_title),
-          bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: primary_title),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,secondary: Colors.red),
+            useMaterial3: true,
+            fontFamily: 'sdn',
+            textTheme: TextTheme(
+              titleLarge: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,color: primary_title),
+              bodyMedium: TextStyle(fontSize: 15,fontWeight: FontWeight.w400,color: primary_title),
+              bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: primary_title),
+            )
+        ),
+        home: Consumer<SettingVM>(
+            builder: (context, value, child) {
+              WidgetsFlutterBinding.ensureInitialized()
+                  .scheduleFrameCallback((timeStamp) {
+                LoadLanguage(current_lang: value.current_language);
+              });
+              return LayoutBuilder(
+                builder: (context, constraints) {
+
+                  sl<ScreenSize>().width =constraints.maxWidth;
+                  sl<ScreenSize>().height =constraints.maxHeight;
+                  //   print("---------${ sl<ScreenSize>().width}");
+
+                  sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
+                  // return MyHomePage();
+                  // return LoadingPage();
+                  return Dashboard();
+                },);
+            }
         )
-      ),
-      home: Consumer<SettingVM>(
-        builder: (context, value, child) {
-          WidgetsFlutterBinding.ensureInitialized()
-              .scheduleFrameCallback((timeStamp) {
-            LoadLanguage(current_lang: value.current_language);
-          });
-          return LayoutBuilder(
-          builder: (context, constraints) {
-
-            sl<ScreenSize>().width =constraints.maxWidth;
-            sl<ScreenSize>().height =constraints.maxHeight;
-         //   print("---------${ sl<ScreenSize>().width}");
-
-            sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-            // return MyHomePage();
-            // return LoadingPage();
-            return Dashboard();
-          },);
-        }
-      )
 
     );
+
   }
 }
 
