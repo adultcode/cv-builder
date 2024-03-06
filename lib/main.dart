@@ -29,6 +29,7 @@ import 'mvvm/viewmodel/education_viewmodel.dart';
 import 'mvvm/viewmodel/info_viewmodel.dart';
 import 'mvvm/viewmodel/language_viewmodel.dart';
 import 'mvvm/viewmodel/menu_viewmodel.dart';
+import 'mvvm/viewmodel/privacy_viewmodel.dart';
 import 'mvvm/viewmodel/profile_provider.dart';
 import 'mvvm/viewmodel/setting_viewmodel.dart';
 import 'mvvm/viewmodel/skill_viewmodel.dart';
@@ -128,10 +129,10 @@ void main() async{
       ChangeNotifierProvider(create: (context) => SkillVM()),
       ChangeNotifierProvider(create: (context) => TemplateVM()),
       ChangeNotifierProvider(create: (context) => SettingVM()),
+      ChangeNotifierProvider(create: (context) => PrivacyVM()),
     ],
      child: MyApp(),)
   );
-
 
 }
 

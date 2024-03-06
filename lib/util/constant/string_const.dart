@@ -10,6 +10,7 @@ class StringConst{
   static const String os_key = "osversion";
   static const String Langsetting_key = "lang_setting";
   static const String english_flag = "English";
+  static const String privacy_key = "privacy";
 
 
 }

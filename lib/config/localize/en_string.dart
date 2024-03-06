@@ -17,6 +17,8 @@ const Map<String, dynamic> en_string = {
   ,AppLocale.skill_subtitle: 'Add your skills list in this section'
   ,AppLocale.delete: 'Delete'
   ,AppLocale.edit: 'Edit'
+  ,AppLocale.accept_privacy: 'Accept privacy'
+  ,AppLocale.privacy: 'Privacy'
   ,AppLocale.skill_hint: 'Programming'
 
  , AppLocale.lang_subtitle: 'You can register your language skills in this section'

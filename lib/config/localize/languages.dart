@@ -53,6 +53,8 @@ mixin AppLocale {
   static const String ed_uni = "دانشگاه";
   static const String ed_uni_hint = "صنعتی شریف";
   static const String add = "اضافه کردن";
+  static const String accept_privacy = "accept_privacy";
+  static const String privacy = "privacy";
 
   static const String social_title = "شبکه های اجتماعی";
   static const String social_subtitle = "ثبت اطلاعات مرتبط با شبکه های اجتماعی";

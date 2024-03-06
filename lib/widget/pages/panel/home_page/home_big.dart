@@ -9,6 +9,7 @@ import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
 import 'package:cv_builder/util/constant/radius_size.dart';
 import 'package:cv_builder/widget/custom_widgets/panel/dashboard/items/template_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,7 @@ final FlutterLocalization localization = FlutterLocalization.instance;
     // TODO: implement initState
 
     super.initState();
-
+    getPrivacy();
     WidgetsFlutterBinding.ensureInitialized()
         .scheduleFrameCallback((timeStamp) async{
       Provider.of<UserViewModel>(context, listen: false).GetUserModel() ;
@@ -54,6 +55,11 @@ final FlutterLocalization localization = FlutterLocalization.instance;
     });
   }
 
+  void getPrivacy()async{
+    final String response = await rootBundle.loadString('assets/data/privacy_fa.txt');
+    print(response);
+
+  }
 
   // Show fab widget and loading
  Widget FabOrIndicator(bool isLoading){
@@ -79,25 +85,72 @@ final FlutterLocalization localization = FlutterLocalization.instance;
          backgroundColor: panel_green,
              padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
          ),
-       onPressed: () async{
-       if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-       // DownloadCV(value.userModel!);
-       var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
-       if(result){
-       SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
+           onPressed: () async{
+           showModalBottomSheet(context: context, builder: (context) {
+             return Container(
+               height: sl<ScreenSize>().height*0.7,
+               width: MediaQuery.of(context).size.width,
+               padding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.all(Radius.circular(outer_radius))
 
-       }else{
-       ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
+               ),
+               child: Column(
 
-       }
+                 children: [
+                   Row(
+                     children: [
+                       Text(AppLocale.accept_privacy.getString(context))
+                     ],
+                   ),
+                   Expanded(child: Container(
+                     width: MediaQuery.of(context).size.width,
+                   //  color:Colors.amberAccent,
+                     child: SingleChildScrollView(
+                       child: Container(
+                    //     color:Colors.amberAccent,
+                         child: Text("sjldfh"),
+                       ),
+                     ),
+                   )),
+                   Container(
+                    // color:Colors.amberAccent,
+                     margin: EdgeInsets.symmetric(vertical: 10),
+                     child:     ElevatedButton(
+                       style: ElevatedButton.styleFrom(
+                         backgroundColor:  primary_container,
+                       ),
+                       onPressed: () {
 
-       }
-       else{
-       ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
-       }
-       },
-       child: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
-       ),
+                       },
+                       child: Text( AppLocale.accept_privacy.getString(context),
+                           style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
+                     ),
+                   )
+                 ],
+               ),
+             );
+           },);
+
+       //     if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+       //     // DownloadCV(value.userModel!);
+       //     var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+       //     if(result){
+       //     SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
+       //
+       //     }else{
+       //     ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
+       //
+       //     }
+       //
+       // }
+       // else{
+       //     ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
+       //     }
+           },
+           child: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
+           ),
          SizedBox(width: 5,),
 
          IconButton(onPressed: () {

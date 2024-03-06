@@ -8,6 +8,8 @@ const Map<String, dynamic> fa_string = {
   AppLocale.template_preview_title:'پیش نمایش قالب شماره',
   AppLocale.cv_builder:'رزومه ساز آنلاین',
   AppLocale.home_welcome:'خوش آمدید',
+  AppLocale.accept_privacy:'تایید حریم خصوصی',
+  AppLocale.privacy:' حریم خصوصی',
 
   AppLocale.download_cv:'دریافت رزومه',
   AppLocale.home_profile:'پروفایل',
