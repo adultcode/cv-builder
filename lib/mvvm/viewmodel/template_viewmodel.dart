@@ -73,7 +73,11 @@ Future<bool> DownloadCV()async{
 
       }else{
         var check_permission  = await requestStoragePermission();
-        if(check_permission==false || check_permission ==null) return false;
+        if(check_permission==false || check_permission ==null) {
+          loading = false;
+          notifyListeners();
+          return false;
+        }
 
         print("start download Android");
        result =  await DownloadCVAndroid(userModel!);

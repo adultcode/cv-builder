@@ -39,9 +39,9 @@ class TemplateItem extends StatelessWidget {
                      alignment: Alignment.center,
                      decoration: BoxDecoration(
                        shape: BoxShape.circle,
-                       color: primary_surface,
+                       color: primary_container,
                      ),
-                     child: Icon(Icons.cancel_outlined,size: 20,color: work_text ,),
+                     child: Icon(Icons.cancel_outlined,size: 20,color: primary_title ,),
                    ),
                  ),
                   SizedBox(height:  sl<ScreenSize>().height * 0.02),

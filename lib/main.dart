@@ -252,7 +252,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return      MaterialApp(
+
       //title: "جاب یار - رزومه ساز آنلاین",
+
         title: AppLocale.app_title.getString(context),
         onGenerateTitle: (context) {
           return AppLocale.app_title.getString(context);
@@ -272,25 +274,28 @@ class _MyAppState extends State<MyApp> {
               bodyLarge: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: primary_title),
             )
         ),
-        home: Consumer<SettingVM>(
-            builder: (context, value, child) {
-              WidgetsFlutterBinding.ensureInitialized()
-                  .scheduleFrameCallback((timeStamp) {
-                LoadLanguage(current_lang: value.current_language);
-              });
-              return LayoutBuilder(
-                builder: (context, constraints) {
+        home: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Consumer<SettingVM>(
+              builder: (context, value, child) {
+                WidgetsFlutterBinding.ensureInitialized()
+                    .scheduleFrameCallback((timeStamp) {
+                  LoadLanguage(current_lang: value.current_language);
+                });
+                return LayoutBuilder(
+                  builder: (context, constraints) {
 
-                  sl<ScreenSize>().width =constraints.maxWidth;
-                  sl<ScreenSize>().height =constraints.maxHeight;
-                  //   print("---------${ sl<ScreenSize>().width}");
+                    sl<ScreenSize>().width =constraints.maxWidth;
+                    sl<ScreenSize>().height =constraints.maxHeight;
+                    //   print("---------${ sl<ScreenSize>().width}");
 
-                  sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-                  // return MyHomePage();
-                  // return LoadingPage();
-                  return Dashboard();
-                },);
-            }
+                    sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
+                    // return MyHomePage();
+                    // return LoadingPage();
+                    return Dashboard();
+                  },);
+              }
+          ),
         )
 
     );

@@ -60,7 +60,8 @@ class _HomePageSmallState extends State<HomePageSmall> {
       color: panel_orange,
       minHeight: 3,
     );
-    else return FloatingActionButton.extended(
+    else {
+      return FloatingActionButton.extended(
 
       backgroundColor: primary_container,
       label: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13),),
@@ -85,6 +86,7 @@ class _HomePageSmallState extends State<HomePageSmall> {
         }
       },
     );
+    }
   }
 
   @override
