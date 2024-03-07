@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import '../../../../config/locator.dart';
 import '../../../../mvvm/model/entity/template_model.dart';
+import '../../../../mvvm/viewmodel/privacy_viewmodel.dart';
 import '../../../../mvvm/viewmodel/setting_viewmodel.dart';
 import '../../../../mvvm/viewmodel/template_viewmodel.dart';
 import '../../../../mvvm/viewmodel/user_viewmodel.dart';
@@ -18,6 +19,7 @@ import '../../../../util/constant/string_const.dart';
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/dashboard/items/template_item.dart';
 import '../../../custom_widgets/panel/dashboard/modal/language_setting.dart';
+import '../../../custom_widgets/panel/dashboard/modal/privacy_modal.dart';
 import '../dashboard/dashboard_small.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 class HomePageSmall extends StatefulWidget {
@@ -68,22 +70,31 @@ class _HomePageSmallState extends State<HomePageSmall> {
       onPressed: () async{
 
 
+        // check privacy policy accepted or not
+        if(await  Provider.of<PrivacyVM>(context,listen: false).isChecked()==false){
+          // show privacy modal to the user
+          showModalBottomSheet(context: context, builder: (context) {
+            return PrivacyModal();
+          },);
+        }else{
+          // resume building process
+          if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+            // DownloadCV(value.userModel!);
+            var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+            if(result){
+              SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
 
-        if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-          // DownloadCV(value.userModel!);
-          var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
-          if(result){
-            SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
+            }else{
+              ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
 
-          }else{
-            ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
+            }
 
           }
+          else{
+            ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
+          }
+        }
 
-        }
-        else{
-          ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
-        }
       },
     );
     }

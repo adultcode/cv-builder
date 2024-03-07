@@ -14,7 +14,7 @@ snackbar success design
 SuccessSnack({required BuildContext context,required String title}){
   ScaffoldMessenger.of(context).showSnackBar(
      SnackBar(
-         duration: Duration(seconds: 2),
+         duration: Duration(seconds: 3),
          showCloseIcon: true,
 
          content: Text(title,style:  Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white),),backgroundColor: panel_green),

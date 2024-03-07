@@ -92,7 +92,9 @@ class PrivacyModal extends StatelessWidget {
               Navigator.pop(context);
 
               },
-              child: Text( AppLocale.accept_privacy.getString(context),
+              child: Text(
+                "تایید شرایط",
+                  //AppLocale.accept_privacy.getString(context),
                   style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
             ),
           )
