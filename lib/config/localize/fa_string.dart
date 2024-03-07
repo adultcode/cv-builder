@@ -15,7 +15,7 @@ const Map<String, dynamic> fa_string = {
   AppLocale.home_profile:'پروفایل',
   AppLocale.home_no_template_choosed:'هیچ قالبی انتخاب نکرده اید',
   AppLocale.home_cv_error:'خطایی رخ داده است',
-  AppLocale.home_cv_downloaded:'رزومه شما با موفقیت دانلود شد',
+  AppLocale.home_cv_downloaded:'فایل رزومه در پوشه دانلود ذخیره شد',
   AppLocale.skill_dialog_content:'عملیات مورد نظر را برای این آیتم مشخص کنید',
   AppLocale.skill_subtitle:'لیست مهارت ها خود را در این بخش اضافه کنید',
   AppLocale.delete:'حذف',

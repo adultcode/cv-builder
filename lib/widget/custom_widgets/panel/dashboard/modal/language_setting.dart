@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import '../../../../config/localize/languages.dart';
-import '../../../../config/locator.dart';
-import '../../../../mvvm/viewmodel/setting_viewmodel.dart';
-import '../../../../util/constant/color.dart';
-import '../../../../util/constant/screen_size.dart';
-import '../../../../util/constant/string_const.dart';
-import 'items/language_setting_item.dart';
+import '../../../../../config/localize/languages.dart';
+import '../../../../../config/locator.dart';
+import '../../../../../mvvm/viewmodel/setting_viewmodel.dart';
+import '../../../../../util/constant/color.dart';
+import '../../../../../util/constant/screen_size.dart';
+import '../../../../../util/constant/string_const.dart';
+import '../items/language_setting_item.dart';
 
 
 
@@ -25,7 +25,7 @@ ShowSetting(BuildContext context){
             alignment: Alignment.topLeft,
             child: IconButton(onPressed: () {
               Navigator.pop(context);
-            }, icon: Icon(Icons.cancel_outlined,size: 28,color: work_text,)),
+            }, icon: Icon(Icons.cancel_outlined,size: 28,color: black_title,)),
           ),
           content: Container(
               child: Consumer<SettingVM>(

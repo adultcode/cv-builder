@@ -12,7 +12,7 @@ const Map<String, dynamic> en_string = {
   AppLocale.home_profile: 'Profile',
   AppLocale.home_no_template_choosed: 'No template selected',
   AppLocale.home_cv_error: 'An error has occurred',
-  AppLocale.home_cv_downloaded: 'Your resume was downloaded successfully'
+  AppLocale.home_cv_downloaded: 'Your resume file saved in Downloads folder'
   ,AppLocale.skill_dialog_content: 'Specify the desired action for this item'
   ,AppLocale.skill_subtitle: 'Add your skills list in this section'
   ,AppLocale.delete: 'Delete'

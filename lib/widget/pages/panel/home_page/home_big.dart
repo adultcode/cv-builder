@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cv_builder/mvvm/model/entity/template_model.dart';
 import 'package:cv_builder/mvvm/model/entity/user_model.dart';
+import 'package:cv_builder/mvvm/viewmodel/privacy_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/setting_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/template_viewmodel.dart';
 import 'package:cv_builder/mvvm/viewmodel/user_viewmodel.dart';
@@ -23,7 +24,8 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../../../util/warning/snack_bar.dart';
 import '../../../custom_widgets/panel/dashboard/items/language_setting_item.dart';
-import '../../../custom_widgets/panel/dashboard/language_setting.dart';
+import '../../../custom_widgets/panel/dashboard/modal/language_setting.dart';
+import '../../../custom_widgets/panel/dashboard/modal/privacy_modal.dart';
 
 class HomeBigPage extends StatefulWidget {
   const HomeBigPage({Key? key}) : super(key: key);
@@ -61,6 +63,75 @@ final FlutterLocalization localization = FlutterLocalization.instance;
 
   }
 
+  // privacy modal
+ // Widget PrivacyModal(){
+ //    Provider.of<PrivacyVM>(context).GetPrivacyText(1);
+ //    return Container(
+ //      height: sl<ScreenSize>().height*0.7,
+ //      width: MediaQuery.of(context).size.width,
+ //      padding: EdgeInsets.symmetric(horizontal: 15,
+ //          vertical: sl<ScreenSize>().height*0.02),
+ //      decoration: BoxDecoration(
+ //          color: Colors.white,
+ //          borderRadius: BorderRadius.all(Radius.circular(outer_radius))
+ //
+ //      ),
+ //      child: Column(
+ //        crossAxisAlignment: CrossAxisAlignment.end,
+ //        children: [
+ //          Row(
+ //            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+ //
+ //            children: [
+ //              IconButton(onPressed: () {
+ //                Navigator.pop(context);
+ //              }, icon: Icon(Icons.cancel_outlined,size: 28,color: black_title,)),
+ //              Text("حریم خصوصی",
+ //              style: Theme.of(context).textTheme.bodyLarge,)
+ //             // Text(AppLocale.accept_privacy.getString(context))
+ //            ],
+ //          ),
+ //          Expanded(child: Container(
+ //            width: MediaQuery.of(context).size.width,
+ //            //  color:Colors.amberAccent,
+ //            child: SingleChildScrollView(
+ //              child: Container(
+ //                alignment: Alignment.topRight,
+ //                //     color:Colors.amberAccent,
+ //                child: Consumer<PrivacyVM>(
+ //                  builder: (context, value, child) {
+ //                    if(value.privacy_text==null){
+ //                      return Text("Loading..");
+ //                    }else{
+ //                    return  Text(value.privacy_text!,
+ //                    textDirection: TextDirection.rtl,
+ //                    textAlign: TextAlign.right,);
+ //                    }
+ //                  },
+ //                ),
+ //              ),
+ //            ),
+ //          )),
+ //          Container(
+ //            // color:Colors.amberAccent,
+ //            margin: EdgeInsets.symmetric(vertical: 10),
+ //            alignment: Alignment.center,
+ //            child:     ElevatedButton(
+ //              style: ElevatedButton.styleFrom(
+ //                backgroundColor:  primary_container,
+ //              ),
+ //              onPressed: () {
+ //
+ //              },
+ //              child: Text( AppLocale.accept_privacy.getString(context),
+ //                  style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
+ //            ),
+ //          )
+ //        ],
+ //      ),
+ //    );
+ // }
+
   // Show fab widget and loading
  Widget FabOrIndicator(bool isLoading){
    if(isLoading) {
@@ -86,68 +157,34 @@ final FlutterLocalization localization = FlutterLocalization.instance;
              padding: EdgeInsets.symmetric(vertical: 13,horizontal: 10)
          ),
            onPressed: () async{
-           showModalBottomSheet(context: context, builder: (context) {
-             return Container(
-               height: sl<ScreenSize>().height*0.7,
-               width: MediaQuery.of(context).size.width,
-               padding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
-               decoration: BoxDecoration(
-                 color: Colors.white,
-                 borderRadius: BorderRadius.all(Radius.circular(outer_radius))
 
-               ),
-               child: Column(
+           // check privacy policy accepted or not
+             if(await  Provider.of<PrivacyVM>(context,listen: false).isChecked()==false){
+               // show privacy modal to the user
+               showModalBottomSheet(context: context, builder: (context) {
+                 return PrivacyModal();
+               },);
+             }else{
+               // resume building process
+               if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+                 // DownloadCV(value.userModel!);
+                 var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
+                 if(result){
+                   SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
 
-                 children: [
-                   Row(
-                     children: [
-                       Text(AppLocale.accept_privacy.getString(context))
-                     ],
-                   ),
-                   Expanded(child: Container(
-                     width: MediaQuery.of(context).size.width,
-                   //  color:Colors.amberAccent,
-                     child: SingleChildScrollView(
-                       child: Container(
-                    //     color:Colors.amberAccent,
-                         child: Text("sjldfh"),
-                       ),
-                     ),
-                   )),
-                   Container(
-                    // color:Colors.amberAccent,
-                     margin: EdgeInsets.symmetric(vertical: 10),
-                     child:     ElevatedButton(
-                       style: ElevatedButton.styleFrom(
-                         backgroundColor:  primary_container,
-                       ),
-                       onPressed: () {
+                 }else{
+                   ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
 
-                       },
-                       child: Text( AppLocale.accept_privacy.getString(context),
-                           style:  Theme.of(context).textTheme.bodyMedium?.copyWith(color: primary_title)),
-                     ),
-                   )
-                 ],
-               ),
-             );
-           },);
+                 }
 
-       //     if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
-       //     // DownloadCV(value.userModel!);
-       //     var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
-       //     if(result){
-       //     SuccessSnack(context: context,title: AppLocale.home_cv_downloaded.getString(context));
-       //
-       //     }else{
-       //     ErrorSnack(context: context,title: AppLocale.home_cv_error.getString(context));
-       //
-       //     }
-       //
-       // }
-       // else{
-       //     ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
-       //     }
+               }
+               else{
+                 ErrorSnack(context: context,title: AppLocale.home_no_template_choosed.getString(context));
+               }
+             }
+
+
+
            },
            child: Text(AppLocale.download_cv.getString(context),style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white)),
            ),

@@ -1,0 +1,22 @@
+JobYar app respects your privacy.
+
+We are committed to not storing your personal information and using any of your personally identifiable information (PII) in the process of generating your resume.
+
+No information is stored from you:
+
+No individual or group will have access to your personal information such as your name, last name, email address, phone number, and information related to your educational and professional background.
+All information you register is only stored on your phone and is not stored online on any server.
+The content of your resume, such as skills, experiences, educational background, and certificates, are only used while using the app and to generate your resume, and after deleting the app, the information is also completely deleted.
+The entire resume file generation process is done on your phone:
+
+Unlike many similar apps, all your information is processed only locally on your phone and is not sent to any online server.
+This guarantees the security and privacy of your information.
+Your phone information:
+
+Except for the information required to send notification notifications by the Google service, no other information from your phone is registered or stored.
+Notification information is also encrypted by Google and stored without any access from us.
+App permissions:
+
+Access to read phone memory and files is only required to register the profile picture in your resume file.
+Write access to the phone memory is required to create the resume file and save it on your phone.
+The generated resume file is saved in the download folder as cv.pdf.
