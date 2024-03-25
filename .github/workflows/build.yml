@@ -3,7 +3,7 @@ name: Build
 
  # Controls what will trigger the workflow.
  # Change it to your needs.
- on:
+on:
  # A new push to the "main" branch. 
   push:
    branches: [ "main" ]
