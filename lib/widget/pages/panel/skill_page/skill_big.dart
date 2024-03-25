@@ -173,7 +173,7 @@ class _SkillBigState extends State<SkillBig> {
                                 value: value.dropdownValue,
                                 interval: 10,
                                 showTicks: true,
-                                                    tickShape: SfTickShape(),
+                                tickShape: SfTickShape(),
                                 //    showLabels: true,
                                 enableTooltip: true,
                                 onChanged: (dynamic newValue){
