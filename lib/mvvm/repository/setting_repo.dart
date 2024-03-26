@@ -25,6 +25,7 @@ class SettingRepository{
   }
   Future<int?> GetLanguageSetting()async{
 
+
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var result =    await prefs.getInt(StringConst.Langsetting_key);
     return result;

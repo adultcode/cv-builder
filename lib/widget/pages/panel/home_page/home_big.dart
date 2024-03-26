@@ -59,7 +59,10 @@ final FlutterLocalization localization = FlutterLocalization.instance;
 
   void getPrivacy()async{
     final String response = await rootBundle.loadString('assets/data/privacy_fa.txt');
-    print(response);
+
+    //pri
+    // nt(response);
+
 
   }
 
@@ -167,6 +170,7 @@ final FlutterLocalization localization = FlutterLocalization.instance;
              }else{
                // resume building process
                if(  Provider.of<TemplateVM>(context, listen: false).getSelected()!=null){
+
                  // DownloadCV(value.userModel!);
                  var result = await Provider.of<TemplateVM>(context, listen: false).DownloadCV();
                  if(result){
@@ -211,6 +215,7 @@ final FlutterLocalization localization = FlutterLocalization.instance;
           child: Consumer<UserViewModel>(
             builder: (context, value, child) {
 
+              // initial the userModel
               Provider.of<TemplateVM>(context, listen: false).userModel = value.userModel;
 
               return Column(

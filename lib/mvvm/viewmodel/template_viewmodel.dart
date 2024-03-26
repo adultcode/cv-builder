@@ -10,6 +10,7 @@ import 'package:pdf/pdf.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../widget/pages/cv/cv1/cv1.dart';
 import '../../widget/pages/cv/cv2/cv2.dart';
+import '../../widget/pages/cv/cv3/cv3.dart';
 import '../data_source/web_pdf_source.dart';
 import '../model/entity/template_model.dart';
 import '../model/service/permission.dart';
@@ -34,7 +35,7 @@ class TemplateVM extends ChangeNotifier{
 
     switch( getSelected() ) {
 
-      case 1: return List.from(await generateResumeCV1(PdfPageFormat.a4,userModel:userModel ));
+      case 1: return List.from(await generateResumeCV3(PdfPageFormat.a4,userModel:userModel ));
       case 2: return List.from(await generateResumeCV2(PdfPageFormat.a4,userModel:userModel ));
       default: return List.from(await generateResumeCV1(PdfPageFormat.a4,userModel:userModel ));
 

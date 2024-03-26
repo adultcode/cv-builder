@@ -90,11 +90,9 @@ class _DashboardBigState extends State<DashboardBig>
                     builder: (context, value, child) {
                       if (value.active_item == 0) {
                         return HomeBigPage();
-                        return ProfileEditBig();
                       }
                       else if (value.active_item == 1) {
                         return ProfileEditBig();
-                        return SocialPageBig();
                       }
                       else if (value.active_item == 2) {
                         return ExperienceBig();

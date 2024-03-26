@@ -1,73 +1,63 @@
- # Name of the workflow
-name: Build
+name: Build and Upload Signed APK
 
- # Controls what will trigger the workflow.
- # Change it to your needs.
 on:
- # A new push to the "main" branch. 
   push:
-   branches: [ "main" ]
- # A new pull request to the "main" branch.
-  pull_request:
-   branches: [ "main" ]
- 
- # Allows to trigger the workflow from GitHub interfaces.
-   workflow_dispatch:
- 
-# A single workflow can have multiple jobs.
-jobs: 
- # 'A new job is defined with the name: "build_android" 
- build_android:
-   # Defines what operating system will be used for the actions.
-   # For android, we will use Linux GitHub-Hosted Runner.
-   runs-on: ubuntu-22.04
-   # Defines what step should be passed for successful run
-   steps:
-     # Checkout to the selected branch
-     - name: Checkout
-       uses: actions/checkout@v3
-     # Download and install flutter packages
-     - name: Install Flutter
-       uses: subosito/flutter-action@v2
-       with:
-         # Define which stable flutter version should be used
-         flutter-version: "3.16.0"
-         channel: 'stable'
-         # Enables cache for flutter packages              
-         # Speed up the process
-         cache: true
-     # Get Flutter project dependencies
-     - name: Get dependencies
-       run: flutter pub get
+    branches: [ main ]  # Trigger on pushes to the main branch
 
-     - name: Build Release App Bundle
-       run: flutter build appbundle --release
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Specify a compatible runner
 
-     - name: Sign App Bundle
-       uses: r0adkll/sign-android-release@v1  # Or a similar action
-       id: sign_app
-       with:
-         # Access secrets securely using environment variables
-         releaseDirectory: build/app/outputs/bundle/release/
-         signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE_FILE_BASE64 }}
-         alias: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
-         keyStorePassword: ${{ secrets.ANDROID_STORE_PASSWORD }}
-         keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v3  # Checkout the repository code
 
-     - name: Generate Signed APK
-       # Replace with the appropriate command for your build process
-       # (e.g., for Gradle, use bundletool)
-       run: bundletool build-apks --bundle=build/app/outputs/bundle/release/app-release.aab \
-         --output=build/app/outputs/apk/release/app-release.apk \
-         --ks-alias=${{ secrets.ANDROID_SIGNING_KEY_ALIAS }} \
-         --ks-pass=${{ secrets.ANDROID_STORE_PASSWORD }} \
-         --key-pass=${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
 
-     - name: Upload Signed APK (Optional)
-       uses: actions/upload-artifact@v3
-       with:
-         name: signed-apk
-         path: build/app/outputs/apk/release/app-release.apk
+      - name: Install Flutter
+        uses: suborbital/flutter@v1  # Or any other preferred Flutter action
+        with:
+          flutter-version: '3.x'  # Update with your desired version
 
+      - name: Get Flutter dependencies
+        run: flutter pub get
 
+      - name: Decode Keystore
+        env:
+          ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+
+        run: |
+            echo $ENCODED_STRING > keystore-b64.txt
+            base64 -d keystore-b64.txt > $SIGNING_KEY_STORE_PATH
+      - name: Configure sig
+        env:
+          # Use encrypted secrets defined in GitHub Actions settings
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        # Decrypt and store credentials in temporary files
+        run: |
+          mkdir -p signing
+          openssl enc -aes-256-cbc -k "${{ secrets.SIGNING_KEY_STORE_PATH }}" -d -in secrets/keystore.enc > signing/keystore.jks
+          openssl enc -aes-256-cbc -k "${{ secrets.SIGNING_KEY_PASSWORD }}" -d -in secrets/key_password.enc > signing/key.password
+          openssl enc -aes-256-cbc -k "${{ secrets.SIGNING_STORE_PASSWORD }}" -d -in secrets/store_password.enc > signing/store_password
+
+      - name: Build signed APK (using Gradle)
+        run: |
+          ./gradlew assembleRelease \
+            -Pandroid:signingConfigs=release \
+            -PkeyStoreFile=signing/keystore.jks \
+            -PkeyAlias=${{ secrets.SIGNING_KEY_ALIAS }} \
+            -PstorePassword=file:signing/store_password \
+            -PkeyPassword=file:signing/key.password
+
+      - name: Upload signed APK as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: signed-apk
+          path: /path/to/your/built/apk/file.apk  # Update with the actual path
 

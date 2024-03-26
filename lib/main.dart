@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cv_builder/util/constant/android_version.dart';
 import 'package:cv_builder/util/constant/string_const.dart';
+import 'package:cv_builder/widget/pages/cv/cv2/cv2.dart';
+import 'package:cv_builder/widget/pages/cv/cv3/cv3.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,7 +114,7 @@ void main() async{
     }
   });
 
-  print('User granted permission: ${settings.authorizationStatus}');
+ // print('User granted permission: ${settings.authorizationStatus}');
  // showNotification("title","body",url_target: "google.ir");
   setUpSL();
   runApp(
@@ -175,7 +177,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   showNotification(message.notification!.title!, message.notification!.body!,
   url_target: message.data["url"]);
 
-  print("Handling a background message: ${message.messageId}");
+//  print("Handling a background message: ${message.messageId}");
 }
 class MyApp extends StatefulWidget {
 
@@ -210,7 +212,7 @@ class _MyAppState extends State<MyApp> {
       final platform = MethodChannel("com.platform");
       platform.setMethodCallHandler((call) async{
         if(call.method=="GetVersion"){
-          print("--------ANDROID: ${call.arguments}");
+          //print("--------ANDROID: ${call.arguments}");
           OSVersion.AndroidVersion = call.arguments;
           //GetSMS(call.arguments);
           SaveVersion(call.arguments);
@@ -291,7 +293,7 @@ class _MyAppState extends State<MyApp> {
                     //   print("---------${ sl<ScreenSize>().width}");
 
                     sl<ScreenSizeStream>().controller.add(sl<ScreenSize>());
-                    // return MyHomePage();
+                     return MyHomePage();
                     // return LoadingPage();
                     return Dashboard();
                   },);
@@ -324,8 +326,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
     WidgetsFlutterBinding.ensureInitialized().scheduleFrameCallback((timeStamp) {
-      //Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
+      Provider.of<InfoVM>(context,listen: false).GetInfoModelData();
       Provider.of<UserViewModel>(context,listen: false).GetUserModel();
+      // Provider.of<TemplateVM>(context, listen: false).userModel = value.userModel;
 
     });
  }
@@ -357,7 +360,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           useActions: true,
                           maxPageWidth: 700,
 
-                          build: (format) => generateResumeCV1(format,userModel:value.userModel! ),
+                          build: (format) => generateResumeCV3(format,userModel:value.userModel! ),
                           //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
                         )
                     );
