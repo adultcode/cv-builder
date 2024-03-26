@@ -40,107 +40,28 @@ class CV3ProfilePart extends pw.StatelessWidget {
 
                   pw.Column(
                       crossAxisAlignment: pw.CrossAxisAlignment.end,
+                     // mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
                       children: [
                         //name
                         pw.Text(userModel!.infoModel!.name??"",textDirection: pw.TextDirection.rtl,
-                            style: name_style_2),
-                        pw.SizedBox(height: PdfPageFormat.cm*0.25),
+                            style: name_style_3),
+                        pw.SizedBox(height: PdfPageFormat.cm*0.2),
                         //job
                         pw.Text(userModel!.infoModel!.job??"",textDirection: pw.TextDirection.rtl,
                             textAlign: pw.TextAlign.right,
-                            style:name2_style_2 ),
-                        pw.SizedBox(height: PdfPageFormat.cm*0.35),
-                        pw.Row(
-                            mainAxisAlignment: pw.MainAxisAlignment.end,
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            style:body_style_3.copyWith(color: cv3_greytext) ),
+                        pw.SizedBox(height: PdfPageFormat.cm*0.2),
+                        pw.Text(userModel!.infoModel!.bio??"",textDirection: pw.TextDirection.rtl,
+                            textAlign: pw.TextAlign.right,
+                            style:body_style_3.copyWith(color: cv3_bodytext_color) ),
 
-                            children: [
-                              pw.Expanded(
-
-                                  child: pw.Container(
-                                    //  color: cv2_primary,
-                                      child: pw.Column(
-                                          crossAxisAlignment: pw.CrossAxisAlignment.end,
-
-                                          //mobile
-                                          children: [
-
-                                            // mobile
-                                            pw.Row(
-                                                mainAxisAlignment: pw.MainAxisAlignment.end,
-
-                                                children: [
-                                                  pw.Text(userModel?.infoModel?.mobile.toString()??""
-                                                      ,textDirection: pw.TextDirection.rtl,
-                                                      style:cv2_body1 ),
-                                                  pw.Text("موبایل "
-                                                      ,textDirection: pw.TextDirection.rtl,
-                                                      style:cv2_body2 ),
-                                                ]
-                                            ),
-                                            pw.SizedBox(height: PdfPageFormat.cm*0.2),
-                                            // birth
-                                            pw.Row(
-                                                mainAxisAlignment: pw.MainAxisAlignment.end,
-
-                                                children: [
-                                                  pw.Text(userModel?.infoModel?.birth??""
-                                                      ,textDirection: pw.TextDirection.rtl,
-                                                      style:cv2_body1 ),
-                                                  pw.Text("تولد "
-                                                      ,textDirection: pw.TextDirection.rtl,
-                                                      style:cv2_body2 ),
-                                                ]
-                                            )
-                                          ])
-                                  )
-                              ),
-                              pw.Expanded(
-                                child: pw.Container(
-                                  //    color: vertical_red,
-                                    child:  pw.Column(
-                                        crossAxisAlignment: pw.CrossAxisAlignment.end,
-
-                                        children: [
-                                          // email
-                                          pw.Row(
-                                              mainAxisAlignment: pw.MainAxisAlignment.end,
-
-                                              children: [
-                                                pw.Text(userModel?.infoModel?.email??""
-                                                    ,textDirection: pw.TextDirection.rtl,
-                                                    style:cv2_body1 ),
-                                                pw.Text("ایمیل "
-                                                    ,textDirection: pw.TextDirection.rtl,
-                                                    style:cv2_body2 ),
-                                              ]
-                                          ),
-                                          pw.SizedBox(height: PdfPageFormat.cm*0.2),
-                                          // city
-                                          pw.Row(
-                                              mainAxisAlignment: pw.MainAxisAlignment.end,
-
-                                              children: [
-                                                pw.Text(userModel?.infoModel?.city??""
-                                                    ,textDirection: pw.TextDirection.rtl,
-                                                    style:cv2_body1 ),
-                                                pw.Text("شهر "
-                                                    ,textDirection: pw.TextDirection.rtl,
-                                                    style:cv2_body2 ),
-                                              ]
-                                          ),
-                                        ])
-                                ),
-                              ),
-
-                            ]
-                        )
 
                       ]
                   )
 
 
               ),
+              pw.SizedBox(width: PdfPageFormat.cm*0.5),
 
               pw.Container(
                   width: PdfPageFormat.cm*3.6,

@@ -19,6 +19,10 @@ var cv2_primary =  PdfColor.fromHex('#275150');
 var cv2_title_color =  PdfColor.fromHex('#010101');
 var cv2_bodytext_color =  PdfColor.fromHex('#adadad');
 
+///// cv3
+ var cv3_green = PdfColor.fromHex('#12c18d');
+ var cv3_greytext = PdfColor.fromHex('#48494b');
+ var cv3_bodytext_color = PdfColor.fromHex('#3e3f41');
 
 /*
 panel colors

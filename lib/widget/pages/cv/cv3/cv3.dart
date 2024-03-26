@@ -114,10 +114,10 @@ Future<Uint8List> generateResumeCV3(PdfPageFormat format, {Uint8List? profile_im
                         profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage),
 
                   // bio
-                  if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
-                    pw.SizedBox(height: top_margin_title_2 ),
-                  if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
-                    CV2BioPart(userModel: userModel),
+                  // if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                  //   pw.SizedBox(height: top_margin_title_2 ),
+                  // if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
+                  //   CV2BioPart(userModel: userModel),
 
                   // work
                   if(userModel.works!=null && userModel.works?.workModels!=null)
