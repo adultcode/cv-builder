@@ -1,8 +1,10 @@
-name: Build and Upload Signed APK
+name: Build and Upload Signed Flutter App
 
 on:
   push:
     branches: [ main ]  # Trigger on pushes to the main branch
+  tags:  # Trigger on tag pushes (optional)
+    - v*  # Match tags starting with "v" (e.g., v1.0.0)
 
 jobs:
   build:
@@ -24,40 +26,35 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Decode Keystore
-        env:
-          ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
-          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
-
-        run: |
-            echo $ENCODED_STRING > keystore-b64.txt
-            base64 -d keystore-b64.txt > $SIGNING_KEY_STORE_PATH
-      - name: Configure sig
+      - name: Configure signing credentials (**Secure way**)
         env:
           # Use encrypted secrets defined in GitHub Actions settings
           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-        # Decrypt and store credentials in temporary files
+        # Decrypt and store credentials in temporary files (optional)
         run: |
-          mkdir -p signing
-          openssl enc -aes-256-cbc -k "${{ secrets.SIGNING_KEY_STORE_PATH }}" -d -in secrets/keystore.enc > signing/keystore.jks
-          openssl enc -aes-256-cbc -k "${{ secrets.SIGNING_KEY_PASSWORD }}" -d -in secrets/key_password.enc > signing/key.password
-          openssl enc -aes-256-cbc -k "${{ secrets.SIGNING_STORE_PASSWORD }}" -d -in secrets/store_password.enc > signing/store_password
+          if [[ -n "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" ]]; then
+            echo $ENCODED_STRING > keystore-b64.txt
+            base64 -d keystore-b64.txt > signing/keystore.jks
+          fi
+          # Add logic for other encrypted secret formats (if applicable)
 
       - name: Build signed APK (using Gradle)
         run: |
           ./gradlew assembleRelease \
             -Pandroid:signingConfigs=release \
-            -PkeyStoreFile=signing/keystore.jks \
+            -PkeyStoreFile=${{ secrets.SIGNING_KEY_STORE_PATH }}  # Use encrypted path if applicable
             -PkeyAlias=${{ secrets.SIGNING_KEY_ALIAS }} \
-            -PstorePassword=file:signing/store_password \
-            -PkeyPassword=file:signing/key.password
+            -PstorePassword=file:signing/store_password (if using temporary file)
+            -PkeyPassword=file:signing/key.password (if using temporary file)
 
       - name: Upload signed APK as artifact
         uses: actions/upload-artifact@v3
         with:
           name: signed-apk
           path: /path/to/your/built/apk/file.apk  # Update with the actual path
+
+  # Optional job for app bundle (similar structure as build job)
 
