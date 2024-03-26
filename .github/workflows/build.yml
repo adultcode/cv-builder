@@ -20,12 +20,18 @@ jobs:
  build_android:
    # Defines what operating system will be used for the actions.
    # For android, we will use Linux GitHub-Hosted Runner.
-   runs-on: ubuntu-22.04
+   runs-on: windows-latest
    # Defines what step should be passed for successful run
    steps:
      # Checkout to the selected branch
      - name: Checkout
        uses: actions/checkout@v3
+     - name: Set up Java
+       uses: actions/setup-java@v2
+       with:
+         java-version: 17
+         distribution: "temurin"
+
      # Download and install flutter packages
      - name: Install Flutter
        uses: subosito/flutter-action@v2
@@ -45,7 +51,7 @@ jobs:
        id: sign_app
        with:
          # Access secrets securely using environment variables
-         releaseDirectory: /home/runner/work/<repo name>/<repo name>/android/app/release
+         releaseDirectory: build/app/outputs/bundle/release/
          signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE_FILE_BASE64 }}
          alias: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
          keyStorePassword: ${{ secrets.ANDROID_STORE_PASSWORD }}
