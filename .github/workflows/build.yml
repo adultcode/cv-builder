@@ -45,7 +45,7 @@ jobs:
        id: sign_app
        with:
          # Access secrets securely using environment variables
-         releaseDirectory: build/app/outputs/bundle/release/
+         releaseDirectory: /home/runner/work/<repo name>/<repo name>/android/app/release
          signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE_FILE_BASE64 }}
          alias: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
          keyStorePassword: ${{ secrets.ANDROID_STORE_PASSWORD }}
