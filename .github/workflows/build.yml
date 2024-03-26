@@ -41,11 +41,11 @@ jobs:
        run: flutter pub get
 
      - name: Sign App Bundle
-       run: flutter build appbundle
-#       id: sign_app
+       uses: r0adkll/sign-android-release@v1  # Or a similar action
+       id: sign_app
        with:
          # Access secrets securely using environment variables
-         #releaseDirectory: build/app/outputs/bundle/release/
+         releaseDirectory: build/app/outputs/bundle/release/
          signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE_FILE_BASE64 }}
          alias: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}
          keyStorePassword: ${{ secrets.ANDROID_STORE_PASSWORD }}
