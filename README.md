@@ -1,7 +1,7 @@
 # JobYar - Flutter resume builder
   - [Online demo](https://hesam.cc/jobyar/)
-  <br />
-  - [Store] (https://cafebazaar.ir/app/com.example.cv_builder?l=en/)
+  - [Store](https://cafebazaar.ir/app/com.example.cv_builder?l=en/)
+    
   <br />
 JobYar is a cross-platform online resume builder designed for wide accessibility, deployable as both a native Android app and a Progressive Web App (PWA) from a single Flutter codebase.
 The application was architected to be scalable and maintainable, leveraging Provider for state management and GetIt for dependency injection to ensure clean code and testability.
