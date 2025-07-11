@@ -1,16 +1,15 @@
 # JobYar - Flutter resume builder
 
-A new Flutter project.
+JobYar is a cross-platform online resume builder designed for wide accessibility, deployable as both a native Android app and a Progressive Web App (PWA) from a single Flutter codebase.
+The application was architected to be scalable and maintainable, leveraging Provider for state management and GetIt for dependency injection to ensure clean code and testability.
 
-## Getting Started
+A core technical achievement of this project was authoring a custom, high-fidelity PDF generation engine entirely in Dart.
+This innovative approach guaranteed pixel-perfect template rendering across all platforms and completely eliminated any reliance on third-party libraries, giving us full control over the final output.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
