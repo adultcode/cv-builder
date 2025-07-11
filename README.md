@@ -1,4 +1,4 @@
-# cv_builder
+# JobYar - Flutter resume builder
 
 A new Flutter project.
 
