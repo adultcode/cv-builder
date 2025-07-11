@@ -23,6 +23,7 @@ var cv2_bodytext_color =  PdfColor.fromHex('#adadad');
  var cv3_green = PdfColor.fromHex('#12c18d');
  var cv3_greytext = PdfColor.fromHex('#48494b');
  var cv3_bodytext_color = PdfColor.fromHex('#3e3f41');
+ var cv3_container_color = PdfColor.fromHex('#e9e9e9');
 
 /*
 panel colors

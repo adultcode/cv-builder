@@ -5,11 +5,11 @@ import 'package:cv_builder/util/constant/string_const.dart';
 import 'package:cv_builder/widget/pages/cv/cv2/cv2.dart';
 import 'package:cv_builder/widget/pages/cv/cv3/cv3.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'config/localize/languages.dart';
 import 'firebase_options.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:cv_builder/mvvm/model/entity/info_model/info_model.dart';
 import 'package:cv_builder/provider/icon_provider.dart';
@@ -50,7 +50,6 @@ import 'notification_controller.dart';
 late AwesomeNotifications notifications;
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
   notifications = AwesomeNotifications();
  // print("---version------${Platform.version}");
   var channel =  NotificationChannel(
@@ -360,7 +359,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           useActions: true,
                           maxPageWidth: 700,
 
-                          build: (format) => generateResumeCV3(format,userModel:value.userModel! ),
+                          build: (format) => generateResumeCV2(format,userModel:value.userModel! ),
                           //  build: (format) => generateResume(format,profile_image_path: value.img_byte),
                         )
                     );

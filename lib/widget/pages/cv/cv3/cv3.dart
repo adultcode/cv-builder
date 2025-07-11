@@ -34,6 +34,7 @@ import '../cv2/cv2_profile_section.dart';
 import '../cv2/cv2_skill_section.dart';
 import '../cv2/cv2_social_section.dart';
 import 'cv3_profile_section.dart';
+import 'cv3_social_section.dart';
 
 Future<String> Geticon(SocialModel socialModel)async{
   switch(socialModel?.socialType){
@@ -104,14 +105,18 @@ Future<Uint8List> generateResumeCV3(PdfPageFormat format, {Uint8List? profile_im
       // pageFormat: format,,
       build: (pw.Context context) => [
         pw.Container(
-            padding: pw.EdgeInsets.all( PdfPageFormat.cm),
+            padding: pw.EdgeInsets.symmetric(vertical:  PdfPageFormat.cm),
             child: pw.Column(
                 mainAxisSize: pw.MainAxisSize.max,
                 children: [
 
                   if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)
-                    CV3ProfilePart(userModel: userModel,
-                        profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage),
+                    pw.Padding(
+                        padding: pw.EdgeInsets.symmetric(horizontal:  PdfPageFormat.cm),
+                        child: CV3ProfilePart(userModel: userModel,
+                          profile_img:  userModel.image_avatar!=null?pw.MemoryImage(userModel.image_avatar!):profileImage)
+                    ),
+                  CV3SocialPart(userModel: userModel),
 
                   // bio
                   // if(userModel.infoModel!=null && userModel.infoModel?.bio!=null)

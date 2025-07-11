@@ -53,7 +53,7 @@ dependencies:
   persian_datetime_picker: ^2.6.0
   permission_handler: ^11.2.1
   path_provider: ^2.1.2
-  firebase_core: ^2.25.4
+  firebase_core: any
   firebase_messaging: any
   firebase_in_app_messaging: any
   firebase_messaging_web: any
